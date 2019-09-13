@@ -1,0 +1,248 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>OGPとその設定 | ぷらずま式改</title>
+  <meta name="author" content="NPlasma">
+
+  
+  <meta name="description" content="NPlasmaの個人メモ">
+  
+
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="OGPとその設定">
+  <meta property="og:site_name" content="ぷらずま式改">
+
+  
+  
+
+  
+    <meta property="og:image" content="/img/ogp.png">
+  
+
+  
+  <link href="/nplus_doc/css/images/favicon.ico" rel="icon">
+  
+
+  <link rel="alternate" href="/nplus_doc/atom.xml" title="ぷらずま式改" type="application/atom+xml">
+  <link rel="stylesheet" href="/nplus_doc/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/nplus_doc/">ぷらずま式改</a></h1>
+  <h2><a href="/nplus_doc/">NPlasma個人メモ</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-11-25T23:15:01.000Z"><a href="/nplus_doc/2016/11/26/engineering/ogp/">2016-11-26</a></time>
+      
+      
+  
+    <h1 class="title">OGPとその設定</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <div id="toc" class="toc-article">
+          <p class="toc-title">目次</p>
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#OGPって何？"><span class="toc-text">OGPって何？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#どうやって設定するの？"><span class="toc-text">どうやって設定するの？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#どういう仕組で表示されるの？"><span class="toc-text">どういう仕組で表示されるの？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#つまり、どういうことだってばよ"><span class="toc-text">つまり、どういうことだってばよ</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#なんとかならんか"><span class="toc-text">なんとかならんか</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ちなみにhexoでは"><span class="toc-text">ちなみにhexoでは</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#実はhexo-2-7以降からはhelpersが使える"><span class="toc-text">実はhexo 2.7以降からはhelpersが使える</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考URL"><span class="toc-text">参考URL</span></a></li></ol>
+        </div>
+        <p>つい最近、OGPの設定が変えられなくて困っている友人を見たので、その仕組について</p>
+<a id="more"></a>
+<h1 id="OGPって何？"><a href="#OGPって何？" class="headerlink" title="OGPって何？"></a>OGPって何？</h1><p>ググるのが最も早くて正確な答えが得られるはず<br>とだけ書いておくのも不親切なので、簡単に説明しておくと</p>
+<ul>
+<li>Open Graph protocolの略</li>
+<li>SNS等でページ情報をリッチに表示するためのwebページに行うメタ情報設定<ul>
+<li>twitterとかにURLを貼った時、いい感じに表示してくれるための設定</li>
+</ul>
+</li>
+</ul>
+<h1 id="どうやって設定するの？"><a href="#どうやって設定するの？" class="headerlink" title="どうやって設定するの？"></a>どうやって設定するの？</h1><p>htmlのmetaタグを使って設定する<br>下記に一例を記す</p>
+<figure class="highlight html"><figcaption><span>OGP設定例</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:title"</span>&gt;</span>タイトル<span class="tag">&lt;/<span class="name">meta</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:site_name"</span>&gt;</span>サイト名<span class="tag">&lt;/<span class="name">meta</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:image"</span>&gt;</span>OGP画像のパス<span class="tag">&lt;/<span class="name">meta</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="どういう仕組で表示されるの？"><a href="#どういう仕組で表示されるの？" class="headerlink" title="どういう仕組で表示されるの？"></a>どういう仕組で表示されるの？</h1><p>たとえばtwitter等のSNSは、URLがpostされた時、そのURLにアクセスしてhtmlをパースする<br>そして、上記metaタグの中身を拾ってきて表示させている</p>
+<p>重要なのは、htmlをパースするだけであってそこに書かれたjavascriptは一切実行されないという点だ<br>つまり、javascriptで動的にmetaタグを書き換えるコードを仕込んでおいても、twitterに表示される情報に何ら影響はないのである</p>
+<h1 id="つまり、どういうことだってばよ"><a href="#つまり、どういうことだってばよ" class="headerlink" title="つまり、どういうことだってばよ"></a>つまり、どういうことだってばよ</h1><p>これがどう問題になるかというと、ページ遷移をjsによるdom書き換えで実現している<a href="http://ja.wix.com/" target="_blank" rel="noopener">WIX</a>のようなウェブページ作成ツールで引っかかる<br>ページごとに別々のHTMLになっている場合はmetaタグをそれぞれ別々の表記にすれば良いが、それができない環境ではページごとにOGP設定を変えることができない</p>
+<p>WIXは手軽でスタイリッシュに見えるものの、HTMLページ自体は一つしかなくjavascriptで複数のページを行き来しているように見せているだけだ<br>これは、ウェブブラウザのデバッグツール（ChromeならF12を押すと開く）を開いて、htmlコードを見ながらWIX製のページを行き来してみればすぐにわかる</p>
+<h1 id="なんとかならんか"><a href="#なんとかならんか" class="headerlink" title="なんとかならんか"></a>なんとかならんか</h1><p>ならん<br>現実的になんとかなるとすれば、WIX側がHTMLページを複数置けるようなシステムに根っこから置き換わるくらいか</p>
+<p>twitter側にjsを実行させる、というのはあまりにハードルが高いように思う<br>（悪意あるjsを仕込んでtwitterに実行させる、なんていう脆弱性を生みかねない）</p>
+<h1 id="ちなみにhexoでは"><a href="#ちなみにhexoでは" class="headerlink" title="ちなみにhexoでは"></a>ちなみにhexoでは</h1><p>hexoではOGP設定は各ページごとに標準で設定できる<br>titleとかcoverとかをページごとに設定もできるし、configに書いておけばサイト全体での設定も容易だ<br>twitterカードについても、configやページごとに設定項目を書き、それを読んで生成するようejsに追記するだけである</p>
+<figure class="highlight html"><figcaption><span>twitterカードの設定</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- twitter --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span> <span class="attr">if</span> (<span class="attr">theme.share.twitter</span>) &#123; %&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"twitter:card"</span> <span class="attr">content</span>=<span class="string">"summary"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%</span> <span class="attr">if</span> (<span class="attr">theme.bottom_link.twitter</span>) &#123; %&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"twitter:site"</span> <span class="attr">content</span>=<span class="string">"@&lt;%= theme.bottom_link.twitter %&gt;"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%</span> <span class="attr">if</span> (<span class="attr">page.title</span>) &#123; %&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"twitter:title"</span> <span class="attr">content</span>=<span class="string">"&lt;%= page.title %&gt;"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%</span> &#125; <span class="attr">else</span> &#123; %&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"twitter:title"</span> <span class="attr">content</span>=<span class="string">"&lt;%= config.title %&gt;"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%</span> <span class="attr">if</span> (<span class="attr">page.description</span>) &#123; %&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"twitter:description"</span> <span class="attr">content</span>=<span class="string">"&lt;%= page.description %&gt;"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%</span> &#125; <span class="attr">else</span> <span class="attr">if</span> (<span class="attr">config.description</span>) &#123; %&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"twitter:description"</span> <span class="attr">content</span>=<span class="string">"&lt;%= config.description %&gt;"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%</span> &#125; <span class="attr">else</span> <span class="attr">if</span> (<span class="attr">page.excerpt</span>) &#123; %&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"twitter:description"</span> <span class="attr">content</span>=<span class="string">"&lt;%= page.excerpt %&gt;"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%</span> <span class="attr">if</span> (<span class="attr">page.cover</span>) &#123; %&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"twitter:image"</span> <span class="attr">content</span>=<span class="string">"&lt;%= config.url %&gt;/&lt;%= page.path %&gt;&lt;%= page.cover %&gt;"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%</span> &#125; <span class="attr">else</span> &#123; %&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"twitter:image"</span> <span class="attr">content</span>=<span class="string">"&lt;%= config.url %&gt;&lt;%= config.cover %&gt;"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="実はhexo-2-7以降からはhelpersが使える"><a href="#実はhexo-2-7以降からはhelpersが使える" class="headerlink" title="実はhexo 2.7以降からはhelpersが使える"></a>実はhexo 2.7以降からはhelpersが使える</h2><p>twitterで心優しい方からご指摘がありました<br><a href="https://hexo.io/docs/helpers.html#open-graph" target="_blank" rel="noopener">公式ドキュメント</a>読んでないのまるわかりで恥ずかしい！<br>下記の記述でも設定可能になるはず</p>
+<p>でも、twitter:imageとかはサポートされてないのかなあ</p>
+<figure class="highlight html"><figcaption><span>helerの使い方</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- ogp --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span> <span class="attr">if</span> (<span class="attr">page.cover</span>) &#123; %&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%</span> <span class="attr">if</span> (<span class="attr">theme.bottom_link.twitter</span>) &#123; %&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">%-</span> <span class="attr">open_graph</span>(&#123;<span class="attr">image:</span> <span class="attr">url_for</span>(<span class="attr">page.path</span>) + <span class="attr">page.cover</span>, <span class="attr">twitter_id:</span> <span class="attr">theme.bottom_link.twitter</span>&#125;) %&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%</span> &#125; <span class="attr">else</span> &#123; %&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">%-</span> <span class="attr">open_graph</span>(&#123;<span class="attr">image:</span> <span class="attr">url_for</span>(<span class="attr">page.path</span>) + <span class="attr">page.cover</span>&#125;) %&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"twitter:image"</span> <span class="attr">content</span>=<span class="string">"&lt;% url_for(page.path) + page.cover %&gt;"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span> &#125; <span class="attr">else</span> &#123; %&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%</span> <span class="attr">if</span> (<span class="attr">theme.bottom_link.twitter</span>) &#123; %&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">%-</span> <span class="attr">open_graph</span>(&#123;<span class="attr">twitter_id:</span> <span class="attr">theme.bottom_link.twitter</span>&#125;) %&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"twitter:image"</span> <span class="attr">content</span>=<span class="string">"&lt;%= config.url %&gt;&lt;%= config.cover %&gt;"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="参考URL"><a href="#参考URL" class="headerlink" title="参考URL"></a>参考URL</h1><ul>
+<li><a href="http://ogp.me/" target="_blank" rel="noopener">The Open Graph protocol</a></li>
+<li><a href="https://dev.twitter.com/ja/cards/overview" target="_blank" rel="noopener">Twitterカード - Twitter Developers</a></li>
+</ul>
+
+      
+    </div>
+    
+    <footer>
+        <div class="alignright">
+            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="OGPとその設定" data-url="http://elleonard.github.io/nplus_doc/2016/11/26/engineering/ogp/" data-via="elleonard_f" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+        
+  
+  <div class="categories">
+    <a href="/nplus_doc/categories/情報技術/">情報技術</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/nplus_doc/tags/情報技術/">情報技術</a>, <a href="/nplus_doc/tags/OGP/">OGP</a>, <a href="/nplus_doc/tags/hexo/">hexo</a>, <a href="/nplus_doc/tags/WIX/">WIX</a>
+  </div>
+
+        
+          <div class="article-prev">
+              <a href="/nplus_doc/2017/01/08/game/musou/orochi2u/">【ゲーム感想】無双OROCHI2Ultimate <span class="prev-arrow"/></a>
+            </div>
+        
+        
+          <div class="article-next">
+            <a href="/nplus_doc/2016/11/24/game/kancolle/event/201611-third/201611-e5/">【艦これ】発令！艦隊作戦第三法 E5 <span class="next-arrow"/></a>
+          </div>
+        
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="検索">
+    <input type="hidden" name="q" value="site:elleonard.github.io/nplus_doc">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">カテゴリ</h3>
+  <ul class="entry">
+  
+    <li><a href="/nplus_doc/categories/FGO/">FGO</a><small>47</small></li>
+  
+    <li><a href="/nplus_doc/categories/niconico/">niconico</a><small>3</small></li>
+  
+    <li><a href="/nplus_doc/categories/アニメ感想/">アニメ感想</a><small>9</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム/">ゲーム</a><small>40</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム/ゲームレビュー/">ゲームレビュー</a><small>29</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム制作/">ゲーム制作</a><small>5</small></li>
+  
+    <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/デッキレシピ/">デッキレシピ</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/ライトノベル/">ライトノベル</a><small>2</small></li>
+  
+    <li><a href="/nplus_doc/categories/情報技術/">情報技術</a><small>11</small></li>
+  
+    <li><a href="/nplus_doc/categories/漫画/">漫画</a><small>2</small></li>
+  
+    <li><a href="/nplus_doc/categories/百合/">百合</a><small>5</small></li>
+  
+    <li><a href="/nplus_doc/categories/艦これ/">艦これ</a><small>76</small></li>
+  
+    <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/">遊戯王ブロンティーズ</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/雑記/">雑記</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最近の投稿</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/nplus_doc/2019/09/13/engineering/hexo-table-render/">【新】HexoのMarkdownで複雑な表を書く</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2019/05/09/game/edf/edf4-1/">【ゲーム感想】地球防衛軍4.1 THE SHADOW OF NEW DESPAIR</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2019/04/27/game/chokaigi2019-taiken/">ニコニコ超会議2019 インディーズゲームショーケース＆プレイコーナー 感想</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2019/03/02/game/kancolle/season2/3-4/">【艦これ】【第二期】3-4 北方海域全域</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2019/02/26/game/atelier/nelke/">【ゲーム感想】ネルケと伝説の錬金術士たち ～新たな大地のアトリエ～</a>
+      </li>
+    
+  </ul>
+</div>
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  <p>
+  
+  &copy; 2019 NPlasma
+  
+  All rights reserved.</p>
+  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="/nplus_doc/js/jquery.imagesloaded.min.js"></script>
+<script src="/nplus_doc/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/nplus_doc/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/nplus_doc/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id='bg'></div>
+</body>
+</html>
