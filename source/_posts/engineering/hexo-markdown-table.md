@@ -1,8 +1,8 @@
 ---
-title: HexoのMarkdownで複雑な表を書く
+title: 【DEPRECATED】HexoのMarkdownで複雑な表を書く
 date: 2016-05-06 00:53:27
 tags: [情報技術, Hexo, Markdown]
-cateogory:
+category:
  - 情報技術
 ---
 
@@ -10,6 +10,11 @@ cateogory:
 
 艦これの出撃ログを記入する際、表でセルの結合や、最上段以外にthを使いたい
 しかし、htmlタグを書くのは非常にダサい上に可読性を下げるのでやりたくない
+
+
+2019/09/13追記: この記事に書かれた方法は著しく保守性に欠けるため、マネしないほうが良いです
+Hexoにはfilterを定義する機能があるため、それを利用してテーブルのレンダラーを自作してしまうほうが良いでしょう
+{% post_link engineering/hexo-table-render %} を参照してください
 
 <!-- more -->
 

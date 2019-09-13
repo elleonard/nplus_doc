@@ -73,3 +73,6 @@ deploy:
   repo: git@github.com:elleonard/nplus_doc.git
   branch: gh-pages
 
+# 記事一覧ページのデザインを揃える
+category: 2
+tag: 2
