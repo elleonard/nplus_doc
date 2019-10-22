@@ -107,15 +107,19 @@
 <li>タイトルの通り</li>
 </ul>
 <a id="more"></a>
+
 <h1 id="なぜこんなことをした！言え！"><a href="#なぜこんなことをした！言え！" class="headerlink" title="なぜこんなことをした！言え！"></a>なぜこんなことをした！言え！</h1><ul>
 <li>Fate/EXTRAで敵のパターンをテキストに記録し続けるのが億劫になってきたから</li>
 <li>ブラウザ上でポチポチしてパターンを記録したり絞り込んだりできる奴作ろうと思って</li>
 <li>nodejs辺りでさくっとやっても良かったが、DB周りが不安だったので、過去にやったことのあるplay slickで</li>
 </ul>
 <h1 id="どこで使い方を習った"><a href="#どこで使い方を習った" class="headerlink" title="どこで使い方を習った"></a>どこで使い方を習った</h1><ul>
-<li><a href="https://www.playframework.com/documentation/2.5.x/Home" target="_blank" rel="noopener">公式ドキュメント</a>を読んだのよ</li>
-<li>公式ドキュメントにしたがってactivatorの最新版（ここでは2.5）をダウンロード/インストール</li>
-<li><a href="https://www.playframework.com/documentation/2.5.x/PlaySlick" target="_blank" rel="noopener">PlaySlickの公式ドキュメント</a>にしたがって依存性解決</li>
+<li><p><a href="https://www.playframework.com/documentation/2.5.x/Home" target="_blank" rel="noopener">公式ドキュメント</a>を読んだのよ</p>
+</li>
+<li><p>公式ドキュメントにしたがってactivatorの最新版（ここでは2.5）をダウンロード/インストール</p>
+</li>
+<li><p><a href="https://www.playframework.com/documentation/2.5.x/PlaySlick" target="_blank" rel="noopener">PlaySlickの公式ドキュメント</a>にしたがって依存性解決</p>
+</li>
 <li><p>application.confに適切な設定をしたらコーディング開始</p>
 </li>
 <li><p>Eclipse使ってるんで、plugin.sbtにsbteclipseの設定も忘れずに</p>
@@ -152,18 +156,22 @@
 </li>
 </ul>
 <h2 id="さよならDBAction-未来を信じて"><a href="#さよならDBAction-未来を信じて" class="headerlink" title="さよならDBAction 未来を信じて"></a>さよならDBAction 未来を信じて</h2><ul>
-<li>これのおかげでかなり楽にかけていたが、2.4から廃止された</li>
-<li>基本的にAction.asyncを使ってFutureを返せということらしい</li>
+<li><p>これのおかげでかなり楽にかけていたが、2.4から廃止された</p>
+</li>
+<li><p>基本的にAction.asyncを使ってFutureを返せということらしい</p>
+</li>
 <li><p>daoからの戻り値は基本的にFuture型に固定される</p>
 </li>
 <li><p>Future型は、「結果はまだ確定していないが後で確定するから処理を続行してくれ」という「ここは俺に任せて先に行け」を地で行く型</p>
 </li>
-<li>例えばDBアクセスは重いので、「その後に書かれているがDBアクセスの結果を使わない処理」を先にやってしまえるならそのほうが効率が良いよね、というようなこと</li>
+<li><p>例えばDBアクセスは重いので、「その後に書かれているがDBアクセスの結果を使わない処理」を先にやってしまえるならそのほうが効率が良いよね、というようなこと</p>
+</li>
 <li><p>これもやっぱり小規模なサーバではそんなにありがたくない</p>
 </li>
 <li><p>Optionと同じくMonadなので、mapとか諸々を使える</p>
 </li>
-<li>成功/失敗判定をして別々の処理をさせる記述も可能<ul>
+<li><p>成功/失敗判定をして別々の処理をさせる記述も可能</p>
+<ul>
 <li>例外処理をしっかり書くことが推奨されるようなDBアクセスとかはそれが書きやすくて良いのかも</li>
 </ul>
 </li>
@@ -215,7 +223,7 @@
 
         
           <div class="article-prev">
-              <a href="/nplus_doc/2016/05/29/about/">ぷらずま式改とは <span class="prev-arrow"/></a>
+              <a href="/nplus_doc/2016/05/29/first/">えぬぷら式改 始動 <span class="prev-arrow"/></a>
             </div>
         
         
@@ -265,7 +273,7 @@
   
     <li><a href="/nplus_doc/categories/漫画/">漫画</a><small>2</small></li>
   
-    <li><a href="/nplus_doc/categories/百合/">百合</a><small>5</small></li>
+    <li><a href="/nplus_doc/categories/百合/">百合</a><small>6</small></li>
   
     <li><a href="/nplus_doc/categories/艦これ/">艦これ</a><small>76</small></li>
   
@@ -283,6 +291,10 @@
   <ul class="entry">
     
       <li>
+        <a href="/nplus_doc/2019/10/22/game/bang-dream/lisa-younger-brother/">今井リサの弟問題に関する理屈と感情</a>
+      </li>
+    
+      <li>
         <a href="/nplus_doc/2019/09/16/game/edf/edf5/">【ゲーム感想】地球防衛軍5</a>
       </li>
     
@@ -296,10 +308,6 @@
     
       <li>
         <a href="/nplus_doc/2019/04/27/game/chokaigi2019-taiken/">ニコニコ超会議2019 インディーズゲームショーケース＆プレイコーナー 感想</a>
-      </li>
-    
-      <li>
-        <a href="/nplus_doc/2019/03/02/game/kancolle/season2/3-4/">【艦これ】【第二期】3-4 北方海域全域</a>
       </li>
     
   </ul>

@@ -27,18 +27,18 @@
   <!-- ogp -->
   
     
-      <meta name="description" content="動機艦これの出撃ログを記入する際、表でセルの結合や、最上段以外にthを使いたいしかし、htmlタグを書くのは非常にダサい上に可読性を下げるのでやりたくない 2019/09/13追記: この記事に書かれた方法は著しく保守性に欠けるため、マネしないほうが良いですHexoにはfilterを定義する機能があるため、それを利用してテーブルのレンダラーを自作してしまうほうが良いでしょう【新】HexoのMark">
+      <meta name="description" content="動機艦これの出撃ログを記入する際、表でセルの結合や、最上段以外にthを使いたいしかし、htmlタグを書くのは非常にダサい上に可読性を下げるのでやりたくない 2019/09/13追記: この記事に書かれた方法は著しく保守性に欠けるため、マネしないほうが良いですHexoにはfilterを定義する機能があるため、それを利用してテーブルのレンダラーを自作してしまうほうが良いでしょう 【新】HexoのMar">
 <meta name="keywords" content="情報技術,Hexo,Markdown">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【DEPRECATED】HexoのMarkdownで複雑な表を書く">
 <meta property="og:url" content="http://elleonard.github.io/nplus_doc/2016/05/06/engineering/hexo-markdown-table/index.html">
 <meta property="og:site_name" content="ぷらずま式改">
-<meta property="og:description" content="動機艦これの出撃ログを記入する際、表でセルの結合や、最上段以外にthを使いたいしかし、htmlタグを書くのは非常にダサい上に可読性を下げるのでやりたくない 2019/09/13追記: この記事に書かれた方法は著しく保守性に欠けるため、マネしないほうが良いですHexoにはfilterを定義する機能があるため、それを利用してテーブルのレンダラーを自作してしまうほうが良いでしょう【新】HexoのMark">
+<meta property="og:description" content="動機艦これの出撃ログを記入する際、表でセルの結合や、最上段以外にthを使いたいしかし、htmlタグを書くのは非常にダサい上に可読性を下げるのでやりたくない 2019/09/13追記: この記事に書かれた方法は著しく保守性に欠けるため、マネしないほうが良いですHexoにはfilterを定義する機能があるため、それを利用してテーブルのレンダラーを自作してしまうほうが良いでしょう 【新】HexoのMar">
 <meta property="og:locale" content="ja">
 <meta property="og:updated_time" content="2019-09-13T10:59:44.667Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【DEPRECATED】HexoのMarkdownで複雑な表を書く">
-<meta name="twitter:description" content="動機艦これの出撃ログを記入する際、表でセルの結合や、最上段以外にthを使いたいしかし、htmlタグを書くのは非常にダサい上に可読性を下げるのでやりたくない 2019/09/13追記: この記事に書かれた方法は著しく保守性に欠けるため、マネしないほうが良いですHexoにはfilterを定義する機能があるため、それを利用してテーブルのレンダラーを自作してしまうほうが良いでしょう【新】HexoのMark">
+<meta name="twitter:description" content="動機艦これの出撃ログを記入する際、表でセルの結合や、最上段以外にthを使いたいしかし、htmlタグを書くのは非常にダサい上に可読性を下げるのでやりたくない 2019/09/13追記: この記事に書かれた方法は著しく保守性に欠けるため、マネしないほうが良いですHexoにはfilterを定義する機能があるため、それを利用してテーブルのレンダラーを自作してしまうほうが良いでしょう 【新】HexoのMar">
 <meta name="twitter:creator" content="@elleonard_f">
     
     <meta name="twitter:image" content="http://elleonard.github.io/nplus_doc/img/ogp.png">
@@ -104,8 +104,11 @@
           <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#動機"><span class="toc-text">動機</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解決策"><span class="toc-text">解決策</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#手順"><span class="toc-text">手順</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#文法を決める"><span class="toc-text">文法を決める</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#marked-jsを改修する（パーサ編）"><span class="toc-text">marked.jsを改修する（パーサ編）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#marked-jsを改修する（レンダラー編）"><span class="toc-text">marked.jsを改修する（レンダラー編）</span></a></li></ol></li></ol>
         </div>
         <h1 id="動機"><a href="#動機" class="headerlink" title="動機"></a>動機</h1><p>艦これの出撃ログを記入する際、表でセルの結合や、最上段以外にthを使いたい<br>しかし、htmlタグを書くのは非常にダサい上に可読性を下げるのでやりたくない</p>
-<p>2019/09/13追記: この記事に書かれた方法は著しく保守性に欠けるため、マネしないほうが良いです<br>Hexoにはfilterを定義する機能があるため、それを利用してテーブルのレンダラーを自作してしまうほうが良いでしょう<br><a href="/nplus_doc/2019/09/13/engineering/hexo-table-render/" title="【新】HexoのMarkdownで複雑な表を書く">【新】HexoのMarkdownで複雑な表を書く</a> を参照してください</p>
+<p>2019/09/13追記: この記事に書かれた方法は著しく保守性に欠けるため、マネしないほうが良いです<br>Hexoにはfilterを定義する機能があるため、それを利用してテーブルのレンダラーを自作してしまうほうが良いでしょう</p>
+<a href="/nplus_doc/2019/09/13/engineering/hexo-table-render/" title="【新】HexoのMarkdownで複雑な表を書く">【新】HexoのMarkdownで複雑な表を書く</a> を参照してください
+
 <a id="more"></a>
+
 <h1 id="解決策"><a href="#解決策" class="headerlink" title="解決策"></a>解決策</h1><p>marked.jsをいじる必要がある<br>理想的にはmarked.jsをcloneして新しいプロジェクトにし、hexo自体がそちらを見るようにするのが良いのだが、今回はとりあえず動かすだけなので、hexo-renderer-markedを直接いじる</p>
 <p>修正するのは以下のjsのみ<br>node_modules/hexo-renderer-marked/lib/marked.js</p>
 <h2 id="手順"><a href="#手順" class="headerlink" title="手順"></a>手順</h2><h3 id="文法を決める"><a href="#文法を決める" class="headerlink" title="文法を決める"></a>文法を決める</h3><p>markdownではセルの結合や最上段以外にthを利用するための文法が規定されていない<br>（方言によっては、横方向のセル結合のみあるようだが）</p>
@@ -119,17 +122,23 @@
 <p>例えば、!hr2!ならばthで尚且つrowspan=2だ</p>
 <p>また、パースの都合上、rowspanやcolspanで上書きされるセルの記法も考えておく<br>（colspanは不要なので、rowspanのみ）<br>wikiで用いられているような^一文字のセルは、rowspanで上書きされるセルということにする</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">|テーブル|テーブル|</span><br><span class="line">|:--:|:--:|</span><br><span class="line">|ヘッダ!r2!|ほげほげ|</span><br><span class="line">|^|ふがふが!h!|</span><br></pre></td></tr></table></figure>
+
 <p>以上のように記述すると、</p>
-<p><table><thead><tr><th style="text-align:center" rowspan="1" colspan="1">テーブル</th><th style="text-align:center" rowspan="1" colspan="1">テーブル</th></tr></thead><tbody><tr><td style="text-align:center" rowspan="2" colspan="1">ヘッダ</td><td style="text-align:center" rowspan="1" colspan="1">ほげほげ</td></tr><tr><th style="text-align:center" rowspan="1" colspan="1">ふがふが</th></tr><tr></tr></tbody></table>こう出力される</p>
+<table><thead><tr><th style="text-align:center" rowspan="1" colspan="1">テーブル</th><th style="text-align:center" rowspan="1" colspan="1">テーブル</th></tr></thead><tbody><tr><td style="text-align:center" rowspan="2" colspan="1">ヘッダ</td><td style="text-align:center" rowspan="1" colspan="1">ほげほげ</td></tr><tr><th style="text-align:center" rowspan="1" colspan="1">ふがふが</th></tr><tr></tr></tbody></table>こう出力される
+
 <h2 id="marked-jsを改修する（パーサ編）"><a href="#marked-jsを改修する（パーサ編）" class="headerlink" title="marked.jsを改修する（パーサ編）"></a>marked.jsを改修する（パーサ編）</h2><p>400行目付近にtable(gfm)なる記述がある<br>ここで表組みのmarkdownをパースしているので、ここに先ほど決定した規則の記述を追加する</p>
 <p>以下はとりあえず動けば良いという程度の強引なやり方</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// table (gfm)</span><br><span class="line">if (top &amp;&amp; (cap = this.rules.table.exec(src))) &#123;</span><br><span class="line">  src = src.substring(cap[0].length);</span><br><span class="line"></span><br><span class="line">  item = &#123;</span><br><span class="line">    type: &apos;table&apos;,</span><br><span class="line">    header: cap[1].replace(/^ *| *\| *$/g, &apos;&apos;).split(/ *\| */),</span><br><span class="line">    align: cap[2].replace(/^ *|\| *$/g, &apos;&apos;).split(/ *\| */),</span><br><span class="line">    cells: cap[3].replace(/(?: *\| *)?\n$/, &apos;&apos;).split(&apos;\n&apos;),</span><br><span class="line">    header_colspan: new Array(),</span><br><span class="line">    header_rowspan: new Array(),</span><br><span class="line">    header_combined: new Array(),</span><br><span class="line">    cell_header: new Array(),</span><br><span class="line">    cell_colspan: new Array(),</span><br><span class="line">    cell_rowspan: new Array(),</span><br><span class="line">    cell_combined: new Array()</span><br><span class="line">  &#125;;</span><br><span class="line">  </span><br><span class="line">  // header colspan rowspan</span><br><span class="line">  for (i = 0; i&lt; item.header.length; i++) &#123;</span><br><span class="line">    if (header_flag = /.*!(.+)!$/.exec(item.header[i])) &#123;</span><br><span class="line">      if (rows = /^.*r([0-9]+).*$/.exec(header_flag[1])) &#123;</span><br><span class="line">        item.header_rowspan[i] = rows[1]; </span><br><span class="line">      &#125;</span><br><span class="line">      if (cols = /^.*c([0-9]+).*$/.exec(header_flag[1])) &#123;</span><br><span class="line">        item.header_colspan[i] = cols[1];</span><br><span class="line">        for(j = 1; j &lt; cols[1]; j++) &#123;</span><br><span class="line">          item.header_combined[i+j] = true;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      item.header[i] = item.header[i].replace(/!(.+)!/, &apos;&apos;);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      item.header_rowspan[i] = 1;</span><br><span class="line">      item.header_colspan[i] = 1;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  for (i = 0; i &lt; item.align.length; i++) &#123;</span><br><span class="line">    if (/^ *-+: *$/.test(item.align[i])) &#123;</span><br><span class="line">      item.align[i] = &apos;right&apos;;</span><br><span class="line">    &#125; else if (/^ *:-+: *$/.test(item.align[i])) &#123;</span><br><span class="line">      item.align[i] = &apos;center&apos;;</span><br><span class="line">    &#125; else if (/^ *:-+ *$/.test(item.align[i])) &#123;</span><br><span class="line">      item.align[i] = &apos;left&apos;;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      item.align[i] = null;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  for (i = 0; i &lt; item.cells.length; i++) &#123;</span><br><span class="line">    if (!item.cells[i].match(/\|$/)) &#123;</span><br><span class="line">      item.cells[i] = item.cells[i] + &quot;\|&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    item.cells[i] = item.cells[i]</span><br><span class="line">      .replace(/^ *\| *| *\| *$/g, &apos;&apos;)</span><br><span class="line">      .split(/ *\| */);</span><br><span class="line"></span><br><span class="line">    // cell rowspan colspan header</span><br><span class="line">    item.cell_header[i] = new Array();</span><br><span class="line">    item.cell_colspan[i] = new Array();</span><br><span class="line">    item.cell_rowspan[i] = new Array();</span><br><span class="line">    if(item.cell_combined[i] == null) &#123;</span><br><span class="line">      item.cell_combined[i] = new Array();</span><br><span class="line">    &#125;</span><br><span class="line">    for(j = 0; j &lt; item.cells[i].length; j++) &#123;</span><br><span class="line">      if (cell_flag = /.*!(.+)!$/.exec(item.cells[i][j])) &#123;</span><br><span class="line">        if (rows = /^.*r([0-9]+).*$/.exec(cell_flag[1])) &#123;</span><br><span class="line">          item.cell_rowspan[i][j] = rows[1];</span><br><span class="line">          for(k = 1; k &lt; rows[1]; k++) &#123;</span><br><span class="line">            if(item.cell_combined[i+k] == null)&#123;</span><br><span class="line">              item.cell_combined[i+k] = new Array();</span><br><span class="line">            &#125;</span><br><span class="line">            for(l = 0; l &lt; j; l++)&#123;</span><br><span class="line">              if(item.cell_combined[i+k][l] == null) &#123;</span><br><span class="line">                item.cell_combined[i+k][l] = false;</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            item.cell_combined[i+k][j] = true;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (cols = /^.*c([0-9]+).*$/.exec(cell_flag[1])) &#123;</span><br><span class="line">          item.cell_colspan[i][j] = cols[1];</span><br><span class="line">          for(k = 1; k &lt; cols[1]; k++) &#123;</span><br><span class="line">            item.cell_combined[i][j+k] = true;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (header = /^.*h.*$/.exec(cell_flag[1])) &#123;</span><br><span class="line">          item.cell_header[i][j] = true;</span><br><span class="line">        &#125;</span><br><span class="line">        item.cells[i][j] = item.cells[i][j].replace(/!(.+)!/, &apos;&apos;);</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        item.cell_rowspan[i][j] = 1;</span><br><span class="line">        item.cell_colspan[i][j] = 1;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  this.tokens.push(item);</span><br><span class="line"></span><br><span class="line">  continue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>尚、別の箇所にふち無しテーブルに関するパースもほぼ同等の記述で書かれているため、そこも変更する必要がある</p>
 <p>（2016/05/06修正） ^のみのセルは無視するように、としましたが、それではalignがズレてしまうので、素直にcell_combinedフラグを使うようにしました</p>
 <h2 id="marked-jsを改修する（レンダラー編）"><a href="#marked-jsを改修する（レンダラー編）" class="headerlink" title="marked.jsを改修する（レンダラー編）"></a>marked.jsを改修する（レンダラー編）</h2><p>tablecell関数で表のセルを出力しているので、その呼出時に、先ほどのパーサで追加した変数を引数として渡してやる</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// header</span><br><span class="line">cell = &apos;&apos;;</span><br><span class="line">for (i = 0; i &lt; this.token.header.length; i++) &#123;</span><br><span class="line">  flags = &#123; header: true, align: this.token.align[i] &#125;;</span><br><span class="line">  cell += this.renderer.tablecell(</span><br><span class="line">    this.inline.output(this.token.header[i]),</span><br><span class="line">    &#123; header: true, align: this.token.align[i] &#125;,</span><br><span class="line">    this.token.header_colspan[i],</span><br><span class="line">    this.token.header_rowspan[i],</span><br><span class="line">    this.token.header_combined[i]</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line">header += this.renderer.tablerow(cell);</span><br><span class="line"></span><br><span class="line">for (i = 0; i &lt; this.token.cells.length; i++) &#123;</span><br><span class="line">  row = this.token.cells[i];</span><br><span class="line"></span><br><span class="line">  cell = &apos;&apos;;</span><br><span class="line">  for (j = 0; j &lt; row.length; j++) &#123;</span><br><span class="line">    cell += this.renderer.tablecell(</span><br><span class="line">      this.inline.output(row[j]),</span><br><span class="line">      &#123; header: this.token.cell_header[i][j], align: this.token.align[j] &#125;,</span><br><span class="line">      this.token.cell_colspan[i][j],</span><br><span class="line">      this.token.cell_rowspan[i][j],</span><br><span class="line">      this.token.cell_combined[i][j]</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  body += this.renderer.tablerow(cell);</span><br><span class="line">&#125;</span><br><span class="line">return this.renderer.table(header, body);</span><br></pre></td></tr></table></figure>
+
+
 <p>勿論、関数そのものの中身を変更することもお忘れなく</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Renderer.prototype.tablecell = function(content, flags, colspan, rowspan, combined) &#123;</span><br><span class="line">  if(combined === true)&#123; return &quot;&quot;; &#125;</span><br><span class="line">  var cols = colspan || 1;</span><br><span class="line">  var rows = rowspan || 1;</span><br><span class="line">  var type = flags.header ? &apos;th&apos; : &apos;td&apos;;</span><br><span class="line">  var tag = flags.align</span><br><span class="line">    ? &apos;&lt;&apos; + type + &apos; style=&quot;text-align:&apos; + flags.align + &apos;&quot; colspan=&quot;&apos; + cols + &apos;&quot; rowspan=&quot;&apos; + rows + &apos;&quot;&gt;&apos;</span><br><span class="line">    : &apos;&lt;&apos; + type + &apos;&gt;&apos;;</span><br><span class="line">  return tag + content + &apos;&lt;/&apos; + type + &apos;&gt;\n&apos;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -202,7 +211,7 @@
   
     <li><a href="/nplus_doc/categories/漫画/">漫画</a><small>2</small></li>
   
-    <li><a href="/nplus_doc/categories/百合/">百合</a><small>5</small></li>
+    <li><a href="/nplus_doc/categories/百合/">百合</a><small>6</small></li>
   
     <li><a href="/nplus_doc/categories/艦これ/">艦これ</a><small>76</small></li>
   
@@ -220,6 +229,10 @@
   <ul class="entry">
     
       <li>
+        <a href="/nplus_doc/2019/10/22/game/bang-dream/lisa-younger-brother/">今井リサの弟問題に関する理屈と感情</a>
+      </li>
+    
+      <li>
         <a href="/nplus_doc/2019/09/16/game/edf/edf5/">【ゲーム感想】地球防衛軍5</a>
       </li>
     
@@ -233,10 +246,6 @@
     
       <li>
         <a href="/nplus_doc/2019/04/27/game/chokaigi2019-taiken/">ニコニコ超会議2019 インディーズゲームショーケース＆プレイコーナー 感想</a>
-      </li>
-    
-      <li>
-        <a href="/nplus_doc/2019/03/02/game/kancolle/season2/3-4/">【艦これ】【第二期】3-4 北方海域全域</a>
       </li>
     
   </ul>

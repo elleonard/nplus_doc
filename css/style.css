@@ -632,6 +632,10 @@ article footer .next-arrow:after {
   font: 1.1em FontAwesome;
   content: '\f061';
 }
+article .up-arrow:after {
+  font: 1.1em FontAwesome;
+  content: '\f062';
+}
 #comment {
   padding: 20px;
   background: rgba(0,0,0,0.65);

@@ -105,8 +105,9 @@
         </div>
         <p>タイトルの通り、ブルースクリーンで突如Windows10が起動しなくなってしまった<br>twitterを検索したところ、今月に入ってからも同様の問題で苦しんでいる人がそれなりの数いるようだったが、日本語の新しい情報はなさそうだったので解決に至るまでの道程をメモしておく</p>
 <a id="more"></a>
+
 <h1 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h1><p>ここに至るまでの経緯はとにかく無駄が多くアレなので、手っ取り早く解決方法を知りたい人向けにまずこれを書いておく</p>
-<p><a href="https://answers.microsoft.com/en-us/windows/forum/windows_10-performance/inaccessible-boot-device-error-cause-fix/8950ec0c-8502-4af4-aca6-be0e41fe463b?utm_source=t.co&amp;utm_medium=referral" target="_blank" rel="noopener">Inaccessible Boot Device error - cause? fix? - Microsoft Community</a></p>
+<p><a href="https://answers.microsoft.com/en-us/windows/forum/windows_10-performance/inaccessible-boot-device-error-cause-fix/8950ec0c-8502-4af4-aca6-be0e41fe463b?utm_source=t.co&utm_medium=referral" target="_blank" rel="noopener">Inaccessible Boot Device error - cause? fix? - Microsoft Community</a></p>
 <p>そのまんまな質問が先月の9日にMicrosoftのフォーラムに投稿されており、解決方法がその返信で示されている<br>今年に入ってからのWindowsUpdateが原因なので、それを巻き戻せ、というもの</p>
 <p>具体的には、再起動が2回繰り返された後に表示されるメニューから</p>
 <ol>
@@ -117,8 +118,10 @@
 <p>を選択し、コマンドプロンプトを開く</p>
 <p>そこで以下のコマンドを実行して最近インストールされたWindowsUpdateを調べる</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Dism /Image:D:\ /Get-Packages</span><br></pre></td></tr></table></figure>
+
 <p>今年の1月に最新のものが2つほどインストールされていたので、それを順番に戻した<br>（この日付はPCにインストールされた日付なので、環境によって変わる）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Dism /Image:D:\ /Remove-Package /packagename:（パッケージ名）</span><br></pre></td></tr></table></figure>
+
 <p>パッケージ名は <code>Get-Packages</code> で確認したところからコピーすれば良い<br>（対象文字列をドラッグし、コマンドプロンプト上で右クリックするとコピペできる）</p>
 <p>その後、Windowsを起動すると正常に起動される</p>
 <h1 id="発端"><a href="#発端" class="headerlink" title="発端"></a>発端</h1><p>帰宅後、いつもの調子でPCの電源を入れたところ、なんか画面が暗いままである<br>ディスプレイに異常があるでもなし、何か引っかかったかとPC本体の電源を一度長押しして強制終了してから再起動を試みた<br>すると、いつものいい感じの画像を出してくれるあのログイン画面の代わりに、心臓に悪い青い画面が</p>
@@ -132,7 +135,8 @@
 <h1 id="ググるよりtwitter検索"><a href="#ググるよりtwitter検索" class="headerlink" title="ググるよりtwitter検索"></a>ググるよりtwitter検索</h1><p>Googleが出してくれる情報は一つ一つがそれなりの質量を持っており、対応のために飯も食わずに唸る筆者のスカスカな脳みそにとってはオーバースペックも良いところ<br>しかし、twitterは1ツイートの文字数が限られているお陰で細切れの情報が読みやすく、しかもいちいち大仰なページにまとめなくても情報を発信できるという手軽さから、多くの類似した症状が報告されやすい<br>しかも新しい順にソートされて表示されるため、情報の鮮度もそれなりに信頼がおける</p>
 <p>twitter検索で <code>INACCESSIBLE BOOT DEVICE</code> を調べたところ、今月に入ってからも同様の症状に苦しむユーザが国内外で大勢いるらしいことがわかり、これは個別のPC内に起きた不具合ではなく、WindowsUpdate起因であろうな、というところまで推測ができた<br>もっと早くにtwitter検索していれば……と嘆くも後の祭り</p>
 <p>かくして、解決方法として報告されているWindowsUpdateの巻き戻しによって、4時間の時を経てPCが落ち着きを取り戻したのである</p>
-<h1 id="根本対策は？"><a href="#根本対策は？" class="headerlink" title="根本対策は？"></a>根本対策は？</h1><p><a href="/nplus_doc/2018/02/14/engineering/windows10-inaccessible-boot-device-2/" title="Windows10がINACCESSIBLE BOOT DEVICEで起動しない（続）">Windows10がINACCESSIBLE BOOT DEVICEで起動しない（続）</a>へ</p>
+<h1 id="根本対策は？"><a href="#根本対策は？" class="headerlink" title="根本対策は？"></a>根本対策は？</h1><a href="/nplus_doc/2018/02/14/engineering/windows10-inaccessible-boot-device-2/" title="Windows10がINACCESSIBLE BOOT DEVICEで起動しない（続）">Windows10がINACCESSIBLE BOOT DEVICEで起動しない（続）</a>へ
+
 
       
     </div>
@@ -205,7 +209,7 @@
   
     <li><a href="/nplus_doc/categories/漫画/">漫画</a><small>2</small></li>
   
-    <li><a href="/nplus_doc/categories/百合/">百合</a><small>5</small></li>
+    <li><a href="/nplus_doc/categories/百合/">百合</a><small>6</small></li>
   
     <li><a href="/nplus_doc/categories/艦これ/">艦これ</a><small>76</small></li>
   
@@ -223,6 +227,10 @@
   <ul class="entry">
     
       <li>
+        <a href="/nplus_doc/2019/10/22/game/bang-dream/lisa-younger-brother/">今井リサの弟問題に関する理屈と感情</a>
+      </li>
+    
+      <li>
         <a href="/nplus_doc/2019/09/16/game/edf/edf5/">【ゲーム感想】地球防衛軍5</a>
       </li>
     
@@ -236,10 +244,6 @@
     
       <li>
         <a href="/nplus_doc/2019/04/27/game/chokaigi2019-taiken/">ニコニコ超会議2019 インディーズゲームショーケース＆プレイコーナー 感想</a>
-      </li>
-    
-      <li>
-        <a href="/nplus_doc/2019/03/02/game/kancolle/season2/3-4/">【艦これ】【第二期】3-4 北方海域全域</a>
       </li>
     
   </ul>

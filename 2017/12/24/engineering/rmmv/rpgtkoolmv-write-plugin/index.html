@@ -107,6 +107,7 @@
         </div>
         <p>メリークリスマス！<br>この記事は<a href="https://adventar.org/calendars/2288" target="_blank" rel="noopener">RPGツクールMV Advent Calendar 2017</a>の記事（後半）です。<br>前半の記事については <a href="/nplus_doc/2017/12/24/engineering/rmmv/rpgtkoolmv-github/" title="RPGツクールMV やさしいプラグインの書き方 基礎編">RPGツクールMV やさしいプラグインの書き方 基礎編</a> へどうぞ</p>
 <a id="more"></a>
+
 <h1 id="プラグインを修正する-不具合を報告する"><a href="#プラグインを修正する-不具合を報告する" class="headerlink" title="プラグインを修正する/不具合を報告する"></a>プラグインを修正する/不具合を報告する</h1><p>ここからはプラグインを読む人、プラグインのバグの内容を説明する人、そしてプラグインをちょっとだけ修正する人のためのセクションです。<br>プラグインを利用するだけの人にも不具合について作者に尋ねることはできますが、ここで言う「不具合の報告」とは不具合の内容を過不足無く作者やコミッターに伝えることを言います。</p>
 <p>プラグインをただ利用するだけよりもかなりハードルは高くなります。<br>プログラムを大部分理解するところまでは必要ではありませんが、javascriptのコードと実際の挙動を見比べてなんとなく「こういう処理をしているんだな」という想像を働かせるくらいの腕が必要になります。</p>
 <p>プラグインの詳細な読み方については説明を省きますので、コードを読めない方はこの先の記事はぼんやり眺めるだけにするか、あるいは将来コードが読めるようになった時のことを想像しながら読んでみてください。</p>
@@ -120,7 +121,9 @@
 <p>ただし、特定の機能を持った新しいプラグインが欲しい場合に用いるべきではないでしょう。<br>そういった場合はより大勢が見ているであろう、twitterやフォーラムなどでぼやいてみるほうがプラグイン作者の目に止まりやすいです。</p>
 <h2 id="プラグインを修正する"><a href="#プラグインを修正する" class="headerlink" title="プラグインを修正する"></a>プラグインを修正する</h2><p>あなたが見つけたプラグインのバグは、ちょっと手を加えれば直せる程度のものだとあなたは気づきました。<br>早速直して動かしてみて、ひとまず問題なく動作しているように見えました。<br>あなたはその修正を作者に伝えるために、githubでissueを立てたり、twitterでメンションを送るしかないのでしょうか。</p>
 <p>いいえ、そんなことはありません。<br>githubは他の人のリポジトリに対して、修正や更新を取り込んでほしいという要求 <code>Pull Request</code> を送ることができます。<br>（Pull RequestはプルリクやPRと略されます）<br>もしこのリクエストが通って、あなたの修正がマージされたら、あなたの名前がそのプラグインの更新履歴に残るのです。<br>そして、それ以降そのプラグインを利用するすべてのゲーム開発者にとって貢献したことになります。</p>
-<p>とある公開されたプラグインについて、それはあなたが欲しかったものだが、バグがあった。仕方がないのであなたはこっそり修正して使うことにした。<br>こういった状況では修正内容はあなたしか知らないし、あなた以外の人は同じ修正を自ら行うしか無く、複数のゲーム開発者が同じプラグインの同じバグを直すという不毛極まりない無駄が発生します。<br>結果としてあなたがプレイしたかったゲームの完成が遅れることだってあるかもしれません。<br>そしてそのバグの修正と直接関係のない更新があった時、あなたはそれに追従するためにあなた自身が加えた修正を適切に新バージョンに移植しなくてはならないのです。<br><a href="/nplus_doc/2017/12/24/engineering/rmmv/rpgtkoolmv-github/" title="前半の記事">前半の記事</a>でも述べたように、人が自らの行った更新を正しく記憶しておくことは困難です。</p>
+<p>とある公開されたプラグインについて、それはあなたが欲しかったものだが、バグがあった。仕方がないのであなたはこっそり修正して使うことにした。<br>こういった状況では修正内容はあなたしか知らないし、あなた以外の人は同じ修正を自ら行うしか無く、複数のゲーム開発者が同じプラグインの同じバグを直すという不毛極まりない無駄が発生します。<br>結果としてあなたがプレイしたかったゲームの完成が遅れることだってあるかもしれません。<br>そしてそのバグの修正と直接関係のない更新があった時、あなたはそれに追従するためにあなた自身が加えた修正を適切に新バージョンに移植しなくてはならないのです。</p>
+<a href="/nplus_doc/2017/12/24/engineering/rmmv/rpgtkoolmv-github/" title="前半の記事">前半の記事</a>でも述べたように、人が自らの行った更新を正しく記憶しておくことは困難です。
+
 <p>しかし、あなたが修正内容を作者のリポジトリにPRとして送り、その修正が取り込まれたなら、どうでしょう。<br>あなた以外の人は同じ修正を行う必要なく、あなたが潰した厄介なバグに悩まされずにゲーム開発に専念できるのです。<br>あなた自身も、そのプラグインに取り込まれる他の更新に追従するための労力を大幅に削減できるでしょう。</p>
 <p>バグを見つけ、もしそれがあなたの手で直せるものであったなら、積極的にPRを出してください。<br>あなたのコード修正が、あなたの後に続く幾多のゲーム開発者を救い、もしかしたらあなた自身をも助け、新たなゲームの誕生を促進するのです。</p>
 <p>では、簡単に手順を説明します。</p>
@@ -135,19 +138,25 @@
 <p>新しいコミットをgithub上に反映する（pushする）ことは、自分が権限を持ったリポジトリに対してしかできません。<br>（他の人のリポジトリを勝手に更新することはできません。当然ですね）<br>そこで、自分の更新を取り込んでもらうためには、その時点のリポジトリの複製を自分のものとして作り、一度そこにコミットする必要があるのです。</p>
 <p>他の人のリポジトリをcloneしていた場合、clone先に自分のリポジトリを紐付けることができます。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git remote add myrepo git@github.com:username/repositoryname.git</span><br></pre></td></tr></table></figure>
+
 <p>上記のようなコマンドで、ローカルのリポジトリとgithub上のリポジトリを紐付けることができます。<br><code>git@～</code> というリポジトリのURLは、github上でリポジトリを開いた時、右端にある <code>Clone or download</code> というボタンから開く小ウィンドウからコピーできます。<br>fork先のリポジトリを改めてcloneしても良いし、他の人のリポジトリをcloneしたものがあるなら、そこに <code>git remote add</code> で紐付けてしまっても構いません。<br>ここでは <code>myrepo</code> という名前でfork先のリポジトリを紐付けたと仮定します。</p>
 <p>そのローカルリポジトリ内で早速コード修正……の前に、修正用のブランチを切っておきましょう。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git checkout -b modify_original_shop_bug</span><br></pre></td></tr></table></figure>
+
 <p>実は、cloneしたばっかりのリポジトリはデフォルトのブランチ（たいてい <code>master</code> ）を向いています。<br>Git Bashでフォルダ名の右に表示されている文字列は、今見ているブランチの名前です。<br><code>master</code> ブランチには（リポジトリの運用ルール次第ですが、たいていの場合）確定した更新のみを取り込みます。<br>今回の修正はまだ作者が取り込む前なので、 <code>master</code> とは異なる名前の <code>modify_original_shop_bug</code> というブランチを切りました。<br>（オリジナルショップを実現するようなプラグインの何らかのバグを修正する、という想定です。修正内容に応じて、ブランチの名前は適宜考えると良いでしょう）</p>
 <p>ブランチとはその名の通り枝分かれのことで、 <code>master</code> が幹であるとするなら、今回切ったブランチは枝というわけです。<br><code>master</code> から切ったブランチは、その時点での <code>master</code> のコミット履歴を引き継ぎます。<br>そして、そのブランチにコミットしても、 <code>master</code> には何ら影響を及ぼしません。（枝が伸びるだけです）</p>
 <p>ここで</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git checkout master</span><br></pre></td></tr></table></figure>
+
 <p>とすれば、すぐに <code>master</code> ブランチに向けることができます。<br>つまり、切った後のブランチにコミットした更新が気に食わない場合、そのブランチを捨てて <code>master</code> から新しくブランチを切り直すことができるのです。<br>では、今回切ったブランチに戻って修正の内容をコミットしましょう。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git checkout modify_original_shop_bug</span><br></pre></td></tr></table></figure>
+
 <p><code>-b</code> をつけると新しいブランチを作成するという意味になりますが、つけなかった場合は既に作ってあるブランチに移動する、という意味です。<br>このあと、プログラムファイルを修正して、それをコミットします。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git add OriginalShop.js</span><br><span class="line">git commit -m &quot;ショップの金額表示がはみ出していたのを修正&quot;</span><br></pre></td></tr></table></figure>
+
 <p><code>git add</code> で更新したファイルを指定し、コミットに含めるファイルリストに追加します。<br>その前に <code>git diff</code> コマンドで差分を確認するクセをつけても良いでしょう。<br><code>git commit</code> では、addで追加された更新ファイル一覧をコミットし、その履歴を記録します。<br>コミットしたら、pushしましょう。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git push myrepo modify_original_shop_bug</span><br></pre></td></tr></table></figure>
+
 <p><code>git push</code> で、remoteに指定したリポジトリに対して更新を同期します。<br>github上に更新が同期されたら、githubのリポジトリをブラウザで開いてみましょう。<br><code>master</code> 以外にpushした直後はPRを出すかどうかという帯が表示されます。<br>そこからでも良いですし、リポジトリ上の <code>New pull request</code> ボタンからでも良いので、PRを作りましょう。<br>左右にブランチ選択のボタンが出るので、左側のbaseに大本のリポジトリの <code>master</code> を、右側に自分の更新が入っているブランチを指定してPR情報を入力しましょう。<br>タイトルと説明文を書いて <code>Create pull request</code> ボタンを押せば、OK。<br>あとはプラグインの作者に「PR送ったから見てね」という連絡をすれば、だいたい見てもらえます。</p>
 <p>ただし、見てもらっても必ず取り込んでもらえるわけではありません。<br>「こういうルールで書いているので、それに従ってちょっと修正してね」といったツッコミが入ることもあります。<br>もし更に修正が必要になったら、そのブランチに修正をコミットして、pushしましょう。</p>
 <p>ここで想定しているのはごく軽微な修正ですので、だいたいサクっと取り込んでもらえるとは思いますが。</p>
@@ -197,6 +206,7 @@
 <p>1については読んだ通りです。何かバグがあってもそれに対して作者は責任を負いません。利用者はそれを承知していれば良いのです。<br>2については面倒に感じる方もいらっしゃるかもしれませんが、MITライセンスを採用したRPGツクールMVのプラグインの場合はたいてい、配布されているプラグインの中に著作権表示と<a href="https://opensource.org/licenses/mit-license.php" target="_blank" rel="noopener">MITライセンス全文</a>へのリンクが最初から含まれています。<br>そして、そのプラグインを利用するということは、プラグインに書かれた著作権表示やリンクもろとも、ゲームプログラムの一部として取り込むことと同義です。<br>ですので、それを意図的に消したりしなければ、利用者は特に何もする必要がありません。<br>（わざわざスタッフロールの中にプラグインの作者の名前を書いたりしなくても良いのです。書いていただけるのはもちろん嬉しいですけどね！）</p>
 <p>広く使われていて、利用者と作者の双方にとって楽なライセンスであるという点で、ライセンスに特別こだわらない人もとりあえずMITを指定しておけば間違いはないでしょう。<br>もちろん、こだわる人はしっかりと調べて自分に合ったライセンスを指定してください。<br>（ただ、GPLはできればやめてほしいですが）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Copyright (c) 2017 XXXX（作者名）</span><br><span class="line">このプラグインはMITライセンスのもとで配布されています</span><br><span class="line">https://opensource.org/licenses/mit-license.php</span><br></pre></td></tr></table></figure>
+
 <p>この記述をソースコード中のわかりやすい位置（たいていは最上部）にコメントで記しておくだけで、そのプラグインをMITライセンスのもとで公開するという意思を示したことになります。<br>先に述べた通り、MITライセンスは利用者にほとんどその存在を意識させずに済む寛容なライセンスです。<br>寛容なライセンスを指定しておくことは、利用者の安心にも繋がります。<br>ライセンスは利用者にやさしいプラグインの大事な一要素というわけです。</p>
 <p>逆に、ライセンスを指定しない場合は<a href="https://choosealicense.com/no-license/" target="_blank" rel="noopener">No License</a>とみなされ、明示的に指定した場合よりもむしろ厳しい制約がかけられていると解釈されることがあります。<br>こういう条件で使ってもいいよという目印として非常にわかりやすく、共通の認識が既に存在するものですので、プラグインを公開される場合には是非メジャーなライセンスを指定してください。</p>
 <h1 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h1><ul>
@@ -216,6 +226,7 @@
 <li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></li>
 <li><a href="http://semver.org/lang/ja/" target="_blank" rel="noopener">セマンティック バージョニング 2.0.0 | Semantic Versioning</a></li>
 <li><a href="/nplus_doc/2017/11/24/engineering/rmmv/rpgtkoolmv-license/" title="RPGツクールMVのプラグイン MITライセンスについて | ぷらずま式改">RPGツクールMVのプラグイン MITライセンスについて | ぷらずま式改</a>
+
 </li>
 </ul>
 <h1 id="筆者について"><a href="#筆者について" class="headerlink" title="筆者について"></a>筆者について</h1><p>プラグインを書いているアカウントはDarkPlasma（@plasma_dark）ですが、そちらはR18アカウントです。<br>もし18歳未満の方が内容について筆者とコンタクトを取りたい場合は全年齢向けのNPlamsa（@elleonard_f）までご連絡ください。</p>
@@ -291,7 +302,7 @@
   
     <li><a href="/nplus_doc/categories/漫画/">漫画</a><small>2</small></li>
   
-    <li><a href="/nplus_doc/categories/百合/">百合</a><small>5</small></li>
+    <li><a href="/nplus_doc/categories/百合/">百合</a><small>6</small></li>
   
     <li><a href="/nplus_doc/categories/艦これ/">艦これ</a><small>76</small></li>
   
@@ -309,6 +320,10 @@
   <ul class="entry">
     
       <li>
+        <a href="/nplus_doc/2019/10/22/game/bang-dream/lisa-younger-brother/">今井リサの弟問題に関する理屈と感情</a>
+      </li>
+    
+      <li>
         <a href="/nplus_doc/2019/09/16/game/edf/edf5/">【ゲーム感想】地球防衛軍5</a>
       </li>
     
@@ -322,10 +337,6 @@
     
       <li>
         <a href="/nplus_doc/2019/04/27/game/chokaigi2019-taiken/">ニコニコ超会議2019 インディーズゲームショーケース＆プレイコーナー 感想</a>
-      </li>
-    
-      <li>
-        <a href="/nplus_doc/2019/03/02/game/kancolle/season2/3-4/">【艦これ】【第二期】3-4 北方海域全域</a>
       </li>
     
   </ul>

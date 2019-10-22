@@ -107,13 +107,16 @@
         </div>
         <p>メリークリスマス！<br>この記事は<a href="https://adventar.org/calendars/2288" target="_blank" rel="noopener">RPGツクールMV Advent Calendar 2017</a>の記事（前半）です。<br>後半の記事については <a href="/nplus_doc/2017/12/24/engineering/rmmv/rpgtkoolmv-write-plugin/" title="RPGツクールMV やさしいプラグインの書き方 応用編">RPGツクールMV やさしいプラグインの書き方 応用編</a> へどうぞ</p>
 <a id="more"></a>
+
 <h1 id="はじめに"><a href="#はじめに" class="headerlink" title="はじめに"></a>はじめに</h1><h2 id="誰が読めばいいの？"><a href="#誰が読めばいいの？" class="headerlink" title="誰が読めばいいの？"></a>誰が読めばいいの？</h2><p>「やさしい書き方」と銘打ってはいますが、RPGツクールMVのプラグインを利用するすべての人に向けた内容を含みます。<br>gitを利用していない人にとってはちょっと慣れない話も出てくるかもしれませんが、これを覚えておけばゲームの開発効率の向上に繋がるので、余裕がある時にでも読んでみてください。</p>
 <p>また、<a href="/nplus_doc/2017/12/24/engineering/rmmv/rpgtkoolmv-write-plugin/" title="後半の記事">後半の記事</a>にはRPGツクールMVのプラグインを読み書きする人に向けた内容も含みます。<br>これからプラグインを書いてみようと思っている人はもちろん、今プラグインを書いて公開している人にも是非読んでいただきたく思います。</p>
 <p>筆者がWindowsユーザであるため、内容もWindowsユーザに向けたものになっています。<br>MacやLinuxを利用できる人はその時点でリテラシーが高いはずですので、適宜読み替えていけるものと思います。</p>
 <h2 id="どんな内容？"><a href="#どんな内容？" class="headerlink" title="どんな内容？"></a>どんな内容？</h2><p>まず、前半の基礎編ではRPGツクールMVのプラグインを利用する上で、gitやgithubという強力なツールを利用する方法や、どう利用すると効率がよくなるかと言ったことに言及します。<br>また、プラグインを書かない人、利用するだけの人にとってもgithubが有用なツールであることも説明します。</p>
 <p>RPGツクールMVのプラグインに関わる全ての人がgithubを利用できるようになり、それによって（ゲーム本編か、プラグインかに関わらず）効率的な開発を行えるようになることを目的としています。</p>
 <p>なお、ゲームプロジェクトそのものをgithubで管理することについては既に多くの方が記事を書いていらっしゃるので、適当にググってそちらを参照されると良いと思います。</p>
-<a href="/nplus_doc/2017/12/24/engineering/rmmv/rpgtkoolmv-write-plugin/" title="後半の応用編">後半の応用編</a>では、他の人のプラグインについて不具合の報告をしたり、修正したりすることについて言及した後、やさしいプラグインの書き方について説明します。<br><br><!-- 基礎知識 -->
+<a href="/nplus_doc/2017/12/24/engineering/rmmv/rpgtkoolmv-write-plugin/" title="後半の応用編">後半の応用編</a>では、他の人のプラグインについて不具合の報告をしたり、修正したりすることについて言及した後、やさしいプラグインの書き方について説明します。
+
+<!-- 基礎知識 -->
 <h1 id="基礎知識-準備"><a href="#基礎知識-準備" class="headerlink" title="基礎知識/準備"></a>基礎知識/準備</h1><h2 id="gitって何？-githubって何？"><a href="#gitって何？-githubって何？" class="headerlink" title="gitって何？ githubって何？"></a>gitって何？ githubって何？</h2><!-- gitとgithubは違うよという話 -->
 <p>gitはバージョン管理システムです。（主に）プログラムのソースコードのバージョンを管理するための強力な補助ツールです。<br><a href="https://github.com/" target="_blank" rel="noopener">github</a>はgitリポジトリをオンライン上で管理できるクラウドサービスです。</p>
 <p>これだけではあまりピンと来ない方も少なからずいらっしゃるでしょうから、gitを使ったバージョン管理について具体的に説明します。<br>既にgitやgithubが何者であるかを理解し、その強力さをご存知の方であれば読み飛ばしていただいても構いません。</p>
@@ -125,8 +128,10 @@
 <p>人間はあまりにも怠惰で、ポンコツです。<br>なので、機械に頼って生きていきましょう。<br>別々のファイル名をつけたり、更新内容を記録することである時点でのファイルがどんな状態であったかを管理しようとするこの行為は、人の記憶や勤勉さという信用ならないものによって支えられていて失敗しやすいとは言え、バージョン管理そのものです。<br>この作業に相当する内容の大部分を機械に任せることができればどうでしょうか。</p>
 <p>gitによって、main.jsやrpg_core.js等、一つの大きなプログラムを構成する複数のファイルをまとめて <code>リポジトリ</code> を作ります。<br>そうすれば、開発者はコマンドライン上で</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &quot;敵のHPバーを表示する機能を追加した&quot;</span><br></pre></td></tr></table></figure>
+
 <p>と入力するだけで、その時点のプログラムの状態と、前回の更新からどういう更新をしたか、という内容を一度に記録できるのです。<br>（この記録する行為を <code>コミットする</code> と呼び、記録の単位を <code>コミット</code> と呼びます）<br>コミットにはそれぞれ重複しない識別番号（コミット番号）が与えられ、 <code>git log</code> コマンドによって番号と更新日時と更新内容を、更新日時が新しい順に一覧することができます。<br>もし、コミット番号 <code>XXXXXX</code> の時点に戻したくなったら、</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout hoge XXXXXX</span><br></pre></td></tr></table></figure>
+
 <p>と入力するだけで該当のコミットに戻すことができます。</p>
 <p>いちいちファイルをコピーして名前をつけて、その時の更新で何があったかをファイルに記録して……といった欠伸の出る眠たい作業をミスなく運用して、山のような不要なファイルを掘り返す。<br>たった2行のコマンドで得られた番号と記録の一覧を眺める。<br>どちらが開発者にとってやさしく、そして効率よく目的を達成できるかは言うまでもありませんね？</p>
 <p>これがgitです。そして、そのgitで作られたリポジトリをクラウド上で管理できるサービスがgithubです。<br>githubはgitリポジトリの単純なバックアップとなるだけでなく、ウェブブラウザでリポジトリの状態を確認できたり、他の人のリポジトリを見たり、意見を交換したりもできます。<br>gitやgithubはプログラムを書く上で極めて強力なサポートツールなのです。<br>これはRPGツクールMVのプラグインにとっても例外ではありません。</p>
@@ -138,11 +143,14 @@
 <p>まずはじめにユーザ名とメールアドレスをローカルに登録しておくと良いです。<br>必須ではありませんが、これをしておくとコミット履歴に名前が残ります。<br>もしプラグインを書いたり、他の人のプラグインにちょっとした修正をかけたり、もちろん、自分のゲームプロジェクトをgithubで管理するといった場合にもこれをしておくと良いでしょう。</p>
 <p>起動したGit Bash上で以下の二つのコマンドを入力してください。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;gitで用いるハンドルネーム&quot;</span><br><span class="line">git config --global user.email &quot;gitで用いるメールアドレス&quot;</span><br></pre></td></tr></table></figure>
+
 <p>このコマンドが通ったかどうかは以下のコマンドで確認できます。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config -l | grep user</span><br></pre></td></tr></table></figure>
+
 <p>先程のコマンドで設定した名前とメールアドレスが出てきたら成功です。<br>名前とメールアドレスの設定は何度でもやり直すことができます。</p>
 <h2 id="プラグインをクローンする準備"><a href="#プラグインをクローンする準備" class="headerlink" title="プラグインをクローンする準備"></a>プラグインをクローンする準備</h2><p>Cドライブの下に rmmv-plugins と言った名前のフォルダを作成して、Git Bashに</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd C:\rmmv-plugins</span><br></pre></td></tr></table></figure>
+
 <p>と入力してみてください。cdはchange directoryの略で、Git Bashが今見ているディレクトリ（フォルダ）を変更する、という意味です。<br>対象のフォルダにcdすることを、今後 <code>フォルダに入る</code> と表現します。<br>この記事では例として、rmmv-pluginsフォルダの下に、github上のプラグインをコピーしてきます。</p>
 <p>フォルダの名前や場所は自由ですので、こだわる人は各自フォルダを作ってそこに cd してください。</p>
 <p>いちいちエクスプローラを開いてフォルダを作る操作が面倒だなと思い始めたら mkdir コマンドを試してみるのも良いでしょう。</p>
@@ -154,8 +162,10 @@
 <h2 id="git-cloneしよう"><a href="#git-cloneしよう" class="headerlink" title="git cloneしよう"></a>git cloneしよう</h2><p>単にプラグインをダウンロードするだけでも良いですが、github上に公開されているリポジトリはgit cloneコマンドによってすべてローカルにコピーすることができます。<br>試しに私のRPGツクールMVプラグインをまとめたリポジトリをクローンしてみましょう。</p>
 <p>Git Bashに以下のように入力してください。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/elleonard/RPGtkoolMV-Plugins.git</span><br></pre></td></tr></table></figure>
+
 <p>もしくは、githubにSSH鍵を登録している方は以下でも構いません。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone git@github.com:elleonard/RPGtkoolMV-Plugins.git</span><br></pre></td></tr></table></figure>
+
 <p>gitコマンドによってgithub上のリポジトリがローカルにコピーされます。<br><code>cd RPGtkoolMV-Plugins</code> と入力すればコピー先のフォルダに入ることができ、フォルダ名の横に <code>(master)</code> という表示が出ます。<br>（プラグインを利用するだけであれば、この意味は理解しなくても問題ありません。Git Bashがリポジトリの中を見ているのだ、というだけです）</p>
 <p>RPGツクールMVで利用するためには .js ファイルを js/plugins フォルダの下にコピーする必要があります。<br>リポジトリをcloneするこの方法では .js ファイルを直接ダウンロードするよりも一手間増えています。</p>
 <p>では何故、この一手間をかけることが開発効率の向上に繋がるのでしょうか。</p>
@@ -167,6 +177,7 @@
 <p>また、github上のリポジトリで公開されているプラグインであれば、github上でそのファイルの更新日時やリポジトリの最新のコミット番号を確認できます。<br>つまり、今利用しているプラグインが最新のものであるかどうかくらいは、<code>git log</code> の結果とgithub上の表示を照らし合わせることで確認ができるのです。<br>最新でない場合は最新にすることで問題が解消するかもしれませんし、最新であるにも関わらず思い通りの動きをしてくれないのであれば、その旨を作者に伝えることができます。<br>作者の側からすれば、質問を受けた後いちいち「最新のプラグインを使っていますか？」という打ち返しをせずに済むのです。<br>作者の答える手間ももちろん、質問する側が望みの回答を得るまでの時間も短縮され、嬉しいことだらけですね。</p>
 <p>もし、最新の更新を取り込みたいのであれば、Git Bashでクローンしたフォルダの中へ入って、以下のコマンドを入力してください。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git pull origin master</span><br></pre></td></tr></table></figure>
+
 <p>詳しい説明は省きますが、この場合の <code>git pull</code> は、github上の更新を取り込むという意味です。<br>このコマンドが実行されると、Git Bashで見ているローカルのリポジトリが、github上の最新のコミットで更新されます。<br>最新版のダウンロードも、コマンド一行だけでできてしまう、というわけですね。</p>
 <p>プラグインを利用する方にとっての記事はここまでです。<br>完全な初心者に向けてできるだけわかりやすく書いたつもりでしたが、それでも新しいことを覚えるのは難しいことと思います。<br>今すぐにすべてできるようになる必要はもちろんなく、けれど将来的にちょっとずつgitと仲良くなっていくと、開発効率も少しずつ良くなることでしょう。<br>ですので、他の作業に詰まった時の気分転換にでもこの記事の内容を思い返していただければと思います。</p>
 <p>そして、ここまでの内容を実践し理解された方は次の<a href="/nplus_doc/2017/12/24/engineering/rmmv/rpgtkoolmv-write-plugin/" title="RPGツクールMV やさしいプラグインの書き方 応用編">RPGツクールMV やさしいプラグインの書き方 応用編</a>で「プラグインを修正する」「不具合を報告する」と言った内容に是非挑戦してみてください。</p>
@@ -253,7 +264,7 @@
   
     <li><a href="/nplus_doc/categories/漫画/">漫画</a><small>2</small></li>
   
-    <li><a href="/nplus_doc/categories/百合/">百合</a><small>5</small></li>
+    <li><a href="/nplus_doc/categories/百合/">百合</a><small>6</small></li>
   
     <li><a href="/nplus_doc/categories/艦これ/">艦これ</a><small>76</small></li>
   
@@ -271,6 +282,10 @@
   <ul class="entry">
     
       <li>
+        <a href="/nplus_doc/2019/10/22/game/bang-dream/lisa-younger-brother/">今井リサの弟問題に関する理屈と感情</a>
+      </li>
+    
+      <li>
         <a href="/nplus_doc/2019/09/16/game/edf/edf5/">【ゲーム感想】地球防衛軍5</a>
       </li>
     
@@ -284,10 +299,6 @@
     
       <li>
         <a href="/nplus_doc/2019/04/27/game/chokaigi2019-taiken/">ニコニコ超会議2019 インディーズゲームショーケース＆プレイコーナー 感想</a>
-      </li>
-    
-      <li>
-        <a href="/nplus_doc/2019/03/02/game/kancolle/season2/3-4/">【艦これ】【第二期】3-4 北方海域全域</a>
       </li>
     
   </ul>

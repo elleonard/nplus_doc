@@ -27,18 +27,18 @@
   <!-- ogp -->
   
     
-      <meta name="description" content="Windows10がINACCESSIBLE BOOT DEVICEで起動しないの続きひとまずWindows Updateを巻き戻すことで一時的に対処できた、というところまでしか書いていなかったので追記真っ青な画面の根本的な原因と対策について">
+      <meta name="description" content="Windows10がINACCESSIBLE BOOT DEVICEで起動しないの続き  ひとまずWindows Updateを巻き戻すことで一時的に対処できた、というところまでしか書いていなかったので追記真っ青な画面の根本的な原因と対策について">
 <meta name="keywords" content="OS,Windows10">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Windows10がINACCESSIBLE BOOT DEVICEで起動しない（続）">
 <meta property="og:url" content="http://elleonard.github.io/nplus_doc/2018/02/14/engineering/windows10-inaccessible-boot-device-2/index.html">
 <meta property="og:site_name" content="ぷらずま式改">
-<meta property="og:description" content="Windows10がINACCESSIBLE BOOT DEVICEで起動しないの続きひとまずWindows Updateを巻き戻すことで一時的に対処できた、というところまでしか書いていなかったので追記真っ青な画面の根本的な原因と対策について">
+<meta property="og:description" content="Windows10がINACCESSIBLE BOOT DEVICEで起動しないの続き  ひとまずWindows Updateを巻き戻すことで一時的に対処できた、というところまでしか書いていなかったので追記真っ青な画面の根本的な原因と対策について">
 <meta property="og:locale" content="ja">
 <meta property="og:updated_time" content="2019-09-13T04:56:39.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Windows10がINACCESSIBLE BOOT DEVICEで起動しない（続）">
-<meta name="twitter:description" content="Windows10がINACCESSIBLE BOOT DEVICEで起動しないの続きひとまずWindows Updateを巻き戻すことで一時的に対処できた、というところまでしか書いていなかったので追記真っ青な画面の根本的な原因と対策について">
+<meta name="twitter:description" content="Windows10がINACCESSIBLE BOOT DEVICEで起動しないの続き  ひとまずWindows Updateを巻き戻すことで一時的に対処できた、というところまでしか書いていなかったので追記真っ青な画面の根本的な原因と対策について">
 <meta name="twitter:creator" content="@elleonard_f">
     
     <meta name="twitter:image" content="http://elleonard.github.io/nplus_doc/img/ogp.png">
@@ -103,17 +103,23 @@
           <p class="toc-title">目次</p>
           <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#原因"><span class="toc-text">原因</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#アンチウイルスソフトは一つに絞ろう"><span class="toc-text">アンチウイルスソフトは一つに絞ろう</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#なぜWindowsはこんな更新を？"><span class="toc-text">なぜWindowsはこんな更新を？</span></a></li></ol>
         </div>
-        <a href="/nplus_doc/2018/02/06/engineering/windows10-inaccessible-boot-device/" title="Windows10がINACCESSIBLE BOOT DEVICEで起動しない">Windows10がINACCESSIBLE BOOT DEVICEで起動しない</a>の続き<br><br>ひとまずWindows Updateを巻き戻すことで一時的に対処できた、というところまでしか書いていなかったので追記<br>真っ青な画面の根本的な原因と対策について<br><br><a id="more"></a>
+        <a href="/nplus_doc/2018/02/06/engineering/windows10-inaccessible-boot-device/" title="Windows10がINACCESSIBLE BOOT DEVICEで起動しない">Windows10がINACCESSIBLE BOOT DEVICEで起動しない</a>の続き
+
+<p>ひとまずWindows Updateを巻き戻すことで一時的に対処できた、というところまでしか書いていなかったので追記<br>真っ青な画面の根本的な原因と対策について</p>
+<a id="more"></a>
+
 <h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p><a href="https://support.microsoft.com/en-us/help/4072699/january-3-2018-windows-security-updates-and-antivirus-software" target="_blank" rel="noopener">Important: Windows security updates released January-February, 2018, and antivirus software</a></p>
 <blockquote title="上記記事Overviewより抜粋"><p>The compatibility issue arises when antivirus applications make unsupported calls into Windows kernel memory. These calls may cause stop errors (also known as blue screen errors) that make the device unable to boot. To help prevent these stop errors, Microsoft is currently only offering the January and February 2018 Windows security updates to devices that are running antivirus software that is from antivirus software vendors who have confirmed that their antivirus software is compatible by setting a required registry key.</p></blockquote>
+
 <p>要約すると、1月のWindows Updateでカーネルメモリへのアクセス方法を制限したが、古いアンチウイルスソフトがそれに対応できておらず、起動時にエラーが起きてブルースクリーンが発生する、ということ<br>そんな破壊的な変更をいきなりやるMicrosoftが悪いかというと実はそういうことではなく、アンチウイルスソフトベンダの対応状況をしっかり見てからアップデートをかけているよ、ということも書いてある<br>「対応済みの場合はこのレジストリキーを書き換えてね」とベンダに伝え、ベンダがアンチウイルスソフトをアップデート、そのアップデートを適用したマシンはレジストリキーが書き換えられ、該当のWindows Updateが適用される、という具合だろう</p>
 <p>では、アンチウイルスソフトが対応したというレジストリの更新があったにも関わらず何故この問題が起きたのか</p>
 <h1 id="アンチウイルスソフトは一つに絞ろう"><a href="#アンチウイルスソフトは一つに絞ろう" class="headerlink" title="アンチウイルスソフトは一つに絞ろう"></a>アンチウイルスソフトは一つに絞ろう</h1><p>あるアンチウイルスソフトが新しいWindows Updateに対応し、レジストリを書き換えた<br>しかし、別のアンチウイルスソフトもインストールされており、そちらは古いままだった</p>
 <blockquote title="雑な流れ"><p>Windows Update「対応した？」
-レジストリ「したよ」
-Windows Update「よっしゃ通るで」
-古いアンチウイルスソフト「おっ、PC起動したんやな いつもどおりカーネルメモリにアクセスして……」
-Windows「あかんで（青画面）」</p></blockquote>
+<br>レジストリ「したよ」
+<br>Windows Update「よっしゃ通るで」
+<br>古いアンチウイルスソフト「おっ、PC起動したんやな いつもどおりカーネルメモリにアクセスして……」
+<br>Windows「あかんで（青画面）」</p></blockquote>
+
 <p>筆者のPCにも２種類のソフトがインストールされており、それで全てを察した<br>尚、今は１種類のみ残してアンインストールしたため、これで問題は起こらないはずである</p>
 <h1 id="なぜWindowsはこんな更新を？"><a href="#なぜWindowsはこんな更新を？" class="headerlink" title="なぜWindowsはこんな更新を？"></a>なぜWindowsはこんな更新を？</h1><p>そもそも、Windowsがカーネルメモリへのアクセス方法を制限しなければこんな問題は起こらなかった<br>とMicrosoftを責めてはいけない<br>この更新はセキュリティ上、仕方なく必要になってしまったものなのだ</p>
 <p><a href="http://www.4gamer.net/games/999/G999902/20180105085/" target="_blank" rel="noopener">Googleが発見した「CPUの脆弱性」とは何なのか。ゲーマーに捧ぐ「正しく恐れる」その方法まとめ - 4Gamer.net</a></p>
@@ -197,7 +203,7 @@ Windows「あかんで（青画面）」</p></blockquote>
   
     <li><a href="/nplus_doc/categories/漫画/">漫画</a><small>2</small></li>
   
-    <li><a href="/nplus_doc/categories/百合/">百合</a><small>5</small></li>
+    <li><a href="/nplus_doc/categories/百合/">百合</a><small>6</small></li>
   
     <li><a href="/nplus_doc/categories/艦これ/">艦これ</a><small>76</small></li>
   
@@ -215,6 +221,10 @@ Windows「あかんで（青画面）」</p></blockquote>
   <ul class="entry">
     
       <li>
+        <a href="/nplus_doc/2019/10/22/game/bang-dream/lisa-younger-brother/">今井リサの弟問題に関する理屈と感情</a>
+      </li>
+    
+      <li>
         <a href="/nplus_doc/2019/09/16/game/edf/edf5/">【ゲーム感想】地球防衛軍5</a>
       </li>
     
@@ -228,10 +238,6 @@ Windows「あかんで（青画面）」</p></blockquote>
     
       <li>
         <a href="/nplus_doc/2019/04/27/game/chokaigi2019-taiken/">ニコニコ超会議2019 インディーズゲームショーケース＆プレイコーナー 感想</a>
-      </li>
-    
-      <li>
-        <a href="/nplus_doc/2019/03/02/game/kancolle/season2/3-4/">【艦これ】【第二期】3-4 北方海域全域</a>
       </li>
     
   </ul>
