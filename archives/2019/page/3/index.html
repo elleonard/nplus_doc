@@ -91,6 +91,46 @@
         <div class="post-content">
           <header>
             <div class="icon"></div>
+            <time datetime="2019-01-30T21:57:58.000Z"><a href="/nplus_doc/2019/01/31/engineering/heroku-multiline-config/">2019-01-31</a></time>
+            
+              <h1 class="title"><a href="/nplus_doc/2019/01/31/engineering/heroku-multiline-config/">Herokuで複数行のコンフィグが設定できずに夜を明かした話</a></h1>
+            
+          </header>
+          <div class="entry">
+             
+              <p>Herokuは手軽にウェブプログラミングを楽しめる最高の環境ですが、パスワードや秘密鍵等の秘匿情報の扱いにはもちろん気をつけなければいけません。<br><code>heroku config:set KEY=VALUE</code> で環境変数に設定し、それをプログラムから読み出すという手法が広く取られているようです。</p>
+<p>ただし、コマンドラインだと複数行の値（例えば秘密鍵）を設定する際に困ります。<br>筆者はWindowsマンかつPowershellおじさんなので <code>heroku config:set KEY=$(cat /path/to/file)</code> とかやってみても改行が潰されてしまうようでした。</p>
+<p>おとなしくHerokuのダッシュボードから設定すればちゃんと動きました。ちくしょう</p>
+
+            
+          </div>
+          
+          <footer>
+              <div class="alignright">
+                  <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Herokuで複数行のコンフィグが設定できずに夜を明かした話 | ぷらずま式改" data-url="http://elleonard.github.io/nplus_doc/2019/01/31/engineering/heroku-multiline-config/" data-via="elleonard_f" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+              </div>
+              
+  
+  <div class="categories">
+    <a href="/nplus_doc/categories/情報技術/">情報技術</a>
+  </div>
+
+              
+  
+  <div class="tags">
+    <a href="/nplus_doc/tags/Heroku/">Heroku</a>
+  </div>
+
+              <!-- partial('post/share') -->
+            <div class="clearfix"></div>
+          </footer>
+        </div>
+      </article>
+    
+      <article class="post">
+        <div class="post-content">
+          <header>
+            <div class="icon"></div>
             <time datetime="2019-01-11T14:19:37.000Z"><a href="/nplus_doc/2019/01/11/yuri/what-is-yuri/">2019-01-11</a></time>
             
               <h1 class="title"><a href="/nplus_doc/2019/01/11/yuri/what-is-yuri/">百合とは何か</a></h1>
@@ -211,7 +251,7 @@
   
     <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/デッキレシピ/">デッキレシピ</a><small>4</small></li>
   
-    <li><a href="/nplus_doc/categories/ライトノベル/">ライトノベル</a><small>2</small></li>
+    <li><a href="/nplus_doc/categories/小説/">小説</a><small>3</small></li>
   
     <li><a href="/nplus_doc/categories/情報技術/">情報技術</a><small>11</small></li>
   
@@ -235,6 +275,10 @@
   <ul class="entry">
     
       <li>
+        <a href="/nplus_doc/2019/11/05/novel/kindaichi-kosuke/">【小説感想】金田一耕助ファイル 全22冊合本版</a>
+      </li>
+    
+      <li>
         <a href="/nplus_doc/2019/11/01/engineering/rmmv/yanfly-retirement-announcement/">Yanfly氏の引退表明和訳</a>
       </li>
     
@@ -248,10 +292,6 @@
     
       <li>
         <a href="/nplus_doc/2019/09/13/engineering/hexo-table-render/">【新】HexoのMarkdownで複雑な表を書く</a>
-      </li>
-    
-      <li>
-        <a href="/nplus_doc/2019/05/09/game/edf/edf4-1/">【ゲーム感想】地球防衛軍4.1 THE SHADOW OF NEW DESPAIR</a>
       </li>
     
   </ul>
