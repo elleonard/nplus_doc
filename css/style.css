@@ -636,6 +636,46 @@ article .up-arrow:after {
   font: 1.1em FontAwesome;
   content: '\f062';
 }
+div .amazon {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  mergin-bottom: 0px;
+}
+div .amazon-inline {
+  width: 380px;
+  padding: 10px;
+  border: 1px solid;
+  border-color: #bbb;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background: #333;
+}
+div .amazon-image {
+  float: left;
+  margin: 0px 12px 1px 0px;
+}
+div .amazon-text {
+  line-height: 120%;
+  margin-bottom: 10px;
+}
+div .amazon-title {
+  margin-bottom: 10px;
+  line-height: 120%;
+}
+div .amazon-link {
+  float: left;
+  margin-top: 5px;
+}
 #comment {
   padding: 20px;
   background: rgba(0,0,0,0.65);
