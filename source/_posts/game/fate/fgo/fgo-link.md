@@ -118,5 +118,4 @@ FGOの記事や外部リンクまとめ
 * [Fate/Grand Order Simulators](http://fgosimulator.webcrow.jp/)
 * [FGO Tools](http://fgo-tool.netgamers.jp/)
 * [うぃうぃのブロマガ](http://blog.livedoor.jp/wiwi02/)
-
 * [「企業型ゲーム攻略サイト」を避けてFGOを遊ぶすゝめ - トラツグミブログ](http://toratugumi.hatenablog.jp/entry/2018/03/15/203105)

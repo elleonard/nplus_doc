@@ -109,7 +109,6 @@ category:
 - [艦これ指南所](http://blog.livedoor.jp/kancollenja/)
 - [ゲーム乱舞 - 艦これ攻略](https://gameranbu.jp/game/kancolle/top/011)
 - [キトンのドラクエ10&艦これ攻略ブログ](https://kitongame.com/category/%E8%89%A6%E3%81%93%E3%82%8C/)
-
 - [【艦これ】酩酊ポーラでも分かる基地航空隊解説](http://ch.nicovideo.jp/lambda/blomaga/ar1265792)
 
 ## 支援ツール
