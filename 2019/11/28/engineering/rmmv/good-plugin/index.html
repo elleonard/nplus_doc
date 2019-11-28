@@ -106,8 +106,8 @@
         <p>RPGツクールMVにおける、良いプラグインの書き方や見分け方について書きます。</p>
 <a id="more"></a>
 
-<h1 id="はじめに"><a href="#はじめに" class="headerlink" title="はじめに"></a>はじめに</h1><p>RPGツクールMVのプラグインはJavaScriptで書かれています。<br>これはかなりやさしい言語<sup class="footnote-ref"><a href="#fn13" id="fnref13" title="言語のやさしさの定義は諸説あるが、ここではとりあえず書いて動かすのが簡単、くらいの意味としておく。">13</a></sup>で、プログラミングに初めて挑戦する人が頑張ってゴリゴリと書いたプラグインが転がっていたり、実際に使われていたりします。<br>中には機能として非常に優れているものも多くあるのですが、同時に書き方の作法を知らないままに書いたために、別の場所で利用者に不便を強いてしまうようなプラグインも散見されます。</p>
-<p>この記事では、プログラミングの作法<sup class="footnote-ref"><a href="#fn14" id="fnref14" title="単にコードを書くだけでなく、そのコードの管理方法や公開方法も含めてプログラミングの作法と呼ぶ。">14</a></sup>から見た良いプラグインの書き方、良いプラグインの見分け方について記します。</p>
+<h1 id="はじめに"><a href="#はじめに" class="headerlink" title="はじめに"></a>はじめに</h1><p>RPGツクールMVのプラグインはJavaScriptで書かれています。<br>これはかなりやさしい言語<sup class="footnote-ref"><a href="#fn1" id="fnref1" title="言語のやさしさの定義は諸説あるが、ここではとりあえず書いて動かすのが簡単、くらいの意味としておく。">1</a></sup>で、プログラミングに初めて挑戦する人が頑張ってゴリゴリと書いたプラグインが転がっていたり、実際に使われていたりします。<br>中には機能として非常に優れているものも多くあるのですが、同時に書き方の作法を知らないままに書いたために、別の場所で利用者に不便を強いてしまうようなプラグインも散見されます。</p>
+<p>この記事では、プログラミングの作法<sup class="footnote-ref"><a href="#fn2" id="fnref2" title="単にコードを書くだけでなく、そのコードの管理方法や公開方法も含めてプログラミングの作法と呼ぶ。">2</a></sup>から見た良いプラグインの書き方、良いプラグインの見分け方について記します。</p>
 <p>プラグインを書こうとしている人、書いて公開している人はもちろん、プラグインを利用する人もぜひ読んでください。</p>
 <h1 id="良いプラグインとはどういうものか"><a href="#良いプラグインとはどういうものか" class="headerlink" title="良いプラグインとはどういうものか"></a>良いプラグインとはどういうものか</h1><p>良いプラグインの定義を、以下のようにします。</p>
 <ul>
@@ -123,7 +123,7 @@
 <h3 id="グローバルな空間を汚染しない"><a href="#グローバルな空間を汚染しない" class="headerlink" title="グローバルな空間を汚染しない"></a>グローバルな空間を汚染しない</h3><p>良いプラグインは、基本的にプラグインの中でスコープを閉じています。<br>良いプラグインを読むと以下のようなコードになっていることがわかるでしょう。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// ここにプラグインの処理</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
 
-<p>このfunctionの書き方を無名関数と言います。<br>この中で新たに定義されたシンボル<sup class="footnote-ref"><a href="#fn15" id="fnref15" title="変数や定数、クラスを指し示す名前のこと。">15</a></sup>は他のプラグインから参照できません。<br>参照できるものはすなわち、そのシンボルが指し示す内容を上書きされる可能性があるということです。</p>
+<p>このfunctionの書き方を無名関数と言います。<br>この中で新たに定義されたシンボル<sup class="footnote-ref"><a href="#fn3" id="fnref3" title="変数や定数、クラスを指し示す名前のこと。">3</a></sup>は他のプラグインから参照できません。<br>参照できるものはすなわち、そのシンボルが指し示す内容を上書きされる可能性があるということです。</p>
 <p>意図しない上書きが発生した場合、プラグインが正常に動かなくなるのは言うまでもないでしょう。</p>
 <h2 id="プラグインパラメータの型が指定されている"><a href="#プラグインパラメータの型が指定されている" class="headerlink" title="プラグインパラメータの型が指定されている"></a>プラグインパラメータの型が指定されている</h2><p>RPGツクールMVのプラグインパラメータは、型を指定することができます。<br>@typeで数値、文字列、真偽値、その他様々な型を指定できます。<br>特にbooleanなど、ツクールエディタ上で設定する際に、利用者に親切なUIが表示されてくれるため、プラグインパラメータには必ず型を指定するようにしましょう。</p>
 <p>また、配列や構造体を駆使してツクールエディタ上での表示を整理すると、よりユーザーフレンドリーになります。</p>
@@ -131,10 +131,10 @@
 <p><a href="https://www.5ing-myway.com/rpgmaker-plugin-parameter-type/" target="_blank" rel="noopener">RPGツクールMV　プラグインパラメータのtypeまとめ | 趣味に生きる。</a></p>
 <h2 id="スクショ付きのマニュアルがある"><a href="#スクショ付きのマニュアルがある" class="headerlink" title="スクショ付きのマニュアルがある"></a>スクショ付きのマニュアルがある</h2><p>利用者にとって、使い方がわかりやすくなるため、マニュアルにはぜひ利用例や設定例のスクリーンショットを載せましょう。</p>
 <p>筆者のプラグインはこれをサボってしまっているのであまり強くは言えないのですが、いずれ落ち着いたらしっかりマニュアルを書きたいと思っています。</p>
-<h2 id="英語ドキュメントがついている"><a href="#英語ドキュメントがついている" class="headerlink" title="英語ドキュメントがついている"></a>英語ドキュメントがついている</h2><p>RPGツクールMVは海外でも使われています。<sup class="footnote-ref"><a href="#fn16" id="fnref16" title="RPG Maker MV, RMMV などと呼ばれる。">16</a></sup><br>海外ユーザへの説明のために英語ドキュメントがついているととても良いです。</p>
+<h2 id="英語ドキュメントがついている"><a href="#英語ドキュメントがついている" class="headerlink" title="英語ドキュメントがついている"></a>英語ドキュメントがついている</h2><p>RPGツクールMVは海外でも使われています。<sup class="footnote-ref"><a href="#fn4" id="fnref4" title="RPG Maker MV, RMMV などと呼ばれる。">4</a></sup><br>海外ユーザへの説明のために英語ドキュメントがついているととても良いです。</p>
 <p>ただし、これを実現できているプラグインはとても少なく、また説明テキストの英訳は少々骨が折れる作業ですので、これを作る優先度はそこまで高くありません。</p>
 <p>ちなみに、よく使われているMOGのプラグインはポルトガル語で説明が書かれていて、読むのが困難です。<br><a href="http://plugin.fungamemake.com/" target="_blank" rel="noopener">RPGツクールMV用プラグイン投稿・告知サイト - #ツクプラ</a>にて、ムノクラさんが日本語訳を公開されているため、それを頼ると良いでしょう。</p>
-<h2 id="程よいカスタマイズ性がある"><a href="#程よいカスタマイズ性がある" class="headerlink" title="程よいカスタマイズ性がある"></a>程よいカスタマイズ性がある</h2><p>プラグイン作者が自分で使うためにあらゆる値を決め打ちしてしまい、ユーザーからするとかゆいところに手が届かないプラグインになってしまうケースがあります。筆者もやってしまいがちです。<br>ユーザーが設定できると嬉しいな、と思える値はプラグインパラメータに切り出しましょう。<sup class="footnote-ref"><a href="#fn17" id="fnref17" title="利用者にプラグインの中身を直接触らせるのは論外です。">17</a></sup><br>これを見極めるためにはRPGを実際に作ってみるのが一番良いのですが……。</p>
+<h2 id="程よいカスタマイズ性がある"><a href="#程よいカスタマイズ性がある" class="headerlink" title="程よいカスタマイズ性がある"></a>程よいカスタマイズ性がある</h2><p>プラグイン作者が自分で使うためにあらゆる値を決め打ちしてしまい、ユーザーからするとかゆいところに手が届かないプラグインになってしまうケースがあります。筆者もやってしまいがちです。<br>ユーザーが設定できると嬉しいな、と思える値はプラグインパラメータに切り出しましょう。<sup class="footnote-ref"><a href="#fn5" id="fnref5" title="利用者にプラグインの中身を直接触らせるのは論外です。">5</a></sup><br>これを見極めるためにはRPGを実際に作ってみるのが一番良いのですが……。</p>
 <h2 id="可読性に優れている（読みやすい）"><a href="#可読性に優れている（読みやすい）" class="headerlink" title="可読性に優れている（読みやすい）"></a>可読性に優れている（読みやすい）</h2><p>読みやすいプラグインはそれだけで良いプラグインとしての条件を一つ満たしています。<br>なぜなら、コードを書き慣れた人に読んでもらいやすくなるからです。</p>
 <p>たとえプラグインの動作自体に疑問を持たれたり、あるいは衝突の要因であることが疑われても、コードが読みやすければその原因は特定しやすいでしょう。</p>
 <p>この記事では良いプラグインの条件において、読みやすさを最重要視し、以下に読みやすいプラグインについて述べます。</p>
@@ -142,18 +142,18 @@
 <p>RPGツクールMV用のプラグインでは、これをおろそかにしているケースが大変多く見受けられます。<br>コードを見ただけで良いエディタを使っていないことがなぜわかるかというと、コードがまるで整形されていないからです。</p>
 <p>プログラムには読みやすいとされている形式の書き方、すなわちお作法があり、それに則っていないコードは見ただけで、良いエディタを使っていないことがわかってしまいます。</p>
 <p>最も重要なのはインデントで、これが揃えられているだけでも読みやすさがまるで違います。<br>インデントを揃えるだけでプログラムの構造が視覚的に捉えやすくなり、不具合の調査/修正や機能追加のために支払うべき労力が大幅に減ります。<br>良いエディタにはコードフォーマット機能が搭載されており、ショートカットキーを押したり、設定さえしておけば保存する際に自動的にフォーマットをかけてくれるものもあります。</p>
-<p>インデントに関連して、ホワイトスペースの統一もぜひ意識するようにしてください。<br>インデントを頑張って揃えようとした形跡はあるが、タブ文字と半角スペースが混ざってしまっているようなプラグインをよく見かけます。<br>タブ文字と半角スペースを混ぜて使わないようにしてください。必ずどちらかに統一しなければなりません。<br>どちらを用いるかは好み次第ですが、筆者は半角スペース2つを1単位として用いています。全角スペースは論外ですので忘れてください。<sup class="footnote-ref"><a href="#fn18" id="fnref18" title="実はJavaScriptの仕様上、全角スペースは半角スペースと同じものとして扱われるため、動作自体に影響は出ない。極めて気持ち悪いコードになってしまうので、絶対に使ってはならないが。">18</a></sup></p>
+<p>インデントに関連して、ホワイトスペースの統一もぜひ意識するようにしてください。<br>インデントを頑張って揃えようとした形跡はあるが、タブ文字と半角スペースが混ざってしまっているようなプラグインをよく見かけます。<br>タブ文字と半角スペースを混ぜて使わないようにしてください。必ずどちらかに統一しなければなりません。<br>どちらを用いるかは好み次第ですが、筆者は半角スペース2つを1単位として用いています。全角スペースは論外ですので忘れてください。<sup class="footnote-ref"><a href="#fn6" id="fnref6" title="実はJavaScriptの仕様上、全角スペースは半角スペースと同じものとして扱われるため、動作自体に影響は出ない。極めて気持ち悪いコードになってしまうので、絶対に使ってはならないが。">6</a></sup></p>
 <p>良いエディタでは、タブキーを押したときにインデントを設定した文字を使って行ってくれる他、改行する際に自動で良い感じにインデントしてくれたりします。<br>また、良いエディタはタブ文字や全角スペースの違いを目視で確認できるような設定ができます。</p>
-<p>良いエディタとしては、プラグインのデバッグにも使いやすいVisual Studio Codeがオススメです。<sup class="footnote-ref"><a href="#fn19" id="fnref19" title="「Visual Studio Code」+「Chrome」で「ツクールMV」のローカルでデバッグなテクニックの紹介 - Qiitaを参照。">19</a></sup><br>もちろんその他の選択肢もありますので、VSCodeがお気に召さない場合はご自身で使いやすいエディタを探してみてください。</p>
+<p>良いエディタとしては、プラグインのデバッグにも使いやすいVisual Studio Codeがオススメです。<sup class="footnote-ref"><a href="#fn7" id="fnref7" title="「Visual Studio Code」+「Chrome」で「ツクールMV」のローカルでデバッグなテクニックの紹介 - Qiitaを参照。">7</a></sup><br>もちろんその他の選択肢もありますので、VSCodeがお気に召さない場合はご自身で使いやすいエディタを探してみてください。</p>
 <p>ちなみに、よく使われているMOG系のプラグインはホワイトスペースが統一されておらず、インデントに頓着しない書き方がされているため、可読性が良くありません。<br>機能としてはとても優れていますが、プラグインを書く際に真似しないようにしてください。</p>
-<h3 id="マジックナンバーが使われていない"><a href="#マジックナンバーが使われていない" class="headerlink" title="マジックナンバーが使われていない"></a>マジックナンバーが使われていない</h3><p>意味があるにも関わらず、定数に代入せずに直接プログラム中に書かれた具体的な数字や文字列のことを、マジックナンバーと呼びます。<sup class="footnote-ref"><a href="#fn20" id="fnref20" title="問題になるケースが多く例をあげやすいのは数字だが、文字列でも同様の問題が起きる。">20</a></sup><br>マジックナンバーを使うことを、定数をハードコーディングする、などと呼びます。<br>これはバグの温床ですので、可能な限り意味のある定数を定義しましょう。</p>
-<p>消費税をあちこちにハードコーディングしていたため、増税のタイミングで修正が追いつかず大騒ぎになった、なんて話をよく聞きます。<br>筆者も今どき、そんな古めかしいシステムが本当に動いているなんてことは伝聞でしか知りませんが。<sup class="footnote-ref"><a href="#fn21" id="fnref21" title="大昔にCOBOLで書かれた金融系のシステムがヤバい、とか。">21</a></sup></p>
+<h3 id="マジックナンバーが使われていない"><a href="#マジックナンバーが使われていない" class="headerlink" title="マジックナンバーが使われていない"></a>マジックナンバーが使われていない</h3><p>意味があるにも関わらず、定数に代入せずに直接プログラム中に書かれた具体的な数字や文字列のことを、マジックナンバーと呼びます。<sup class="footnote-ref"><a href="#fn8" id="fnref8" title="問題になるケースが多く例をあげやすいのは数字だが、文字列でも同様の問題が起きる。">8</a></sup><br>マジックナンバーを使うことを、定数をハードコーディングする、などと呼びます。<br>これはバグの温床ですので、可能な限り意味のある定数を定義しましょう。</p>
+<p>消費税をあちこちにハードコーディングしていたため、増税のタイミングで修正が追いつかず大騒ぎになった、なんて話をよく聞きます。<br>筆者も今どき、そんな古めかしいシステムが本当に動いているなんてことは伝聞でしか知りませんが。<sup class="footnote-ref"><a href="#fn9" id="fnref9" title="大昔にCOBOLで書かれた金融系のシステムがヤバい、とか。">9</a></sup></p>
 <h3 id="命名規則が統一されている"><a href="#命名規則が統一されている" class="headerlink" title="命名規則が統一されている"></a>命名規則が統一されている</h3><p>変数や定数の命名規則が統一されていると、とても美しく読みやすいプラグインになります。</p>
 <p>JavaScriptにおいて、メソッドや変数はキャメルケース、定数は大文字スネークケースを用いるのが一般的です。<br>特に強いこだわりがなければ、元のRPGツクールMVのコードを参考に、それに統一しておくと良いでしょう。</p>
 <h3 id="命名に一意性がある"><a href="#命名に一意性がある" class="headerlink" title="命名に一意性がある"></a>命名に一意性がある</h3><p>良いプラグインでは、変数やプラグインコマンドの名前が、それを見ただけである程度伝わります。</p>
 <p>ダメージ計算の際に、ダメージの値として使われる変数の名前が <code>a</code> としてしまうと極めて不格好で、計算が複雑になればなるほどその <code>a</code> の意味がつかみにくくなり、バグの温床になります。<br>ちゃんと <code>damage</code> などと意味のある名前をつけてあげましょう。</p>
 <h3 id="よりモダンなJavaScriptで書かれている"><a href="#よりモダンなJavaScriptで書かれている" class="headerlink" title="よりモダンなJavaScriptで書かれている"></a>よりモダンなJavaScriptで書かれている</h3><p>JavaScriptは歴史の長い言語ですが、その過程でよりモダンな書き方ができるよう改良されてきています。</p>
-<p><code>var</code> でなく <code>let</code> <code>const</code> を用いるほうが良いです。<br><code>var</code> と <code>let</code> に関してはスコープに関する知識がないとピンと来ない話なので、気になる人はググってください。<sup class="footnote-ref"><a href="#fn22" id="fnref22" title="RPGツクールMVは初期の頃letが普及していなかったのか、varを使って書かれている。varを使ったからと言って極端に悪いものではない。">22</a></sup><br><code>const</code> は再代入ができなくなるため、定数を定義する際にはこちらを用いましょう。</p>
+<p><code>var</code> でなく <code>let</code> <code>const</code> を用いるほうが良いです。<br><code>var</code> と <code>let</code> に関してはスコープに関する知識がないとピンと来ない話なので、気になる人はググってください。<sup class="footnote-ref"><a href="#fn10" id="fnref10" title="RPGツクールMVは初期の頃letが普及していなかったのか、varを使って書かれている。varを使ったからと言って極端に悪いものではない。">10</a></sup><br><code>const</code> は再代入ができなくなるため、定数を定義する際にはこちらを用いましょう。</p>
 <p>また、配列を操作する際にはfor文はできるだけ使わず、 <code>map</code> <code>filter</code> などの配列操作関数とラムダ式を組み合わせて使うとスッキリとした良いコードになります。</p>
 <h3 id="機能が単一である"><a href="#機能が単一である" class="headerlink" title="機能が単一である"></a>機能が単一である</h3><p>単一の機能を実現するために書かれているプラグインは、自ずとプラグインそのものの規模も大きくなりにくく、読みやすい傾向にあります。<br>一つのプラグインに欲張ってあれもこれもと詰め込むとコードが肥大し、可読性を著しく下げてしまいます。</p>
 <p>YEPのコア系は機能が多く、長大になっていて読み解くのに苦労します。</p>
@@ -166,9 +166,9 @@
 <p>必ずしもセマンティックバージョニングに従う必要はなく、しかし規則的にバージョンを振ると良いでしょう。</p>
 <p>さて、公開しているプラグインについて、必ず最新のバージョンにアクセスしてもらう方法があります。<br>GitHubでプラグインを公開することです。常に最新のコミットが前面に表示されるため、利用者が誤って過去のバージョンをダウンロードする心配はありません。</p>
 <p>最新版に容易にアクセスできること、どれが最新版か明らかであることは、それだけで利用者に優しいのです。<br>ツクマテや公式フォーラムの掲示板の書き込みに無造作に貼り付けてあるだけだとこれがとてもわかりにくく、混乱を招きます。</p>
-<h3 id="容易にコミットできる"><a href="#容易にコミットできる" class="headerlink" title="容易にコミットできる"></a>容易にコミットできる</h3><p>GitHubで最新版を公開すると、利用者からバグ報告だけでなく、修正方法を提案しやすくなる利点があります。<br>プルリクエストを受け付ければ、他の人からのコード修正を取り込むだけでバグ修正が完了することもあります。<sup class="footnote-ref"><a href="#fn23" id="fnref23" title="もちろん、動作確認は必要だが。">23</a></sup></p>
+<h3 id="容易にコミットできる"><a href="#容易にコミットできる" class="headerlink" title="容易にコミットできる"></a>容易にコミットできる</h3><p>GitHubで最新版を公開すると、利用者からバグ報告だけでなく、修正方法を提案しやすくなる利点があります。<br>プルリクエストを受け付ければ、他の人からのコード修正を取り込むだけでバグ修正が完了することもあります。<sup class="footnote-ref"><a href="#fn11" id="fnref11" title="もちろん、動作確認は必要だが。">11</a></sup></p>
 <p>GitとGitHubを利用したバージョン管理の重要性については、<a href="/nplus_doc/2017/12/24/engineering/rmmv/rpgtkoolmv-github/" title="RPGツクールMV やさしいプラグインの書き方 基礎編">RPGツクールMV やさしいプラグインの書き方 基礎編</a>にも詳しく書いてあります。長い文章ですので、余裕のあるときに読んでみてください。</p>
-<h3 id="Strictモードを使っている"><a href="#Strictモードを使っている" class="headerlink" title="Strictモードを使っている"></a>Strictモードを使っている</h3><blockquote title="Strict モード - JavaScript | MDN"><p>第一に strict モードでは、JavaScript でエラーではないが落とし穴になる一部の事柄を、エラーが発生するように変更することで除去します。第二に strict モードでは、JavaScript エンジンによる最適化処理を困難にする誤りを修正します: strict モードのコードは、非 strict モードの同一コードより高速に実行できることがあります (Firefox 4 ではまだ strict モードにあまり最適化していませんが、将来のバージョンで実現するでしょう)。第三に strict モードでは、将来の ECMAScript で定義される予定の構文を禁止します。</p></blockquote><sup class="footnote-ref"><a href="#fn24" id="fnref24" title="Strict モード - JavaScript | MDN">24</a></sup>
+<h3 id="Strictモードを使っている"><a href="#Strictモードを使っている" class="headerlink" title="Strictモードを使っている"></a>Strictモードを使っている</h3><blockquote title="Strict モード - JavaScript | MDN"><p>第一に strict モードでは、JavaScript でエラーではないが落とし穴になる一部の事柄を、エラーが発生するように変更することで除去します。第二に strict モードでは、JavaScript エンジンによる最適化処理を困難にする誤りを修正します: strict モードのコードは、非 strict モードの同一コードより高速に実行できることがあります (Firefox 4 ではまだ strict モードにあまり最適化していませんが、将来のバージョンで実現するでしょう)。第三に strict モードでは、将来の ECMAScript で定義される予定の構文を禁止します。</p></blockquote><sup class="footnote-ref"><a href="#fn12" id="fnref12" title="Strict モード - JavaScript | MDN">12</a></sup>
 
 <p>わかりやすく言うと、以下の通りです。</p>
 <ol>
@@ -196,30 +196,18 @@
   <hr class="footnotes-sep">
   <section class="footnotes">
   <ol class="footnotes-list">
-  <li id="fn1" class="footnote-item">ダ・ヴィンチ・コードの続編として公開されたミステリスリラー映画。<a href="#fnref1"> <span class="up-arrow"></span></a></li>
-<li id="fn2" class="footnote-item">百合を描く作品で、あの犯人の心理描写に対して文字数を割くわけにはいかないのも十分に理解できる。<a href="#fnref2"> <span class="up-arrow"></span></a></li>
-<li id="fn3" class="footnote-item">昭和十二年の本陣殺人事件のみ？<a href="#fnref3"> <span class="up-arrow"></span></a></li>
-<li id="fn4" class="footnote-item">Yanfly氏のプラグインを勝手に販売した輩がいるらしい<a href="#fnref4"> <span class="up-arrow"></span></a></li>
-<li id="fn5" class="footnote-item">クリエイターがポートフォリオを公開したりコンテンツを販売できるプラットフォーム。<a href="#fnref5"> <span class="up-arrow"></span></a></li>
-<li id="fn6" class="footnote-item">FiverrでYanfly氏のプラグインを含む無料のプラグインセットや他のアーティストのグラフィックを販売している輩がいたとのこと。<a href="http://yanfly.moe/2019/05/18/user-on-fiverr-is-taking-free-librarium-releases-as-part-of-their-own-portfolio-and-possibly-selling-it-to-unsuspecting-clients/" target="_blank" rel="noopener">参考記事</a><a href="#fnref6"> <span class="up-arrow"></span></a></li>
-<li id="fn7" class="footnote-item">ちょっと訳が怪しい。フリー配布と勝手に販売される仕組みのことを言っている？<a href="#fnref7"> <span class="up-arrow"></span></a></li>
-<li id="fn8" class="footnote-item">有料化前からプラグインを所持しているユーザー。<a href="#fnref8"> <span class="up-arrow"></span></a></li>
-<li id="fn9" class="footnote-item"><a href="https://twitter.com/Archeia_Nessiah" target="_blank" rel="noopener">Spooky Archeia</a>。RPGツクールMVプラグイン作者の一人。<a href="#fnref9"> <span class="up-arrow"></span></a></li>
-<li id="fn10" class="footnote-item">インディーゲームを中心としたゲーム販売プラットフォーム。<a href="https://itch.io/" target="_blank" rel="noopener">itch.io</a>。<a href="#fnref10"> <span class="up-arrow"></span></a></li>
-<li id="fn11" class="footnote-item">いわゆるプログラマ。<a href="#fnref11"> <span class="up-arrow"></span></a></li>
-<li id="fn12" class="footnote-item">文脈に対してあまりにも唐突だが、文章を〆にかかっているだけか？<a href="#fnref12"> <span class="up-arrow"></span></a></li>
-<li id="fn13" class="footnote-item">言語のやさしさの定義は諸説あるが、ここではとりあえず書いて動かすのが簡単、くらいの意味としておく。<a href="#fnref13"> <span class="up-arrow"></span></a></li>
-<li id="fn14" class="footnote-item">単にコードを書くだけでなく、そのコードの管理方法や公開方法も含めてプログラミングの作法と呼ぶ。<a href="#fnref14"> <span class="up-arrow"></span></a></li>
-<li id="fn15" class="footnote-item">変数や定数、クラスを指し示す名前のこと。<a href="#fnref15"> <span class="up-arrow"></span></a></li>
-<li id="fn16" class="footnote-item">RPG Maker MV, RMMV などと呼ばれる。<a href="#fnref16"> <span class="up-arrow"></span></a></li>
-<li id="fn17" class="footnote-item">利用者にプラグインの中身を直接触らせるのは論外です。<a href="#fnref17"> <span class="up-arrow"></span></a></li>
-<li id="fn18" class="footnote-item">実はJavaScriptの仕様上、全角スペースは半角スペースと同じものとして扱われるため、動作自体に影響は出ない。極めて気持ち悪いコードになってしまうので、絶対に使ってはならないが。<a href="#fnref18"> <span class="up-arrow"></span></a></li>
-<li id="fn19" class="footnote-item"><a href="https://qiita.com/Sanshiro/items/084fb0971942e03db9a4" target="_blank" rel="noopener">「Visual Studio Code」+「Chrome」で「ツクールMV」のローカルでデバッグなテクニックの紹介 - Qiita</a>を参照。<a href="#fnref19"> <span class="up-arrow"></span></a></li>
-<li id="fn20" class="footnote-item">問題になるケースが多く例をあげやすいのは数字だが、文字列でも同様の問題が起きる。<a href="#fnref20"> <span class="up-arrow"></span></a></li>
-<li id="fn21" class="footnote-item">大昔にCOBOLで書かれた金融系のシステムがヤバい、とか。<a href="#fnref21"> <span class="up-arrow"></span></a></li>
-<li id="fn22" class="footnote-item">RPGツクールMVは初期の頃letが普及していなかったのか、varを使って書かれている。varを使ったからと言って極端に悪いものではない。<a href="#fnref22"> <span class="up-arrow"></span></a></li>
-<li id="fn23" class="footnote-item">もちろん、動作確認は必要だが。<a href="#fnref23"> <span class="up-arrow"></span></a></li>
-<li id="fn24" class="footnote-item"><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Strict_mode" target="_blank" rel="noopener">Strict モード - JavaScript | MDN</a><a href="#fnref24"> <span class="up-arrow"></span></a></li>
+  <li id="fn1" class="footnote-item">言語のやさしさの定義は諸説あるが、ここではとりあえず書いて動かすのが簡単、くらいの意味としておく。<a href="#fnref1"> <span class="up-arrow"></span></a></li>
+<li id="fn2" class="footnote-item">単にコードを書くだけでなく、そのコードの管理方法や公開方法も含めてプログラミングの作法と呼ぶ。<a href="#fnref2"> <span class="up-arrow"></span></a></li>
+<li id="fn3" class="footnote-item">変数や定数、クラスを指し示す名前のこと。<a href="#fnref3"> <span class="up-arrow"></span></a></li>
+<li id="fn4" class="footnote-item">RPG Maker MV, RMMV などと呼ばれる。<a href="#fnref4"> <span class="up-arrow"></span></a></li>
+<li id="fn5" class="footnote-item">利用者にプラグインの中身を直接触らせるのは論外です。<a href="#fnref5"> <span class="up-arrow"></span></a></li>
+<li id="fn6" class="footnote-item">実はJavaScriptの仕様上、全角スペースは半角スペースと同じものとして扱われるため、動作自体に影響は出ない。極めて気持ち悪いコードになってしまうので、絶対に使ってはならないが。<a href="#fnref6"> <span class="up-arrow"></span></a></li>
+<li id="fn7" class="footnote-item"><a href="https://qiita.com/Sanshiro/items/084fb0971942e03db9a4" target="_blank" rel="noopener">「Visual Studio Code」+「Chrome」で「ツクールMV」のローカルでデバッグなテクニックの紹介 - Qiita</a>を参照。<a href="#fnref7"> <span class="up-arrow"></span></a></li>
+<li id="fn8" class="footnote-item">問題になるケースが多く例をあげやすいのは数字だが、文字列でも同様の問題が起きる。<a href="#fnref8"> <span class="up-arrow"></span></a></li>
+<li id="fn9" class="footnote-item">大昔にCOBOLで書かれた金融系のシステムがヤバい、とか。<a href="#fnref9"> <span class="up-arrow"></span></a></li>
+<li id="fn10" class="footnote-item">RPGツクールMVは初期の頃letが普及していなかったのか、varを使って書かれている。varを使ったからと言って極端に悪いものではない。<a href="#fnref10"> <span class="up-arrow"></span></a></li>
+<li id="fn11" class="footnote-item">もちろん、動作確認は必要だが。<a href="#fnref11"> <span class="up-arrow"></span></a></li>
+<li id="fn12" class="footnote-item"><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Strict_mode" target="_blank" rel="noopener">Strict モード - JavaScript | MDN</a><a href="#fnref12"> <span class="up-arrow"></span></a></li>
   </ol>
   </section>
 
