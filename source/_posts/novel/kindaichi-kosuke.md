@@ -13,8 +13,7 @@ date: 2019-11-05 17:15:59
 百合作品ばかり読み漁っている豚が、10万ページを超える日本の代表的ミステリ作品群を読み切ったというのはいったいどういう心境だったのであろうか。
 この記事は、金田一耕助シリーズを読み始めた経緯からはじめ、全て読了した際の筆者の感慨についても、読者諸賢にお伝えするものである。
 
-<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=tf_til&t=elleonard-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=B00PBOSCOG&linkId=0f09b056a9fe43d23e4ad6710e906966&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
-    </iframe>
+{% amazon "https://www.amazon.co.jp/dp/B00PBOSCOG?tag=false" "https://images-fe.ssl-images-amazon.com/images/I/51k1omRWxUL._SL200_.jpg" "金田一耕助ファイル　全２２冊合本版 (角川文庫)" 2014-11-25 %}
 
 古い作品とはいえミステリ作品を扱う以上、未読の方は金田一耕助に関するネタバレを覚悟してお読みいただきたい。
 幾度も映像化された作品群であるものの、映像と原作とでは内容が大きく違うケースもある。
@@ -32,8 +31,7 @@ date: 2019-11-05 17:15:59
 
 そんな筆者が2019年の3月に出会ったのが、花園に来たる嵐だ。
 
-<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=elleonard-22&m=amazon&o=9&p=8&l=as1&IS1=1&detail=1&asins=B07PG9XS48&linkId=6a7f26363673ae8ac5dc9c669b73b267&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
-    </iframe>
+{% amazon "https://www.amazon.co.jp/dp/B07PG9XS48?tag=false" "https://images-fe.ssl-images-amazon.com/images/I/515DFu9dcuL._SL200_.jpg" "花園に来たる嵐" 2019-03-10 %}
 
 百合＋ミステリ。欲しい要素しかない作品の登場による筆者の喜びは言うまでもない。
 そこで早速と読了したが、最も大きな読後感は物足りなさであった。

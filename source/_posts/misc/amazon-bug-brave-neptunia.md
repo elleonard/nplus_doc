@@ -20,10 +20,7 @@ tags:
 今回も不穏なメールタイトルにビビりながらブラウザでAmazonを開いて注文履歴を確認。
 未発送の注文の中にいました。勇ネプ。
 
-<iframe style="width:120px;height:240px;float:left;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=tf_til&t=plasma02-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=B07CNDFMW1&linkId=02174954833ddd90b55cd12479cfb357&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
-</iframe><iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=tf_til&t=plasma02-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=B07CNHWD41&linkId=192b43aebab105c09bdd42626ffef29d&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
-    </iframe>
-
+{% amazon "https://www.amazon.co.jp/dp/B07CNHWD41?tag=false" "https://images-fe.ssl-images-amazon.com/images/I/61jf9DIVniL._SL200_.jpg" "勇者ネプテューヌ 世界よ宇宙よ刮目せよ! ! アルティメットRPG宣言! ! - PS4" 2018-12-20 %}
 Re;birth1+を購入した際に、まとめて予約していたんでした。半年以上前のことだったんですっかり記憶の彼方です。
 
 勇ネプの注文ログに、お支払い方法の変更が必要です。と赤文字でデカデカと表記されていました。

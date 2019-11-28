@@ -19,8 +19,7 @@ category:
 
 筆者Plasmaはこれまでの数年、ゼンハイザーのPC131を使い続けてきました。
 
-<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=plasma02-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=B000T00ZG0&linkId=2ab37c033266ca379d29be041c4e98ba&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
-    </iframe>
+{% amazon "https://www.amazon.co.jp/dp/B000T00ZG0?tag=false" "https://images-fe.ssl-images-amazon.com/images/I/5144Vzt1w6L._SL200_.jpg" "ゼンハイザー PCヘッドセット ヘッドバンド型両耳式 PC 131【国内正規品】" 2007-07-25 %}
 
 比較的安価で音質も良く、耳につけていても疲れにくい非常に優秀なタイプのヘッドセットです。
 
@@ -51,8 +50,7 @@ PC373Dはかなりお高い上に、接続コネクタがUSBです。
 
 ありました。そんな贅沢な望みを叶えてくれる素晴らしいヘッドセット。
 
-<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=tf_til&t=plasma02-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=B013I59RCA&linkId=1e7743bca6296af92039ccc2640f9c3d&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
-    </iframe>
+{% amazon "https://www.amazon.co.jp/dp/B013I59RCA?tag=false" "https://images-fe.ssl-images-amazon.com/images/I/416D9%2BeitsL._SL200_.jpg" "ゼンハイザー GAME ONE PCゲーミングヘッドセット ノイズキャンセリング ブラック 506080N【国内正規品】" 2015-08-13 %}
 
 PC373Dよりややお安く抑えられ、しかも先程の条件をすべて満たしています。
 ちょっと高いが、ケーブルも頑丈とのことで、長く使う覚悟を決めてえいやと購入しました。
@@ -64,8 +62,7 @@ PC373Dよりややお安く抑えられ、しかも先程の条件をすべて�
 愕然としました。PCの3.5mmジャックの奥まで差し込んでさあいい音聞くぞーと思ったらこれです。
 Aurora Daysの勇者部の皆さんの声が全然聞こえてきません。
 
-<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=tf_til&t=plasma02-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=B00MXXCQEA&linkId=74b89df1c42243c1c4692c1f275d3b6f&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
-    </iframe>
+{% amazon "https://www.amazon.co.jp/dp/B00MXXCQEA?tag=false" "https://images-fe.ssl-images-amazon.com/images/I/51SyIkG3QeL._SL200_.jpg" "TVアニメ「結城友奈は勇者である」エンディングテーマ「Aurora Days」" 2014-11-18 %}
 
 満開もしてないのに聴力を奪われてしまったのでしょうか。神樹様絶対に許さないからな。
 なんて勇者でもなんでもないおじさんがぼやいてても仕方ないので、原因の特定をしなければなりません。
