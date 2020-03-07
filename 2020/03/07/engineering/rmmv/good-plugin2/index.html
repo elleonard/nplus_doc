@@ -35,7 +35,7 @@
 <meta property="og:site_name" content="ぷらずま式改">
 <meta property="og:description" content="RPGツクールMV 良いプラグインとは の内容からもう少し難しい内容に踏み込みます。">
 <meta property="og:locale" content="ja">
-<meta property="og:updated_time" content="2020-03-07T03:56:37.330Z">
+<meta property="og:updated_time" content="2020-03-07T03:57:31.766Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RPGツクールMV 続・良いプラグインとは">
 <meta name="twitter:description" content="RPGツクールMV 良いプラグインとは の内容からもう少し難しい内容に踏み込みます。">
@@ -142,7 +142,7 @@
 <p>JavaScript処理系にはGarbage Collector（ガベージコレクタ、ゴミ集め）の機能が備わっており、不要になったメモリ領域を自動的に再利用してくれます。<br><code>new Bitmap()</code> などとして確保したオブジェクトのためのメモリ領域が使わなくなった後<sup class="footnote-ref"><a href="#fn4" id="fnref4" title="正確にはもう二度と使われないとGCに判断された後。">4</a></sup>占有されっぱなしにならないのは、これのおかげです。</p>
 <p>ゲームにおいてこのGCは曲者です。<br>メモリの再利用自体は必要なことですが、それをするコストもタダではないのです。<br>必要なものをしっかりとマーキングして、不要なものだけ再利用しなければなりません。<br>GCのせいでゲームがカクつく可能性がある、と言うと、アクションゲームなどを作っている方には深刻さが伝わるかもしれません。</p>
 <p>ただし、ChromeやChromiumに搭載されたJavaScriptエンジンV8のGCは非常に優秀で、マイナーGC<sup class="footnote-ref"><a href="#fn5" id="fnref5" title="V8のGCは世代別GCで、ざっくり言うと簡単なお掃除と大掃除の2種類があり、マイナーGCは簡単なお掃除のほう。ちなみに大掃除のほうはメジャーGCと呼ぶ。">5</a></sup>は10ミリ秒のオーダーで完了します。<sup class="footnote-ref"><a href="#fn6" id="fnref6" title="オブジェクトプールを使った静的メモリ JavaScript参照。">6</a></sup><br>もちろん、GCが頻発してしまうのは問題ですが、RPGツクールMVのプラグインでそんなに大きなオブジェクトを頻繁に作っては捨て、という処理を書くことはないでしょう。</p>
-<p>小さなゴミが大量に出るのは経験上よく知られており、GCもそれに適した形にチューニングされています。<br>正確なことはゲームごとにメモリ使用量推移のデータを見てみないとわかりませんが、よほど雑にアロケーション<sup class="footnote-ref"><a href="#fn7" id="fnref7" title="オブジェクトのためにメモリを確保すること。">7</a></sup>しまったりオブジェクトを保持し続けない限り、GCの停止時間が問題になることはないでしょう。<br>GCのタイミングを制御したいほどリアルタイム性を重視するアクションゲームの場合は大掛かりな最適化を考えても良いかもしれませんが、そうでない場合は特別にGCを意識してコードの可読性を落としたりすべきではありません。<sup class="footnote-ref"><a href="#fn8" id="fnref8" title="オブジェクトプールが有効なのはプログラム全体で必要なオブジェクト数上限がわかっている場合であって、単独のプラグインだけで意識してオブジェクトを抱え込んでも逆効果にすらなる場合がある。">8</a></sup></p>
+<p>小さなゴミが大量に出るのは経験上よく知られており、GCもそれに適した形にチューニングされています。<br>正確なことはゲームごとにメモリ使用量推移のデータを見てみないとわかりませんが、よほど雑にアロケーション<sup class="footnote-ref"><a href="#fn7" id="fnref7" title="オブジェクトのためにメモリを確保すること。">7</a></sup>してしまったりオブジェクトを保持し続けない限り、GCの停止時間が問題になることはないでしょう。<br>GCのタイミングを制御したいほどリアルタイム性を重視するアクションゲームの場合は大掛かりな最適化を考えても良いかもしれませんが、そうでない場合は特別にGCを意識してコードの可読性を落としたりすべきではありません。<sup class="footnote-ref"><a href="#fn8" id="fnref8" title="オブジェクトプールが有効なのはプログラム全体で必要なオブジェクト数上限がわかっている場合であって、単独のプラグインだけで意識してオブジェクトを抱え込んでも逆効果にすらなる場合がある。">8</a></sup></p>
   <hr class="footnotes-sep">
   <section class="footnotes">
   <ol class="footnotes-list">
