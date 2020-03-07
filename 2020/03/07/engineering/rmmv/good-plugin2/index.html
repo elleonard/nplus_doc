@@ -35,7 +35,7 @@
 <meta property="og:site_name" content="ぷらずま式改">
 <meta property="og:description" content="RPGツクールMV 良いプラグインとは の内容からもう少し難しい内容に踏み込みます。">
 <meta property="og:locale" content="ja">
-<meta property="og:updated_time" content="2020-03-07T04:33:46.711Z">
+<meta property="og:updated_time" content="2020-03-07T04:34:31.942Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RPGツクールMV 続・良いプラグインとは">
 <meta name="twitter:description" content="RPGツクールMV 良いプラグインとは の内容からもう少し難しい内容に踏み込みます。">
@@ -109,7 +109,7 @@
 
 <h1 id="はじめに"><a href="#はじめに" class="headerlink" title="はじめに"></a>はじめに</h1><p>良いプラグインの定義については <a href="/nplus_doc/2019/11/28/engineering/rmmv/good-plugin/" title="前回の記事">前回の記事</a> をご参照ください。<br>今回もその定義に従って、可読性や保守性を意識したプラグインの書き方を紹介していきます。</p>
 <p>前回よりも難しい領域に踏み込むため、この記事の説明だけでは理解しにくい内容もあるかもしれません。<br>今回はできるだけ具体的なコード例を書きながら書き進めていくつもりです。</p>
-<h1 id="良いプラグインの書き方"><a href="#良いプラグインの書き方" class="headerlink" title="良いプラグインの書き方"></a>良いプラグインの書き方</h1><h2 id="セーブデータの互換性を破壊しない"><a href="#セーブデータの互換性を破壊しない" class="headerlink" title="セーブデータの互換性を破壊しない"></a>セーブデータの互換性を破壊しない</h2><p>RPGツクールMVの <code>Game_****</code> 系のクラスは、内容をゲームのセーブデータに保存しています。<sup class="footnote-ref"><a href="#fn1" id="fnref1" title="Game_Message,Game_Troopは例外。">1</a></sup><br>このクラス群にメンバを追加する場合は、十分に注意する必要があります。</p>
+<h1 id="良いプラグインの書き方"><a href="#良いプラグインの書き方" class="headerlink" title="良いプラグインの書き方"></a>良いプラグインの書き方</h1><h2 id="セーブデータの互換性を破壊しない"><a href="#セーブデータの互換性を破壊しない" class="headerlink" title="セーブデータの互換性を破壊しない"></a>セーブデータの互換性を破壊しない</h2><p>RPGツクールMVの <code>Game_****</code> 系のクラスは、内容をゲームのセーブデータに保存しています。<sup class="footnote-ref"><a href="#fn1" id="fnref1" title="Game_Message,Game_Troop,Game_Enemyは例外。">1</a></sup><br>このクラス群にメンバを追加する場合は、十分に注意する必要があります。</p>
 <p>以下の例を見てみましょう。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> _Game_Character_initMembers = Game_Character.prototype.initMembers;</span><br><span class="line">Game_Character.prototype.initMembers = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  _Game_Character_initMembers.call(<span class="keyword">this</span>);</span><br><span class="line">  <span class="keyword">this</span>._characterHoge = [];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
@@ -146,7 +146,7 @@
   <hr class="footnotes-sep">
   <section class="footnotes">
   <ol class="footnotes-list">
-  <li id="fn1" class="footnote-item">Game_Message,Game_Troopは例外。<a href="#fnref1"> <span class="up-arrow"></span></a></li>
+  <li id="fn1" class="footnote-item">Game_Message,Game_Troop,Game_Enemyは例外。<a href="#fnref1"> <span class="up-arrow"></span></a></li>
 <li id="fn2" class="footnote-item">あるいはGame_CharacterBaseを継承したクラスの内部。<a href="#fnref2"> <span class="up-arrow"></span></a></li>
 <li id="fn3" class="footnote-item">最も広く受け入れられているスタイルの一つ <a href="http://snowdream.github.io/javascript-style-guide/javascript-style-guide/jp/index.html" target="_blank" rel="noopener">Airbnb JavaScript Style Guide</a> も同様の命名規則を採用している。<a href="#fnref3"> <span class="up-arrow"></span></a></li>
 <li id="fn4" class="footnote-item">ちなみに <a href="http://cou929.nu/data/google_javascript_style_guide/" target="_blank" rel="noopener">Google JavaScript Style Guide</a> ではアンダーバーを末尾につける命名規則を採用している。プロダクトごとに命名規則は異なる。<a href="#fnref4"> <span class="up-arrow"></span></a></li>
