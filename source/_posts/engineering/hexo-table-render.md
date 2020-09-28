@@ -99,7 +99,7 @@ hexo.extend.filter.register('before_post_render', function(data) {
         }).join('')}</tr>`;
       }).join('')}</tbody>`;
   
-    return `<table>${thead}${tbody}</table>`;
+    return `<table>${thead}${tbody}</table>\n\n`;
   });
   return data;
 });
@@ -113,3 +113,9 @@ hexo.extend.filter.register('before_post_render', function(data) {
 
 まず、node_modulesの中身を直接触らなくて良いというのが一番大きいです。
 テーマディレクトリの下に `scripts` を置かないといけないというのは少し面倒ですが、日本語向けのテーマはなかなかないので、基本的にいい感じのやつをforkして自分でメンテしていくことになるでしょう。
+
+# 追記/編集履歴
+
+## 2020/03/22
+
+テーブルの直後のマークダウン要素がHTMLの一部と解釈されてしまうバグがあったため、スクリプトを簡単に修正しました。

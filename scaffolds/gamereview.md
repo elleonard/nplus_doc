@@ -20,3 +20,5 @@ category:
 # やりこみ
 
 # 総評
+
+{% footnote_list %}

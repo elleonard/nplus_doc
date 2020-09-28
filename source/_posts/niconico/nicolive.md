@@ -8,7 +8,7 @@ category:
 
 # コミュニティ 悶絶の空中庭園
 
-<iframe width="312" height="176" src="http://ext.nicovideo.jp/thumb_community/co1860775" scrolling="no" style="border:solid 1px #CCC;" frameborder="0"><a href="http://com.nicovideo.jp/community/co1860775">【ニコニコ動画】悶絶の空中庭園</a></iframe>
+<iframe width="312" height="176" src="https://com.nicovideo.jp/thumb_community/co1860775" scrolling="no" style="border:solid 1px #CCC;" frameborder="0"><a href="https://com.nicovideo.jp/community/co1860775">【ニコニコ動画】悶絶の空中庭園</a></iframe>
 
 <!-- more -->
 
@@ -25,13 +25,7 @@ category:
 
 ## プレイ中
 
-* モンスターハンターワールド
-* リディー＆スールのアトリエ
-* 新次元ゲイム ネプテューヌV2
-
 ## プレイ予定
-
-* Fate/EXTELLA LINK
 
 ## 無期停止
 
@@ -43,6 +37,16 @@ category:
 
 ## クリア済み
 
+### モンハンシリーズ
+
+* モンスターハンターワールド
+* モンスターハンターワールド：アイスボーン
+
+### 地球防衛軍シリーズ
+
+* 地球防衛軍4.1
+* 地球防衛軍5
+
 ### アトリエシリーズ
 
 * ロロナのアトリエ
@@ -53,6 +57,9 @@ category:
 * シャリーのアトリエplus
 * ソフィーのアトリエ
 * フィリスのアトリエ
+* リディー＆スールのアトリエ
+
+* ネルケと伝説の錬金術士たち
 
 ### FFシリーズ
 
@@ -60,6 +67,17 @@ category:
 * FF6　モグタン将軍が行く
 * FF8
 * FF10
+
+### ネプテューヌシリーズ
+
+* 新次元ゲイム ネプテューヌV2
+
+### Fateシリーズ
+
+* Fate/EXTRA
+* Fate/EXTRA CCC
+* Fate/EXTELLA
+* Fate/EXTELLA LINK
 
 ### その他
 
@@ -85,9 +103,9 @@ category:
 
 * 無双OROCHI2Ultimate
 
-* Fate/EXTRA
-* Fate/EXTRA CCC
-* Fate/EXTELLA
+* アズールレーン クロスウェーブ
+* CRYSTAR
+* じんるいのみなさまへ
 
 # 効果音
 
