@@ -36,7 +36,7 @@
 <meta property="og:description" content="RPGツクールMVのデプロイメントで出力されたファイルを、NWjs公式で紹介されている方法でパッキングできます。1わたしも依頼した楽曲を含めて配布することになったため、そろそろこの手法をやっておこうかなと思って挑戦した2ところ、Game.exe（nw.exe）の画面がnw_blank.htmlになってしまいました。 一晩これで眠れなかったので、とりあえず納得のいく説を書いておきます。">
 <meta property="og:locale" content="ja">
 <meta property="og:image" content="http://elleonard.github.io/nplus_doc/2020/05/01/engineering/rmmv/why-game-exe-doesnt-work-with-package-nw/nwjs.png">
-<meta property="og:updated_time" content="2020-05-02T04:51:39.566Z">
+<meta property="og:updated_time" content="2020-10-10T06:56:36.311Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RPGツクールMV Game.exeがpackage.nwをちゃんと読んでくれなかった話">
 <meta name="twitter:description" content="RPGツクールMVのデプロイメントで出力されたファイルを、NWjs公式で紹介されている方法でパッキングできます。1わたしも依頼した楽曲を含めて配布することになったため、そろそろこの手法をやっておこうかなと思って挑戦した2ところ、Game.exe（nw.exe）の画面がnw_blank.htmlになってしまいました。 一晩これで眠れなかったので、とりあえず納得のいく説を書いておきます。">
@@ -119,7 +119,7 @@
 </ol>
 <p><img src="nwjs.png" alt="メタリック！" title="nw_blank.html"></p>
 <p>本来であればゲームが起動してほしいところ、開いたウィンドウはこのメタリックな画面のまま動きません。</p>
-<h1 id="試行錯誤"><a href="#試行錯誤" class="headerlink" title="試行錯誤"></a>試行錯誤</h1><h2 id="ググる"><a href="#ググる" class="headerlink" title="ググる"></a>ググる</h2><p>まずは添加のグーグル先生に聞いてみましょう。 Google is your friend.<br>すると、<a href="https://forums.rpgmakerweb.com/index.php?threads/rmmv-pro-tips-how-to-compress-your-ressource-one-files-exectuable.96879/page-2" target="_blank" rel="noopener">全く同じ症状で苦しんでいるポスト</a>が海外のフォーラムにありました。</p>
+<h1 id="試行錯誤"><a href="#試行錯誤" class="headerlink" title="試行錯誤"></a>試行錯誤</h1><h2 id="ググる"><a href="#ググる" class="headerlink" title="ググる"></a>ググる</h2><p>まずは天下のグーグル先生に聞いてみましょう。 Google is your friend.<br>すると、<a href="https://forums.rpgmakerweb.com/index.php?threads/rmmv-pro-tips-how-to-compress-your-ressource-one-files-exectuable.96879/page-2" target="_blank" rel="noopener">全く同じ症状で苦しんでいるポスト</a>が海外のフォーラムにありました。</p>
 <p>しかし、解決はしていないようです。</p>
 <h2 id="NWjs-を最新版にしてみる"><a href="#NWjs-を最新版にしてみる" class="headerlink" title="NWjs を最新版にしてみる"></a>NWjs を最新版にしてみる</h2><p>2020/05/01現在最新の0.45.0にして、上記手順のGame.exeや.dll周りを差し替えて試してみました。<br>結果は同じくメタリックさん。変わりません。</p>
 <h2 id="package-json-だけ置いてみる"><a href="#package-json-だけ置いてみる" class="headerlink" title="package.json だけ置いてみる"></a>package.json だけ置いてみる</h2><p>package.jsonだけ削除せずにGame.exeを起動してみました。<br>すると、対象が見つかりませんエラー。index.htmlが見えていない（つまり、package.nwの中身が見えていない）ということで間違いなさそうです。</p>
