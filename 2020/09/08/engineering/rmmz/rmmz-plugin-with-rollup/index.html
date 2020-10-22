@@ -35,7 +35,7 @@
 <meta property="og:site_name" content="ぷらずま式改">
 <meta property="og:description" content="RPGツクールMZのプラグインを、新リポジトリへ移行しました。これでかなり快適にプラグインが書けるようになったと思うので、仕組みを紹介します。">
 <meta property="og:locale" content="ja">
-<meta property="og:updated_time" content="2020-09-08T10:18:40.348Z">
+<meta property="og:updated_time" content="2020-10-22T16:21:48.768Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rollupを利用した、RPGツクールMZのプラグインを快適に書ける仕組み">
 <meta name="twitter:description" content="RPGツクールMZのプラグインを、新リポジトリへ移行しました。これでかなり快適にプラグインが書けるようになったと思うので、仕組みを紹介します。">
@@ -102,7 +102,7 @@
       
         <div id="toc" class="toc-article">
           <p class="toc-title">目次</p>
-          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ざっくりした仕組み"><span class="toc-text">ざっくりした仕組み</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#何が嬉しいのか"><span class="toc-text">何が嬉しいのか</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#どうして今？"><span class="toc-text">どうして今？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#移行後のプラグイン開発がどうなるか"><span class="toc-text">移行後のプラグイン開発がどうなるか</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#詳細"><span class="toc-text">詳細</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#yamlからヘッダとパラメータパースコードを生成"><span class="toc-text">yamlからヘッダとパラメータパースコードを生成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rollupで生成したコードと本体を合体させる"><span class="toc-text">rollupで生成したコードと本体を合体させる</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cpxでプロジェクトディレクトリにコピー"><span class="toc-text">cpxでプロジェクトディレクトリにコピー</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GitHub-Actionsでリリースブランチにpush"><span class="toc-text">GitHub Actionsでリリースブランチにpush</span></a></li></ol></li></ol>
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ざっくりした仕組み"><span class="toc-text">ざっくりした仕組み</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#何が嬉しいのか"><span class="toc-text">何が嬉しいのか</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#どうして今？"><span class="toc-text">どうして今？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#移行後のプラグイン開発がどうなるか"><span class="toc-text">移行後のプラグイン開発がどうなるか</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#詳細と実装"><span class="toc-text">詳細と実装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#yamlからヘッダとパラメータパースコードを生成"><span class="toc-text">yamlからヘッダとパラメータパースコードを生成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rollupで生成したコードと本体を合体させる"><span class="toc-text">rollupで生成したコードと本体を合体させる</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cpxでプロジェクトディレクトリにコピー"><span class="toc-text">cpxでプロジェクトディレクトリにコピー</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GitHub-Actionsでリリースブランチにpush"><span class="toc-text">GitHub Actionsでリリースブランチにpush</span></a></li></ol></li></ol>
         </div>
         <p>RPGツクールMZのプラグインを、<a href="https://github.com/elleonard/DarkPlasma-MZ-Plugins" target="_blank" rel="noopener">新リポジトリ</a>へ移行しました。<br>これでかなり快適にプラグインが書けるようになったと思うので、仕組みを紹介します。</p>
 <a id="more"></a>
@@ -127,7 +127,7 @@
 </ol>
 <p>既にあるプラグインを編集する際は、 <code>yarn watch</code> を起動しておいて編集しつつ動作確認、なんてこともできます。</p>
 <p>個人開発なのでmasterブランチ一本で今のところは大丈夫そうですが、開発用ブランチ切ったりPRを受け付けることを考えると、マージフックでreleaseブランチへのコミットも走らせたほうが良い気がしてきました。<br>これは必要になった時に試してみましょう。</p>
-<h1 id="詳細"><a href="#詳細" class="headerlink" title="詳細"></a>詳細</h1><h2 id="yamlからヘッダとパラメータパースコードを生成"><a href="#yamlからヘッダとパラメータパースコードを生成" class="headerlink" title="yamlからヘッダとパラメータパースコードを生成"></a>yamlからヘッダとパラメータパースコードを生成</h2><p>生成ロジックはnodejsで割と力技で書いています。<br>形式が決まっているので、あんまり難しいことはしていません。愚直にめんどくさいコードを書きました。</p>
+<h1 id="詳細と実装"><a href="#詳細と実装" class="headerlink" title="詳細と実装"></a>詳細と実装</h1><h2 id="yamlからヘッダとパラメータパースコードを生成"><a href="#yamlからヘッダとパラメータパースコードを生成" class="headerlink" title="yamlからヘッダとパラメータパースコードを生成"></a>yamlからヘッダとパラメータパースコードを生成</h2><p>生成ロジックはnodejsで割と力技で書いています。<br>形式が決まっているので、あんまり難しいことはしていません。愚直にめんどくさいコードを書きました。</p>
 <p>Ruたんさんのものをほとんどそのままコピーしても動くとは思うのですが、完全に自分用ということで、自分用の設定内容はハードコーディングしてしまい、これまでのプラグインと構成が大きく変わらないようなポリシーで生成できるようにしています。</p>
 <p>ここでプラグイン本体を <code>X.js</code> とすると、その横の <code>_build</code> ディレクトリに <code>X_header.js</code> と <code>X_parameters.js</code> が生成されます。</p>
 <h2 id="rollupで生成したコードと本体を合体させる"><a href="#rollupで生成したコードと本体を合体させる" class="headerlink" title="rollupで生成したコードと本体を合体させる"></a>rollupで生成したコードと本体を合体させる</h2><p>headerとparametersを生成したら、いよいよrollupの出番です。<br>rollupは複数のjsファイルを一つにまとめてくれる賢いヤツです。<br>yamlから生成したX_header.js,X_parameter.js,そして本体のX.jsをくっつければ、配布する形式の成果物が出来上がるというわけです。</p>
@@ -204,7 +204,7 @@
   
     <li><a href="/nplus_doc/categories/ゲーム/ゲームレビュー/">ゲームレビュー</a><small>46</small></li>
   
-    <li><a href="/nplus_doc/categories/ゲーム制作/">ゲーム制作</a><small>10</small></li>
+    <li><a href="/nplus_doc/categories/ゲーム制作/">ゲーム制作</a><small>11</small></li>
   
     <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/デッキレシピ/">デッキレシピ</a><small>4</small></li>
   
@@ -232,6 +232,10 @@
   <ul class="entry">
     
       <li>
+        <a href="/nplus_doc/2020/10/22/engineering/rmmz/rmmz-plugin-integration-test/">RPGツクールMZのプラグイン半自動テストの仕組み</a>
+      </li>
+    
+      <li>
         <a href="/nplus_doc/2020/09/28/game/nippon-marathon/">【ゲーム感想】Nippon Marathon</a>
       </li>
     
@@ -245,10 +249,6 @@
     
       <li>
         <a href="/nplus_doc/2020/08/31/game/neptunia/super-neptunia-rpg/">【ゲーム感想】勇者ネプテューヌ 世界よ宇宙よ刮目せよ！！ アルティメットRPG宣言！！</a>
-      </li>
-    
-      <li>
-        <a href="/nplus_doc/2020/08/30/game/atelier/ryza/">【ゲーム感想】ライザのアトリエ ～常闇の女王と秘密の隠れ家～</a>
       </li>
     
   </ul>
