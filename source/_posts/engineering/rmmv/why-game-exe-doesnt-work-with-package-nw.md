@@ -33,7 +33,7 @@ RPGツクールMVのデプロイメントで出力されたファイルを、NWj
 
 ## ググる
 
-まずは添加のグーグル先生に聞いてみましょう。 Google is your friend.
+まずは天下のグーグル先生に聞いてみましょう。 Google is your friend.
 すると、[全く同じ症状で苦しんでいるポスト](https://forums.rpgmakerweb.com/index.php?threads/rmmv-pro-tips-how-to-compress-your-ressource-one-files-exectuable.96879/page-2)が海外のフォーラムにありました。
 
 しかし、解決はしていないようです。
