@@ -35,7 +35,7 @@
 <meta property="og:site_name" content="ぷらずま式改">
 <meta property="og:description" content="RPGツクールMV 良いプラグインとは の内容からもう少し難しい内容に踏み込みます。">
 <meta property="og:locale" content="ja">
-<meta property="og:updated_time" content="2020-03-10T07:01:42.484Z">
+<meta property="og:updated_time" content="2021-01-10T12:15:52.288Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RPGツクールMV 続・良いプラグインとは">
 <meta name="twitter:description" content="RPGツクールMV 良いプラグインとは の内容からもう少し難しい内容に踏み込みます。">
@@ -119,7 +119,10 @@
 <p>上記のコードを含むプラグインを導入する前にセーブしたデータを、プラグイン導入後にロードするとどうなるでしょうか。<br>ニューゲーム開始時には空配列で初期化される <code>_characterHoge</code> が、セーブデータロード時には未定義になってしまいます。<br>その配列に対して何らかのメソッドを呼ぶ、例えば <code>.map</code> で何らかの処理を配列の要素全てに対して行うようなコードが書かれていた場合に、 <code>Cannot read property &#39;map&#39; of undefined</code> などというエラーが出てしまうのです。</p>
 <p>こういったケースが存在することを知っていれば再現条件に想像は付きますが、プラグインの利用者はたいていこんなこと知りません。<br>再現の条件がわからないまま断片的な情報を作者に送りつけなければならなかったり、あるいはその時点でプラグインを捨てる選択を迫られるでしょう。<br>リリースしてから時間の経ったゲームの改修に使われてしまった場合は最悪です。<br>プレイヤーがバージョンアップしたゲームを取り込んだ後、これまでのセーブデータの続きからプレイできなくなってしまいます。</p>
 <p>セーブデータに影響があるため、 <code>Game_****</code> 系のクラスにメンバを追加する場合は、ニューゲーム開始後とセーブデータロード後のどちらでもしっかりと値が初期化されるよう注意しましょう。<br>もちろん、セーブデータに含める必要のないメンバを追加すべきではありません。</p>
-<h2 id="カプセル化を意識している"><a href="#カプセル化を意識している" class="headerlink" title="カプセル化を意識している"></a>カプセル化を意識している</h2><p>カプセル化。RPGツクールの世界では、某クソコード動画さんのおかげで有名な言葉かもしれません。</p>
+<h2 id="カプセル化を意識している"><a href="#カプセル化を意識している" class="headerlink" title="カプセル化を意識している"></a>カプセル化を意識している</h2><p>2021/01/10追記: より平易な記事を用意したので、よくわからないという方はそちらも参照してみてください。</p>
+<a href="/nplus_doc/2021/01/10/engineering/rmmz/dont-access-private-from-outside/" title="【RPGツクールMV/MZ】なぜアンダースコアで始まる変数にクラスの外からアクセスしてはならないのか">【RPGツクールMV/MZ】なぜアンダースコアで始まる変数にクラスの外からアクセスしてはならないのか</a>
+
+<p>カプセル化。RPGツクールの世界では、某クソコード動画さんのおかげで有名な言葉かもしれません。</p>
 <p>噛み砕いて説明すると、クラスが内部状態や詳細な実装ではなく外部から必要な操作のみを公開するようにし、それぞれのクラスの独立性を担保して保守しやすくすることです。<br>言葉だけではピンとこないと思うので、RPGツクールMVのコアスクリプトのコードを一部見てみましょう。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Game_CharacterBase.prototype.moveStraight = <span class="function"><span class="keyword">function</span> (<span class="params">d</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.setMovementSuccess(<span class="keyword">this</span>.canPass(<span class="keyword">this</span>._x, <span class="keyword">this</span>._y, d));</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.isMovementSucceeded()) &#123;</span><br><span class="line">    <span class="keyword">this</span>.setDirection(d);</span><br><span class="line">    <span class="keyword">this</span>._x = $gameMap.roundXWithDirection(<span class="keyword">this</span>._x, d);</span><br><span class="line">    <span class="keyword">this</span>._y = $gameMap.roundYWithDirection(<span class="keyword">this</span>._y, d);</span><br><span class="line">    <span class="keyword">this</span>._realX = $gameMap.xWithDirection(<span class="keyword">this</span>._x, <span class="keyword">this</span>.reverseDir(d));</span><br><span class="line">    <span class="keyword">this</span>._realY = $gameMap.yWithDirection(<span class="keyword">this</span>._y, <span class="keyword">this</span>.reverseDir(d));</span><br><span class="line">    <span class="keyword">this</span>.increaseSteps();</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.setDirection(d);</span><br><span class="line">    <span class="keyword">this</span>.checkEventTriggerTouchFront(d);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
