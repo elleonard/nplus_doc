@@ -1,5 +1,8 @@
 ---
 title: {{ title }}
 date: {{ date }}
-tags:
 ---
+
+<!-- more -->
+
+{% footnote_list %}
