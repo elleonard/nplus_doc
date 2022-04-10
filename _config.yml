@@ -13,7 +13,7 @@ cover: /img/ogp.png
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://elleonard.github.io/nplus_doc
+url: https://elleonard.github.io/nplus_doc
 root: /nplus_doc/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
