@@ -38,11 +38,11 @@
 <meta property="article:modified_time" content="2022-04-16T09:44:10.484Z">
 <meta property="article:author" content="NPlasma">
 <meta property="article:tag" content="Fate">
+<meta property="article:tag" content="ゲーム">
 <meta property="article:tag" content="scala">
 <meta property="article:tag" content="playframework">
 <meta property="article:tag" content="slick">
 <meta property="article:tag" content="Fate&#x2F;EXTRA">
-<meta property="article:tag" content="ゲーム">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:creator" content="@elleonard_f">
     
@@ -110,7 +110,7 @@
         <ul>
 <li>タイトルの通り</li>
 </ul>
-<a id="more"></a>
+<span id="more"></span>
 
 <h1 id="なぜこんなことをした！言え！"><a href="#なぜこんなことをした！言え！" class="headerlink" title="なぜこんなことをした！言え！"></a>なぜこんなことをした！言え！</h1><ul>
 <li>Fate/EXTRAで敵のパターンをテキストに記録し続けるのが億劫になってきたから</li>
@@ -118,11 +118,11 @@
 <li>nodejs辺りでさくっとやっても良かったが、DB周りが不安だったので、過去にやったことのあるplay slickで</li>
 </ul>
 <h1 id="どこで使い方を習った"><a href="#どこで使い方を習った" class="headerlink" title="どこで使い方を習った"></a>どこで使い方を習った</h1><ul>
-<li><p><a href="https://www.playframework.com/documentation/2.5.x/Home" target="_blank" rel="noopener">公式ドキュメント</a>を読んだのよ</p>
+<li><p><a target="_blank" rel="noopener" href="https://www.playframework.com/documentation/2.5.x/Home">公式ドキュメント</a>を読んだのよ</p>
 </li>
 <li><p>公式ドキュメントにしたがってactivatorの最新版（ここでは2.5）をダウンロード/インストール</p>
 </li>
-<li><p><a href="https://www.playframework.com/documentation/2.5.x/PlaySlick" target="_blank" rel="noopener">PlaySlickの公式ドキュメント</a>にしたがって依存性解決</p>
+<li><p><a target="_blank" rel="noopener" href="https://www.playframework.com/documentation/2.5.x/PlaySlick">PlaySlickの公式ドキュメント</a>にしたがって依存性解決</p>
 </li>
 <li><p>application.confに適切な設定をしたらコーディング開始</p>
 </li>
@@ -136,7 +136,7 @@
 </li>
 </ul>
 <h2 id="DI（Dependencies-Injection）"><a href="#DI（Dependencies-Injection）" class="headerlink" title="DI（Dependencies Injection）"></a>DI（Dependencies Injection）</h2><blockquote>
-<p>依存性の注入（いそんせいのちゅうにゅう、英: Dependency injection）とは、コンポーネント間の依存関係をプログラムのソースコードから排除し、外部の設定ファイルなどで注入できるようにするソフトウェアパターンである。英語の頭文字からDIと略される。<br>!cite:<a href="https://ja.wikipedia.org/wiki/%E4%BE%9D%E5%AD%98%E6%80%A7%E3%81%AE%E6%B3%A8%E5%85%A5" target="_blank" rel="noopener">https://ja.wikipedia.org/wiki/%E4%BE%9D%E5%AD%98%E6%80%A7%E3%81%AE%E6%B3%A8%E5%85%A5</a>!<br>!title:依存性の注入 - Wikipedia!</p>
+<p>依存性の注入（いそんせいのちゅうにゅう、英: Dependency injection）とは、コンポーネント間の依存関係をプログラムのソースコードから排除し、外部の設定ファイルなどで注入できるようにするソフトウェアパターンである。英語の頭文字からDIと略される。<br>!cite:<a target="_blank" rel="noopener" href="https://ja.wikipedia.org/wiki/%E4%BE%9D%E5%AD%98%E6%80%A7%E3%81%AE%E6%B3%A8%E5%85%A5">https://ja.wikipedia.org/wiki/%E4%BE%9D%E5%AD%98%E6%80%A7%E3%81%AE%E6%B3%A8%E5%85%A5</a>!<br>!title:依存性の注入 - Wikipedia!</p>
 </blockquote>
 <ul>
 <li><p>例えば、あるdaoを使いたいserviceが、そのdaoのインスタンスをnewするコードを含まなくても良い</p>
@@ -201,9 +201,9 @@
 </li>
 </ul>
 <h2 id="リンク"><a href="#リンク" class="headerlink" title="リンク"></a>リンク</h2><ul>
-<li><a href="https://github.com/elleonard/extra-match" target="_blank" rel="noopener">extra-match: github</a></li>
-<li><a href="http://qiita.com/yohei1126@github/items/d60c6e498bc57c07b880" target="_blank" rel="noopener">Play 2.3.xから2.4.x、Slick 2.xから3.1.xへの移行 - Qiita</a></li>
-<li><a href="http://qiita.com/SatohJohn/items/52e7d8c3e30329d290b2" target="_blank" rel="noopener">playframeworkでslickを使ってDBにアクセする際にハマったのでメモ</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/elleonard/extra-match">extra-match: github</a></li>
+<li><a target="_blank" rel="noopener" href="http://qiita.com/yohei1126@github/items/d60c6e498bc57c07b880">Play 2.3.xから2.4.x、Slick 2.xから3.1.xへの移行 - Qiita</a></li>
+<li><a target="_blank" rel="noopener" href="http://qiita.com/SatohJohn/items/52e7d8c3e30329d290b2">playframeworkでslickを使ってDBにアクセする際にハマったのでメモ</a></li>
 </ul>
 
       
@@ -221,7 +221,7 @@
         
   
   <div class="tags">
-    <a href="/nplus_doc/tags/Fate/">Fate</a>, <a href="/nplus_doc/tags/scala/">scala</a>, <a href="/nplus_doc/tags/playframework/">playframework</a>, <a href="/nplus_doc/tags/slick/">slick</a>, <a href="/nplus_doc/tags/Fate-EXTRA/">Fate/EXTRA</a>, <a href="/nplus_doc/tags/ゲーム/">ゲーム</a>
+    <a href="/nplus_doc/tags/Fate/">Fate</a>, <a href="/nplus_doc/tags/ゲーム/">ゲーム</a>, <a href="/nplus_doc/tags/scala/">scala</a>, <a href="/nplus_doc/tags/playframework/">playframework</a>, <a href="/nplus_doc/tags/slick/">slick</a>, <a href="/nplus_doc/tags/Fate-EXTRA/">Fate/EXTRA</a>
   </div>
 
         </div>
@@ -231,7 +231,7 @@
         </div>
         
           <div class="article-prev">
-              <a href="/nplus_doc/2016/05/29/first/">えぬぷら式改 始動 <span class="prev-arrow"/></a>
+              <a href="/nplus_doc/2016/05/29/about/">ぷらずま式改とは <span class="prev-arrow"/></a>
             </div>
         
         

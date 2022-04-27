@@ -106,9 +106,9 @@
           <p class="toc-title">目次</p>
           <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A9%B3%E7%B4%B0%E3%81%AA%E6%89%8B%E9%A0%86%E3%81%A8%E7%97%87%E7%8A%B6"><span class="toc-text">詳細な手順と症状</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A9%A6%E8%A1%8C%E9%8C%AF%E8%AA%A4"><span class="toc-text">試行錯誤</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%82%B0%E3%82%B0%E3%82%8B"><span class="toc-text">ググる</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NWjs-%E3%82%92%E6%9C%80%E6%96%B0%E7%89%88%E3%81%AB%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B"><span class="toc-text">NWjs を最新版にしてみる</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#package-json-%E3%81%A0%E3%81%91%E7%BD%AE%E3%81%84%E3%81%A6%E3%81%BF%E3%82%8B"><span class="toc-text">package.json だけ置いてみる</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#package-nw-%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%82%92%E7%BD%AE%E3%81%84%E3%81%A6%E3%81%BF%E3%82%8B"><span class="toc-text">package.nw ディレクトリを置いてみる</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nw-builder-%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B"><span class="toc-text">nw-builder を使ってみる</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nw-builder-%E3%81%AE%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E8%AA%AD%E3%82%80"><span class="toc-text">nw-builder のソースコードを読む</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ZipInfo%E3%82%92%E8%A6%8B%E6%AF%94%E3%81%B9%E3%82%8B"><span class="toc-text">ZipInfoを見比べる</span></a></li></ol></li></ol>
         </div>
-        <p>RPGツクールMVのデプロイメントで出力されたファイルを、NWjs公式で紹介されている方法でパッキングできます。<sup class="footnote-ref"><a href="#fn1" id="fnref1" title="セアロソンク作品サポートブログ : 【ツクールMV】ENIGMA VIRTUAL BOXを使わずにファイルを隠蔽する方法参照。">1</a></sup><br>わたしも依頼した楽曲を含めて配布することになったため、そろそろこの手法をやっておこうかなと思って挑戦した<sup class="footnote-ref"><a href="#fn2" id="fnref2" title="ただし、zipを使った方法ではnwjsが一時ディレクトリに中身を全展開するのでリソースが丸見えになる。ファイル隠匿の効果がまったくない。">2</a></sup>ところ、Game.exe（nw.exe）の画面がnw_blank.htmlになってしまいました。</p>
+        <p>RPGツクールMVのデプロイメントで出力されたファイルを、NWjs公式で紹介されている方法でパッキングできます。<sup class="footnote-ref"><a href=#fn1 id="fnref1" title="セアロソンク作品サポートブログ : 【ツクールMV】ENIGMA VIRTUAL BOXを使わずにファイルを隠蔽する方法参照。">1</a></sup><br>わたしも依頼した楽曲を含めて配布することになったため、そろそろこの手法をやっておこうかなと思って挑戦した<sup class="footnote-ref"><a href=#fn2 id="fnref2" title="ただし、zipを使った方法ではnwjsが一時ディレクトリに中身を全展開するのでリソースが丸見えになる。ファイル隠匿の効果がまったくない。">2</a></sup>ところ、Game.exe（nw.exe）の画面がnw_blank.htmlになってしまいました。</p>
 <p>一晩これで眠れなかったので、とりあえず納得のいく説を書いておきます。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h1 id="詳細な手順と症状"><a href="#詳細な手順と症状" class="headerlink" title="詳細な手順と症状"></a>詳細な手順と症状</h1><ol>
 <li>まず、RPGツクールMVのデプロイメントでプロジェクトをデプロイします。</li>
@@ -119,22 +119,22 @@
 </ol>
 <p><img src="nwjs.png" alt="メタリック！" title="nw_blank.html"></p>
 <p>本来であればゲームが起動してほしいところ、開いたウィンドウはこのメタリックな画面のまま動きません。</p>
-<h1 id="試行錯誤"><a href="#試行錯誤" class="headerlink" title="試行錯誤"></a>試行錯誤</h1><h2 id="ググる"><a href="#ググる" class="headerlink" title="ググる"></a>ググる</h2><p>まずは天下のグーグル先生に聞いてみましょう。 Google is your friend.<br>すると、<a href="https://forums.rpgmakerweb.com/index.php?threads/rmmv-pro-tips-how-to-compress-your-ressource-one-files-exectuable.96879/page-2" target="_blank" rel="noopener">全く同じ症状で苦しんでいるポスト</a>が海外のフォーラムにありました。</p>
+<h1 id="試行錯誤"><a href="#試行錯誤" class="headerlink" title="試行錯誤"></a>試行錯誤</h1><h2 id="ググる"><a href="#ググる" class="headerlink" title="ググる"></a>ググる</h2><p>まずは天下のグーグル先生に聞いてみましょう。 Google is your friend.<br>すると、<a target="_blank" rel="noopener" href="https://forums.rpgmakerweb.com/index.php?threads/rmmv-pro-tips-how-to-compress-your-ressource-one-files-exectuable.96879/page-2">全く同じ症状で苦しんでいるポスト</a>が海外のフォーラムにありました。</p>
 <p>しかし、解決はしていないようです。</p>
 <h2 id="NWjs-を最新版にしてみる"><a href="#NWjs-を最新版にしてみる" class="headerlink" title="NWjs を最新版にしてみる"></a>NWjs を最新版にしてみる</h2><p>2020/05/01現在最新の0.45.0にして、上記手順のGame.exeや.dll周りを差し替えて試してみました。<br>結果は同じくメタリックさん。変わりません。</p>
 <h2 id="package-json-だけ置いてみる"><a href="#package-json-だけ置いてみる" class="headerlink" title="package.json だけ置いてみる"></a>package.json だけ置いてみる</h2><p>package.jsonだけ削除せずにGame.exeを起動してみました。<br>すると、対象が見つかりませんエラー。index.htmlが見えていない（つまり、package.nwの中身が見えていない）ということで間違いなさそうです。</p>
-<h2 id="package-nw-ディレクトリを置いてみる"><a href="#package-nw-ディレクトリを置いてみる" class="headerlink" title="package.nw ディレクトリを置いてみる"></a>package.nw ディレクトリを置いてみる</h2><p>実は<a href="http://docs.nwjs.io/en/latest/For%20Users/Package%20and%20Distribute/#package-option-1-plain-files-recommended" target="_blank" rel="noopener">NWjsの公式ドキュメント</a>にはこの方法が推奨されると書かれています。<br>package.nw というzipファイルではなく、ディレクトリを用意して、package.jsonとwwwディレクトリをその中に放り込んで試してみました。</p>
+<h2 id="package-nw-ディレクトリを置いてみる"><a href="#package-nw-ディレクトリを置いてみる" class="headerlink" title="package.nw ディレクトリを置いてみる"></a>package.nw ディレクトリを置いてみる</h2><p>実は<a target="_blank" rel="noopener" href="http://docs.nwjs.io/en/latest/For%20Users/Package%20and%20Distribute/#package-option-1-plain-files-recommended">NWjsの公式ドキュメント</a>にはこの方法が推奨されると書かれています。<br>package.nw というzipファイルではなく、ディレクトリを用意して、package.jsonとwwwディレクトリをその中に放り込んで試してみました。</p>
 <p>無事にゲームが起動しました。</p>
 <p>こうなると、package.nwを作る方法（すなわち、.zip圧縮の方法）が疑わしい、ということがわかります。</p>
-<h2 id="nw-builder-を使ってみる"><a href="#nw-builder-を使ってみる" class="headerlink" title="nw-builder を使ってみる"></a>nw-builder を使ってみる</h2><p><a href="https://github.com/nwjs-community/nw-builder" target="_blank" rel="noopener">nw-builder</a> は、NWjsのプロジェクトを.exeにパッキングしてくれるプログラムです。<br>以下のようにして簡単に使用できます。</p>
+<h2 id="nw-builder-を使ってみる"><a href="#nw-builder-を使ってみる" class="headerlink" title="nw-builder を使ってみる"></a>nw-builder を使ってみる</h2><p><a target="_blank" rel="noopener" href="https://github.com/nwjs-community/nw-builder">nw-builder</a> は、NWjsのプロジェクトを.exeにパッキングしてくれるプログラムです。<br>以下のようにして簡単に使用できます。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install nw-builder -g</span><br><span class="line">nwbuild -v latest -p win64 （プロジェクトディレクトリへのパス）</span><br></pre></td></tr></table></figure>
 
 <p>これによって出力されたディレクトリの中身をNWjsの最新版ディレクトリに放り込んで、.exeを起動すると、無事にゲームが開始されます。<br>nwbuild の実行中、コンソールには <code>Zipping （ファイル名）</code> などと表示されていたので、内部でzip圧縮処理を行っているのでしょう。</p>
-<h2 id="nw-builder-のソースコードを読む"><a href="#nw-builder-のソースコードを読む" class="headerlink" title="nw-builder のソースコードを読む"></a>nw-builder のソースコードを読む</h2><p>つまり、 nw-builder と同じ方法でzip圧縮すれば、起動のために必要な package.nw が得られるのでは、と考えてやってみました。<br><a href="https://gist.github.com/elleonard/e4453a423eaedbc44858a8bef5d07194" target="_blank" rel="noopener">generateZip.js</a></p>
+<h2 id="nw-builder-のソースコードを読む"><a href="#nw-builder-のソースコードを読む" class="headerlink" title="nw-builder のソースコードを読む"></a>nw-builder のソースコードを読む</h2><p>つまり、 nw-builder と同じ方法でzip圧縮すれば、起動のために必要な package.nw が得られるのでは、と考えてやってみました。<br><a target="_blank" rel="noopener" href="https://gist.github.com/elleonard/e4453a423eaedbc44858a8bef5d07194">generateZip.js</a></p>
 <p>nw-builderのソースコードを読んで、zip圧縮している箇所だけ単体で実行できるように雑に書いたjsです。<br>archiver と simple-glob に依存しているので、それらをインストールしてから実行します。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install archiver -g</span><br><span class="line">npm install simple-glob -g</span><br><span class="line">node ./generateZip.js</span><br></pre></td></tr></table></figure>
 
-<p>このプログラムによって生成した package.nw を使って実行したところ、ゲームが無事に起動しました。<sup class="footnote-ref"><a href="#fn3" id="fnref3" title="しかも、nw-builderと違って必要なファイルのみ圧縮しているので、容量もそこそこ削減できた。">3</a></sup><br>つまり、zipの作り方が何かしら間違っていた可能性があります。</p>
+<p>このプログラムによって生成した package.nw を使って実行したところ、ゲームが無事に起動しました。<sup class="footnote-ref"><a href=#fn3 id="fnref3" title="しかも、nw-builderと違って必要なファイルのみ圧縮しているので、容量もそこそこ削減できた。">3</a></sup><br>つまり、zipの作り方が何かしら間違っていた可能性があります。</p>
 <h2 id="ZipInfoを見比べる"><a href="#ZipInfoを見比べる" class="headerlink" title="ZipInfoを見比べる"></a>ZipInfoを見比べる</h2><p>では、起動に成功する良いzipと、メタリックな画面のお友達な悪いzipの中身、どう違うのでしょうか。<br>答えはZipInfoで両者の中身を見た時になんとなく想像できました。</p>
 <ul>
 <li>permissionの表示が異なる（ <code>-rw-rw-rw-</code> と <code>-rw-a--</code> ）</li>
@@ -142,15 +142,15 @@
 <li>ディレクトリそのものが構成の中に記されているかどうか（悪いzipはディレクトリそのものが記されていた）</li>
 <li>ファイル名のマルチバイト文字が化けているかどうか（悪いzipは化けている）</li>
 </ul>
-<p>この中で、最も怪しいのはマルチバイト文字です。<br>なぜかと言うと、海外のポストで苦しんでいた人物がブラジルの人だから。<sup class="footnote-ref"><a href="#fn4" id="fnref4" title="ブラジルの公用語はポルトガル語。セディーユ等の特殊なマルチバイト文字が含まれる。">4</a></sup></p>
+<p>この中で、最も怪しいのはマルチバイト文字です。<br>なぜかと言うと、海外のポストで苦しんでいた人物がブラジルの人だから。<sup class="footnote-ref"><a href=#fn4 id="fnref4" title="ブラジルの公用語はポルトガル語。セディーユ等の特殊なマルチバイト文字が含まれる。">4</a></sup></p>
 <p>とは言え、ローカルでこれの検証をするだけの元気は残っていませんでした。<br>誰か暇な人がいれば、検証してみてください。</p>
-  <hr class="footnotes-sep">
+  <hr class="footnotes-sep" />
   <section class="footnotes">
   <ol class="footnotes-list">
-  <li id="fn1" class="footnote-item"><a href="http://b.dlsite.net/RG26890/archives/16263650.html" target="_blank" rel="noopener">セアロソンク作品サポートブログ : 【ツクールMV】ENIGMA VIRTUAL BOXを使わずにファイルを隠蔽する方法</a>参照。<a href="#fnref1"> <span class="up-arrow"></span></a></li>
-<li id="fn2" class="footnote-item">ただし、zipを使った方法ではnwjsが一時ディレクトリに中身を全展開するのでリソースが丸見えになる。ファイル隠匿の効果がまったくない。<a href="#fnref2"> <span class="up-arrow"></span></a></li>
-<li id="fn3" class="footnote-item">しかも、nw-builderと違って必要なファイルのみ圧縮しているので、容量もそこそこ削減できた。<a href="#fnref3"> <span class="up-arrow"></span></a></li>
-<li id="fn4" class="footnote-item">ブラジルの公用語はポルトガル語。セディーユ等の特殊なマルチバイト文字が含まれる。<a href="#fnref4"> <span class="up-arrow"></span></a></li>
+  <li id="fn1" class="footnote-item"><a target="_blank" rel="noopener" href="http://b.dlsite.net/RG26890/archives/16263650.html">セアロソンク作品サポートブログ : 【ツクールMV】ENIGMA VIRTUAL BOXを使わずにファイルを隠蔽する方法</a>参照。<a href="#fnref1"> <span class="up-arrow"/></a></li>
+<li id="fn2" class="footnote-item">ただし、zipを使った方法ではnwjsが一時ディレクトリに中身を全展開するのでリソースが丸見えになる。ファイル隠匿の効果がまったくない。<a href="#fnref2"> <span class="up-arrow"/></a></li>
+<li id="fn3" class="footnote-item">しかも、nw-builderと違って必要なファイルのみ圧縮しているので、容量もそこそこ削減できた。<a href="#fnref3"> <span class="up-arrow"/></a></li>
+<li id="fn4" class="footnote-item">ブラジルの公用語はポルトガル語。セディーユ等の特殊なマルチバイト文字が含まれる。<a href="#fnref4"> <span class="up-arrow"/></a></li>
   </ol>
   </section>
 

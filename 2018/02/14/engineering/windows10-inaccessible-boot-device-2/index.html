@@ -106,30 +106,30 @@
         <a href="/nplus_doc/2018/02/06/engineering/windows10-inaccessible-boot-device/" title="Windows10がINACCESSIBLE BOOT DEVICEで起動しない">Windows10がINACCESSIBLE BOOT DEVICEで起動しない</a>の続き
 
 <p>ひとまずWindows Updateを巻き戻すことで一時的に対処できた、というところまでしか書いていなかったので追記<br>真っ青な画面の根本的な原因と対策について</p>
-<a id="more"></a>
+<span id="more"></span>
 
-<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p><a href="https://support.microsoft.com/en-us/help/4072699/january-3-2018-windows-security-updates-and-antivirus-software" target="_blank" rel="noopener">Important: Windows security updates released January-February, 2018, and antivirus software</a></p>
+<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p><a target="_blank" rel="noopener" href="https://support.microsoft.com/en-us/help/4072699/january-3-2018-windows-security-updates-and-antivirus-software">Important: Windows security updates released January-February, 2018, and antivirus software</a></p>
 <blockquote><p>The compatibility issue arises when antivirus applications make unsupported calls into Windows kernel memory. These calls may cause stop errors (also known as blue screen errors) that make the device unable to boot. To help prevent these stop errors, Microsoft is currently only offering the January and February 2018 Windows security updates to devices that are running antivirus software that is from antivirus software vendors who have confirmed that their antivirus software is compatible by setting a required registry key.</p><p>上記記事Overviewより抜粋</p></blockquote>
 
 <p>要約すると、1月のWindows Updateでカーネルメモリへのアクセス方法を制限したが、古いアンチウイルスソフトがそれに対応できておらず、起動時にエラーが起きてブルースクリーンが発生する、ということ<br>そんな破壊的な変更をいきなりやるMicrosoftが悪いかというと実はそういうことではなく、アンチウイルスソフトベンダの対応状況をしっかり見てからアップデートをかけているよ、ということも書いてある<br>「対応済みの場合はこのレジストリキーを書き換えてね」とベンダに伝え、ベンダがアンチウイルスソフトをアップデート、そのアップデートを適用したマシンはレジストリキーが書き換えられ、該当のWindows Updateが適用される、という具合だろう</p>
 <p>では、アンチウイルスソフトが対応したというレジストリの更新があったにも関わらず何故この問題が起きたのか</p>
 <h1 id="アンチウイルスソフトは一つに絞ろう"><a href="#アンチウイルスソフトは一つに絞ろう" class="headerlink" title="アンチウイルスソフトは一つに絞ろう"></a>アンチウイルスソフトは一つに絞ろう</h1><p>あるアンチウイルスソフトが新しいWindows Updateに対応し、レジストリを書き換えた<br>しかし、別のアンチウイルスソフトもインストールされており、そちらは古いままだった</p>
 <blockquote><p>Windows Update「対応した？」
-<br>レジストリ「したよ」
-<br>Windows Update「よっしゃ通るで」
-<br>古いアンチウイルスソフト「おっ、PC起動したんやな いつもどおりカーネルメモリにアクセスして……」
-<br>Windows「あかんで（青画面）」</p><p>雑な流れ</p></blockquote>
+<br />レジストリ「したよ」
+<br />Windows Update「よっしゃ通るで」
+<br />古いアンチウイルスソフト「おっ、PC起動したんやな いつもどおりカーネルメモリにアクセスして……」
+<br />Windows「あかんで（青画面）」</p><p>雑な流れ</p></blockquote>
 
 <p>筆者のPCにも２種類のソフトがインストールされており、それで全てを察した<br>尚、今は１種類のみ残してアンインストールしたため、これで問題は起こらないはずである</p>
 <h1 id="なぜWindowsはこんな更新を？"><a href="#なぜWindowsはこんな更新を？" class="headerlink" title="なぜWindowsはこんな更新を？"></a>なぜWindowsはこんな更新を？</h1><p>そもそも、Windowsがカーネルメモリへのアクセス方法を制限しなければこんな問題は起こらなかった<br>とMicrosoftを責めてはいけない<br>この更新はセキュリティ上、仕方なく必要になってしまったものなのだ</p>
-<p><a href="http://www.4gamer.net/games/999/G999902/20180105085/" target="_blank" rel="noopener">Googleが発見した「CPUの脆弱性」とは何なのか。ゲーマーに捧ぐ「正しく恐れる」その方法まとめ - 4Gamer.net</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.4gamer.net/games/999/G999902/20180105085/">Googleが発見した「CPUの脆弱性」とは何なのか。ゲーマーに捧ぐ「正しく恐れる」その方法まとめ - 4Gamer.net</a></p>
 <p>わかりやすい説明が上記ページに書いてあるので細かいことは省くが、 <code>Meltdown</code> 及び <code>Spectre</code> という名前のCPU脆弱性が発表され、その対応を急がねばならなかったのである<br>この脆弱性はざっくり言うと、投機的実行の仕組みを悪用してカーネルメモリの内容を盗み見ることができてしまうというもの<br>投機的実行とは技術用語で、例えば条件分岐の結果を予測してそれよりも先にある命令に必要な計算を先んじて行ってしまい、実際の実行時にその結果を使って高速に処理できるようにしようという仕組みのこと<br>もちろん、分岐予測が外れた場合には先んじて実行した結果は無駄になり、捨てることになる（投機的 だからね）</p>
 <p>この脆弱性を放置すると、カーネルメモリ領域に展開される情報が攻撃者に筒抜けになる可能性がある</p>
-<p><a href="http://milestone-of-se.nesuke.com/nw-advanced/nw-security/meltdown-spectre/" target="_blank" rel="noopener">CPUの脆弱性[Spectre], [Meltdown] は具体的にどのような仕組みで攻撃する？影響範囲は？ | SEの道標</a></p>
-<p><a href="http://sectanlab.sakura.ne.jp/sblo_files/sectanlab/misc/20180131/Meltdown_Spectre.pdf" target="_blank" rel="noopener">CPUの脆弱性 MeltdownおよびSpectreの攻撃シナリオ（PDF）</a></p>
+<p><a target="_blank" rel="noopener" href="http://milestone-of-se.nesuke.com/nw-advanced/nw-security/meltdown-spectre/">CPUの脆弱性[Spectre], [Meltdown] は具体的にどのような仕組みで攻撃する？影響範囲は？ | SEの道標</a></p>
+<p><a target="_blank" rel="noopener" href="http://sectanlab.sakura.ne.jp/sblo_files/sectanlab/misc/20180131/Meltdown_Spectre.pdf">CPUの脆弱性 MeltdownおよびSpectreの攻撃シナリオ（PDF）</a></p>
 <p>主にクラウドサービスの事業者にとっての危険が大きい脆弱性だが、個人PCでも対応を怠っていると重要な機密情報を盗み見られてしまう危険がある<br>特に悪意のあるJavaScriptだけで発火させられかねないのが脅威<br>（攻撃コードの例は既に出回っている様子 200行足らずの短いjs）</p>
 <p>各種webブラウザでも対応の更新がされているようである</p>
-<p><a href="https://forest.watch.impress.co.jp/docs/news/1099729.html" target="_blank" rel="noopener">Google、CPU脆弱性“Meltdown”“Spectre”の緩和策を「Google Chrome 64」へ導入 - 窓の杜</a></p>
+<p><a target="_blank" rel="noopener" href="https://forest.watch.impress.co.jp/docs/news/1099729.html">Google、CPU脆弱性“Meltdown”“Spectre”の緩和策を「Google Chrome 64」へ導入 - 窓の杜</a></p>
 <p>Windows Updateをしっかり適用し、アンチウイルスソフトもwebブラウザも正しく更新しておく、怪しげなリンクは踏まない、等の当たり前の心がけが大切である</p>
 
       

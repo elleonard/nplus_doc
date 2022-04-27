@@ -103,17 +103,17 @@
           <p class="toc-title">目次</p>
           <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%81%96%E3%81%A3%E3%81%8F%E3%82%8A%E3%81%97%E3%81%9F%E4%BB%95%E7%B5%84%E3%81%BF"><span class="toc-text">ざっくりした仕組み</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%95%E3%81%8C%E5%AC%89%E3%81%97%E3%81%84%E3%81%AE%E3%81%8B"><span class="toc-text">何が嬉しいのか</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%81%A9%E3%81%86%E3%81%97%E3%81%A6%E4%BB%8A%EF%BC%9F"><span class="toc-text">どうして今？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A7%BB%E8%A1%8C%E5%BE%8C%E3%81%AE%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E9%96%8B%E7%99%BA%E3%81%8C%E3%81%A9%E3%81%86%E3%81%AA%E3%82%8B%E3%81%8B"><span class="toc-text">移行後のプラグイン開発がどうなるか</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A9%B3%E7%B4%B0%E3%81%A8%E5%AE%9F%E8%A3%85"><span class="toc-text">詳細と実装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#yaml%E3%81%8B%E3%82%89%E3%83%98%E3%83%83%E3%83%80%E3%81%A8%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%91%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E7%94%9F%E6%88%90"><span class="toc-text">yamlからヘッダとパラメータパースコードを生成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rollup%E3%81%A7%E7%94%9F%E6%88%90%E3%81%97%E3%81%9F%E3%82%B3%E3%83%BC%E3%83%89%E3%81%A8%E6%9C%AC%E4%BD%93%E3%82%92%E5%90%88%E4%BD%93%E3%81%95%E3%81%9B%E3%82%8B"><span class="toc-text">rollupで生成したコードと本体を合体させる</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cpx%E3%81%A7%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%81%AB%E3%82%B3%E3%83%94%E3%83%BC"><span class="toc-text">cpxでプロジェクトディレクトリにコピー</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GitHub-Actions%E3%81%A7%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E3%83%96%E3%83%A9%E3%83%B3%E3%83%81%E3%81%ABpush"><span class="toc-text">GitHub Actionsでリリースブランチにpush</span></a></li></ol></li></ol>
         </div>
-        <p>RPGツクールMZのプラグインを、<a href="https://github.com/elleonard/DarkPlasma-MZ-Plugins" target="_blank" rel="noopener">新リポジトリ</a>へ移行しました。<br>これでかなり快適にプラグインが書けるようになったと思うので、仕組みを紹介します。</p>
-<a id="more"></a>
+        <p>RPGツクールMZのプラグインを、<a target="_blank" rel="noopener" href="https://github.com/elleonard/DarkPlasma-MZ-Plugins">新リポジトリ</a>へ移行しました。<br>これでかなり快適にプラグインが書けるようになったと思うので、仕組みを紹介します。</p>
+<span id="more"></span>
 
 <h1 id="ざっくりした仕組み"><a href="#ざっくりした仕組み" class="headerlink" title="ざっくりした仕組み"></a>ざっくりした仕組み</h1><p>プラグインのヘッダコメントに必要な情報をyamlに書いて、そこからヘッダとパラメータパースコードを生成、本体コードとがっちゃんこして最終的なプラグインを生成します。<br>成果物はmasterブランチのpush後にGitHub Actionsでreleaseブランチへコミットされます。<br>また、設定したプロジェクトのプラグインディレクトリに対して自動的にコピーする機能も備えています。</p>
 <h1 id="何が嬉しいのか"><a href="#何が嬉しいのか" class="headerlink" title="何が嬉しいのか"></a>何が嬉しいのか</h1><p>パラメータを書く際に、いちいちツクールエディタ向けのコメントとパラメータのパースコードを書かずに済みます。<br>プラグインを書くたびにわざわざ書かなければいけないこのボイラープレートを、yamlから自動生成させることができるのです。</p>
-<p>効率化できるのはもちろんのこと、一つのyaml設定から書き出すため、片方だけ型を間違った、などという事故が起こらなくなります。<sup class="footnote-ref"><a href="#fn1" id="fnref1" title="エディタ設定側ではboolean型なのに、パースのコードはnumber型になってしまっている、みたいなケースは割と良く見かける。">1</a></sup></p>
-<p>また、日本語設定と他言語設定を並べて書けるようにもしているので、多言語対応がベタ書きするよりも格段に楽になっています。<br>ついでに言うと、yamlの編集だけで多言語対応を済ませられるので、コードをガッツリ書く人でなくても翻訳に集中できたりします。<br>PR出してくれても良いのよ！<sup class="footnote-ref"><a href="#fn2" id="fnref2" title="まあ、まずCONTRIBUTING.mdに英訳をつけるのが先ではあるが。">2</a></sup></p>
+<p>効率化できるのはもちろんのこと、一つのyaml設定から書き出すため、片方だけ型を間違った、などという事故が起こらなくなります。<sup class="footnote-ref"><a href=#fn1 id="fnref1" title="エディタ設定側ではboolean型なのに、パースのコードはnumber型になってしまっている、みたいなケースは割と良く見かける。">1</a></sup></p>
+<p>また、日本語設定と他言語設定を並べて書けるようにもしているので、多言語対応がベタ書きするよりも格段に楽になっています。<br>ついでに言うと、yamlの編集だけで多言語対応を済ませられるので、コードをガッツリ書く人でなくても翻訳に集中できたりします。<br>PR出してくれても良いのよ！<sup class="footnote-ref"><a href=#fn2 id="fnref2" title="まあ、まずCONTRIBUTING.mdに英訳をつけるのが先ではあるが。">2</a></sup></p>
 <h1 id="どうして今？"><a href="#どうして今？" class="headerlink" title="どうして今？"></a>どうして今？</h1><p>この構成自体は、MVのプラグインが対象であっても可能です。<br>ヘッダコメントとパラメータパースのコードの自動生成は同様に有効ではあるのですが、成果物の扱いや動作確認の方法について具体的な方法をイメージできないままズルズルとプラグインだけが増えていき、最終的に移行が現実的でないところまで来てしまっていました。</p>
 <p>今になってこの構成へ移行した理由は、だいたい以下の理由からです。</p>
 <ol>
-<li>偶然、<a href="https://github.com/rutan/torigoya-rpg-maker-plugin" target="_blank" rel="noopener">Ruたんさんのリポジトリ</a>の構成を見て、これなら真似できるんではないかと思った</li>
+<li>偶然、<a target="_blank" rel="noopener" href="https://github.com/rutan/torigoya-rpg-maker-plugin">Ruたんさんのリポジトリ</a>の構成を見て、これなら真似できるんではないかと思った</li>
 <li>MZは発売から2週間程度しか経っていなかったので、まだMZ向けプラグインが少ない</li>
 </ol>
 <p>なお、このうち2は少ない（少ないとは言ってない）状態だったので、移行はそれなりに時間がかかりました。</p>
@@ -134,11 +134,11 @@
 <p>watchモードでnodeスクリプトを起動すれば、プラグインの変更を検知して自動でプロジェクトディレクトリにも同期してくれます。</p>
 <h2 id="GitHub-Actionsでリリースブランチにpush"><a href="#GitHub-Actionsでリリースブランチにpush" class="headerlink" title="GitHub Actionsでリリースブランチにpush"></a>GitHub Actionsでリリースブランチにpush</h2><p>GitHub Actionsは.github/workflows下にyamlを書いて定義します。<br>masterブランチのpush時に、成果物をreleaseブランチに入れてpushするだけの単純なヤツです。</p>
 <p>Ruたんさんの構成ではgh-pagesに上げる方式でしたが、gh-pagesは将来プラグインの解説ページを作る時に使おうかなと考えているので、releaseブランチにアップする構成にしました。</p>
-  <hr class="footnotes-sep">
+  <hr class="footnotes-sep" />
   <section class="footnotes">
   <ol class="footnotes-list">
-  <li id="fn1" class="footnote-item">エディタ設定側ではboolean型なのに、パースのコードはnumber型になってしまっている、みたいなケースは割と良く見かける。<a href="#fnref1"> <span class="up-arrow"></span></a></li>
-<li id="fn2" class="footnote-item">まあ、まずCONTRIBUTING.mdに英訳をつけるのが先ではあるが。<a href="#fnref2"> <span class="up-arrow"></span></a></li>
+  <li id="fn1" class="footnote-item">エディタ設定側ではboolean型なのに、パースのコードはnumber型になってしまっている、みたいなケースは割と良く見かける。<a href="#fnref1"> <span class="up-arrow"/></a></li>
+<li id="fn2" class="footnote-item">まあ、まずCONTRIBUTING.mdに英訳をつけるのが先ではあるが。<a href="#fnref2"> <span class="up-arrow"/></a></li>
   </ol>
   </section>
 

@@ -106,18 +106,18 @@
           <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B5%8C%E7%B7%AF"><span class="toc-text">経緯</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B9%E9%87%9D"><span class="toc-text">方針</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A8%AD%E8%A8%88"><span class="toc-text">設計</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#TestBase%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3"><span class="toc-text">TestBaseプラグイン</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TestCase%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%81%AE%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF"><span class="toc-text">TestCaseプラグインの読み込み</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TestCase%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%81%8B%E3%82%89%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88%E3%82%B1%E3%83%BC%E3%82%B9%E7%99%BB%E9%8C%B2"><span class="toc-text">TestCaseプラグインからのテストケース登録</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%83%86%E3%82%B9%E3%83%88%E3%82%B1%E3%83%BC%E3%82%B9%E4%B8%80%E8%A6%A7%E8%A1%A8%E7%A4%BA%E3%82%B7%E3%83%BC%E3%83%B3"><span class="toc-text">テストケース一覧表示シーン</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%83%86%E3%82%B9%E3%83%88%E7%94%A8%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%81%AE%E5%AE%9A%E7%BE%A9"><span class="toc-text">テスト用メソッドの定義</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TestCase%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3"><span class="toc-text">TestCaseプラグイン</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%81%8B%E7%94%A8"><span class="toc-text">運用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AC%89%E3%81%97%E3%81%84%E3%81%93%E3%81%A8"><span class="toc-text">嬉しいこと</span></a></li></ol>
         </div>
         <p>RPGツクールMZのプラグインを半自動テストするような仕組みを作ったので、その概要を説明します。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h1 id="経緯"><a href="#経緯" class="headerlink" title="経緯"></a>経緯</h1><p>プログラムはバグるものです。RPGツクールのプラグインといえど、例外ではありません。</p>
 <p>バグの要因はたくさんあります。<br>単純にロジックを間違えていたり、typoしたりすることもありますし、動作確認が行き届かなかったりしてバグが残ったり、機能追加や修正の際に別のバグを仕込むこともあります。<br>世に出ているサービスや製品も同様にバグが混入している可能性はありますが、ではそれらはどのようにしてバグを取り除いたり防いでいるのでしょうか。</p>
-<p>実際に動作させて目視確認している箇所もあるとは思いますが、それよりも確実性の高い方法、自動テストを行っているケースが多いでしょう。<sup class="footnote-ref"><a href="#fn1" id="fnref1" title="多い……よね？">1</a></sup></p>
+<p>実際に動作させて目視確認している箇所もあるとは思いますが、それよりも確実性の高い方法、自動テストを行っているケースが多いでしょう。<sup class="footnote-ref"><a href=#fn1 id="fnref1" title="多い……よね？">1</a></sup></p>
 <p>筆者もバグ報告を受けるたびに、RPGツクールのプラグインでも自動テストができないものか、と頭を捻っていたのですが、ついに方針を思いついたので実行してみたのです。</p>
 <h1 id="方針"><a href="#方針" class="headerlink" title="方針"></a>方針</h1><p>まず、プラグイン内に定義したメソッドの単体テストを考えました。<br>各メソッドの挙動が正しいことを機械的に確認できれば、その組み合わせで実装されるプラグインのバグも随分減らせるはずです。</p>
 <p>しかし、そう簡単な話では済みません。<br>プラグインで書くようなメソッドは、RPGツクールのコアスクリプトの処理のどこかに挟まって、ゲームを元あった状態から別の状態へ変化させるようなものがほとんどです。<br>この元あった状態を機械的に再現するのがかなりしんどく、ゲームを起動せずに、全自動で汎用的に単体テストを実行するような仕組みを実現できそうにないのです。</p>
-<p>テストデータやモック<sup class="footnote-ref"><a href="#fn2" id="fnref2" title="テストに用いる、プログラム（ゲーム）の状態に似せて作るオブジェクト。">2</a></sup>をいちいちプログラムで定義する労力が現実的でないわけです。</p>
-<p>そこで、ゲームを起動して、対象プラグインの効果が現れる状況への遷移は手動で行い、その状態の変化だけ機械的に確認することにしました。<br>状態の変化を確認するだけであればNodejsの <code>assert</code> を用いれば良さそうですが、今回はせっかくなのでゲーム中にテスト項目と結果を表示したり、失敗してもエラーを投げるのではなくゲームを続行したいなと思ったので、自前でテストフレームワーク<sup class="footnote-ref"><a href="#fn3" id="fnref3" title="テストコードを書きやすくする枠組み。">3</a></sup>的なものを書いています。</p>
+<p>テストデータやモック<sup class="footnote-ref"><a href=#fn2 id="fnref2" title="テストに用いる、プログラム（ゲーム）の状態に似せて作るオブジェクト。">2</a></sup>をいちいちプログラムで定義する労力が現実的でないわけです。</p>
+<p>そこで、ゲームを起動して、対象プラグインの効果が現れる状況への遷移は手動で行い、その状態の変化だけ機械的に確認することにしました。<br>状態の変化を確認するだけであればNodejsの <code>assert</code> を用いれば良さそうですが、今回はせっかくなのでゲーム中にテスト項目と結果を表示したり、失敗してもエラーを投げるのではなくゲームを続行したいなと思ったので、自前でテストフレームワーク<sup class="footnote-ref"><a href=#fn3 id="fnref3" title="テストコードを書きやすくする枠組み。">3</a></sup>的なものを書いています。</p>
 <p>ついでに、表示関係は機械的に状態を確認するだけでは微妙なので、目視確認用のテストケースも管理できるようにしました。</p>
-<h1 id="設計"><a href="#設計" class="headerlink" title="設計"></a>設計</h1><h2 id="TestBaseプラグイン"><a href="#TestBaseプラグイン" class="headerlink" title="TestBaseプラグイン"></a>TestBaseプラグイン</h2><p>まず、テストケースを登録してその成否を判定、表示するような<a href="https://github.com/elleonard/DarkPlasma-MZ-Plugins/blob/release/DarkPlasma_TestBase.js" target="_blank" rel="noopener">TestBaseプラグイン</a>を作りました。<br>本来であれば1プラグインに多くの機能を持たせるべきではないのですが、自動テスト用のベースクラスをいくつも用意するのもそれはそれでしんどいので、テスト用のベースとなる機能はここに詰め込みました。</p>
+<h1 id="設計"><a href="#設計" class="headerlink" title="設計"></a>設計</h1><h2 id="TestBaseプラグイン"><a href="#TestBaseプラグイン" class="headerlink" title="TestBaseプラグイン"></a>TestBaseプラグイン</h2><p>まず、テストケースを登録してその成否を判定、表示するような<a target="_blank" rel="noopener" href="https://github.com/elleonard/DarkPlasma-MZ-Plugins/blob/release/DarkPlasma_TestBase.js">TestBaseプラグイン</a>を作りました。<br>本来であれば1プラグインに多くの機能を持たせるべきではないのですが、自動テスト用のベースクラスをいくつも用意するのもそれはそれでしんどいので、テスト用のベースとなる機能はここに詰め込みました。</p>
 <h3 id="TestCaseプラグインの読み込み"><a href="#TestCaseプラグインの読み込み" class="headerlink" title="TestCaseプラグインの読み込み"></a>TestCaseプラグインの読み込み</h3><p>この後、テストしたい対象のプラグインごとにTestCaseプラグインを作るのですが、それをプラグイン名から解決して読み込む機能をつけました。<br>つまり、TestCaseプラグインはjs/pluginsフォルダ内に置いておけばいちいちツクールエディタ上から追加する必要をなくしました。</p>
 <p>この設計については悩みました。自動で探してロードするために、起動時のパフォーマンスを少し犠牲にする必要があるからです。<br>今後、TestCaseプラグインが増えるごとに起動時間が伸びていきますが、そうなったらそうなった時に考えることにしました。<br>プラグインパラメータで指定したTestCaseをOFFにすることくらいはできそうですし。</p>
 <p>なお、このためにfsを利用したのでブラウザ向けのプラグインをテストすることはできませんが、ブラウザ環境よりもアプリケーションを意識したいため、それは許容しています。</p>
@@ -126,19 +126,19 @@
 <h3 id="テストケース一覧表示シーン"><a href="#テストケース一覧表示シーン" class="headerlink" title="テストケース一覧表示シーン"></a>テストケース一覧表示シーン</h3><p>ゲーム中、プラグインコマンドで呼び出せるテストケース一覧表示シーンを作りました。<br>ここで一覧を表示し、その成否がプラグインごとに確認できます。</p>
 <p>また、目視確認する必要のあるものについてはここで確認したチェックをつけられるようにもしました。<br>戦闘中にも確認したいケースはありそうでしたが、戦闘シーンにウィンドウを追加するのは割と面倒なので、やめておきました。</p>
 <h3 id="テスト用メソッドの定義"><a href="#テスト用メソッドの定義" class="headerlink" title="テスト用メソッドの定義"></a>テスト用メソッドの定義</h3><p>テストフレームワークでよく見るmustBeHogehogeを定義しました。<br>TestCaseプラグインではこれらを用いて、テストケースを登録します。<br>この辺りは睡魔と戦いながら書いていたので、クラスの命名がちょっと微妙な感じもします。</p>
-<h2 id="TestCaseプラグイン"><a href="#TestCaseプラグイン" class="headerlink" title="TestCaseプラグイン"></a>TestCaseプラグイン</h2><p>テスト対象プラグインに対して、末尾に_Testと名前をつけて<a href="https://github.com/elleonard/DarkPlasma-MZ-Plugins/blob/master/src/tests/SkillCooldown_Test/DarkPlasma_SkillCooldown_Test.js" target="_blank" rel="noopener">TestCaseプラグイン</a>を書きます。<br>Scene_BootのdefineTestCaseでテストケースを登録し、$testTargetPlugins.doTestをテスト可能なタイミングで呼び出して自動テストを実行します。</p>
+<h2 id="TestCaseプラグイン"><a href="#TestCaseプラグイン" class="headerlink" title="TestCaseプラグイン"></a>TestCaseプラグイン</h2><p>テスト対象プラグインに対して、末尾に_Testと名前をつけて<a target="_blank" rel="noopener" href="https://github.com/elleonard/DarkPlasma-MZ-Plugins/blob/master/src/tests/SkillCooldown_Test/DarkPlasma_SkillCooldown_Test.js">TestCaseプラグイン</a>を書きます。<br>Scene_BootのdefineTestCaseでテストケースを登録し、$testTargetPlugins.doTestをテスト可能なタイミングで呼び出して自動テストを実行します。</p>
 <p>各プラグイン向けに、できるだけ本質的でないコードを省けるような形にしたかったのですが、割と睡魔に負けて雑になってるところがちらほら。<br>addTestCaseやdoTestは共通コードをimportに任せて、rollupで自動生成させちゃいたいですね。</p>
 <p>参考: <a href="/nplus_doc/2020/09/08/engineering/rmmz/rmmz-plugin-with-rollup/" title="rollupを利用した、RPGツクールMZのプラグインを快適に書ける仕組み">rollupを利用した、RPGツクールMZのプラグインを快適に書ける仕組み</a></p>
 <h1 id="運用"><a href="#運用" class="headerlink" title="運用"></a>運用</h1><p><img src="scene-testcase.png" alt="テストケースシーン" title="テストケースシーン"></p>
 <p>こんな感じで、テストケース一覧とその結果が表示されます。<br>スキルクールタイムのプラグインで試しにテストケースをゴリゴリ書いたのですが、意外にも自動テストできるケースが多くてやりやすいです。<br>また、パラメータ読み込みのテストが効くのも強いですね。だいたいバグるのはここって感じの傾向があり、これを機械的にチェックできるのはとても嬉しいです。<br>最下部のウィンドウにはテストが失敗した場合になぜ失敗したかを出力してくれるので、バグ取りもやりやすくなるでしょう。</p>
 <p>各種テストケースの書き味にはやや改善の余地がありそうな気もしますが、ひとまずこれで運用してみようと思います。</p>
 <h1 id="嬉しいこと"><a href="#嬉しいこと" class="headerlink" title="嬉しいこと"></a>嬉しいこと</h1><p>半自動でテストできるのはもちろん嬉しいのですが、何よりテストケースをリポジトリ管理できるという点が素晴らしいです。<br>あれテストしたっけ？ これテストしたっけ？ みたいなテスト漏れがなくなり、仮に漏れが見つかったとしてもそのケースを足せば次からは漏れなくチェックできるというわけです。<br>一度使うだけだと労力に対してリターンがやや微妙に見えるかもしれませんが、長い期間メンテナンスしていく程に旨味が出てくる仕組みですね。</p>
-  <hr class="footnotes-sep">
+  <hr class="footnotes-sep" />
   <section class="footnotes">
   <ol class="footnotes-list">
-  <li id="fn1" class="footnote-item">多い……よね？<a href="#fnref1"> <span class="up-arrow"></span></a></li>
-<li id="fn2" class="footnote-item">テストに用いる、プログラム（ゲーム）の状態に似せて作るオブジェクト。<a href="#fnref2"> <span class="up-arrow"></span></a></li>
-<li id="fn3" class="footnote-item">テストコードを書きやすくする枠組み。<a href="#fnref3"> <span class="up-arrow"></span></a></li>
+  <li id="fn1" class="footnote-item">多い……よね？<a href="#fnref1"> <span class="up-arrow"/></a></li>
+<li id="fn2" class="footnote-item">テストに用いる、プログラム（ゲーム）の状態に似せて作るオブジェクト。<a href="#fnref2"> <span class="up-arrow"/></a></li>
+<li id="fn3" class="footnote-item">テストコードを書きやすくする枠組み。<a href="#fnref3"> <span class="up-arrow"/></a></li>
   </ol>
   </section>
 
