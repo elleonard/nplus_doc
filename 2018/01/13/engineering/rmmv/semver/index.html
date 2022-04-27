@@ -1,0 +1,320 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>ゲーム制作においてどのようなバージョニングを採用すべきか | ぷらずま式改</title>
+  <meta name="author" content="NPlasma" />
+
+  
+  <meta name="description" content="NPlasmaの個人メモ" />
+  
+
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <meta property="og:title" content="ゲーム制作においてどのようなバージョニングを採用すべきか" />
+  <meta property="og:site_name" content="ぷらずま式改" />
+
+  
+  
+
+  
+    <meta property="og:image" content="/img/ogp.png" />
+  
+
+  <!-- ogp -->
+  
+    
+      <meta name="description" content="ゲーム制作におけるバージョニングとは、ここではゲームにバージョン番号を振ることを言います。こういう振り方をしましょう、という指南書が軽く探しただけでは見つからず、さてこれはいったいどうするのが標準的なのか、と疑問に思ったため筆者が調査して考えたことをまとめました。 プログラムを書かない人にも理解できるよう平易な表現を用いています。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ゲーム制作においてどのようなバージョニングを採用すべきか">
+<meta property="og:url" content="https://elleonard.github.io/nplus_doc/2018/01/13/engineering/rmmv/semver/index.html">
+<meta property="og:site_name" content="ぷらずま式改">
+<meta property="og:description" content="ゲーム制作におけるバージョニングとは、ここではゲームにバージョン番号を振ることを言います。こういう振り方をしましょう、という指南書が軽く探しただけでは見つからず、さてこれはいったいどうするのが標準的なのか、と疑問に思ったため筆者が調査して考えたことをまとめました。 プログラムを書かない人にも理解できるよう平易な表現を用いています。">
+<meta property="og:locale" content="ja_JP">
+<meta property="article:published_time" content="2018-01-13T09:31:38.000Z">
+<meta property="article:modified_time" content="2022-04-16T09:44:10.491Z">
+<meta property="article:author" content="NPlasma">
+<meta property="article:tag" content="ゲーム">
+<meta property="article:tag" content="RPGツクールMV">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@elleonard_f">
+    
+    <meta name="twitter:image" content="https://elleonard.github.io/nplus_doc/img/ogp.png"/>
+  
+
+  <link rel="alternate" href="/nplus_doc/atom.xml" title="ぷらずま式改" type="application/atom+xml">
+  <link rel="stylesheet" href="/nplus_doc/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/nplus_doc/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/nplus_doc//favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/nplus_doc//favicon/favicon-16x16.png">
+  <link rel="manifest" href="/nplus_doc//favicon/site.webmanifest">
+  <link rel="mask-icon" href="/nplus_doc//favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <script src="https://kit.fontawesome.com/b51cad8f00.js" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/nplus_doc/">ぷらずま式改</a></h1>
+  <h2><a href="/nplus_doc/">NPlasma個人メモ</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/nplus_doc/">Home</a></li>
+    
+      <li><a href="/nplus_doc/2016/05/29/about/">About</a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://twitter.com/elleonard_f">Twitter</a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://github.com/elleonard">GitHub</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-13T09:31:38.000Z"><a href="/nplus_doc/2018/01/13/engineering/rmmv/semver/">2018-01-13</a></time>
+      
+      
+  
+    <h1 class="title">ゲーム制作においてどのようなバージョニングを採用すべきか</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <div id="toc" class="toc-article">
+          <p class="toc-title">目次</p>
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%8B%E3%83%B3%E3%82%B0%E3%81%A3%E3%81%A6%E4%BD%95%EF%BC%9F"><span class="toc-text">バージョニングって何？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%8B%E3%83%B3%E3%82%B0%E3%81%AF%E5%88%B6%E4%BD%9C%E8%80%85%E3%81%AE%E8%87%AA%E7%94%B1"><span class="toc-text">バージョニングは制作者の自由</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%8B%E3%83%B3%E3%82%B0%E3%81%AE%E7%9B%AE%E7%9A%84"><span class="toc-text">バージョニングの目的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%81%AF%E5%BF%85%E3%81%9A%E4%B8%8A%E3%81%8C%E3%82%8B%E3%81%97%E4%B8%8B%E3%81%8C%E3%82%89%E3%81%AA%E3%81%84"><span class="toc-text">バージョンは必ず上がるし下がらない</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%82%BB%E3%83%9E%E3%83%B3%E3%83%86%E3%82%A3%E3%83%83%E3%82%AF%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%8B%E3%83%B3%E3%82%B0"><span class="toc-text">セマンティックバージョニング</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9F%E9%9A%9B%E3%81%AB%E6%8E%A1%E7%94%A8%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%82%8B%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%8B%E3%83%B3%E3%82%B0"><span class="toc-text">実際に採用されているバージョニング</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%83%A1%E3%82%B8%E3%83%A3%E3%83%BC%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%82%92%E4%B8%8A%E3%81%92%E3%81%A6%E3%81%AF%E3%81%84%E3%81%91%E3%81%AA%E3%81%84"><span class="toc-text">メジャーバージョンを上げてはいけない</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%83%A1%E3%82%B8%E3%83%A3%E3%83%BC%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%81%8C0%E3%81%AE%E5%A0%B4%E5%90%88%E3%81%AF%EF%BC%9F"><span class="toc-text">メジャーバージョンが0の場合は？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%99%E8%AB%87%EF%BC%9A%E4%BE%8B%E5%A4%96%E7%9A%84%E3%81%AA%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%8B%E3%83%B3%E3%82%B0"><span class="toc-text">余談：例外的なバージョニング</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%99%E8%AB%87%EF%BC%92%EF%BC%9A%E7%B4%B0%E3%81%8B%E3%81%84%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF"><span class="toc-text">余談２：細かいテクニック</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%81%BE%E3%81%A8%E3%82%81"><span class="toc-text">まとめ</span></a></li></ol>
+        </div>
+        <p>ゲーム制作におけるバージョニングとは、ここではゲームにバージョン番号を振ることを言います。<br>こういう振り方をしましょう、という指南書が軽く探しただけでは見つからず、さてこれはいったいどうするのが標準的なのか、と疑問に思ったため筆者が調査して考えたことをまとめました。</p>
+<p>プログラムを書かない人にも理解できるよう平易な表現を用いています。</p>
+<a id="more"></a>
+
+<h1 id="バージョニングって何？"><a href="#バージョニングって何？" class="headerlink" title="バージョニングって何？"></a>バージョニングって何？</h1><p>ゲーム（あるいはその他の制作したソフトウェア）にバージョン番号を振ることです。<br>例えば、（特にPCで）ゲームをする人は <code>ver 1.00a</code> 等の表記をどこかしらで目にしたことがあるはずです。</p>
+<p>この記事では、そのバージョニングがどのような規則に従って行われているか、そしてどのような規則を採用したら良いのか、筆者が調査し考えたことを記述します。</p>
+<h1 id="バージョニングは制作者の自由"><a href="#バージョニングは制作者の自由" class="headerlink" title="バージョニングは制作者の自由"></a>バージョニングは制作者の自由</h1><p>まず最初に身も蓋もない結論を言うと、バージョンの振り方は制作者の自由です。<br>しかしながら、全くの気まぐれでバージョン番号を上げてみたり上げなかったりしてしまうのは、わざわざバージョンを振っている意味がなくなってしまうことでしょう。<br>バージョンを振る目的から考え始めるのがわかりやすいかと思います。</p>
+<h1 id="バージョニングの目的"><a href="#バージョニングの目的" class="headerlink" title="バージョニングの目的"></a>バージョニングの目的</h1><p>バージョニングは、リリースするゲーム（を始めとするソフトウェア制作物）のある時点における挙動を一意に識別するための名前付けです。<br>同じバージョンのプログラムは同じ環境で動作させる限り、同じ挙動をします。<br>（話を簡単にするためにここでは環境の差異については考慮しないものとします）</p>
+<p>バグ報告があった時に、そのバグが確認されたバージョンと同じバージョンのプログラムを用意することで、バグの再現が比較的容易に取れるようになるのです。<br>手元でのバグの再現は、制作者がそのバグの原因をつかむための大いなる助けになるでしょう。<br>また、最新バージョンで修正済みのバグであれば、制作者は「最新バージョンに更新してね」とプレイヤーに伝えるだけで済みます。</p>
+<p>制作者とプレイヤーのやり取りだけに注目しても、バージョンは、互いにゲームの挙動について話す際に共通の認識を持つための役割を担っているのです。<br>チーム開発であったり、あるいはテストプレイの協力を依頼するといった状況でも同じ役割を持つことは想像に難くないことでしょう。</p>
+<h1 id="バージョンは必ず上がるし下がらない"><a href="#バージョンは必ず上がるし下がらない" class="headerlink" title="バージョンは必ず上がるし下がらない"></a>バージョンは必ず上がるし下がらない</h1><p>先に述べた目的に沿うため、バージョンは以下の決まりを必ず守って運用されます。</p>
+<ul>
+<li>更新内容がどんな小さな修正であっても、ゲームがリリースされるタイミングで必ず上がる</li>
+<li>最新版のバージョン番号が下がることはない</li>
+</ul>
+<p>一度広くリリースされたバージョンのゲームは誰かがプレイしている可能性があります。<br>ですので、バージョン番号を上げずに修正を取り込んでしまうと、同じバージョンで挙動が異なるゲームが存在することになってしまうのです。<br>そうなってしまっては、ゲームの挙動について話す際に共通の認識を持つことができません。<br>「このバージョンにはバグがあるので気をつけること」と言ったプレイヤー間での注意喚起も意味を成さなくなってしまいます。</p>
+<p>同じ理由で、最新版のバージョンが下がることはありません。</p>
+<p>基本的にはこの二つの決まりさえ守られていれば、どんなバージョンをつけようとも制作者の自由です。</p>
+<h1 id="セマンティックバージョニング"><a href="#セマンティックバージョニング" class="headerlink" title="セマンティックバージョニング"></a>セマンティックバージョニング</h1><p>自由とは言っても、具体的な決まりが定まっていたりはしないのでしょうか。<br>ゲームのバージョニングという観点では説明されていませんが、ソフトウェア技術者の間に（おそらく）唯一広く知られている決まりが、<a href="https://semver.org/lang/ja/" target="_blank" rel="noopener">セマンティックバージョニング</a>です。</p>
+<p>これはAPIのバージョニングという観点で策定されたものであり、そのままゲームに当てはめるのはやや難しいものです。<br>（API = Application Programming Interfaceとは、例えばライブラリが提供してくれるメソッドの入力と出力のことです）<br>しかしながら、プログラムの更新には3種類あり、それぞれについてバージョンの上げ方を変えるという考え方は、ゲームにも応用できるものです。<br>3種類の更新とは以下のようなものです。</p>
+<ol>
+<li>破壊的な変更がされており、後方互換性がない更新</li>
+<li>後方互換性を保ちながら機能性を追加する更新</li>
+<li>後方互換性を保ちながらバグを修正する更新</li>
+</ol>
+<p>破壊的な変更とか、後方互換性とかいう語句は専門的なものになりますが、そう難しいものではありません。<br>要するに、「バージョンアップ前と同じことをした時に、同じ（ような）結果が得られるかどうか」ということです。</p>
+<p>例えば、「△ボタンでNPCに話しかけることができたのに、バージョンアップ後は△ボタンではなく○ボタンに変更された」というのは1の破壊的な変更に含まれるでしょう。<br>「△ボタンでNPCに話しかけることができたが、バージョンアップ後は○ボタンでも話しかけられるように変更された」というのは2の後方互換性を保ちながら機能性を追加する更新に含まれます。<br>「本来は△ボタンでNPCに話しかけられるはずがそれができず、バージョンアップ後にそのバグが修正された」が3です。</p>
+<p>セマンティックバージョニングは、これらの3種類について別々のバージョンを上げる、という決まりです。<br><code>X.Y.Z</code> のように表記し、Xはメジャーバージョン、Yがマイナーバージョン、Zがパッチバージョンです。<br>このX,Y,Zはそれぞれ先に述べた1,2,3の更新の種類に対応しています。<br>破壊的な更新があればメジャーバージョンを、後方互換性を保った機能追加であればマイナーバージョンを、後方互換性を保ったバグ修正であればパッチバージョンを上げます。</p>
+<p>ただし先程も述べたように、これはAPIのバージョニング――すなわち、ゲームそのものというよりはゲームに使われるライブラリ等のバージョニング――として都合が良いように定められた規則です。<br>盲目的にこれをそのままゲームのバージョニングに採用すべき、という主張は成り立ちません。（無論、これを採用すること自体が間違いというわけでもないはずです）<br>例えば、PS4のゲームではマイナーバージョンとパッチバージョンを区別していません。<br>機能追加であってもバグ修正であっても、マイナーバージョンを上げて <code>1.01</code> 等のように記述しています。</p>
+<h1 id="実際に採用されているバージョニング"><a href="#実際に採用されているバージョニング" class="headerlink" title="実際に採用されているバージョニング"></a>実際に採用されているバージョニング</h1><p>PS4のゲームでは、 <code>1.00</code> のように2つの数字でバージョンを記述しているようです。<br>小数点の左側がメジャーバージョン、右側がマイナーバージョンです。<br>PS4のシステムソフトウェアも同様に <code>5.03</code> のような記述になっています。</p>
+<p>メジャーバージョンが2以上になったゲームを確認できていないので正確なところは定かではありませんが、おそらくはメジャーバージョンは破壊的な更新を含む場合に上がるものなのでしょう。<br>マイナーバージョンも最大でどこまで増えるのか不明です。<br>ふし幻TODRで <code>1.22</code> でした。商業作品よりも積極的にアップデートがされるplay dojinの作品でこれなので、99まで枠を用意しておけば問題ないという判断かもしれません。<br><code>1.99</code> の後は <code>1.100</code> になるのではないかと見ていますが、そこまでたどり着く作品は現実的に想定されていないのではないかとも思います。</p>
+<p>PCの同人ゲーとして有名所の東方シリーズは <code>1.00a</code> のように、マイナーバージョンの後ろにアルファベットがついた形式になっています。<br>このアルファベットがパッチバージョンのような役割を果たしているのではないかと推測されます。</p>
+<p>幻想人形演舞は <code>1.103</code> のような表記になっています。<br><code>1.017</code> から <code>1.100</code> に更新されていたため、小数点右側の数字の上一桁がマイナーバージョン、下二桁がパッチバージョンの役割を持っているようです。</p>
+<p>ソシャゲ等のスマホアプリはセマンティックバージョニングに従うケースが多いのですが、アズールレーンはなんと <code>1135</code> という区切りのない表記を用いていました。<br>どういった規則でバージョンを上げていくかはわかりませんが、ゲームとしては珍しい表記です。<br>FGOは <code>1.33.0</code> のようになっていたため、セマンティックバージョニングに従っているのではないかと思われます。</p>
+<p>また、Nintendo Switchのゲームもセマンティックバージョニングと同じ表記方法でした。</p>
+<p>どのゲームもメジャーバージョンは1で固定されており、破壊的な更新はされていないようです。</p>
+<h1 id="メジャーバージョンを上げてはいけない"><a href="#メジャーバージョンを上げてはいけない" class="headerlink" title="メジャーバージョンを上げてはいけない"></a>メジャーバージョンを上げてはいけない</h1><p>後方互換性を無くす更新が幾度もリリースされたとすると、プレイヤーには何らかの負担が生じます。<br>例えば、セーブデータの後方互換性がなくなったとしたら、プレイヤーはゲームを1から始めなければいけません。<br>操作方法が頻繁に変更されたら、ゲームの仕様を覚えられなくなってしまうでしょう。</p>
+<p>破壊的な更新というのはプレイヤーに多大な負担を強いることがあるのです。<br>そういう理由もあって、広く遊ばれているゲームはメジャーバージョンが1なのです。</p>
+<h1 id="メジャーバージョンが0の場合は？"><a href="#メジャーバージョンが0の場合は？" class="headerlink" title="メジャーバージョンが0の場合は？"></a>メジャーバージョンが0の場合は？</h1><p>セマンティックバージョニングにおいてこれは開発中で、正式にリリースされていないことを表します。<br>このメジャーバージョン0は特別な意味を持っており、正式リリースまでの間であればどんな更新をしてもメジャーバージョンを上げなくて良いとされています。<br>開発チーム内で合意の取れる方法でバージョニングすると良いでしょう。</p>
+<h1 id="余談：例外的なバージョニング"><a href="#余談：例外的なバージョニング" class="headerlink" title="余談：例外的なバージョニング"></a>余談：例外的なバージョニング</h1><p>表記方法がセマンティックバージョニングと同じだからと言って、バージョンアップの規則まで同じとは限りません。<br>基本的には互換性を意識したバージョニングになっているはずですが、scalaはマイナーバージョンアップの段階でガンガン後方互換を切っているようです。</p>
+<h1 id="余談２：細かいテクニック"><a href="#余談２：細かいテクニック" class="headerlink" title="余談２：細かいテクニック"></a>余談２：細かいテクニック</h1><p>ゲームシステム中にバージョン番号を含めるのであれば、必ず一箇所に定義するようにしましょう。<br>複数箇所に定義するとどこかの更新が漏れて、いったいバージョンいくつなのかわからなくなる恐れがあります。<br>システム中に１箇所、readmeに１箇所の最多で２箇所に定義しておくくらいに留めるのが良いでしょう。<br>システム中の１箇所に定義するのみにして、readmeにはバージョンを書かなくても良いかもしれません。</p>
+<p>また、ファイル名にバージョンを含めてはなりません。<br>ファイル名を用いたバージョン管理は邪悪ですし、windows環境において、OS側のボリュームコントロールは実行ファイルのパスに応じて記録されます。<br>バージョンアップしただけでボリュームコントロール設定し直し、なんて最悪ですね。</p>
+<h1 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h1><ul>
+<li>バージョン番号はゲームの挙動について共通の認識を持つためのもの</li>
+<li>セマンティックバージョニングには必ずしも従う必要はないが、後方互換性を意識してバージョニングする</li>
+<li>よほどのことが無い限りメジャーバージョンアップ（＝破壊的な更新）はするべきではない</li>
+</ul>
+
+      
+    </div>
+    
+    <footer>
+        <div class="article-footer">
+        <div class="footer-left">
+        
+  
+  <div class="categories">
+    <a href="/nplus_doc/categories/ゲーム制作/">ゲーム制作</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/nplus_doc/tags/ゲーム/">ゲーム</a>, <a href="/nplus_doc/tags/RPGツクールMV/">RPGツクールMV</a>
+  </div>
+
+        </div>
+        <div class="footer-right">
+          <a target="_blank" rel="noopener" href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="ゲーム制作においてどのようなバージョニングを採用すべきか | ぷらずま式改" data-url="https://elleonard.github.io/nplus_doc/2018/01/13/engineering/rmmv/semver/" data-via="elleonard_f" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+        </div>
+        
+          <div class="article-prev">
+              <a href="/nplus_doc/2018/01/16/game/fate/fgo/fake/czartoryski/">【FGO】復刻：ダ・ヴィンチと七人の贋作英霊 ライト版 チャルトリスキ 周回メモ <span class="prev-arrow"/></a>
+            </div>
+        
+        
+          <div class="article-next">
+            <a href="/nplus_doc/2017/12/31/misc/2017/">2017年の振り返り <span class="next-arrow"/></a>
+          </div>
+        
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="検索">
+    <input type="hidden" name="q" value="site:elleonard.github.io/nplus_doc">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">カテゴリ</h3>
+  <ul class="entry">
+  
+    <li><a href="/nplus_doc/categories/FGO/">FGO</a><small>47</small></li>
+  
+    <li><a href="/nplus_doc/categories/niconico/">niconico</a><small>3</small></li>
+  
+    <li><a href="/nplus_doc/categories/アニメ感想/">アニメ感想</a><small>10</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム/">ゲーム</a><small>77</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム/ゲームレビュー/">ゲームレビュー</a><small>61</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム制作/">ゲーム制作</a><small>12</small></li>
+  
+    <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/デッキレシピ/">デッキレシピ</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/小説/">小説</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/情報技術/">情報技術</a><small>11</small></li>
+  
+    <li><a href="/nplus_doc/categories/漫画/">漫画</a><small>2</small></li>
+  
+    <li><a href="/nplus_doc/categories/百合/">百合</a><small>9</small></li>
+  
+    <li><a href="/nplus_doc/categories/艦これ/">艦これ</a><small>76</small></li>
+  
+    <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/">遊戯王ブロンティーズ</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/雑記/">雑記</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最近の投稿</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/nplus_doc/2022/04/27/game/atelier/sophie2/">【ゲーム感想】ソフィーのアトリエ2 ～不思議な夢の錬金術士～</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/04/10/misc/social-game-overcame-me/">ソシャゲを続けられない無力な人間の嘆き</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/02/09/game/neptunia/neptunia-senran-kagura-ninja-wars/">【ゲーム感想】閃乱忍忍忍者大戦ネプテューヌ -少女たちの饗宴-</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/01/18/game/night-of-azure/night-of-azure/">【ゲーム感想】よるのないくに</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2021/12/31/misc/2021/">2021年の振り返り</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Link</h3>
+  <ul class="entry">
+    
+      <li>
+        <a target="_blank" rel="noopener" href="https://www.nicovideo.jp/">niconico</a>
+      </li>
+    
+      <li>
+        <a target="_blank" rel="noopener" href="http://lovingtheflags1986.blog96.fc2.com/">国旗と酒が待ち遠しいドリル日記</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  <p>
+  
+  &copy; 2022 NPlasma
+  
+  All rights reserved.</p>
+  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</div>
+<div class="alignright">
+  <a target="_blank" rel="noopener" href="https://github.com/elleonard"><i class="fab fa-github"></i></a>
+  <a target="_blank" rel="noopener" href="https://twitter.com/elleonard_f"><i class="fab fa-twitter-square"></i></a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="/nplus_doc/js/jquery.imagesloaded.min.js"></script>
+<script src="/nplus_doc/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/nplus_doc/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/nplus_doc/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id='bg'></div>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>【ゲーム感想】Promise | ぷらずま式改</title>
+  <meta name="author" content="NPlasma" />
+
+  
+  <meta name="description" content="NPlasmaの個人メモ" />
+  
+
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <meta property="og:title" content="【ゲーム感想】Promise" />
+  <meta property="og:site_name" content="ぷらずま式改" />
+
+  
+  
+
+  
+    <meta property="og:image" content="/img/ogp.png" />
+  
+
+  <!-- ogp -->
+  
+    
+      <meta name="description" content="前置き本作は3年前に筆者が悲鳴を上げた作品Againの続編にあたる。両作品の根幹に関わるネタバレを含むので、ぜひ両方ともプレイした上で本記事をお読みいただきたい。1 また、筆者がシステム面で大きく関わらせていただいた作品であるため、その辺りの裏話も話せる範囲で記しておく。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【ゲーム感想】Promise">
+<meta property="og:url" content="https://elleonard.github.io/nplus_doc/2021/10/03/game/promise/index.html">
+<meta property="og:site_name" content="ぷらずま式改">
+<meta property="og:description" content="前置き本作は3年前に筆者が悲鳴を上げた作品Againの続編にあたる。両作品の根幹に関わるネタバレを含むので、ぜひ両方ともプレイした上で本記事をお読みいただきたい。1 また、筆者がシステム面で大きく関わらせていただいた作品であるため、その辺りの裏話も話せる範囲で記しておく。">
+<meta property="og:locale" content="ja_JP">
+<meta property="article:published_time" content="2021-10-03T14:55:23.000Z">
+<meta property="article:modified_time" content="2022-04-16T09:44:11.433Z">
+<meta property="article:author" content="NPlasma">
+<meta property="article:tag" content="ゲーム">
+<meta property="article:tag" content="RPGツクールMZ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@elleonard_f">
+    
+    <meta name="twitter:image" content="https://elleonard.github.io/nplus_doc/img/ogp.png"/>
+  
+
+  <link rel="alternate" href="/nplus_doc/atom.xml" title="ぷらずま式改" type="application/atom+xml">
+  <link rel="stylesheet" href="/nplus_doc/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/nplus_doc/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/nplus_doc//favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/nplus_doc//favicon/favicon-16x16.png">
+  <link rel="manifest" href="/nplus_doc//favicon/site.webmanifest">
+  <link rel="mask-icon" href="/nplus_doc//favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <script src="https://kit.fontawesome.com/b51cad8f00.js" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/nplus_doc/">ぷらずま式改</a></h1>
+  <h2><a href="/nplus_doc/">NPlasma個人メモ</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/nplus_doc/">Home</a></li>
+    
+      <li><a href="/nplus_doc/2016/05/29/about/">About</a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://twitter.com/elleonard_f">Twitter</a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://github.com/elleonard">GitHub</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2021-10-03T14:55:23.000Z"><a href="/nplus_doc/2021/10/03/game/promise/">2021-10-03</a></time>
+      
+      
+  
+    <h1 class="title">【ゲーム感想】Promise</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <div id="toc" class="toc-article">
+          <p class="toc-title">目次</p>
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E3%81%8D"><span class="toc-text">前置き</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%9C%E5%93%81%E9%85%8D%E5%B8%83%E3%83%BB%E8%B2%A9%E5%A3%B2%E3%83%9A%E3%83%BC%E3%82%B8%E3%83%AA%E3%83%B3%E3%82%AF"><span class="toc-text">作品配布・販売ページリンク</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%82%B0%E3%83%A9%E3%83%95%E3%82%A3%E3%83%83%E3%82%AF%E3%82%B9"><span class="toc-text">グラフィックス</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA-%E3%82%AD%E3%83%A3%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%BC"><span class="toc-text">シナリオ&#x2F;キャラクター</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%83%A1%E3%82%A4%E3%83%B3%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA-%E6%9C%80%E9%AB%98%E3%81%AE%E4%BD%93%E9%A8%93"><span class="toc-text">メインシナリオ &#x3D; 最高の体験</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%91%E8%AB%87"><span class="toc-text">雑談</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%82%BD%E3%83%95%E3%82%A3%E3%83%BC%EF%BC%9D%E3%83%95%E3%83%AA%E3%82%AF%E3%82%BB%E3%83%AB"><span class="toc-text">ソフィー＝フリクセル</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%83%95%E3%82%A7%E3%82%A4%EF%BC%9D%E3%83%B4%E3%82%A3%E3%82%AB%E3%83%B3%E3%83%87%E3%83%AB"><span class="toc-text">フェイ＝ヴィカンデル</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%86%E3%82%A3%E3%83%BC%E3%83%8D%EF%BC%9D%E3%83%8E%E3%83%AB%E3%83%80%E3%83%BC%E3%83%AB"><span class="toc-text">クリスティーネ＝ノルダール</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%82%A4%E3%82%B6%E3%83%99%E3%83%A9%EF%BC%9D%E3%82%AF%E3%83%AC%E3%82%A2%E3%83%A0"><span class="toc-text">イザベラ＝クレアム</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%83%AA%E3%83%B3%E3%83%AA%E3%83%B3"><span class="toc-text">リンリン</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%83%A1%E3%82%A4%E3%83%AA%E3%83%B3"><span class="toc-text">メイリン</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%82%A8%E3%83%AC%E3%83%8A%EF%BC%9D%E3%83%95%E3%83%AA%E3%83%A5%E3%82%AF%E3%83%AC%E3%83%95"><span class="toc-text">エレナ＝フリュクレフ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%83%AA%E3%83%BC%E3%83%81%E3%82%A7"><span class="toc-text">リーチェ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%82%A2%E3%83%9E%E3%83%AA%E3%82%A2%EF%BC%9D%E3%83%95%E3%82%A3%E3%82%AA%E3%83%AC%E3%83%B3%E3%83%86%E3%82%A3%E3%83%BC%E3%83%8B"><span class="toc-text">アマリア＝フィオレンティーニ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%91%B5"><span class="toc-text">葵</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%83%9C%E3%83%83%E3%83%86%E3%82%AD%E3%82%A2"><span class="toc-text">ボッテキア</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%9F%E8%91%89%EF%BC%86%E3%81%8F%E3%81%98%E3%82%85%E3%81%AF"><span class="toc-text">樟葉＆くじゅは</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0"><span class="toc-text">システム</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%81%8D%E3%81%A3%E3%81%A1%E3%82%8A%E8%AA%BF%E6%95%B4%E3%81%95%E3%82%8C%E3%81%9F%E6%88%A6%E9%97%98%E3%83%90%E3%83%A9%E3%83%B3%E3%82%B9"><span class="toc-text">きっちり調整された戦闘バランス</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9D%E7%AE%B1%E3%82%B5%E3%83%BC%E3%83%81%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%A7%E7%84%A1%E9%A7%84%E3%81%AA%E6%8E%A2%E7%B4%A2%E3%81%AF%E4%B8%8D%E8%A6%81%E3%81%AB"><span class="toc-text">宝箱サーチシステムで無駄な探索は不要に</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%82%BB%E3%83%BC%E3%83%96%E3%81%AF%E6%95%99%E4%BC%9A%E3%81%AE%E3%81%BF-%E3%81%9F%E3%81%A0%E3%81%97%E3%83%86%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88%E5%8F%AF%E8%83%BD"><span class="toc-text">セーブは教会のみ ただしテレポート可能</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%96%8B%E7%99%BA%E8%A3%8F%E8%A9%B1"><span class="toc-text">開発裏話</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#MZ%E7%A7%BB%E8%A1%8C"><span class="toc-text">MZ移行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%83%86%E3%82%B9%E3%83%88%E3%83%97%E3%83%AC%E3%82%A4%E6%9C%9F%E9%96%93%E3%81%AE%E8%BF%BD%E5%8A%A0%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0"><span class="toc-text">テストプレイ期間の追加システム</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%82%84%E3%82%8A%E3%81%93%E3%81%BF"><span class="toc-text">やりこみ</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%82%A4%E3%83%86%E3%83%A0"><span class="toc-text">コレクションアイテム</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B3%9E%E9%87%91%E9%A6%96"><span class="toc-text">賞金首</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B6%BA%E9%BA%97%E3%81%AA%E3%83%A1%E3%83%80%E3%83%AB"><span class="toc-text">綺麗なメダル</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B7%8F%E8%A9%95"><span class="toc-text">総評</span></a></li></ol>
+        </div>
+        <h1 id="前置き"><a href="#前置き" class="headerlink" title="前置き"></a>前置き</h1><p>本作は3年前に筆者が<a href="/nplus_doc/2018/10/30/game/again/" title="悲鳴を上げた">悲鳴を上げた</a>作品Againの続編にあたる。<br>両作品の根幹に関わるネタバレを含むので、ぜひ両方ともプレイした上で本記事をお読みいただきたい。<sup class="footnote-ref"><a href="#fn1" id="fnref1" title="少なくとも、Promise真エンディングまでは見た上で本記事を閲覧することを強く推奨する。Againも可能ならプレイしてほしいが。">1</a></sup></p>
+<p>また、筆者がシステム面で大きく関わらせていただいた作品であるため、その辺りの裏話も話せる範囲で記しておく。</p>
+<a id="more"></a>
+
+<h1 id="作品配布・販売ページリンク"><a href="#作品配布・販売ページリンク" class="headerlink" title="作品配布・販売ページリンク"></a>作品配布・販売ページリンク</h1><ul>
+<li><a href="https://ci-en.net/creator/2260/article/161200" target="_blank" rel="noopener">Again</a></li>
+<li><a href="https://ci-en.net/creator/2260/article/353909" target="_blank" rel="noopener">Again後日談</a></li>
+<li><a href="https://www.dlsite.com/home/work/=/product_id/RJ270599.html" target="_blank" rel="noopener">Promise えちえちぼでぃ - DLSite</a></li>
+</ul>
+<h1 id="グラフィックス"><a href="#グラフィックス" class="headerlink" title="グラフィックス"></a>グラフィックス</h1><p>前作から引き続き、本作の最大の魅力は美しいマップの数々だ。<br>作者のこだわりを徹底して詰め込んだマップの総数は、900を超える。<sup class="footnote-ref"><a href="#fn2" id="fnref2" title="しかもそれぞれが歩き回るための十分な広さを持っている。RPGツクールMZのマップ数上限が1000であることを考えると、この数がいかに凄まじいかがわかる。">2</a></sup><br>世界各地を冒険する、SFC時代の古き良きRPGをひたすら丁寧に仕上げた作品になっており、前作で苦しめられた暗すぎるマップなどのストレス要因もプレイヤーサイドに寄り添ってしっかりと調整されている。<sup class="footnote-ref"><a href="#fn3" id="fnref3" title="筆者は脳みそがオフの状態だと地形を全く把握できないので道に迷うことが多少あったが、落ち着いてマップを歩いていれば複雑な分岐があるわけでもないので、さして迷うこともないだろう。">3</a></sup><br>ゲームバランス面でもマップをちゃんと歩いてもらうような設計になっており、マップに関してはこれ以上望めないクオリティになっている。</p>
+<p>立ち絵やアイキャッチのイラストはきんなんさん。前作でマッチ売りの少女や桜の扉奥で出会えるくノ一のイラストを担当していた。<br>パーティメンバーが10人＋主要サブキャラクターの立ち絵はすべて可愛らしく、表情からキャラクターの性格や感情がしっかり伝わってきて良い。</p>
+<p>そして、真エンディングのモノクロイラストを見たとき、筆者は慟哭した。<sup class="footnote-ref"><a href="#fn4" id="fnref4" title="自分で驚くほどの獣のような声であった。当時通話していた作者本人からも、「数年付き合ってきて聞いたことがない声」と称されたほどである。">4</a></sup><br>システム面をほぼフルで担当し、深く関わらせていただいたことに心の底から感謝するほどのエモさであった。</p>
+<h1 id="シナリオ-キャラクター"><a href="#シナリオ-キャラクター" class="headerlink" title="シナリオ/キャラクター"></a>シナリオ/キャラクター</h1><p>本項目について、筆者は冷静でいられる自信がまったくない。時折発狂したオタクの悲鳴が交じることになるが、ご容赦いただきたい。<br>むしろ、画面の前のあなたにも同じ悲鳴を上げてほしい。<br>だから、未プレイの方には前作含めてプレイしてから読んでほしいのだ。</p>
+<h2 id="メインシナリオ-最高の体験"><a href="#メインシナリオ-最高の体験" class="headerlink" title="メインシナリオ = 最高の体験"></a>メインシナリオ = 最高の体験</h2><p>前作がアレだっただけに、道中で前作の面影を見つけるたびにちょっとだけ怖くなったりもしたが、作者本人の「ちゃんと今回はハッピーエンドにします」宣言を信じて遊びきった。<br>道中のメインシナリオは、本当に古き良きRPGといった感じで、あまり複雑になりすぎず、筋道がわかりやすい。</p>
+<p>そして、魔法の里地方の小さな家付近にあるあの建物と木、そして赤水晶を見たとき、これはもしかして前作プレイヤーを殺すためのヤバいギミックが仕掛けられているのでは？ と直感した。</p>
+<p>果たしてその直感は真実であった。</p>
+<p>ラスボス君！ 名前！ 名前ーッ！<br>各地で書物やら伝承で語られているのはお前のことだと思ってたよ。けど、お前、お前さあ、なんでそんなマッチョになってるの！？</p>
+<p>何かしら前作に関連する人物がクリア後のおまけかどこかで登場すると思ってはいた。ラスボスの立ち絵は、制作過程の共有で知ってしまっていただけに、そこまでは特に前作に関わらず進行する話なのだと、思い込んでいた。<sup class="footnote-ref"><a href="#fn5" id="fnref5" title="ラストダンジョンがあからさまに前作を意識した構成になっていた時点で、何か関連する話が出てくるのかもしれないとは思ったが、ここまでクリティカルに食い込んだ話だとは思わなかったのである。">5</a></sup><br>下手に知識が与えられていただけに完全にしてやられたわけである。情報の出し方がうまい！ オタクの殺し方を心得てる！ 人の心！！！！！！ Againというタイトルには、前作プレイヤーは二度死ぬ的な意味もあったんだなこれが！<sup class="footnote-ref"><a href="#fn6" id="fnref6" title="後から冷静になって考えると、前作から本作をプレーンな知識で遊んだプレイヤーとしては、なんとなくラスボスが前作関係者であると予想できるかもしれない。">6</a></sup></p>
+<p>こうなると、ラスボス戦まで入ることができなかったあの扉の奥が俄然気になってくるというわけだ。<br>前作続投組の博物館の主から黒の鍵を託され、前作の各世界を象ったマップを歩きながら、一番奥にいるであろうあの子に会って、全てに決着をつけるぞという意気込みでプレイしていた。<sup class="footnote-ref"><a href="#fn7" id="fnref7" title="あまりに熱中して無言になっていたため、当時通話していた作者からは度々「何か言ってよ」とせっつかれてしまうほどであった。">7</a></sup></p>
+<p>強力なモンスターが跋扈する裏ダンジョンを突き進み、最奥に到達したとき、彼女はそこにいたのである。<br>ちゃんと前作を踏襲した絵柄かつ、本作の絵とも乖離しないように描かれた彼女を前に、筆者は決意をみなぎらせた。終わらせてやるからな、と。</p>
+<p>激戦であった。ラスボス戦ですら出し渋った全体フル回復アイテムをきっちり使い、最後の最後まで、完膚なきまでに遊びきったと言えよう。呼吸を忘れていたのか、戦闘後に画面の前の筆者が息切れするほどであった。<br>そこに、あのモノクロイラストである。こんなもの、前作を最後まで遊んだオタクなら情緒をめちゃくちゃにされて当たり前だ。<sup class="footnote-ref"><a href="#fn8" id="fnref8" title="感極まって言葉に詰まり、やはり作者本人から「何か言ってよ」とせっつかれた。結局、出てきたのは獣のような咆哮だったのである。">8</a></sup></p>
+<h2 id="雑談"><a href="#雑談" class="headerlink" title="雑談"></a>雑談</h2><p>各地には、特定のパーティメンバーがいる場合に、会話イベントが発生するポイントがある。<br>特に話の本筋には関わらない雑談イベントで、言ってしまえばどうでも良い会話しかないのだが、これがまた楽しい。</p>
+<p>筆者のお気に入りは、クリスがメイリンに手を出して死にかけるイベント。</p>
+<p>欲を言えば、一度見たイベントもふと思い出したときにもう一度見たいとは思う。</p>
+<p>また、コレクションアイテムが前作から続投しており、本作ではボッテキアとパーティメンバーの一人が話す形式でアイテムについての紹介が行われる。<br>これも本編と関わらない雑談になっており、キャラクターの個性を掘り下げる内容が多いため、ゲーム中盤くらいからはこれがメインの楽しみになっていた。</p>
+<h2 id="ソフィー＝フリクセル"><a href="#ソフィー＝フリクセル" class="headerlink" title="ソフィー＝フリクセル"></a>ソフィー＝フリクセル</h2><p>どこにでもいる普通の女の子……らしい。お前のような美少女がどこにでもいてたまるかというツッコミは、直近では<a href="/nplus_doc/2020/08/30/game/atelier/ryza/" title="ライザ">ライザ</a>で経験したものだ。</p>
+<p>素直で、周りの濃い連中に比べるとやや影が薄い……と思いきや、フェイへの溺愛っぷりがだんだん壊れてくる。もう一歩踏み出せば赤座あかねレベルに到達できる。<br>クリスへの対応も含め、ちょっと頼りないけど頑張るお姉ちゃんである。</p>
+<p>戦闘面では回復補助サブ火力と何でもできるオールラウンダー。筆者は基本的に彼女をパーティから外せなかった。<br>ストップの魔導書も彼女に使ったくらい。</p>
+<h2 id="フェイ＝ヴィカンデル"><a href="#フェイ＝ヴィカンデル" class="headerlink" title="フェイ＝ヴィカンデル"></a>フェイ＝ヴィカンデル</h2><p>村を魔物に滅ぼされ、命からがらソフィーのいる村までたどり着いた少女。12歳に対してあまりに過酷な運命では？<br>その暗い影を抱えながらも、本編中ではそれを感じさせるシーンは少なく、基本的に素直で明るい良い子である。</p>
+<p>ソフィーにべったりなところがあり、この二人はもはや相思相愛と言っても過言ではない。</p>
+<p>戦闘面では、序盤から種族特攻持ちのため火力要員として活躍。最終盤に至るまでメイン火力としてスタメンにい続けてくれた。</p>
+<h2 id="クリスティーネ＝ノルダール"><a href="#クリスティーネ＝ノルダール" class="headerlink" title="クリスティーネ＝ノルダール"></a>クリスティーネ＝ノルダール</h2><p>14歳の自称天才魔法少女。しかしてその実態は、パーティ加入時のイベントからいきなり公文書偽造をやらかす問題児。</p>
+<p>お調子者でいたずら好き、セクハラ上等の問題児だが、実は人一倍、他人に対して気を使う子。<sup class="footnote-ref"><a href="#fn9" id="fnref9" title="これは、エンディングの一枚絵でも表現されている。">9</a></sup><br>自分も結構なスタイルかつ露出だが、とにかくおっぱい大好き星人らしく、事あるごとに揉もうとする。そしてそのたびに死にかける。<br>死にかけながらも学習せずに同じことを繰り返す、愛すべきバカ。</p>
+<p>イザベラからの報復を受けるときの「やめろ はなせ ま゛ーーーー！」とかメイリンに手を出したときのガチで命がヤバそうな声が好き。</p>
+<p>実は本作で最初期に作られたキャラクターらしく、メインシナリオ中に大きめの専用イベントがある。<br>ちゃんといい子なんですよ。ちょっと学習しないだけで。</p>
+<p>ソフィーのことを先輩と呼んで慕っている。願いの丘イベント良かった。</p>
+<p>戦闘面では魔法使いらしく、火力満点耐久０点。<br>筆者のプレイではなぜかよく狙われる傾向にあり、頻繁にノびていた。</p>
+<h2 id="イザベラ＝クレアム"><a href="#イザベラ＝クレアム" class="headerlink" title="イザベラ＝クレアム"></a>イザベラ＝クレアム</h2><p>イグニシア国の女王。厳しい性格をした、パーティ内の大人役。<br>エレナ曰く、昔はもっと厳しかったらしい。ソフィーたちに会って、少し丸くなったようだ。</p>
+<p>クリスのいたずらに対しては、「言ってわからないのなら身体で教える他あるまい」とでも言わんばかりにお仕置きする。それでもあの子学習しないんだけどさ！</p>
+<p>真面目で厳格な彼女だが、根っからの武闘派らしく、戦闘はできても書き物は苦手。良いギャップだ。</p>
+<p>戦闘面では、回避高めの生存能力を持った前衛火力という感じ。<br>ボス戦ではやや物足りないシーンも多くなるものの、雑魚戦ではかなり使いやすい。<br>終盤のボス戦でも、最終武器の都合上、特定の相手には十分な火力を出せたりする。</p>
+<h2 id="リンリン"><a href="#リンリン" class="headerlink" title="リンリン"></a>リンリン</h2><p>作中屈指の爆裂ボディ姉妹の姉のほう。<br>湿気の強い妹と違い、こっちはかなりさっぱりした性格。</p>
+<p>おバカに見えて、彼女も割と周囲に気を使っている節がある。</p>
+<p>戦闘面では、とにかくHPがぶっ飛んで高くなる。<br>魔法防御は紙ッぺらだが、それを補ってあまりあるHPの高さで、ライフで受けるタイプ。<br>攻撃面では弱点をつくことこそできないものの、汎用的にある程度の火力を出し続けられるのは魅力。<br>特に最終盤、奥義を覚えた後はメイン火力として運用できるほどになる。</p>
+<h2 id="メイリン"><a href="#メイリン" class="headerlink" title="メイリン"></a>メイリン</h2><p>爆裂ボディ姉妹の妹のほう。<br>おとなしい性格をしているが、姉のことになると壊れるガチの姉好き。</p>
+<p>姉と一緒に中華料理店を営んでいるが、冒険のためしばらく店はお休み。<br>大丈夫なのかと思うが、出張サービスなどでちょいちょい閉めているらしく、問題ないだけの蓄えはあるのだろう。<br>姉か樟葉のことになると熱くなるが、それ以外だとあんまり印象に残らない。</p>
+<p>戦闘面では、会心重視の火力役。<br>装備で会心率を上げられるようになってからが、彼女の本領発揮。<br>最終的に7割近くまで会心率を上げることができ、装備次第では姉以上にコンスタントに火力を出していける。</p>
+<h2 id="エレナ＝フリュクレフ"><a href="#エレナ＝フリュクレフ" class="headerlink" title="エレナ＝フリュクレフ"></a>エレナ＝フリュクレフ</h2><p>エールハラ国でシスターをやっている人。糸目の美人。<br>真面目な人かと思いきや、かなりのおちゃめさん。<br>普段と全く変わらないトーンでジョークをぶっ放してくるため、よくリーチェが巻き添えを食っている。</p>
+<p>イザベラとは昔から親交があったらしい。そこのところ、詳しく！！！</p>
+<p>戦闘面では、回復に振り切ったヒーラータイプ。<br>ソフィーでは追いつかない場合にも彼女なら安心。<br>攻撃魔法もあるので、サブ火力もこなせる。</p>
+<h2 id="リーチェ"><a href="#リーチェ" class="headerlink" title="リーチェ"></a>リーチェ</h2><p>エールハラでシスターをやっている11歳。<br>ツンツンした生意気な少女だが、それは彼女が最前線で戦うシスターとして気を張っているがためでもある。<br>フェイほどではないにせよ、このゲーム少女に過酷な運命を背負わせすぎでは？</p>
+<p>よくクリスに体型について煽られるが、年齢に対してクリスが成長しすぎなのではないかとは思う。<br>ボッテキアとも言い合いになるケースが。争いは同じレベルの者同士でしか発生しない……ッ！</p>
+<p>戦闘面では、アイテムを消費する代わりに莫大なリターンをもたらす状態異常や一発立て直し担当。<br>賞金首や特定の状態異常を無効化しないボスなどの厄介な相手にスポットで使っていくことになるか。<br>特に加入当初は弾薬費が洒落にならないため、彼女の真価が発揮できるシーンは資金に余裕が出てきてからになる。<br>パーティメンバー10人のうち、もっとも運用がトリッキーになる子。</p>
+<h2 id="アマリア＝フィオレンティーニ"><a href="#アマリア＝フィオレンティーニ" class="headerlink" title="アマリア＝フィオレンティーニ"></a>アマリア＝フィオレンティーニ</h2><p>北の国ドルリーフで兵士をやっている少女。片腕が義手になっている。</p>
+<p>普通に話している分にはまともな子だが、骨董品のことになると壊れる。<br>骨董品が好きなだけならまだしも、残念ながら彼女には致命的にモノの真贋を見分ける能力が欠けており、ただ古そうなものに対して自身の妄想であることないことを語り始めるのでたちが悪い。<br>葵さんにバッサリ斬られて少しは懲りただろうか……？</p>
+<p>全く空気を読めない性格が災いし、あるイベントではリーチェをガチ泣きさせてしまう。<sup class="footnote-ref"><a href="#fn10" id="fnref10" title="この辺りが、自然に気を使えているクリスと対比的である。">10</a></sup> <sup class="footnote-ref"><a href="#fn11" id="fnref11" title="エレナさんのポーカーフェイスジョークとアマリアの空気の読めなさがガッチリ噛み合って起きてしまった事故なので、一概に彼女が悪いとは言い切れないのだが。">11</a></sup></p>
+<p>戦闘面では、バフデバフ回復サポートのスペシャリスト。<br>味方全体への能力バフと回復がセットになったスキル、敵全体へのデバフとMP吸収がセットになったスキルなど、彼女が一人いるだけでパーティの安定度がぐっと変わる。<br>彼女はキャラクター特性として全状態異常が効かず、その点でも強力。<br>そして、何と言ってもストップである。<br>本作において、時間停止は状態異常扱いではなく、対象の行動を確実に1ターン停止させる。<br>これのおかげでボス戦の難易度が全く変わってくるため、筆者は彼女が加入した後はだいたいスタメンにいてもらっていた。</p>
+<h2 id="葵"><a href="#葵" class="headerlink" title="葵"></a>葵</h2><p>天桜国を守護する土地神様。<br>加入が最終盤のため、10人の中ではそんなに印象が強くない。他メンバーとの絡みも少なめ。</p>
+<p>食欲が旺盛で、落ち着いているように見えて実は飯のことしか考えていない説あり。</p>
+<p>戦闘面では、必中スキルが強力なので、回避の高い雑魚戦でスポットで使うことがある。<br>クリティカル寄せの構成にすれば火力運用も可能。<br>回復・防御面のサポートも強力だが、燃費があまり良くないので、MP回復アイテムの用意は潤沢に。</p>
+<h2 id="ボッテキア"><a href="#ボッテキア" class="headerlink" title="ボッテキア"></a>ボッテキア</h2><p>前作から続投。今作もコレクションアイテム担当。<br>子供っぽかったりちゃんと神様してたり忙しい。</p>
+<p>コレクションアイテムの雑談がかなり楽しく、時折口調が雑になるのもまた良い。</p>
+<p>前作の3人のことをちゃんと覚えていてくれたのは嬉しかった。</p>
+<h2 id="樟葉＆くじゅは"><a href="#樟葉＆くじゅは" class="headerlink" title="樟葉＆くじゅは"></a>樟葉＆くじゅは</h2><p>イラスト担当 きんなんさんの漫画「秘密の満員電車」からゲスト参戦。<br>本作ではメダル王女として、綺麗なメダルを集めるNPCとして登場する。</p>
+<p>煽り耐性が低く、煽られるとすぐに目からハイライトが消えてしまう。<sup class="footnote-ref"><a href="#fn12" id="fnref12" title="そして、クリスとリーチェはだいたい煽ってくる。">12</a></sup></p>
+<p>くじゅはは、彼女の杖の先端にいる小さい謎の生物。</p>
+<p>メダルを集めた枚数に応じて、彼女や彼女のメイドたちから小話を聞くことができる。</p>
+<h1 id="システム"><a href="#システム" class="headerlink" title="システム"></a>システム</h1><p>特別に奇をてらったシステムはなく、基本に忠実なRPGであるのは前作通り。</p>
+<h2 id="きっちり調整された戦闘バランス"><a href="#きっちり調整された戦闘バランス" class="headerlink" title="きっちり調整された戦闘バランス"></a>きっちり調整された戦闘バランス</h2><p>前作はめちゃくちゃ難しいレベルだったところ、今作は遊びやすく、しかしぬるくなりすぎない程度にきっちりと調整されている。<br>ボスはやはり強いのだが、サブダンジョンを巡ったり、賞金首に挑むことで自然とレベルが上がり、装備も整えられるだけの資金を調達できるようになっている。<br>また、最終的にはパーティメンバー10人のうち、誰を使っても戦えるようになっているので、前作ほど理不尽な難易度にはなっていない。</p>
+<p>特にクイーンを相手にする場合に詰まりやすいが、そこからは装備をしっかり考えた上で戦う必要がある。<br>道中の宝箱にちゃんと対ボス用装備が用意されていたりするので、後述の宝箱サーチシステムを使って回収しておきたい。</p>
+<h2 id="宝箱サーチシステムで無駄な探索は不要に"><a href="#宝箱サーチシステムで無駄な探索は不要に" class="headerlink" title="宝箱サーチシステムで無駄な探索は不要に"></a>宝箱サーチシステムで無駄な探索は不要に</h2><p>ワンボタンで、現在いるマップ上に未回収のアイテムがあるかどうかを教えてくれるシステム。<br>画面内にあれば吹き出しが出るため、見た目がわかりにくいコレクションアイテムの回収にも役立つ。</p>
+<p>魔法の鍵を要求する宝箱もあり、中盤までは万能とは言い難いものの、新しいマップに入ったらまずこれを使っておく癖をつけておきたい。</p>
+<h2 id="セーブは教会のみ-ただしテレポート可能"><a href="#セーブは教会のみ-ただしテレポート可能" class="headerlink" title="セーブは教会のみ ただしテレポート可能"></a>セーブは教会のみ ただしテレポート可能</h2><p>本作は、セーブできる場所が教会に限られている。<sup class="footnote-ref"><a href="#fn13" id="fnref13" title="どこでもセーブを可能にするアイテムもあるが、単価が高く、終盤にならないと手が出ない。">13</a></sup><br>ただし、テレポートシステムによって、メニューから好きなタイミングで拠点に戻ることが可能。<br>戻り先として登録できる枠数は限られているが、よく使う博物館やメダル王女の城は別枠なので、現在攻略中のダンジョンから近い便利な場所を登録しておくと良い。</p>
+<h1 id="開発裏話"><a href="#開発裏話" class="headerlink" title="開発裏話"></a>開発裏話</h1><p>筆者は本作において、RPGツクールMZのプラグイン開発という形でシステム面に大きく関わらせていただいている。<br>本作専用のシステムもいくらか手掛けており、本作に導入されたプラグインのうち2/3は筆者が書いたものになっている。</p>
+<h2 id="MZ移行"><a href="#MZ移行" class="headerlink" title="MZ移行"></a>MZ移行</h2><p>本作は開発に3年かけているが、2020年8月20日に、RPGツクールMZが発売された。<br>当初はMVで開発されていた本作だが、作者本人のPCとMVエディタとの相性が致命的に悪かったようで、開発が難航していた。<br>そこで意を決してMZ移行することとした、という連絡を受け、つまりはそういうことッスね、と筆者も了承したわけである。<sup class="footnote-ref"><a href="#fn14" id="fnref14" title="MVとMZでは、コアスクリプトの構造が大きく変わっている箇所があり、MV向けプラグインをそのままMZで使うことができないケースも多い。地獄の移植作業の幕開けであった。">14</a></sup></p>
+<p>レイアウト周りは特に頭を悩ませたが、この辺りは作者本人のディレクションの巧みさに助けられ、良い形にまとまってくれたと思う。<br>筆者がサクッと作った試作を見てもらって、ここはこうしたほうが良いとか、こういう風にできないかとか、色々意見を交わして作った。</p>
+<p>結果としてシステム面のクオリティもかなり向上した。MZ移行はご英断だった。</p>
+<h2 id="テストプレイ期間の追加システム"><a href="#テストプレイ期間の追加システム" class="headerlink" title="テストプレイ期間の追加システム"></a>テストプレイ期間の追加システム</h2><p>実は、モンスター図鑑の今戦っている相手の強調表示やワンボタンでのフォーカス、装備品の効果による絞り込み、新規入手アイテムの強調表示はテストプレイ期間中に追加されたシステムだ。<br>筆者がテストプレイさせていただいている間に、もうちょっと快適になってくれないものかと、無理を言って導入していただいたものである。</p>
+<p>Promiseのプレイヤーには、マップやキャラクター、戦闘バランスなどの魅力に集中してプレイしてほしい。それにあたってシステムで解決できる不便さは出来得る限り解決したいと思っていた。<br>ギリギリまでバグ修正をさせて頂いて、ヒヤヒヤさせてしまったのは本当に申し訳ないが、おかげでかなり快適に遊べるようになったと思う。</p>
+<h1 id="やりこみ"><a href="#やりこみ" class="headerlink" title="やりこみ"></a>やりこみ</h1><h2 id="コレクションアイテム"><a href="#コレクションアイテム" class="headerlink" title="コレクションアイテム"></a>コレクションアイテム</h2><p>すべて集めきるには裏ボスまで倒し切る必要があり、そう容易いことではない。<br>が、真エンディング関連は前作からのプレイヤーには大変なご褒美だし、本作で最も重要な部分なので是非頑張ってほしい。</p>
+<h2 id="賞金首"><a href="#賞金首" class="headerlink" title="賞金首"></a>賞金首</h2><p>実は、すべて倒さなくとも真エンディングまで見ることができる。<br>最後の一体は場所のヒントがなく、見つけるのに苦労する場所にいるので、撃破しないまま真エンディングを見てしまうプレイヤーも少なくないだろう。</p>
+<h2 id="綺麗なメダル"><a href="#綺麗なメダル" class="headerlink" title="綺麗なメダル"></a>綺麗なメダル</h2><p>序盤から宝箱サーチシステムを使ってしっかり集めていけば、そう難しくはないか。<br>序盤サボったりして歯抜けだらけになっていると、どこを探して良いのかわからず途方に暮れることになる。</p>
+<h1 id="総評"><a href="#総評" class="headerlink" title="総評"></a>総評</h1><p>Againの衝撃的なエンディングに直面し、発狂したオタクの悲鳴を吐き出すために夜を明かしたあの日から3年。<br>本作をプレイし終えた感想を述べるとき、まず最初に出てくる言葉はありがとうの一言だ。</p>
+<p>あの頃の希望に満ちた冒険が、血の海に沈んだまま朽ち果ててしまったとしても、救いはあった。<br>友との、遠い日の約束を果たすために戦い続けた悲しい魔王は、きっと最後には救われたのだ。<br>自分はもう人間の心を得た。人間になったのだと、自らの命たる赤水晶をソフィーたちに託し、友のために新たな約束をしたレイチェルも。<br>砂になって尚、彼女のそばにいてくれたシュティーナも。</p>
+<p>彼女たちの墓を願いの丘に建ててくれたのも、良かった。<br>次に出会う時はどうか、赤水晶の呪いに蝕まれない平和な世界で笑い会えるようにと、願うばかりである。</p>
+  <hr class="footnotes-sep">
+  <section class="footnotes">
+  <ol class="footnotes-list">
+  <li id="fn1" class="footnote-item">少なくとも、Promise真エンディングまでは見た上で本記事を閲覧することを強く推奨する。Againも可能ならプレイしてほしいが。<a href="#fnref1"> <span class="up-arrow"></span></a></li>
+<li id="fn2" class="footnote-item">しかもそれぞれが歩き回るための十分な広さを持っている。RPGツクールMZのマップ数上限が1000であることを考えると、この数がいかに凄まじいかがわかる。<a href="#fnref2"> <span class="up-arrow"></span></a></li>
+<li id="fn3" class="footnote-item">筆者は脳みそがオフの状態だと地形を全く把握できないので道に迷うことが多少あったが、落ち着いてマップを歩いていれば複雑な分岐があるわけでもないので、さして迷うこともないだろう。<a href="#fnref3"> <span class="up-arrow"></span></a></li>
+<li id="fn4" class="footnote-item">自分で驚くほどの獣のような声であった。当時通話していた作者本人からも、「数年付き合ってきて聞いたことがない声」と称されたほどである。<a href="#fnref4"> <span class="up-arrow"></span></a></li>
+<li id="fn5" class="footnote-item">ラストダンジョンがあからさまに前作を意識した構成になっていた時点で、何か関連する話が出てくるのかもしれないとは思ったが、ここまでクリティカルに食い込んだ話だとは思わなかったのである。<a href="#fnref5"> <span class="up-arrow"></span></a></li>
+<li id="fn6" class="footnote-item">後から冷静になって考えると、前作から本作をプレーンな知識で遊んだプレイヤーとしては、なんとなくラスボスが前作関係者であると予想できるかもしれない。<a href="#fnref6"> <span class="up-arrow"></span></a></li>
+<li id="fn7" class="footnote-item">あまりに熱中して無言になっていたため、当時通話していた作者からは度々「何か言ってよ」とせっつかれてしまうほどであった。<a href="#fnref7"> <span class="up-arrow"></span></a></li>
+<li id="fn8" class="footnote-item">感極まって言葉に詰まり、やはり作者本人から「何か言ってよ」とせっつかれた。結局、出てきたのは獣のような咆哮だったのである。<a href="#fnref8"> <span class="up-arrow"></span></a></li>
+<li id="fn9" class="footnote-item">これは、エンディングの一枚絵でも表現されている。<a href="#fnref9"> <span class="up-arrow"></span></a></li>
+<li id="fn10" class="footnote-item">この辺りが、自然に気を使えているクリスと対比的である。<a href="#fnref10"> <span class="up-arrow"></span></a></li>
+<li id="fn11" class="footnote-item">エレナさんのポーカーフェイスジョークとアマリアの空気の読めなさがガッチリ噛み合って起きてしまった事故なので、一概に彼女が悪いとは言い切れないのだが。<a href="#fnref11"> <span class="up-arrow"></span></a></li>
+<li id="fn12" class="footnote-item">そして、クリスとリーチェはだいたい煽ってくる。<a href="#fnref12"> <span class="up-arrow"></span></a></li>
+<li id="fn13" class="footnote-item">どこでもセーブを可能にするアイテムもあるが、単価が高く、終盤にならないと手が出ない。<a href="#fnref13"> <span class="up-arrow"></span></a></li>
+<li id="fn14" class="footnote-item">MVとMZでは、コアスクリプトの構造が大きく変わっている箇所があり、MV向けプラグインをそのままMZで使うことができないケースも多い。地獄の移植作業の幕開けであった。<a href="#fnref14"> <span class="up-arrow"></span></a></li>
+  </ol>
+  </section>
+
+      
+    </div>
+    
+    <footer>
+        <div class="article-footer">
+        <div class="footer-left">
+        
+  
+  <div class="categories">
+    <a href="/nplus_doc/categories/ゲーム/">ゲーム</a>, <a href="/nplus_doc/categories/ゲーム/ゲームレビュー/">ゲームレビュー</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/nplus_doc/tags/ゲーム/">ゲーム</a>, <a href="/nplus_doc/tags/RPGツクールMZ/">RPGツクールMZ</a>
+  </div>
+
+        </div>
+        <div class="footer-right">
+          <a target="_blank" rel="noopener" href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="【ゲーム感想】Promise | ぷらずま式改" data-url="https://elleonard.github.io/nplus_doc/2021/10/03/game/promise/" data-via="elleonard_f" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+        </div>
+        
+          <div class="article-prev">
+              <a href="/nplus_doc/2021/10/30/game/god-eater/god-eater-resurrection/">【ゲーム感想】GOD EATER RESURRECTION <span class="prev-arrow"/></a>
+            </div>
+        
+        
+          <div class="article-next">
+            <a href="/nplus_doc/2021/09/29/misc/vaccine-side-reaction/">ワクチンの副反応で救急車を呼んだ話 <span class="next-arrow"/></a>
+          </div>
+        
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="検索">
+    <input type="hidden" name="q" value="site:elleonard.github.io/nplus_doc">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">カテゴリ</h3>
+  <ul class="entry">
+  
+    <li><a href="/nplus_doc/categories/FGO/">FGO</a><small>47</small></li>
+  
+    <li><a href="/nplus_doc/categories/niconico/">niconico</a><small>3</small></li>
+  
+    <li><a href="/nplus_doc/categories/アニメ感想/">アニメ感想</a><small>10</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム/">ゲーム</a><small>77</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム/ゲームレビュー/">ゲームレビュー</a><small>61</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム制作/">ゲーム制作</a><small>12</small></li>
+  
+    <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/デッキレシピ/">デッキレシピ</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/小説/">小説</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/情報技術/">情報技術</a><small>11</small></li>
+  
+    <li><a href="/nplus_doc/categories/漫画/">漫画</a><small>2</small></li>
+  
+    <li><a href="/nplus_doc/categories/百合/">百合</a><small>9</small></li>
+  
+    <li><a href="/nplus_doc/categories/艦これ/">艦これ</a><small>76</small></li>
+  
+    <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/">遊戯王ブロンティーズ</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/雑記/">雑記</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最近の投稿</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/nplus_doc/2022/04/27/game/atelier/sophie2/">【ゲーム感想】ソフィーのアトリエ2 ～不思議な夢の錬金術士～</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/04/10/misc/social-game-overcame-me/">ソシャゲを続けられない無力な人間の嘆き</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/02/09/game/neptunia/neptunia-senran-kagura-ninja-wars/">【ゲーム感想】閃乱忍忍忍者大戦ネプテューヌ -少女たちの饗宴-</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/01/18/game/night-of-azure/night-of-azure/">【ゲーム感想】よるのないくに</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2021/12/31/misc/2021/">2021年の振り返り</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Link</h3>
+  <ul class="entry">
+    
+      <li>
+        <a target="_blank" rel="noopener" href="https://www.nicovideo.jp/">niconico</a>
+      </li>
+    
+      <li>
+        <a target="_blank" rel="noopener" href="http://lovingtheflags1986.blog96.fc2.com/">国旗と酒が待ち遠しいドリル日記</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  <p>
+  
+  &copy; 2022 NPlasma
+  
+  All rights reserved.</p>
+  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</div>
+<div class="alignright">
+  <a target="_blank" rel="noopener" href="https://github.com/elleonard"><i class="fab fa-github"></i></a>
+  <a target="_blank" rel="noopener" href="https://twitter.com/elleonard_f"><i class="fab fa-twitter-square"></i></a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="/nplus_doc/js/jquery.imagesloaded.min.js"></script>
+<script src="/nplus_doc/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/nplus_doc/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/nplus_doc/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id='bg'></div>
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>RPGツクールMZのプラグイン半自動テストの仕組み | ぷらずま式改</title>
+  <meta name="author" content="NPlasma" />
+
+  
+  <meta name="description" content="NPlasmaの個人メモ" />
+  
+
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <meta property="og:title" content="RPGツクールMZのプラグイン半自動テストの仕組み" />
+  <meta property="og:site_name" content="ぷらずま式改" />
+
+  
+  
+
+  
+    <meta property="og:image" content="/img/ogp.png" />
+  
+
+  <!-- ogp -->
+  
+    
+      <meta name="description" content="RPGツクールMZのプラグインを半自動テストするような仕組みを作ったので、その概要を説明します。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RPGツクールMZのプラグイン半自動テストの仕組み">
+<meta property="og:url" content="https://elleonard.github.io/nplus_doc/2020/10/22/engineering/rmmz/rmmz-plugin-integration-test/index.html">
+<meta property="og:site_name" content="ぷらずま式改">
+<meta property="og:description" content="RPGツクールMZのプラグインを半自動テストするような仕組みを作ったので、その概要を説明します。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://elleonard.github.io/nplus_doc/2020/10/22/engineering/rmmz/rmmz-plugin-integration-test/scene-testcase.png">
+<meta property="article:published_time" content="2020-10-22T03:32:45.000Z">
+<meta property="article:modified_time" content="2022-04-16T09:44:10.501Z">
+<meta property="article:author" content="NPlasma">
+<meta property="article:tag" content="情報技術">
+<meta property="article:tag" content="RPGツクールMZ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://elleonard.github.io/nplus_doc/2020/10/22/engineering/rmmz/rmmz-plugin-integration-test/scene-testcase.png">
+<meta name="twitter:creator" content="@elleonard_f">
+    
+    <meta name="twitter:image" content="https://elleonard.github.io/nplus_doc/img/ogp.png"/>
+  
+
+  <link rel="alternate" href="/nplus_doc/atom.xml" title="ぷらずま式改" type="application/atom+xml">
+  <link rel="stylesheet" href="/nplus_doc/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/nplus_doc/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/nplus_doc//favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/nplus_doc//favicon/favicon-16x16.png">
+  <link rel="manifest" href="/nplus_doc//favicon/site.webmanifest">
+  <link rel="mask-icon" href="/nplus_doc//favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <script src="https://kit.fontawesome.com/b51cad8f00.js" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/nplus_doc/">ぷらずま式改</a></h1>
+  <h2><a href="/nplus_doc/">NPlasma個人メモ</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/nplus_doc/">Home</a></li>
+    
+      <li><a href="/nplus_doc/2016/05/29/about/">About</a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://twitter.com/elleonard_f">Twitter</a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://github.com/elleonard">GitHub</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2020-10-22T03:32:45.000Z"><a href="/nplus_doc/2020/10/22/engineering/rmmz/rmmz-plugin-integration-test/">2020-10-22</a></time>
+      
+      
+  
+    <h1 class="title">RPGツクールMZのプラグイン半自動テストの仕組み</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <div id="toc" class="toc-article">
+          <p class="toc-title">目次</p>
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B5%8C%E7%B7%AF"><span class="toc-text">経緯</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B9%E9%87%9D"><span class="toc-text">方針</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A8%AD%E8%A8%88"><span class="toc-text">設計</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#TestBase%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3"><span class="toc-text">TestBaseプラグイン</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TestCase%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%81%AE%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF"><span class="toc-text">TestCaseプラグインの読み込み</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TestCase%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%81%8B%E3%82%89%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88%E3%82%B1%E3%83%BC%E3%82%B9%E7%99%BB%E9%8C%B2"><span class="toc-text">TestCaseプラグインからのテストケース登録</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%83%86%E3%82%B9%E3%83%88%E3%82%B1%E3%83%BC%E3%82%B9%E4%B8%80%E8%A6%A7%E8%A1%A8%E7%A4%BA%E3%82%B7%E3%83%BC%E3%83%B3"><span class="toc-text">テストケース一覧表示シーン</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%83%86%E3%82%B9%E3%83%88%E7%94%A8%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%81%AE%E5%AE%9A%E7%BE%A9"><span class="toc-text">テスト用メソッドの定義</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TestCase%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3"><span class="toc-text">TestCaseプラグイン</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%81%8B%E7%94%A8"><span class="toc-text">運用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AC%89%E3%81%97%E3%81%84%E3%81%93%E3%81%A8"><span class="toc-text">嬉しいこと</span></a></li></ol>
+        </div>
+        <p>RPGツクールMZのプラグインを半自動テストするような仕組みを作ったので、その概要を説明します。</p>
+<a id="more"></a>
+
+<h1 id="経緯"><a href="#経緯" class="headerlink" title="経緯"></a>経緯</h1><p>プログラムはバグるものです。RPGツクールのプラグインといえど、例外ではありません。</p>
+<p>バグの要因はたくさんあります。<br>単純にロジックを間違えていたり、typoしたりすることもありますし、動作確認が行き届かなかったりしてバグが残ったり、機能追加や修正の際に別のバグを仕込むこともあります。<br>世に出ているサービスや製品も同様にバグが混入している可能性はありますが、ではそれらはどのようにしてバグを取り除いたり防いでいるのでしょうか。</p>
+<p>実際に動作させて目視確認している箇所もあるとは思いますが、それよりも確実性の高い方法、自動テストを行っているケースが多いでしょう。<sup class="footnote-ref"><a href="#fn1" id="fnref1" title="多い……よね？">1</a></sup></p>
+<p>筆者もバグ報告を受けるたびに、RPGツクールのプラグインでも自動テストができないものか、と頭を捻っていたのですが、ついに方針を思いついたので実行してみたのです。</p>
+<h1 id="方針"><a href="#方針" class="headerlink" title="方針"></a>方針</h1><p>まず、プラグイン内に定義したメソッドの単体テストを考えました。<br>各メソッドの挙動が正しいことを機械的に確認できれば、その組み合わせで実装されるプラグインのバグも随分減らせるはずです。</p>
+<p>しかし、そう簡単な話では済みません。<br>プラグインで書くようなメソッドは、RPGツクールのコアスクリプトの処理のどこかに挟まって、ゲームを元あった状態から別の状態へ変化させるようなものがほとんどです。<br>この元あった状態を機械的に再現するのがかなりしんどく、ゲームを起動せずに、全自動で汎用的に単体テストを実行するような仕組みを実現できそうにないのです。</p>
+<p>テストデータやモック<sup class="footnote-ref"><a href="#fn2" id="fnref2" title="テストに用いる、プログラム（ゲーム）の状態に似せて作るオブジェクト。">2</a></sup>をいちいちプログラムで定義する労力が現実的でないわけです。</p>
+<p>そこで、ゲームを起動して、対象プラグインの効果が現れる状況への遷移は手動で行い、その状態の変化だけ機械的に確認することにしました。<br>状態の変化を確認するだけであればNodejsの <code>assert</code> を用いれば良さそうですが、今回はせっかくなのでゲーム中にテスト項目と結果を表示したり、失敗してもエラーを投げるのではなくゲームを続行したいなと思ったので、自前でテストフレームワーク<sup class="footnote-ref"><a href="#fn3" id="fnref3" title="テストコードを書きやすくする枠組み。">3</a></sup>的なものを書いています。</p>
+<p>ついでに、表示関係は機械的に状態を確認するだけでは微妙なので、目視確認用のテストケースも管理できるようにしました。</p>
+<h1 id="設計"><a href="#設計" class="headerlink" title="設計"></a>設計</h1><h2 id="TestBaseプラグイン"><a href="#TestBaseプラグイン" class="headerlink" title="TestBaseプラグイン"></a>TestBaseプラグイン</h2><p>まず、テストケースを登録してその成否を判定、表示するような<a href="https://github.com/elleonard/DarkPlasma-MZ-Plugins/blob/release/DarkPlasma_TestBase.js" target="_blank" rel="noopener">TestBaseプラグイン</a>を作りました。<br>本来であれば1プラグインに多くの機能を持たせるべきではないのですが、自動テスト用のベースクラスをいくつも用意するのもそれはそれでしんどいので、テスト用のベースとなる機能はここに詰め込みました。</p>
+<h3 id="TestCaseプラグインの読み込み"><a href="#TestCaseプラグインの読み込み" class="headerlink" title="TestCaseプラグインの読み込み"></a>TestCaseプラグインの読み込み</h3><p>この後、テストしたい対象のプラグインごとにTestCaseプラグインを作るのですが、それをプラグイン名から解決して読み込む機能をつけました。<br>つまり、TestCaseプラグインはjs/pluginsフォルダ内に置いておけばいちいちツクールエディタ上から追加する必要をなくしました。</p>
+<p>この設計については悩みました。自動で探してロードするために、起動時のパフォーマンスを少し犠牲にする必要があるからです。<br>今後、TestCaseプラグインが増えるごとに起動時間が伸びていきますが、そうなったらそうなった時に考えることにしました。<br>プラグインパラメータで指定したTestCaseをOFFにすることくらいはできそうですし。</p>
+<p>なお、このためにfsを利用したのでブラウザ向けのプラグインをテストすることはできませんが、ブラウザ環境よりもアプリケーションを意識したいため、それは許容しています。</p>
+<h3 id="TestCaseプラグインからのテストケース登録"><a href="#TestCaseプラグインからのテストケース登録" class="headerlink" title="TestCaseプラグインからのテストケース登録"></a>TestCaseプラグインからのテストケース登録</h3><p>ゲーム起動後、TestCaseプラグインをロードし終わった後に、各TestCaseプラグインからテストケースを登録できるメソッドをScene_Bootに追加しています。<br>ここで登録されたテストケースを、後で定義するテストケースシーンで一覧表示します。</p>
+<p>登録後、すぐに起動するタイミングを提供するためにdoTestOnBootメソッドも追加しています。</p>
+<h3 id="テストケース一覧表示シーン"><a href="#テストケース一覧表示シーン" class="headerlink" title="テストケース一覧表示シーン"></a>テストケース一覧表示シーン</h3><p>ゲーム中、プラグインコマンドで呼び出せるテストケース一覧表示シーンを作りました。<br>ここで一覧を表示し、その成否がプラグインごとに確認できます。</p>
+<p>また、目視確認する必要のあるものについてはここで確認したチェックをつけられるようにもしました。<br>戦闘中にも確認したいケースはありそうでしたが、戦闘シーンにウィンドウを追加するのは割と面倒なので、やめておきました。</p>
+<h3 id="テスト用メソッドの定義"><a href="#テスト用メソッドの定義" class="headerlink" title="テスト用メソッドの定義"></a>テスト用メソッドの定義</h3><p>テストフレームワークでよく見るmustBeHogehogeを定義しました。<br>TestCaseプラグインではこれらを用いて、テストケースを登録します。<br>この辺りは睡魔と戦いながら書いていたので、クラスの命名がちょっと微妙な感じもします。</p>
+<h2 id="TestCaseプラグイン"><a href="#TestCaseプラグイン" class="headerlink" title="TestCaseプラグイン"></a>TestCaseプラグイン</h2><p>テスト対象プラグインに対して、末尾に_Testと名前をつけて<a href="https://github.com/elleonard/DarkPlasma-MZ-Plugins/blob/master/src/tests/SkillCooldown_Test/DarkPlasma_SkillCooldown_Test.js" target="_blank" rel="noopener">TestCaseプラグイン</a>を書きます。<br>Scene_BootのdefineTestCaseでテストケースを登録し、$testTargetPlugins.doTestをテスト可能なタイミングで呼び出して自動テストを実行します。</p>
+<p>各プラグイン向けに、できるだけ本質的でないコードを省けるような形にしたかったのですが、割と睡魔に負けて雑になってるところがちらほら。<br>addTestCaseやdoTestは共通コードをimportに任せて、rollupで自動生成させちゃいたいですね。</p>
+<p>参考: <a href="/nplus_doc/2020/09/08/engineering/rmmz/rmmz-plugin-with-rollup/" title="rollupを利用した、RPGツクールMZのプラグインを快適に書ける仕組み">rollupを利用した、RPGツクールMZのプラグインを快適に書ける仕組み</a></p>
+<h1 id="運用"><a href="#運用" class="headerlink" title="運用"></a>運用</h1><p><img src="scene-testcase.png" alt="テストケースシーン" title="テストケースシーン"></p>
+<p>こんな感じで、テストケース一覧とその結果が表示されます。<br>スキルクールタイムのプラグインで試しにテストケースをゴリゴリ書いたのですが、意外にも自動テストできるケースが多くてやりやすいです。<br>また、パラメータ読み込みのテストが効くのも強いですね。だいたいバグるのはここって感じの傾向があり、これを機械的にチェックできるのはとても嬉しいです。<br>最下部のウィンドウにはテストが失敗した場合になぜ失敗したかを出力してくれるので、バグ取りもやりやすくなるでしょう。</p>
+<p>各種テストケースの書き味にはやや改善の余地がありそうな気もしますが、ひとまずこれで運用してみようと思います。</p>
+<h1 id="嬉しいこと"><a href="#嬉しいこと" class="headerlink" title="嬉しいこと"></a>嬉しいこと</h1><p>半自動でテストできるのはもちろん嬉しいのですが、何よりテストケースをリポジトリ管理できるという点が素晴らしいです。<br>あれテストしたっけ？ これテストしたっけ？ みたいなテスト漏れがなくなり、仮に漏れが見つかったとしてもそのケースを足せば次からは漏れなくチェックできるというわけです。<br>一度使うだけだと労力に対してリターンがやや微妙に見えるかもしれませんが、長い期間メンテナンスしていく程に旨味が出てくる仕組みですね。</p>
+  <hr class="footnotes-sep">
+  <section class="footnotes">
+  <ol class="footnotes-list">
+  <li id="fn1" class="footnote-item">多い……よね？<a href="#fnref1"> <span class="up-arrow"></span></a></li>
+<li id="fn2" class="footnote-item">テストに用いる、プログラム（ゲーム）の状態に似せて作るオブジェクト。<a href="#fnref2"> <span class="up-arrow"></span></a></li>
+<li id="fn3" class="footnote-item">テストコードを書きやすくする枠組み。<a href="#fnref3"> <span class="up-arrow"></span></a></li>
+  </ol>
+  </section>
+
+      
+    </div>
+    
+    <footer>
+        <div class="article-footer">
+        <div class="footer-left">
+        
+  
+  <div class="categories">
+    <a href="/nplus_doc/categories/ゲーム制作/">ゲーム制作</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/nplus_doc/tags/情報技術/">情報技術</a>, <a href="/nplus_doc/tags/RPGツクールMZ/">RPGツクールMZ</a>
+  </div>
+
+        </div>
+        <div class="footer-right">
+          <a target="_blank" rel="noopener" href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="RPGツクールMZのプラグイン半自動テストの仕組み | ぷらずま式改" data-url="https://elleonard.github.io/nplus_doc/2020/10/22/engineering/rmmz/rmmz-plugin-integration-test/" data-via="elleonard_f" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+        </div>
+        
+          <div class="article-prev">
+              <a href="/nplus_doc/2020/10/31/game/bullet-girls/bullet-girls/">【ゲーム感想】バレットガールズ <span class="prev-arrow"/></a>
+            </div>
+        
+        
+          <div class="article-next">
+            <a href="/nplus_doc/2020/09/28/game/nippon-marathon/">【ゲーム感想】Nippon Marathon <span class="next-arrow"/></a>
+          </div>
+        
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="検索">
+    <input type="hidden" name="q" value="site:elleonard.github.io/nplus_doc">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">カテゴリ</h3>
+  <ul class="entry">
+  
+    <li><a href="/nplus_doc/categories/FGO/">FGO</a><small>47</small></li>
+  
+    <li><a href="/nplus_doc/categories/niconico/">niconico</a><small>3</small></li>
+  
+    <li><a href="/nplus_doc/categories/アニメ感想/">アニメ感想</a><small>10</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム/">ゲーム</a><small>77</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム/ゲームレビュー/">ゲームレビュー</a><small>61</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム制作/">ゲーム制作</a><small>12</small></li>
+  
+    <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/デッキレシピ/">デッキレシピ</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/小説/">小説</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/情報技術/">情報技術</a><small>11</small></li>
+  
+    <li><a href="/nplus_doc/categories/漫画/">漫画</a><small>2</small></li>
+  
+    <li><a href="/nplus_doc/categories/百合/">百合</a><small>9</small></li>
+  
+    <li><a href="/nplus_doc/categories/艦これ/">艦これ</a><small>76</small></li>
+  
+    <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/">遊戯王ブロンティーズ</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/雑記/">雑記</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最近の投稿</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/nplus_doc/2022/04/27/game/atelier/sophie2/">【ゲーム感想】ソフィーのアトリエ2 ～不思議な夢の錬金術士～</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/04/10/misc/social-game-overcame-me/">ソシャゲを続けられない無力な人間の嘆き</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/02/09/game/neptunia/neptunia-senran-kagura-ninja-wars/">【ゲーム感想】閃乱忍忍忍者大戦ネプテューヌ -少女たちの饗宴-</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/01/18/game/night-of-azure/night-of-azure/">【ゲーム感想】よるのないくに</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2021/12/31/misc/2021/">2021年の振り返り</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Link</h3>
+  <ul class="entry">
+    
+      <li>
+        <a target="_blank" rel="noopener" href="https://www.nicovideo.jp/">niconico</a>
+      </li>
+    
+      <li>
+        <a target="_blank" rel="noopener" href="http://lovingtheflags1986.blog96.fc2.com/">国旗と酒が待ち遠しいドリル日記</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  <p>
+  
+  &copy; 2022 NPlasma
+  
+  All rights reserved.</p>
+  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</div>
+<div class="alignright">
+  <a target="_blank" rel="noopener" href="https://github.com/elleonard"><i class="fab fa-github"></i></a>
+  <a target="_blank" rel="noopener" href="https://twitter.com/elleonard_f"><i class="fab fa-twitter-square"></i></a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="/nplus_doc/js/jquery.imagesloaded.min.js"></script>
+<script src="/nplus_doc/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/nplus_doc/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/nplus_doc/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id='bg'></div>
+</body>
+</html>

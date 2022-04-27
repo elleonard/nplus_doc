@@ -1,0 +1,288 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>【新】HexoのMarkdownで複雑な表を書く | ぷらずま式改</title>
+  <meta name="author" content="NPlasma" />
+
+  
+  <meta name="description" content="NPlasmaの個人メモ" />
+  
+
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <meta property="og:title" content="【新】HexoのMarkdownで複雑な表を書く" />
+  <meta property="og:site_name" content="ぷらずま式改" />
+
+  
+  
+
+  
+    <meta property="og:image" content="/img/ogp.png" />
+  
+
+  <!-- ogp -->
+  
+    
+      <meta name="description" content="動機たまたま前回の記事を見てみたら、とんでもなく保守性の悪いことをしていたので、もうちょいマシな方法を記しておきます。 node_modulesの中身を直接書き換えるなんてことしちゃあダメだぞ。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【新】HexoのMarkdownで複雑な表を書く">
+<meta property="og:url" content="https://elleonard.github.io/nplus_doc/2019/09/13/engineering/hexo-table-render/index.html">
+<meta property="og:site_name" content="ぷらずま式改">
+<meta property="og:description" content="動機たまたま前回の記事を見てみたら、とんでもなく保守性の悪いことをしていたので、もうちょいマシな方法を記しておきます。 node_modulesの中身を直接書き換えるなんてことしちゃあダメだぞ。">
+<meta property="og:locale" content="ja_JP">
+<meta property="article:published_time" content="2019-09-13T10:40:04.000Z">
+<meta property="article:modified_time" content="2022-04-16T09:44:10.483Z">
+<meta property="article:author" content="NPlasma">
+<meta property="article:tag" content="情報技術">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Markdown">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@elleonard_f">
+    
+    <meta name="twitter:image" content="https://elleonard.github.io/nplus_doc/img/ogp.png"/>
+  
+
+  <link rel="alternate" href="/nplus_doc/atom.xml" title="ぷらずま式改" type="application/atom+xml">
+  <link rel="stylesheet" href="/nplus_doc/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/nplus_doc/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/nplus_doc//favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/nplus_doc//favicon/favicon-16x16.png">
+  <link rel="manifest" href="/nplus_doc//favicon/site.webmanifest">
+  <link rel="mask-icon" href="/nplus_doc//favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <script src="https://kit.fontawesome.com/b51cad8f00.js" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/nplus_doc/">ぷらずま式改</a></h1>
+  <h2><a href="/nplus_doc/">NPlasma個人メモ</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/nplus_doc/">Home</a></li>
+    
+      <li><a href="/nplus_doc/2016/05/29/about/">About</a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://twitter.com/elleonard_f">Twitter</a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://github.com/elleonard">GitHub</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2019-09-13T10:40:04.000Z"><a href="/nplus_doc/2019/09/13/engineering/hexo-table-render/">2019-09-13</a></time>
+      
+      
+  
+    <h1 class="title">【新】HexoのMarkdownで複雑な表を書く</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <div id="toc" class="toc-article">
+          <p class="toc-title">目次</p>
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8B%95%E6%A9%9F"><span class="toc-text">動機</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B9%E9%87%9D"><span class="toc-text">方針</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E5%AE%9A%E7%BE%A9%E3%81%AE%E6%96%B9%E6%B3%95"><span class="toc-text">フィルタ定義の方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%8C%E6%88%90%E3%81%97%E3%81%9F%E3%82%B3%E3%83%BC%E3%83%89"><span class="toc-text">完成したコード</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E3%81%AE%E6%96%B9%E6%B3%95%E3%81%A8%E6%AF%94%E3%81%B9%E3%81%A6%E3%81%A9%E3%81%93%E3%81%8C%E8%89%AF%E3%81%84%EF%BC%9F"><span class="toc-text">前の方法と比べてどこが良い？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%BD%E8%A8%98-%E7%B7%A8%E9%9B%86%E5%B1%A5%E6%AD%B4"><span class="toc-text">追記&#x2F;編集履歴</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2020-03-22"><span class="toc-text">2020&#x2F;03&#x2F;22</span></a></li></ol></li></ol>
+        </div>
+        <h1 id="動機"><a href="#動機" class="headerlink" title="動機"></a>動機</h1><p>たまたま<a href="/nplus_doc/2016/05/06/engineering/hexo-markdown-table/" title="前回の記事">前回の記事</a>を見てみたら、とんでもなく保守性の悪いことをしていたので、もうちょいマシな方法を記しておきます。</p>
+<p>node_modulesの中身を直接書き換えるなんてことしちゃあダメだぞ。</p>
+<a id="more"></a>
+
+<h1 id="方針"><a href="#方針" class="headerlink" title="方針"></a>方針</h1><p>前回の記事で定義したオレオレ記法はひとまず引き継ぐこととします。<br>昔の記事が壊れちゃうのもなんだかかっこ悪いし、後方互換性君を意識した開発は基本ですので。</p>
+<p>Hexoには<a href="https://hexo.io/api/filter.html" target="_blank" rel="noopener">記事データにフィルタをかける機能</a>があります。<br>今回はそれを使って、デフォルトレンダラーに表を作られる前に自前のレンダラーで思い通りの表を作る、ということをします。</p>
+<h1 id="フィルタ定義の方法"><a href="#フィルタ定義の方法" class="headerlink" title="フィルタ定義の方法"></a>フィルタ定義の方法</h1><p>表をレンダリングされる前にこちらでHTMLタグに変換してしまうので、 <code>before_post_render</code> のタイミングでフィルタをかけます。<br>使っているテーマディレクトリの下に <code>scripts</code> ディレクトリを作成し、その下に任意の名前で.jsファイルを置きます。</p>
+<p>今回は <code>table.js</code> としましょう。</p>
+<h1 id="完成したコード"><a href="#完成したコード" class="headerlink" title="完成したコード"></a>完成したコード</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> rTable = <span class="regexp">/ *\|(.+)\n *\|( *[-:]+[-| :]*)\n((?: *\|.*(?:\n|$))*)\n*/g</span>;</span><br><span class="line"></span><br><span class="line">hexo.extend.filter.register(<span class="string">'before_post_render'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">  data.content = data.content.replace(rTable, (content, header, align, body) =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> headerContents = header.split(<span class="string">'|'</span>).map(<span class="function"><span class="params">content</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        isNoContent: content === <span class="string">''</span>,</span><br><span class="line">        isHeader: <span class="literal">true</span>,</span><br><span class="line">        rowspan: content.match(<span class="regexp">/!.*(r[1-9]).*!/</span>) != <span class="literal">null</span> ? <span class="built_in">Number</span>(content.match(<span class="regexp">/!.*(r[1-9]).*!/</span>)[<span class="number">1</span>].substring(<span class="number">1</span>)) || <span class="number">1</span> : <span class="number">1</span>,</span><br><span class="line">        colspan: content.match(<span class="regexp">/!.*(c[1-9]).*!/</span>) != <span class="literal">null</span> ? <span class="built_in">Number</span>(content.match(<span class="regexp">/!.*(c[1-9]).*!/</span>)[<span class="number">1</span>].substring(<span class="number">1</span>)) || <span class="number">1</span> : <span class="number">1</span>,</span><br><span class="line">        content: content.replace(<span class="regexp">/!.*!/</span>, <span class="string">''</span>),</span><br><span class="line">        isCombined: content === <span class="string">'^'</span> || content === <span class="string">'&lt;'</span></span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;);</span><br><span class="line">    headerContents.pop(); <span class="comment">// 末尾に邪魔な要素がいる</span></span><br><span class="line">  </span><br><span class="line">    <span class="keyword">const</span> lines = body.split(<span class="string">'\n'</span>);</span><br><span class="line">    <span class="keyword">var</span> cellContents = lines.map(<span class="function">(<span class="params">line</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">var</span> cells = line.split(<span class="string">'|'</span>).map(<span class="function"><span class="params">cell</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">          isNoContent: cell === <span class="string">''</span>,</span><br><span class="line">          isHeader: cell.match(<span class="regexp">/!.*h.*!/</span>) != <span class="literal">null</span>,</span><br><span class="line">          <span class="comment">// row, colともに1桁のみ対応。2桁以上は必要になり次第実装する</span></span><br><span class="line">          rowspan: cell.match(<span class="regexp">/!.*(r[1-9]).*!/</span>) != <span class="literal">null</span> ? <span class="built_in">Number</span>(cell.match(<span class="regexp">/!.*(r[1-9]).*!/</span>)[<span class="number">1</span>].substring(<span class="number">1</span>)) || <span class="number">1</span> : <span class="number">1</span>,</span><br><span class="line">          colspan: cell.match(<span class="regexp">/!.*(c[1-9]).*!/</span>) != <span class="literal">null</span> ? <span class="built_in">Number</span>(cell.match(<span class="regexp">/!.*(c[1-9]).*!/</span>)[<span class="number">1</span>].substring(<span class="number">1</span>)) || <span class="number">1</span> : <span class="number">1</span>,</span><br><span class="line">          content: cell.replace(<span class="regexp">/!.*!/</span>, <span class="string">''</span>),</span><br><span class="line">          isCombined: cell === <span class="string">'^'</span> || cell === <span class="string">'&lt;'</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">      cells.shift();</span><br><span class="line">      cells.pop();</span><br><span class="line">      <span class="keyword">return</span> cells;</span><br><span class="line">    &#125;);</span><br><span class="line">  </span><br><span class="line">    <span class="comment">// text align</span></span><br><span class="line">    <span class="keyword">var</span> textAlign = align.split(<span class="string">'|'</span>).map(<span class="function"><span class="params">align</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (align.match(<span class="regexp">/^:-*:$/</span>)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"center"</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (align.match(<span class="regexp">/^-*:$/</span>)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"right"</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">"left"</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">var</span> thead = <span class="string">`&lt;thead&gt;&lt;tr&gt;<span class="subst">$&#123;headerContents.map((cell) =&gt; &#123;</span></span></span><br><span class="line"><span class="string"><span class="subst">        <span class="keyword">if</span> (cell.isCombined) &#123;</span></span></span><br><span class="line"><span class="string"><span class="subst">          <span class="keyword">return</span> <span class="string">""</span>;</span></span></span><br><span class="line"><span class="string"><span class="subst">        &#125;</span></span></span><br><span class="line"><span class="string">        return `</span>&lt;th style=<span class="string">"text-align:center"</span> rowspan=$&#123;cell.rowspan&#125; colspan=$&#123;cell.colspan&#125;&gt;$&#123;cell.content&#125;&lt;<span class="regexp">/th&gt;`;</span></span><br><span class="line"><span class="regexp">      &#125;).join('')&#125;&lt;/</span>tr&gt;&lt;/thead&gt;<span class="string">`;</span></span><br><span class="line"><span class="string">  </span></span><br><span class="line"><span class="string">    var tbody = `</span>&lt;tbody&gt;$&#123;cellContents.map(<span class="function">(<span class="params">line</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">`&lt;tr&gt;<span class="subst">$&#123;line.map((cell, cellIndex) =&gt; &#123;</span></span></span><br><span class="line"><span class="string"><span class="subst">          <span class="keyword">if</span> (cell.isCombined) &#123;</span></span></span><br><span class="line"><span class="string"><span class="subst">            <span class="keyword">return</span> <span class="string">""</span>;</span></span></span><br><span class="line"><span class="string"><span class="subst">          &#125;</span></span></span><br><span class="line"><span class="string">          const tag = cell.isHeader ? `</span>th<span class="string">` : `</span>td<span class="string">`;</span></span><br><span class="line"><span class="string">          return `</span>&lt;$&#123;tag&#125; style=<span class="string">"text-align:$&#123;cell.isHeader ? "</span>center<span class="string">" : textAlign[cellIndex]&#125;"</span> rowspan=$&#123;cell.rowspan&#125; colspan=$&#123;cell.colspan&#125;&gt;$&#123;cell.content&#125;&lt;<span class="regexp">/$&#123;tag&#125;&gt;`</span></span><br><span class="line"><span class="regexp">        &#125;).join('')&#125;&lt;/</span>tr&gt;<span class="string">`;</span></span><br><span class="line"><span class="string">      &#125;).join('')&#125;&lt;/tbody&gt;`</span>;</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> <span class="string">`&lt;table&gt;<span class="subst">$&#123;thead&#125;</span><span class="subst">$&#123;tbody&#125;</span>&lt;/table&gt;\n\n`</span>;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> data;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>すべての記事データの中から、正規表現でテーブル部分を抜き出して自前で組み立てています。<br>とりあえず自分で使いそうなスタイルのみ対応しているので、左右の枠なしテーブルとかには対応してません。</p>
+<h1 id="前の方法と比べてどこが良い？"><a href="#前の方法と比べてどこが良い？" class="headerlink" title="前の方法と比べてどこが良い？"></a>前の方法と比べてどこが良い？</h1><p>まず、node_modulesの中身を直接触らなくて良いというのが一番大きいです。<br>テーマディレクトリの下に <code>scripts</code> を置かないといけないというのは少し面倒ですが、日本語向けのテーマはなかなかないので、基本的にいい感じのやつをforkして自分でメンテしていくことになるでしょう。</p>
+<h1 id="追記-編集履歴"><a href="#追記-編集履歴" class="headerlink" title="追記/編集履歴"></a>追記/編集履歴</h1><h2 id="2020-03-22"><a href="#2020-03-22" class="headerlink" title="2020/03/22"></a>2020/03/22</h2><p>テーブルの直後のマークダウン要素がHTMLの一部と解釈されてしまうバグがあったため、スクリプトを簡単に修正しました。</p>
+
+      
+    </div>
+    
+    <footer>
+        <div class="article-footer">
+        <div class="footer-left">
+        
+  
+  <div class="categories">
+    <a href="/nplus_doc/categories/情報技術/">情報技術</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/nplus_doc/tags/情報技術/">情報技術</a>, <a href="/nplus_doc/tags/Hexo/">Hexo</a>, <a href="/nplus_doc/tags/Markdown/">Markdown</a>, <a href="/nplus_doc/tags/JavaScript/">JavaScript</a>
+  </div>
+
+        </div>
+        <div class="footer-right">
+          <a target="_blank" rel="noopener" href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="【新】HexoのMarkdownで複雑な表を書く | ぷらずま式改" data-url="https://elleonard.github.io/nplus_doc/2019/09/13/engineering/hexo-table-render/" data-via="elleonard_f" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+        </div>
+        
+          <div class="article-prev">
+              <a href="/nplus_doc/2019/09/16/game/edf/edf5/">【ゲーム感想】地球防衛軍5 <span class="prev-arrow"/></a>
+            </div>
+        
+        
+          <div class="article-next">
+            <a href="/nplus_doc/2019/05/09/game/edf/edf4-1/">【ゲーム感想】地球防衛軍4.1 THE SHADOW OF NEW DESPAIR <span class="next-arrow"/></a>
+          </div>
+        
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="検索">
+    <input type="hidden" name="q" value="site:elleonard.github.io/nplus_doc">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">カテゴリ</h3>
+  <ul class="entry">
+  
+    <li><a href="/nplus_doc/categories/FGO/">FGO</a><small>47</small></li>
+  
+    <li><a href="/nplus_doc/categories/niconico/">niconico</a><small>3</small></li>
+  
+    <li><a href="/nplus_doc/categories/アニメ感想/">アニメ感想</a><small>10</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム/">ゲーム</a><small>77</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム/ゲームレビュー/">ゲームレビュー</a><small>61</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム制作/">ゲーム制作</a><small>12</small></li>
+  
+    <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/デッキレシピ/">デッキレシピ</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/小説/">小説</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/情報技術/">情報技術</a><small>11</small></li>
+  
+    <li><a href="/nplus_doc/categories/漫画/">漫画</a><small>2</small></li>
+  
+    <li><a href="/nplus_doc/categories/百合/">百合</a><small>9</small></li>
+  
+    <li><a href="/nplus_doc/categories/艦これ/">艦これ</a><small>76</small></li>
+  
+    <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/">遊戯王ブロンティーズ</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/雑記/">雑記</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最近の投稿</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/nplus_doc/2022/04/27/game/atelier/sophie2/">【ゲーム感想】ソフィーのアトリエ2 ～不思議な夢の錬金術士～</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/04/10/misc/social-game-overcame-me/">ソシャゲを続けられない無力な人間の嘆き</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/02/09/game/neptunia/neptunia-senran-kagura-ninja-wars/">【ゲーム感想】閃乱忍忍忍者大戦ネプテューヌ -少女たちの饗宴-</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/01/18/game/night-of-azure/night-of-azure/">【ゲーム感想】よるのないくに</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2021/12/31/misc/2021/">2021年の振り返り</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Link</h3>
+  <ul class="entry">
+    
+      <li>
+        <a target="_blank" rel="noopener" href="https://www.nicovideo.jp/">niconico</a>
+      </li>
+    
+      <li>
+        <a target="_blank" rel="noopener" href="http://lovingtheflags1986.blog96.fc2.com/">国旗と酒が待ち遠しいドリル日記</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  <p>
+  
+  &copy; 2022 NPlasma
+  
+  All rights reserved.</p>
+  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</div>
+<div class="alignright">
+  <a target="_blank" rel="noopener" href="https://github.com/elleonard"><i class="fab fa-github"></i></a>
+  <a target="_blank" rel="noopener" href="https://twitter.com/elleonard_f"><i class="fab fa-twitter-square"></i></a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="/nplus_doc/js/jquery.imagesloaded.min.js"></script>
+<script src="/nplus_doc/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/nplus_doc/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/nplus_doc/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id='bg'></div>
+</body>
+</html>

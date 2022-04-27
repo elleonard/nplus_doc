@@ -1,0 +1,307 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>Windows10がINACCESSIBLE BOOT DEVICEで起動しない | ぷらずま式改</title>
+  <meta name="author" content="NPlasma" />
+
+  
+  <meta name="description" content="NPlasmaの個人メモ" />
+  
+
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <meta property="og:title" content="Windows10がINACCESSIBLE BOOT DEVICEで起動しない" />
+  <meta property="og:site_name" content="ぷらずま式改" />
+
+  
+  
+
+  
+    <meta property="og:image" content="/img/ogp.png" />
+  
+
+  <!-- ogp -->
+  
+    
+      <meta name="description" content="タイトルの通り、ブルースクリーンで突如Windows10が起動しなくなってしまったtwitterを検索したところ、今月に入ってからも同様の問題で苦しんでいる人がそれなりの数いるようだったが、日本語の新しい情報はなさそうだったので解決に至るまでの道程をメモしておく">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows10がINACCESSIBLE BOOT DEVICEで起動しない">
+<meta property="og:url" content="https://elleonard.github.io/nplus_doc/2018/02/06/engineering/windows10-inaccessible-boot-device/index.html">
+<meta property="og:site_name" content="ぷらずま式改">
+<meta property="og:description" content="タイトルの通り、ブルースクリーンで突如Windows10が起動しなくなってしまったtwitterを検索したところ、今月に入ってからも同様の問題で苦しんでいる人がそれなりの数いるようだったが、日本語の新しい情報はなさそうだったので解決に至るまでの道程をメモしておく">
+<meta property="og:locale" content="ja_JP">
+<meta property="article:published_time" content="2018-02-05T20:05:00.000Z">
+<meta property="article:modified_time" content="2022-04-16T09:44:10.504Z">
+<meta property="article:author" content="NPlasma">
+<meta property="article:tag" content="OS">
+<meta property="article:tag" content="windows10">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@elleonard_f">
+    
+    <meta name="twitter:image" content="https://elleonard.github.io/nplus_doc/img/ogp.png"/>
+  
+
+  <link rel="alternate" href="/nplus_doc/atom.xml" title="ぷらずま式改" type="application/atom+xml">
+  <link rel="stylesheet" href="/nplus_doc/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/nplus_doc/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/nplus_doc//favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/nplus_doc//favicon/favicon-16x16.png">
+  <link rel="manifest" href="/nplus_doc//favicon/site.webmanifest">
+  <link rel="mask-icon" href="/nplus_doc//favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <script src="https://kit.fontawesome.com/b51cad8f00.js" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/nplus_doc/">ぷらずま式改</a></h1>
+  <h2><a href="/nplus_doc/">NPlasma個人メモ</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/nplus_doc/">Home</a></li>
+    
+      <li><a href="/nplus_doc/2016/05/29/about/">About</a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://twitter.com/elleonard_f">Twitter</a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://github.com/elleonard">GitHub</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-02-05T20:05:00.000Z"><a href="/nplus_doc/2018/02/06/engineering/windows10-inaccessible-boot-device/">2018-02-06</a></time>
+      
+      
+  
+    <h1 class="title">Windows10がINACCESSIBLE BOOT DEVICEで起動しない</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <div id="toc" class="toc-article">
+          <p class="toc-title">目次</p>
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E6%B1%BA%E6%96%B9%E6%B3%95"><span class="toc-text">解決方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%99%BA%E7%AB%AF"><span class="toc-text">発端</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E5%8B%95%E3%81%A7%E5%86%8D%E8%B5%B7%E5%8B%95%E3%81%99%E3%82%8B%E3%81%A8%E3%81%A9%E3%81%86%E3%81%AA%E3%82%8B%EF%BC%9F"><span class="toc-text">自動で再起動するとどうなる？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E3%81%AF%E4%BF%AE%E5%BE%A9%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%97%E3%81%9F%E3%81%8B%EF%BC%9F"><span class="toc-text">スタートアップは修復できましたか？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%82%B0%E3%82%B0%E3%82%8B%E3%82%88%E3%82%8Atwitter%E6%A4%9C%E7%B4%A2"><span class="toc-text">ググるよりtwitter検索</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%B9%E6%9C%AC%E5%AF%BE%E7%AD%96%E3%81%AF%EF%BC%9F"><span class="toc-text">根本対策は？</span></a></li></ol>
+        </div>
+        <p>タイトルの通り、ブルースクリーンで突如Windows10が起動しなくなってしまった<br>twitterを検索したところ、今月に入ってからも同様の問題で苦しんでいる人がそれなりの数いるようだったが、日本語の新しい情報はなさそうだったので解決に至るまでの道程をメモしておく</p>
+<a id="more"></a>
+
+<h1 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h1><p>ここに至るまでの経緯はとにかく無駄が多くアレなので、手っ取り早く解決方法を知りたい人向けにまずこれを書いておく</p>
+<p><a href="https://answers.microsoft.com/en-us/windows/forum/windows_10-performance/inaccessible-boot-device-error-cause-fix/8950ec0c-8502-4af4-aca6-be0e41fe463b?utm_source=t.co&utm_medium=referral" target="_blank" rel="noopener">Inaccessible Boot Device error - cause? fix? - Microsoft Community</a></p>
+<p>そのまんまな質問が先月の9日にMicrosoftのフォーラムに投稿されており、解決方法がその返信で示されている<br>今年に入ってからのWindowsUpdateが原因なので、それを巻き戻せ、というもの</p>
+<p>具体的には、再起動が2回繰り返された後に表示されるメニューから</p>
+<ol>
+<li>トラブルシューティング</li>
+<li>詳細オプション</li>
+<li>コマンドプロンプト</li>
+</ol>
+<p>を選択し、コマンドプロンプトを開く</p>
+<p>そこで以下のコマンドを実行して最近インストールされたWindowsUpdateを調べる</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Dism /Image:D:\ /Get-Packages</span><br></pre></td></tr></table></figure>
+
+<p>今年の1月に最新のものが2つほどインストールされていたので、それを順番に戻した<br>（この日付はPCにインストールされた日付なので、環境によって変わる）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Dism /Image:D:\ /Remove-Package /packagename:（パッケージ名）</span><br></pre></td></tr></table></figure>
+
+<p>パッケージ名は <code>Get-Packages</code> で確認したところからコピーすれば良い<br>（対象文字列をドラッグし、コマンドプロンプト上で右クリックするとコピペできる）</p>
+<p>その後、Windowsを起動すると正常に起動される</p>
+<h1 id="発端"><a href="#発端" class="headerlink" title="発端"></a>発端</h1><p>帰宅後、いつもの調子でPCの電源を入れたところ、なんか画面が暗いままである<br>ディスプレイに異常があるでもなし、何か引っかかったかとPC本体の電源を一度長押しして強制終了してから再起動を試みた<br>すると、いつものいい感じの画像を出してくれるあのログイン画面の代わりに、心臓に悪い青い画面が</p>
+<p>問題が発生したため、PCでを再起動する必要があります。自動的に再起動します。<br>などという文章の下に小さく <code>INACCESSIBLE BOOT DEVICE</code> なるエラーコードが表示されていたが、この時点ではテンパってしまいそれどころではなかった</p>
+<h1 id="自動で再起動するとどうなる？"><a href="#自動で再起動するとどうなる？" class="headerlink" title="自動で再起動するとどうなる？"></a>自動で再起動するとどうなる？</h1><p>知らんのか、自動で再起動する<br>とでも言わんばかりに、再起動後も無慈悲な青い画面である。コブラじゃなくてアオダイショウじゃねーか！<br>表示されているエラーメッセージは先程と全く同じ<br>かくして、二度目の再起動が走る</p>
+<p>今回の件で調べて初めてわかったのだが、Windows10は何か予期せぬ不具合で再起動しようとしてそれが2回失敗した場合に、ようやく手動で解決するためにユーザに操作を委ねてくる<br>これは何度やっても同じで、起動オプションで自動で再起動させない設定にした場合は、「再起動する必要があります」で止まるが結局手動で再起動しなければならない<br>操作を委ねられたは良いものの結局よくわからずに「再起動」してしまい、また無慈悲に2回のオート再起動を見せられることになる</p>
+<p>トラブルシューティング→詳細オプションから色々と選ぶことができるが、かつて役に立った記憶のない「スタートアップ修復」とそれなりに仕事するらしい「システムの復元」以外は初見ではさっぱりよくわからないものである<br>イメージからのシステム回復は非常に有効なようだが、手元にあるバックアップイメージの古さを考えるとこの選択肢の優先度は落としたい、といったところだった</p>
+<h1 id="スタートアップは修復できましたか？"><a href="#スタートアップは修復できましたか？" class="headerlink" title="スタートアップは修復できましたか？"></a>スタートアップは修復できましたか？</h1><p>やっぱり今回もだめだったよ。あいつは何やってるのかさっぱりわからないからなあ<br>というわけで、スタートアップの修復もシステムの復元も特に効果なく、どちらも再起動を挟むので2x2回分の青画面を見せられることとなった</p>
+<p>コマンドプロンプトから入って中身を取り出すことはできそうだったので、ひとまずそこは安心できたのだが、さてどうしたものか<br>Google先生に尋ねてみると、日本語の情報はどうやらアテにならなさそう<br>セーフモードで起動せよとか、HDDを換装せよ、PCは突然壊れることがある、などという全く無難で根本的な解決にならない話ばかり<br>英語は日中の頭が回っている時ならともかく、仕事が終わって頭の中がオフになった状態で大量に読めるものでもなく、Google先生が大量に与えてくれる情報の海へ漕ぎ出す気力は湧いてこない</p>
+<p>セーフモードは実際に試してみたが、通常の起動を試みた時と同じく <code>INACCESSIBLE BOOT DEVICE</code> 君がテキーラをサービスしてくれそうな面を見せてくれる。出荷よ。仏の顔もって言うしね<br>言葉では言い表せないときめきみたいなものはらん豚にでも食わせておくとして、さあ困ったぞという時にふと目に入ったのがtwitter<br>これが解決の鍵になった</p>
+<h1 id="ググるよりtwitter検索"><a href="#ググるよりtwitter検索" class="headerlink" title="ググるよりtwitter検索"></a>ググるよりtwitter検索</h1><p>Googleが出してくれる情報は一つ一つがそれなりの質量を持っており、対応のために飯も食わずに唸る筆者のスカスカな脳みそにとってはオーバースペックも良いところ<br>しかし、twitterは1ツイートの文字数が限られているお陰で細切れの情報が読みやすく、しかもいちいち大仰なページにまとめなくても情報を発信できるという手軽さから、多くの類似した症状が報告されやすい<br>しかも新しい順にソートされて表示されるため、情報の鮮度もそれなりに信頼がおける</p>
+<p>twitter検索で <code>INACCESSIBLE BOOT DEVICE</code> を調べたところ、今月に入ってからも同様の症状に苦しむユーザが国内外で大勢いるらしいことがわかり、これは個別のPC内に起きた不具合ではなく、WindowsUpdate起因であろうな、というところまで推測ができた<br>もっと早くにtwitter検索していれば……と嘆くも後の祭り</p>
+<p>かくして、解決方法として報告されているWindowsUpdateの巻き戻しによって、4時間の時を経てPCが落ち着きを取り戻したのである</p>
+<h1 id="根本対策は？"><a href="#根本対策は？" class="headerlink" title="根本対策は？"></a>根本対策は？</h1><a href="/nplus_doc/2018/02/14/engineering/windows10-inaccessible-boot-device-2/" title="Windows10がINACCESSIBLE BOOT DEVICEで起動しない（続）">Windows10がINACCESSIBLE BOOT DEVICEで起動しない（続）</a>へ
+
+
+      
+    </div>
+    
+    <footer>
+        <div class="article-footer">
+        <div class="footer-left">
+        
+  
+  <div class="categories">
+    <a href="/nplus_doc/categories/情報技術/">情報技術</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/nplus_doc/tags/OS/">OS</a>, <a href="/nplus_doc/tags/windows10/">windows10</a>
+  </div>
+
+        </div>
+        <div class="footer-right">
+          <a target="_blank" rel="noopener" href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Windows10がINACCESSIBLE BOOT DEVICEで起動しない | ぷらずま式改" data-url="https://elleonard.github.io/nplus_doc/2018/02/06/engineering/windows10-inaccessible-boot-device/" data-via="elleonard_f" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+        </div>
+        
+          <div class="article-prev">
+              <a href="/nplus_doc/2018/02/09/game/fate/fgo/chocolate-garden/white-to-0215/">【FGO】繁栄のチョコレートガーデンズ・オブ・バレンタイン ホワイト級（2/15まで） <span class="prev-arrow"/></a>
+            </div>
+        
+        
+          <div class="article-next">
+            <a href="/nplus_doc/2018/02/05/game/fate/fgo/freequest/shinjuku-heart/">【FGO】新宿 新宿御苑 蛮神の心臓集め 周回 <span class="next-arrow"/></a>
+          </div>
+        
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="検索">
+    <input type="hidden" name="q" value="site:elleonard.github.io/nplus_doc">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">カテゴリ</h3>
+  <ul class="entry">
+  
+    <li><a href="/nplus_doc/categories/FGO/">FGO</a><small>47</small></li>
+  
+    <li><a href="/nplus_doc/categories/niconico/">niconico</a><small>3</small></li>
+  
+    <li><a href="/nplus_doc/categories/アニメ感想/">アニメ感想</a><small>10</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム/">ゲーム</a><small>77</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム/ゲームレビュー/">ゲームレビュー</a><small>61</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム制作/">ゲーム制作</a><small>12</small></li>
+  
+    <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/デッキレシピ/">デッキレシピ</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/小説/">小説</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/情報技術/">情報技術</a><small>11</small></li>
+  
+    <li><a href="/nplus_doc/categories/漫画/">漫画</a><small>2</small></li>
+  
+    <li><a href="/nplus_doc/categories/百合/">百合</a><small>9</small></li>
+  
+    <li><a href="/nplus_doc/categories/艦これ/">艦これ</a><small>76</small></li>
+  
+    <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/">遊戯王ブロンティーズ</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/雑記/">雑記</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最近の投稿</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/nplus_doc/2022/04/27/game/atelier/sophie2/">【ゲーム感想】ソフィーのアトリエ2 ～不思議な夢の錬金術士～</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/04/10/misc/social-game-overcame-me/">ソシャゲを続けられない無力な人間の嘆き</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/02/09/game/neptunia/neptunia-senran-kagura-ninja-wars/">【ゲーム感想】閃乱忍忍忍者大戦ネプテューヌ -少女たちの饗宴-</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/01/18/game/night-of-azure/night-of-azure/">【ゲーム感想】よるのないくに</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2021/12/31/misc/2021/">2021年の振り返り</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Link</h3>
+  <ul class="entry">
+    
+      <li>
+        <a target="_blank" rel="noopener" href="https://www.nicovideo.jp/">niconico</a>
+      </li>
+    
+      <li>
+        <a target="_blank" rel="noopener" href="http://lovingtheflags1986.blog96.fc2.com/">国旗と酒が待ち遠しいドリル日記</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  <p>
+  
+  &copy; 2022 NPlasma
+  
+  All rights reserved.</p>
+  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</div>
+<div class="alignright">
+  <a target="_blank" rel="noopener" href="https://github.com/elleonard"><i class="fab fa-github"></i></a>
+  <a target="_blank" rel="noopener" href="https://twitter.com/elleonard_f"><i class="fab fa-twitter-square"></i></a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="/nplus_doc/js/jquery.imagesloaded.min.js"></script>
+<script src="/nplus_doc/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/nplus_doc/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/nplus_doc/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id='bg'></div>
+</body>
+</html>

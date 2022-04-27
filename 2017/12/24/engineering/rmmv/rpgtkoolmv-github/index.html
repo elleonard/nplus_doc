@@ -1,0 +1,363 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>RPGツクールMV やさしいプラグインの書き方 基礎編 | ぷらずま式改</title>
+  <meta name="author" content="NPlasma" />
+
+  
+  <meta name="description" content="NPlasmaの個人メモ" />
+  
+
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <meta property="og:title" content="RPGツクールMV やさしいプラグインの書き方 基礎編" />
+  <meta property="og:site_name" content="ぷらずま式改" />
+
+  
+  
+
+  
+    <meta property="og:image" content="/img/ogp.png" />
+  
+
+  <!-- ogp -->
+  
+    
+      <meta name="description" content="メリークリスマス！この記事はRPGツクールMV Advent Calendar 2017の記事（前半）です。後半の記事については RPGツクールMV やさしいプラグインの書き方 応用編 へどうぞ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RPGツクールMV やさしいプラグインの書き方 基礎編">
+<meta property="og:url" content="https://elleonard.github.io/nplus_doc/2017/12/24/engineering/rmmv/rpgtkoolmv-github/index.html">
+<meta property="og:site_name" content="ぷらずま式改">
+<meta property="og:description" content="メリークリスマス！この記事はRPGツクールMV Advent Calendar 2017の記事（前半）です。後半の記事については RPGツクールMV やさしいプラグインの書き方 応用編 へどうぞ">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://elleonard.github.io/nplus_doc/2017/12/24/engineering/rmmv/rpgtkoolmv-github/gitbash.png">
+<meta property="article:published_time" content="2017-12-23T15:00:00.000Z">
+<meta property="article:modified_time" content="2022-04-16T09:44:10.487Z">
+<meta property="article:author" content="NPlasma">
+<meta property="article:tag" content="情報技術">
+<meta property="article:tag" content="RPGツクールMV">
+<meta property="article:tag" content="github">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://elleonard.github.io/nplus_doc/2017/12/24/engineering/rmmv/rpgtkoolmv-github/gitbash.png">
+<meta name="twitter:creator" content="@elleonard_f">
+    
+    <meta name="twitter:image" content="https://elleonard.github.io/nplus_doc/img/ogp.png"/>
+  
+
+  <link rel="alternate" href="/nplus_doc/atom.xml" title="ぷらずま式改" type="application/atom+xml">
+  <link rel="stylesheet" href="/nplus_doc/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/nplus_doc/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/nplus_doc//favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/nplus_doc//favicon/favicon-16x16.png">
+  <link rel="manifest" href="/nplus_doc//favicon/site.webmanifest">
+  <link rel="mask-icon" href="/nplus_doc//favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <script src="https://kit.fontawesome.com/b51cad8f00.js" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/nplus_doc/">ぷらずま式改</a></h1>
+  <h2><a href="/nplus_doc/">NPlasma個人メモ</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/nplus_doc/">Home</a></li>
+    
+      <li><a href="/nplus_doc/2016/05/29/about/">About</a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://twitter.com/elleonard_f">Twitter</a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://github.com/elleonard">GitHub</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-12-23T15:00:00.000Z"><a href="/nplus_doc/2017/12/24/engineering/rmmv/rpgtkoolmv-github/">2017-12-24</a></time>
+      
+      
+  
+    <h1 class="title">RPGツクールMV やさしいプラグインの書き方 基礎編</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <div id="toc" class="toc-article">
+          <p class="toc-title">目次</p>
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB"><span class="toc-text">はじめに</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AA%B0%E3%81%8C%E8%AA%AD%E3%82%81%E3%81%B0%E3%81%84%E3%81%84%E3%81%AE%EF%BC%9F"><span class="toc-text">誰が読めばいいの？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%81%A9%E3%82%93%E3%81%AA%E5%86%85%E5%AE%B9%EF%BC%9F"><span class="toc-text">どんな内容？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-%E6%BA%96%E5%82%99"><span class="toc-text">基礎知識&#x2F;準備</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#git%E3%81%A3%E3%81%A6%E4%BD%95%EF%BC%9F-github%E3%81%A3%E3%81%A6%E4%BD%95%EF%BC%9F"><span class="toc-text">gitって何？ githubって何？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%97%E3%82%88%E3%81%86"><span class="toc-text">gitをインストールしよう</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Bash%E3%82%92%E8%B5%B7%E5%8B%95%E3%81%97%E3%82%88%E3%81%86"><span class="toc-text">Git Bashを起動しよう</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%82%92%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%B3%E3%81%99%E3%82%8B%E6%BA%96%E5%82%99"><span class="toc-text">プラグインをクローンする準備</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GitHub%E3%81%AB%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%82%92%E7%99%BB%E9%8C%B2%E3%81%97%E3%82%88%E3%81%86"><span class="toc-text">GitHubにアカウントを登録しよう</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSH%E5%85%AC%E9%96%8B%E9%8D%B5%E3%82%92GitHub%E3%81%AB%E7%99%BB%E9%8C%B2%E3%81%97%E3%82%88%E3%81%86"><span class="toc-text">SSH公開鍵をGitHubに登録しよう</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%82%92%E5%88%A9%E7%94%A8%E3%81%99%E3%82%8B"><span class="toc-text">プラグインを利用する</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#git-clone%E3%81%97%E3%82%88%E3%81%86"><span class="toc-text">git cloneしよう</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%81%AF%E6%9B%B4%E6%96%B0%E3%81%95%E3%82%8C%E3%82%8B%E3%81%93%E3%81%A8%E3%81%8C%E3%81%82%E3%82%8B"><span class="toc-text">プラグインは更新されることがある</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%99%E8%AB%87%EF%BC%9A%E3%82%BB%E3%83%9E%E3%83%B3%E3%83%86%E3%82%A3%E3%83%83%E3%82%AF%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%8B%E3%83%B3%E3%82%B0"><span class="toc-text">余談：セマンティックバージョニング</span></a></li></ol></li></ol>
+        </div>
+        <p>メリークリスマス！<br>この記事は<a href="https://adventar.org/calendars/2288" target="_blank" rel="noopener">RPGツクールMV Advent Calendar 2017</a>の記事（前半）です。<br>後半の記事については <a href="/nplus_doc/2017/12/24/engineering/rmmv/rpgtkoolmv-write-plugin/" title="RPGツクールMV やさしいプラグインの書き方 応用編">RPGツクールMV やさしいプラグインの書き方 応用編</a> へどうぞ</p>
+<a id="more"></a>
+
+<h1 id="はじめに"><a href="#はじめに" class="headerlink" title="はじめに"></a>はじめに</h1><h2 id="誰が読めばいいの？"><a href="#誰が読めばいいの？" class="headerlink" title="誰が読めばいいの？"></a>誰が読めばいいの？</h2><p>「やさしい書き方」と銘打ってはいますが、RPGツクールMVのプラグインを利用するすべての人に向けた内容を含みます。<br>gitを利用していない人にとってはちょっと慣れない話も出てくるかもしれませんが、これを覚えておけばゲームの開発効率の向上に繋がるので、余裕がある時にでも読んでみてください。</p>
+<p>また、<a href="/nplus_doc/2017/12/24/engineering/rmmv/rpgtkoolmv-write-plugin/" title="後半の記事">後半の記事</a>にはRPGツクールMVのプラグインを読み書きする人に向けた内容も含みます。<br>これからプラグインを書いてみようと思っている人はもちろん、今プラグインを書いて公開している人にも是非読んでいただきたく思います。</p>
+<p>筆者がWindowsユーザであるため、内容もWindowsユーザに向けたものになっています。<br>MacやLinuxを利用できる人はその時点でリテラシーが高いはずですので、適宜読み替えていけるものと思います。</p>
+<h2 id="どんな内容？"><a href="#どんな内容？" class="headerlink" title="どんな内容？"></a>どんな内容？</h2><p>まず、前半の基礎編ではRPGツクールMVのプラグインを利用する上で、gitやgithubという強力なツールを利用する方法や、どう利用すると効率がよくなるかと言ったことに言及します。<br>また、プラグインを書かない人、利用するだけの人にとってもgithubが有用なツールであることも説明します。</p>
+<p>RPGツクールMVのプラグインに関わる全ての人がgithubを利用できるようになり、それによって（ゲーム本編か、プラグインかに関わらず）効率的な開発を行えるようになることを目的としています。</p>
+<p>なお、ゲームプロジェクトそのものをgithubで管理することについては既に多くの方が記事を書いていらっしゃるので、適当にググってそちらを参照されると良いと思います。</p>
+<a href="/nplus_doc/2017/12/24/engineering/rmmv/rpgtkoolmv-write-plugin/" title="後半の応用編">後半の応用編</a>では、他の人のプラグインについて不具合の報告をしたり、修正したりすることについて言及した後、やさしいプラグインの書き方について説明します。
+
+<!-- 基礎知識 -->
+<h1 id="基礎知識-準備"><a href="#基礎知識-準備" class="headerlink" title="基礎知識/準備"></a>基礎知識/準備</h1><h2 id="gitって何？-githubって何？"><a href="#gitって何？-githubって何？" class="headerlink" title="gitって何？ githubって何？"></a>gitって何？ githubって何？</h2><!-- gitとgithubは違うよという話 -->
+<p>gitはバージョン管理システムです。（主に）プログラムのソースコードのバージョンを管理するための強力な補助ツールです。<br><a href="https://github.com/" target="_blank" rel="noopener">github</a>はgitリポジトリをオンライン上で管理できるクラウドサービスです。</p>
+<p>これだけではあまりピンと来ない方も少なからずいらっしゃるでしょうから、gitを使ったバージョン管理について具体的に説明します。<br>既にgitやgithubが何者であるかを理解し、その強力さをご存知の方であれば読み飛ばしていただいても構いません。</p>
+<p>例えば、ある開発者がjavascriptを用いて大きめのプログラムを作ったとしましょう。<br>そのプログラムは、とうてい1ファイルに収まる規模のものではなく、main.js、rpg_core.js、rpg_manager.js、rpg_object.js…のようにいくつものファイルに分かれています。<br>今日はrpg_manager.jsを改造しよう、次の日はrpg_object.jsを改造しよう、そのまた次の日は……<br>こうして少しずつ改造を重ねたプログラムは、あの日どんなプログラムであったかを思い出すことが難しい程に巨大で複雑なものになっていきました。</p>
+<p>あの時点のシンプルなコードに戻したい、あの時ここのコードはどんな形で書かれていたんだっけ？ あの時の更新が原因でバグが出てしまったから、それ以前のものに戻したい。<br>そんな欲求を満たすには、開発者はどうすれば良かったでしょうか。</p>
+<p>プログラムを改造する前にそのコピーを取って、別の名前で保存しておく？<br>開発者はやる気に満ち満ちていて、毎日のようにプログラムを改造します。日に三回同じファイルを更新することだってあります。<br>そのたびに違う名前のファイルを作っていては、後で見返した時に、いったいどのファイルを開けば自分が遡りたいところまで行けるのかわかりません。<br>もしかしたら、一番大切な最新のファイルが有象無象の古いプログラムの山に埋もれて見えなくなってしまうかもしれません。<br>ファイル名の付け方を怠ければ、rpg_core最新.jsとか、rpg_core最新 - コピー.jsなんていう見るもおぞましいゴミの山が生まれることにもなりかねません。</p>
+<p>更新内容をメモしたファイルを別に作っておき、ファイル名と対応付ける？<br>更新内容がごくごく小さいものであった場合、開発者は記録を怠けてしまうことでしょう。<br>一度怠けたらあとはそのままズルズルと……<br>後で対応付けのファイルを開いた時、そこには全く役に立たない大昔の更新内容が、三日坊主を体現した自らの怠惰を雄弁に物語っていることでしょう。</p>
+<p>人の手による運用の占める割合が大きくなると、その運用はたいてい破綻するのです。<br>人の能力や勤勉さを決して過信してはいけません。<br>その過信や慢心が開発者自身を混乱させ、間違ったファイルを目的のものと思い込んで不必要なバグを生み、結果としてプログラム全体が壊れたり、完成が大幅に遅れたりするのです。</p>
+<p>人間はあまりにも怠惰で、ポンコツです。<br>なので、機械に頼って生きていきましょう。<br>別々のファイル名をつけたり、更新内容を記録することである時点でのファイルがどんな状態であったかを管理しようとするこの行為は、人の記憶や勤勉さという信用ならないものによって支えられていて失敗しやすいとは言え、バージョン管理そのものです。<br>この作業に相当する内容の大部分を機械に任せることができればどうでしょうか。</p>
+<p>gitによって、main.jsやrpg_core.js等、一つの大きなプログラムを構成する複数のファイルをまとめて <code>リポジトリ</code> を作ります。<br>そうすれば、開発者はコマンドライン上で</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &quot;敵のHPバーを表示する機能を追加した&quot;</span><br></pre></td></tr></table></figure>
+
+<p>と入力するだけで、その時点のプログラムの状態と、前回の更新からどういう更新をしたか、という内容を一度に記録できるのです。<br>（この記録する行為を <code>コミットする</code> と呼び、記録の単位を <code>コミット</code> と呼びます）<br>コミットにはそれぞれ重複しない識別番号（コミット番号）が与えられ、 <code>git log</code> コマンドによって番号と更新日時と更新内容を、更新日時が新しい順に一覧することができます。<br>もし、コミット番号 <code>XXXXXX</code> の時点に戻したくなったら、</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout hoge XXXXXX</span><br></pre></td></tr></table></figure>
+
+<p>と入力するだけで該当のコミットに戻すことができます。</p>
+<p>いちいちファイルをコピーして名前をつけて、その時の更新で何があったかをファイルに記録して……といった欠伸の出る眠たい作業をミスなく運用して、山のような不要なファイルを掘り返す。<br>たった2行のコマンドで得られた番号と記録の一覧を眺める。<br>どちらが開発者にとってやさしく、そして効率よく目的を達成できるかは言うまでもありませんね？</p>
+<p>これがgitです。そして、そのgitで作られたリポジトリをクラウド上で管理できるサービスがgithubです。<br>githubはgitリポジトリの単純なバックアップとなるだけでなく、ウェブブラウザでリポジトリの状態を確認できたり、他の人のリポジトリを見たり、意見を交換したりもできます。<br>gitやgithubはプログラムを書く上で極めて強力なサポートツールなのです。<br>これはRPGツクールMVのプラグインにとっても例外ではありません。</p>
+<p>プラグインの利用者にとっても、そのプラグインがどの時点で更新されたものなのか知っておくことは重要です。（詳しくは後述します）</p>
+<p>では、次のセクションからは実際にgitやgithubを使ってみましょう。</p>
+<h2 id="gitをインストールしよう"><a href="#gitをインストールしよう" class="headerlink" title="gitをインストールしよう"></a>gitをインストールしよう</h2><p><a href="https://git-for-windows.github.io/" target="_blank" rel="noopener">Git for Windows</a> をダウンロードしてインストールしましょう。<br>gitに加え、優秀なコマンドラインツールgit bashもインストールされます。<br>gitリポジトリに対する操作は基本的にこのGit Bashを利用することになります。</p>
+<h2 id="Git-Bashを起動しよう"><a href="#Git-Bashを起動しよう" class="headerlink" title="Git Bashを起動しよう"></a>Git Bashを起動しよう</h2><p>スタートメニュー等からGit Bashを起動しましょう。<br>このような画面が表示されるはずです。</p>
+<p><img src="gitbash.png" alt="Git Bash起動直後" title="GitBash"></p>
+<p>まずはじめにユーザ名とメールアドレスをローカルに登録しておくと良いです。<br>必須ではありませんが、これをしておくとコミット履歴に名前が残ります。<br>もしプラグインを書いたり、他の人のプラグインにちょっとした修正をかけたり、もちろん、自分のゲームプロジェクトをgithubで管理するといった場合にもこれをしておくと良いでしょう。</p>
+<p>起動したGit Bash上で以下の二つのコマンドを入力してください。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;gitで用いるハンドルネーム&quot;</span><br><span class="line">git config --global user.email &quot;gitで用いるメールアドレス&quot;</span><br></pre></td></tr></table></figure>
+
+<p>このコマンドが通ったかどうかは以下のコマンドで確認できます。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config -l | grep user</span><br></pre></td></tr></table></figure>
+
+<p>先程のコマンドで設定した名前とメールアドレスが出てきたら成功です。<br>名前とメールアドレスの設定は何度でもやり直すことができます。</p>
+<h2 id="プラグインをクローンする準備"><a href="#プラグインをクローンする準備" class="headerlink" title="プラグインをクローンする準備"></a>プラグインをクローンする準備</h2><p>Cドライブの下に rmmv-plugins と言った名前のフォルダを作成して、Git Bashに</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd C:\rmmv-plugins</span><br></pre></td></tr></table></figure>
+
+<p>と入力してみてください。cdはchange directoryの略で、Git Bashが今見ているディレクトリ（フォルダ）を変更する、という意味です。<br>対象のフォルダにcdすることを、今後 <code>フォルダに入る</code> と表現します。<br>この記事では例として、rmmv-pluginsフォルダの下に、github上のプラグインをコピーしてきます。</p>
+<p>フォルダの名前や場所は自由ですので、こだわる人は各自フォルダを作ってそこに cd してください。</p>
+<p>いちいちエクスプローラを開いてフォルダを作る操作が面倒だなと思い始めたら mkdir コマンドを試してみるのも良いでしょう。</p>
+<p>ここで開いたGit Bashは後ほど、実際にgithub上のプラグインをコピーする際に使用しますので、慣れていない方は起動したままにしておくと良いでしょう。</p>
+<h2 id="GitHubにアカウントを登録しよう"><a href="#GitHubにアカウントを登録しよう" class="headerlink" title="GitHubにアカウントを登録しよう"></a>GitHubにアカウントを登録しよう</h2><p>プラグインを利用するだけであれば必須ではありません。<br><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>にSignUpしてユーザ登録すると、自分のgitリポジトリをGitHub上にアップロードしたりできます。<br>他のプラグイン作者のリポジトリをWatchしたりもできるので、プラグインを利用するだけであっても、可能であれば登録しておくことをおすすめします。</p>
+<h2 id="SSH公開鍵をGitHubに登録しよう"><a href="#SSH公開鍵をGitHubに登録しよう" class="headerlink" title="SSH公開鍵をGitHubに登録しよう"></a>SSH公開鍵をGitHubに登録しよう</h2><p>これもプラグインを利用するだけなら必須ではありません。<br>もしプログラムを書いたり修正したりするのであれば、 <a href="https://qiita.com/suthio/items/2760e4cff0e185fe2db9" target="_blank" rel="noopener">お前らのSSH Keysの作り方は間違っている - Qiita</a> に書かれた方法に従ってSSH鍵を新規作成し、GitHubに登録しましょう。</p>
+<p>これでgithubを利用する準備は完了です。</p>
+<h1 id="プラグインを利用する"><a href="#プラグインを利用する" class="headerlink" title="プラグインを利用する"></a>プラグインを利用する</h1><p>このセクションでは、プラグインを利用する際のgit/githubの使い方について説明します。</p>
+<h2 id="git-cloneしよう"><a href="#git-cloneしよう" class="headerlink" title="git cloneしよう"></a>git cloneしよう</h2><p>単にプラグインをダウンロードするだけでも良いですが、github上に公開されているリポジトリはgit cloneコマンドによってすべてローカルにコピーすることができます。<br>試しに私のRPGツクールMVプラグインをまとめたリポジトリをクローンしてみましょう。</p>
+<p>Git Bashに以下のように入力してください。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/elleonard/RPGtkoolMV-Plugins.git</span><br></pre></td></tr></table></figure>
+
+<p>もしくは、githubにSSH鍵を登録している方は以下でも構いません。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone git@github.com:elleonard/RPGtkoolMV-Plugins.git</span><br></pre></td></tr></table></figure>
+
+<p>gitコマンドによってgithub上のリポジトリがローカルにコピーされます。<br><code>cd RPGtkoolMV-Plugins</code> と入力すればコピー先のフォルダに入ることができ、フォルダ名の横に <code>(master)</code> という表示が出ます。<br>（プラグインを利用するだけであれば、この意味は理解しなくても問題ありません。Git Bashがリポジトリの中を見ているのだ、というだけです）</p>
+<p>RPGツクールMVで利用するためには .js ファイルを js/plugins フォルダの下にコピーする必要があります。<br>リポジトリをcloneするこの方法では .js ファイルを直接ダウンロードするよりも一手間増えています。</p>
+<p>では何故、この一手間をかけることが開発効率の向上に繋がるのでしょうか。</p>
+<h2 id="プラグインは更新されることがある"><a href="#プラグインは更新されることがある" class="headerlink" title="プラグインは更新されることがある"></a>プラグインは更新されることがある</h2><p>github上のプラグインは作者の意思で更新されることがあります。<br>プラグインの作者も人間ですので、プラグインを書く際に間違いを犯したりバグを仕込んでしまったりします。<br>そういった時にバグ修正をしたり、あるいは機能を増やすためにプラグインをバージョンアップすることもあります。</p>
+<p>バージョンアップの頻度にもよりますが、利用者がダウンロードしたタイミングによってプラグインの内容が変わっていることが少なからずあるのです。</p>
+<p>「あれ？　このプラグインを入れたら挙動がおかしくなったぞ？」<br>「他のプラグインと競合しちゃってるのかな？」</p>
+<p>プラグインを読んだり書いたりしないゲーム制作者でも、こういった状況に遭遇することはあるでしょう。<br>そういう時に作者に質問をすることは悪いことではないのですが、何度もバージョンアップされたプラグインの場合、どの時点のものかわからないと質問された側も答えようがありません。</p>
+<p>ところで、gitはバージョン管理システムです。<br>基礎知識のセクションで説明した通り、 <code>git log</code> コマンドを使用すればそのリポジトリがどの時点のものかわかります。<br><code>git clone</code> コマンドはその時点のリポジトリの状態をまるごとコピーしてくるので、Git Bashでそのディレクトリの中に入って <code>git log</code> コマンドを使用すればコミット番号やコミット日時がわかるのです。</p>
+<p>また、github上のリポジトリで公開されているプラグインであれば、github上でそのファイルの更新日時やリポジトリの最新のコミット番号を確認できます。<br>つまり、今利用しているプラグインが最新のものであるかどうかくらいは、<code>git log</code> の結果とgithub上の表示を照らし合わせることで確認ができるのです。<br>最新でない場合は最新にすることで問題が解消するかもしれませんし、最新であるにも関わらず思い通りの動きをしてくれないのであれば、その旨を作者に伝えることができます。<br>作者の側からすれば、質問を受けた後いちいち「最新のプラグインを使っていますか？」という打ち返しをせずに済むのです。<br>作者の答える手間ももちろん、質問する側が望みの回答を得るまでの時間も短縮され、嬉しいことだらけですね。</p>
+<p>もし、最新の更新を取り込みたいのであれば、Git Bashでクローンしたフォルダの中へ入って、以下のコマンドを入力してください。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git pull origin master</span><br></pre></td></tr></table></figure>
+
+<p>詳しい説明は省きますが、この場合の <code>git pull</code> は、github上の更新を取り込むという意味です。<br>このコマンドが実行されると、Git Bashで見ているローカルのリポジトリが、github上の最新のコミットで更新されます。<br>最新版のダウンロードも、コマンド一行だけでできてしまう、というわけですね。</p>
+<p>プラグインを利用する方にとっての記事はここまでです。<br>完全な初心者に向けてできるだけわかりやすく書いたつもりでしたが、それでも新しいことを覚えるのは難しいことと思います。<br>今すぐにすべてできるようになる必要はもちろんなく、けれど将来的にちょっとずつgitと仲良くなっていくと、開発効率も少しずつ良くなることでしょう。<br>ですので、他の作業に詰まった時の気分転換にでもこの記事の内容を思い返していただければと思います。</p>
+<p>そして、ここまでの内容を実践し理解された方は次の<a href="/nplus_doc/2017/12/24/engineering/rmmv/rpgtkoolmv-write-plugin/" title="RPGツクールMV やさしいプラグインの書き方 応用編">RPGツクールMV やさしいプラグインの書き方 応用編</a>で「プラグインを修正する」「不具合を報告する」と言った内容に是非挑戦してみてください。</p>
+<h2 id="余談：セマンティックバージョニング"><a href="#余談：セマンティックバージョニング" class="headerlink" title="余談：セマンティックバージョニング"></a>余談：セマンティックバージョニング</h2><!-- プラグインについているバージョンについて -->
+<p>これは長い記事を読んで疲れた方向けのちょっとした余談ですので、読み飛ばしていただいても問題ありません。</p>
+<p>プラグインには、説明にバージョン番号が書かれていることがあります。<br>1.0.3 のような表記に見覚えのある方は少なくないでしょう。<br>（有名なところでは<a href="https://twitter.com/triacontane" target="_blank" rel="noopener">某きのこ印の大先生</a>がこのバージョニングを行っていますね）</p>
+<p>このバージョン、実は適当につけられているものではありません。<br>基本的に<a href="http://semver.org/lang/ja/" target="_blank" rel="noopener">セマンティックバージョニング</a>という決まりごとに従ってつけられているものです。<br>上記ページの説明を噛み砕いてみます。<br>バージョン x.y.z のうちの x がメジャーバージョン y がマイナーバージョン z がパッチバージョンと呼ばれます。<br>プラグインの更新があった場合にこのうちのいずれかのバージョンが上がるわけですが、どれが上がるかは更新内容によって決まります。</p>
+<p>互換性のない更新があった場合、つまり、js/plugins下のプラグインを更新後のもので上書きすると以前のように動かなくなる場合（以前できていた正常な動作を以前と同じ設定では再現できなくなる場合）はメジャーバージョンが上がります。<br>メジャーバージョンは基本的に（良い開発者であれば）滅多に上がりません。メジャーバージョンを上げるということは、利用者がプラグインを更新する際、以前の動作を再現するためにプラグインパラメータの設定を見直す手間をかけねばならないということです。<br>そんな更新が頻繁に入っていたら、利用者はどの時点のものを利用したら良いかわからなくなってしまいますね。<br>いちいち最新の更新に利用者が追従するのがコストになってしまうので、そういうプラグインは「利用者にやさしくない」ものになってしまいます。<br>なので、いい加減皆さんも忘れた頃であろうこの記事のタイトル「やさしいプラグインの書き方」に従って書くならば、メジャーバージョンは頻繁に上げるべきではない、ということです。</p>
+<p>互換性はあるが新しい機能を追加するような修正があった場合はマイナーバージョンが上がります。<br>例えば、メニューから開ける新しい画面を追加するようなプラグインについて、その新しい画面をマップ上からショートカットキーで開けるようにする更新、というのはこの場合に当てはまるでしょう。</p>
+<p>そして、互換性があり機能追加ではなく小さなバグ修正のみがあった場合は、パッチバージョンが上がります。</p>
+<p>利用者にとって、マイナーバージョンとパッチバージョンの更新は（たいていの場合）すぐに取り込んでしまっても問題ないもの、という意味です。<br>メジャーバージョンの更新があった場合は、その更新を取り込むために手間がかかることを意味しているので、更新内容次第では慎重になるべきでしょう。</p>
+<p>ただし、これらの決まりごとはメジャーバージョンが0の場合には当てはまりません。<br>メジャーバージョン0のものはひたすら高速に頻繁にアップデートされる可能性があり、プラグインとして安定していないので多くの場合取り込むべきではないです。<br>（もちろん、メジャーバージョン0のプラグインを公開している人がいたとしたら、の話ですが）</p>
+<p>セマンティックバージョニングを初めて見る人にとっては直感に反することかもしれませんが、実はそれぞれのバージョンは桁数の制限がありません。<br>例えば、1.0.9の時点で互換性のあるバグ修正が入った場合、バージョンは1.0.10になります。<br>どこかが繰り上がって上位のバージョンに影響を与える、などということはありません。</p>
+<p>しかしメジャーバージョンが更新された時にはマイナーバージョンとパッチバージョンが、マイナーバージョンが更新された時にはパッチバージョンが0になります。<br>つまり、 1.0.10 から、互換性のある機能追加が行われた場合には 1.1.0 になります。<br>互換性のない更新があった場合は、 2.0.0 となるのです。</p>
+
+      
+    </div>
+    
+    <footer>
+        <div class="article-footer">
+        <div class="footer-left">
+        
+  
+  <div class="categories">
+    <a href="/nplus_doc/categories/ゲーム制作/">ゲーム制作</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/nplus_doc/tags/情報技術/">情報技術</a>, <a href="/nplus_doc/tags/RPGツクールMV/">RPGツクールMV</a>, <a href="/nplus_doc/tags/github/">github</a>
+  </div>
+
+        </div>
+        <div class="footer-right">
+          <a target="_blank" rel="noopener" href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="RPGツクールMV やさしいプラグインの書き方 基礎編 | ぷらずま式改" data-url="https://elleonard.github.io/nplus_doc/2017/12/24/engineering/rmmv/rpgtkoolmv-github/" data-via="elleonard_f" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+        </div>
+        
+          <div class="article-prev">
+              <a href="/nplus_doc/2017/12/25/anime/konohanakitan/">【アニメ感想】このはな綺譚 <span class="prev-arrow"/></a>
+            </div>
+        
+        
+          <div class="article-next">
+            <a href="/nplus_doc/2017/12/24/engineering/rmmv/rpgtkoolmv-write-plugin/">RPGツクールMV やさしいプラグインの書き方 応用編 <span class="next-arrow"/></a>
+          </div>
+        
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="検索">
+    <input type="hidden" name="q" value="site:elleonard.github.io/nplus_doc">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">カテゴリ</h3>
+  <ul class="entry">
+  
+    <li><a href="/nplus_doc/categories/FGO/">FGO</a><small>47</small></li>
+  
+    <li><a href="/nplus_doc/categories/niconico/">niconico</a><small>3</small></li>
+  
+    <li><a href="/nplus_doc/categories/アニメ感想/">アニメ感想</a><small>10</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム/">ゲーム</a><small>77</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム/ゲームレビュー/">ゲームレビュー</a><small>61</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム制作/">ゲーム制作</a><small>12</small></li>
+  
+    <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/デッキレシピ/">デッキレシピ</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/小説/">小説</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/情報技術/">情報技術</a><small>11</small></li>
+  
+    <li><a href="/nplus_doc/categories/漫画/">漫画</a><small>2</small></li>
+  
+    <li><a href="/nplus_doc/categories/百合/">百合</a><small>9</small></li>
+  
+    <li><a href="/nplus_doc/categories/艦これ/">艦これ</a><small>76</small></li>
+  
+    <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/">遊戯王ブロンティーズ</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/雑記/">雑記</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最近の投稿</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/nplus_doc/2022/04/27/game/atelier/sophie2/">【ゲーム感想】ソフィーのアトリエ2 ～不思議な夢の錬金術士～</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/04/10/misc/social-game-overcame-me/">ソシャゲを続けられない無力な人間の嘆き</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/02/09/game/neptunia/neptunia-senran-kagura-ninja-wars/">【ゲーム感想】閃乱忍忍忍者大戦ネプテューヌ -少女たちの饗宴-</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/01/18/game/night-of-azure/night-of-azure/">【ゲーム感想】よるのないくに</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2021/12/31/misc/2021/">2021年の振り返り</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Link</h3>
+  <ul class="entry">
+    
+      <li>
+        <a target="_blank" rel="noopener" href="https://www.nicovideo.jp/">niconico</a>
+      </li>
+    
+      <li>
+        <a target="_blank" rel="noopener" href="http://lovingtheflags1986.blog96.fc2.com/">国旗と酒が待ち遠しいドリル日記</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  <p>
+  
+  &copy; 2022 NPlasma
+  
+  All rights reserved.</p>
+  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</div>
+<div class="alignright">
+  <a target="_blank" rel="noopener" href="https://github.com/elleonard"><i class="fab fa-github"></i></a>
+  <a target="_blank" rel="noopener" href="https://twitter.com/elleonard_f"><i class="fab fa-twitter-square"></i></a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="/nplus_doc/js/jquery.imagesloaded.min.js"></script>
+<script src="/nplus_doc/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/nplus_doc/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/nplus_doc/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id='bg'></div>
+</body>
+</html>

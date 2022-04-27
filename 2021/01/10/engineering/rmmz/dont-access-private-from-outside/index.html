@@ -1,0 +1,374 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>【RPGツクールMV/MZ】なぜアンダースコアで始まる変数にクラスの外からアクセスしてはならないのか | ぷらずま式改</title>
+  <meta name="author" content="NPlasma" />
+
+  
+  <meta name="description" content="NPlasmaの個人メモ" />
+  
+
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <meta property="og:title" content="【RPGツクールMV/MZ】なぜアンダースコアで始まる変数にクラスの外からアクセスしてはならないのか" />
+  <meta property="og:site_name" content="ぷらずま式改" />
+
+  
+  
+
+  
+    <meta property="og:image" content="/img/ogp.png" />
+  
+
+  <!-- ogp -->
+  
+    
+      <meta name="description" content="本記事は、RPGツクールMVまたはMZのスクリプト、プラグインを書いているものの、本記事タイトルの理由がわからない人に向けて書いています。有識者の方におかれましては、正確性を欠いた記述を見つけ次第、twitter @plasma_dark (R18) または @elleonard_f (年齢制限なし) へご連絡ください。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【RPGツクールMV&#x2F;MZ】なぜアンダースコアで始まる変数にクラスの外からアクセスしてはならないのか">
+<meta property="og:url" content="https://elleonard.github.io/nplus_doc/2021/01/10/engineering/rmmz/dont-access-private-from-outside/index.html">
+<meta property="og:site_name" content="ぷらずま式改">
+<meta property="og:description" content="本記事は、RPGツクールMVまたはMZのスクリプト、プラグインを書いているものの、本記事タイトルの理由がわからない人に向けて書いています。有識者の方におかれましては、正確性を欠いた記述を見つけ次第、twitter @plasma_dark (R18) または @elleonard_f (年齢制限なし) へご連絡ください。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://elleonard.github.io/nplus_doc/2021/01/10/engineering/rmmz/dont-access-private-from-outside/event1.png">
+<meta property="og:image" content="https://elleonard.github.io/nplus_doc/2021/01/10/engineering/rmmz/dont-access-private-from-outside/yubaba.png">
+<meta property="og:image" content="https://elleonard.github.io/nplus_doc/2021/01/10/engineering/rmmz/dont-access-private-from-outside/default.png">
+<meta property="og:image" content="https://elleonard.github.io/nplus_doc/2021/01/10/engineering/rmmz/dont-access-private-from-outside/dugger.png">
+<meta property="og:image" content="https://elleonard.github.io/nplus_doc/2021/01/10/engineering/rmmz/dont-access-private-from-outside/star.png">
+<meta property="og:image" content="https://elleonard.github.io/nplus_doc/2021/01/10/engineering/rmmz/dont-access-private-from-outside/yubaba2.png">
+<meta property="og:image" content="https://elleonard.github.io/nplus_doc/2021/01/10/engineering/rmmz/dont-access-private-from-outside/yubaba3.png">
+<meta property="og:image" content="https://elleonard.github.io/nplus_doc/2021/01/10/engineering/rmmz/dont-access-private-from-outside/yubaba4.png">
+<meta property="og:image" content="https://elleonard.github.io/nplus_doc/2021/01/10/engineering/rmmz/dont-access-private-from-outside/100damage.png">
+<meta property="og:image" content="https://elleonard.github.io/nplus_doc/2021/01/10/engineering/rmmz/dont-access-private-from-outside/hpminus.png">
+<meta property="article:published_time" content="2021-01-10T05:03:33.000Z">
+<meta property="article:modified_time" content="2022-04-16T09:44:10.493Z">
+<meta property="article:author" content="NPlasma">
+<meta property="article:tag" content="情報技術">
+<meta property="article:tag" content="RPGツクールMV">
+<meta property="article:tag" content="RPGツクールMZ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://elleonard.github.io/nplus_doc/2021/01/10/engineering/rmmz/dont-access-private-from-outside/event1.png">
+<meta name="twitter:creator" content="@elleonard_f">
+    
+    <meta name="twitter:image" content="https://elleonard.github.io/nplus_doc/img/ogp.png"/>
+  
+
+  <link rel="alternate" href="/nplus_doc/atom.xml" title="ぷらずま式改" type="application/atom+xml">
+  <link rel="stylesheet" href="/nplus_doc/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/nplus_doc/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/nplus_doc//favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/nplus_doc//favicon/favicon-16x16.png">
+  <link rel="manifest" href="/nplus_doc//favicon/site.webmanifest">
+  <link rel="mask-icon" href="/nplus_doc//favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <script src="https://kit.fontawesome.com/b51cad8f00.js" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/nplus_doc/">ぷらずま式改</a></h1>
+  <h2><a href="/nplus_doc/">NPlasma個人メモ</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/nplus_doc/">Home</a></li>
+    
+      <li><a href="/nplus_doc/2016/05/29/about/">About</a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://twitter.com/elleonard_f">Twitter</a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://github.com/elleonard">GitHub</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2021-01-10T05:03:33.000Z"><a href="/nplus_doc/2021/01/10/engineering/rmmz/dont-access-private-from-outside/">2021-01-10</a></time>
+      
+      
+  
+    <h1 class="title">【RPGツクールMV/MZ】なぜアンダースコアで始まる変数にクラスの外からアクセスしてはならないのか</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <div id="toc" class="toc-article">
+          <p class="toc-title">目次</p>
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B5%8C%E7%B7%AF"><span class="toc-text">経緯</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%82%A2%E3%83%B3%E3%83%80%E3%83%BC%E3%82%B9%E3%82%B3%E3%82%A2%E3%81%A7%E5%A7%8B%E3%81%BE%E3%82%8B%E5%A4%89%E6%95%B0%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AE%E8%AA%AC%E6%98%8E"><span class="toc-text">アンダースコアで始まる変数についての説明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%82%A2%E3%82%AF%E3%82%BF%E3%83%BC%E3%81%AE%E5%90%8D%E5%89%8D"><span class="toc-text">アクターの名前</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9F%E7%8F%BE%E3%81%97%E3%81%9F%E3%81%84%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E4%BE%8B"><span class="toc-text">実現したいシステムの例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E8%A6%8F%E6%A8%A1%E3%81%AE%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3"><span class="toc-text">最小規模のプラグイン</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%82%92%E6%8B%A1%E5%BC%B5%E3%81%99%E3%82%8B"><span class="toc-text">プラグインを拡張する</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%82%A2%E3%82%AF%E3%82%BF%E3%83%BC%E3%81%AEHP"><span class="toc-text">アクターのHP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9F%E7%8F%BE%E3%81%97%E3%81%9F%E3%81%84%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E4%BE%8B-1"><span class="toc-text">実現したいシステムの例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Game-Actor%E3%81%AE%E5%A4%96%E9%83%A8%E3%81%8B%E3%82%89HP%E3%82%92%E7%9B%B4%E6%8E%A5%E6%93%8D%E4%BD%9C%E3%81%99%E3%82%8B"><span class="toc-text">Game_Actorの外部からHPを直接操作する</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E3%81%97%E3%81%84%E3%82%84%E3%82%8A%E6%96%B9%E3%81%AF%E3%82%B3%E3%82%A2%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E5%86%85%E3%81%AB%E3%81%82%E3%82%8B"><span class="toc-text">正しいやり方はコアスクリプト内にある</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%AD%A3%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3"><span class="toc-text">修正プラグイン</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%A4%96"><span class="toc-text">例外</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%81%BE%E3%81%A8%E3%82%81"><span class="toc-text">まとめ</span></a></li></ol>
+        </div>
+        <p>本記事は、RPGツクールMVまたはMZのスクリプト、プラグインを書いているものの、本記事タイトルの理由がわからない人に向けて書いています。<br>有識者の方におかれましては、正確性を欠いた記述を見つけ次第、twitter <a href="https://twitter.com/plasma_dark" target="_blank" rel="noopener">@plasma_dark (R18)</a> または <a href="https://twitter.com/elleonard_f" target="_blank" rel="noopener">@elleonard_f (年齢制限なし)</a> へご連絡ください。</p>
+<a id="more"></a>
+
+<h1 id="経緯"><a href="#経緯" class="headerlink" title="経緯"></a>経緯</h1><p>RPGツクールMV/MZはjavascriptで書かれたコアスクリプトを、同様にjavascriptで記述したプラグインにより拡張・改変することができます。<br>また、イベントコマンドとしてツクールエディタ内で小規模なスクリプトを書いて動作させることも可能です。<sup class="footnote-ref"><a href="#fn1" id="fnref1" title="内部的にはevalしているので、規模の大きなスクリプトは推奨しないし、小規模でも多用しないほうが良い。">1</a></sup></p>
+<p>コアスクリプトは記法こそクラスでなくprototypeで書かれているものの、フォーマットが整っていてかなり読みやすい類のコードになっています。<br>自分でゲームシステムを拡張するためにプラグインを書き始めるユーザも少なからずいるようで、そういった入門者に向けた解説記事も熱心なユーザによって整備されつつあります。</p>
+<p>本記事もその一環ではありますが、内容は記事タイトルにある通り、コーディングの際に気をつけるべきある一点に絞っています。<br>RPGツクールMV/MZのプラグインを読み書きするがそのスキルに不安を持つ人向けであるため、カプセル化に関する詳細な説明を行うものではなく、RPGツクールMV/MZに絞ってその理由を例と共に紹介する内容であることをご承知おきください。</p>
+<h1 id="アンダースコアで始まる変数についての説明"><a href="#アンダースコアで始まる変数についての説明" class="headerlink" title="アンダースコアで始まる変数についての説明"></a>アンダースコアで始まる変数についての説明</h1><p>アンダースコアで始まる変数<sup class="footnote-ref"><a href="#fn2" id="fnref2" title="正確にはメソッドも含むが、コアスクリプト内で見る頻度は圧倒的に変数のほうが多い。">2</a></sup>は、RPGツクールMV/MZのコアスクリプトの規則として、クラスの外部から直接アクセスすべきでない、という暗黙の決まりがあります。<sup class="footnote-ref"><a href="#fn3" id="fnref3" title="クラス内部に秘匿しておきたい情報に外部からアクセスさせない機能を持つ言語もあるが、javascriptはそうではないので、命名でその意味を表す慣習がある。">3</a></sup> <sup class="footnote-ref"><a href="#fn4" id="fnref4" title="プライベートクラスフィールドは実験的な内容であり、サポートしていないブラウザもあるため、ここでは触れない。">4</a></sup></p>
+<p>これがなぜかと言うと、クラスとして公開している操作<sup class="footnote-ref"><a href="#fn5" id="fnref5" title="外からアクセスしても良いメソッド。変数そのものを公開することは多くない。">5</a></sup>を限定することでクラスごとの独立性を担保し、保守しやすくするためです。<br>……とだけ言っても初学者には何のことやら、と思いますので、二つほど簡単な例を紹介します。</p>
+<h1 id="アクターの名前"><a href="#アクターの名前" class="headerlink" title="アクターの名前"></a>アクターの名前</h1><p><code>Game_Actor</code> クラスが持つ <code>_name</code> 変数について考えてみることにします。<br>これはアクターの名前を意味する変数ですが、 <code>Game_Actor</code> 以外のクラスからは <code>Game_Actor.prototype.name</code> メソッドを介してアクセスされています。</p>
+<p>例えば、ステータス画面で名前を描画する際は以下のようにしてアクセスしています。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Window_StatusBase.prototype.drawActorName = <span class="function"><span class="keyword">function</span>(<span class="params">actor, x, y, width</span>) </span>&#123;</span><br><span class="line">    width = width || <span class="number">168</span>;</span><br><span class="line">    <span class="keyword">this</span>.changeTextColor(ColorManager.hpColor(actor));</span><br><span class="line">    <span class="keyword">this</span>.drawText(actor.name(), x, y, width);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><code>actor.name()</code> がアクターの名前です。<br>メソッドの内容はどうなっているかというと</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Game_Actor.prototype.name = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>._name;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><code>this._name</code> を返しているだけです。<br>ステータス画面で名前を描画する際に使っていた <code>actor</code> は <code>Game_Actor</code> クラスの実体で、そのアクターの名前にアクセスするだけであれば <code>actor._name</code> と書いても良いはずです。<br>ですが、ここではそれをせず、メソッドを介してアクセスしています。</p>
+<p>アクターの名前に関する拡張プラグインを作りたいと思った時に、この仕組みが効いてきます。</p>
+<h2 id="実現したいシステムの例"><a href="#実現したいシステムの例" class="headerlink" title="実現したいシステムの例"></a>実現したいシステムの例</h2><p>まず、全てのアクターの表示上の名前を、元の名前の両サイドにダガー文字を付与したものにしたいという要求があったとします。<br>ここで元の名前とは、データベースに設定されているアクターの名前のみならず、イベントコマンドの名前の変更を使って変更した後の名前も含んだ意味であるとします。<sup class="footnote-ref"><a href="#fn6" id="fnref6" title="混乱させるようで非常に心苦しいが、実装を単純化するための仕様定義。例えば、「すけ」という名前を「かく」にイベントコマンドで変更した場合、表示上「†かく†」とする。">6</a></sup></p>
+<h2 id="最小規模のプラグイン"><a href="#最小規模のプラグイン" class="headerlink" title="最小規模のプラグイン"></a>最小規模のプラグイン</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line"><span class="meta">  'use strict'</span>;</span><br><span class="line">  Game_Actor.prototype.name = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`†<span class="subst">$&#123;<span class="keyword">this</span>._name&#125;</span>†`</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>これだけです。 <code>Game_Actor.prototype.name</code> を上書きして、両サイドにダガー文字をつけた名前を返すようにしています。<br>ステータス画面をはじめ、名前を描画する箇所では全てこのメソッドを介してアクセスされるので、最低限のプラグインで済ませることができました。</p>
+<p>このプラグインが何をしているかというと、 <code>name</code> という <code>Game_Actor</code> がクラスの外部に対して提供する、名前を取得する操作の実装を書き換えています。<br>ステータス画面を描画する <code>Window_StatusBase</code> などの外部クラスは、こうして提供された操作<sup class="footnote-ref"><a href="#fn7" id="fnref7" title="インターフェースと呼ばれる。">7</a></sup>だけ把握しておけば良く、その中の実装がどうなっているかまで知っている必要はありません。</p>
+<h2 id="プラグインを拡張する"><a href="#プラグインを拡張する" class="headerlink" title="プラグインを拡張する"></a>プラグインを拡張する</h2><p>ダガーを星にしたいとか、油屋の経営者に贅沢だと名前を一文字にされる場合はどうすれば良いでしょう。<br>もちろん、元の世界に戻るためには名前を取り戻さなければいけません。ついでにダガー文字もつけてオシャレに凱旋したいお年頃かもしれません。</p>
+<p>今回は簡単のため、以下のようにしました。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line"><span class="meta">  'use strict'</span>;</span><br><span class="line">  <span class="keyword">const</span> DUGGER = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">const</span> STAR = <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">const</span> YUBABA = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> NAME_CHANGE_VARIABLE_ID = <span class="number">17</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> _Game_Actor_name = Game_Actor.prototype.name;</span><br><span class="line">  Game_Actor.prototype.name = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> ($gameVariables.value(NAME_CHANGE_VARIABLE_ID)) &#123;</span><br><span class="line">    <span class="keyword">case</span> DUGGER:</span><br><span class="line">      <span class="keyword">return</span> <span class="string">`†<span class="subst">$&#123;<span class="keyword">this</span>._name&#125;</span>†`</span>;</span><br><span class="line">    <span class="keyword">case</span> STAR:</span><br><span class="line">      <span class="keyword">return</span> <span class="string">`☆<span class="subst">$&#123;<span class="keyword">this</span>._name&#125;</span>☆`</span>;</span><br><span class="line">    <span class="keyword">case</span> YUBABA:</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>._name.substring(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _Game_Actor_name.call(<span class="keyword">this</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>変数17番の値次第で、アクターの名前が変わるというものです。</p>
+<p><img src="event1.png" alt="イベント1" title="イベント1"><br><img src="yubaba.png" alt="贅沢な名前" title="贅沢な名前"></p>
+<p>こんな感じのイベントで変数の値を書き換えて、名前が変わるかどうか見てみましょう。</p>
+<p><img src="default.png" alt="元々の名前" title="元々はこんな名前"></p>
+<p>元々こうであったものに……</p>
+<p><img src="dugger.png" alt="ダガー文字" title="kuraudoとか言っちゃダメ"><br><img src="star.png" alt="星" title="これがほんとのキラキラネーム"></p>
+<p>ダガーや星を両サイドにくっつけたり</p>
+<p><img src="yubaba2.png" alt="贅沢な名前だね" title="贅沢な名前"><br><img src="yubaba3.png" alt="名前を奪われます" title="今日からお前の名前は"><br><img src="yubaba4.png" alt="質素な名前に" title="質素な名前"></p>
+<p>一文字になったりします。</p>
+<p>アクターの名前にはメソッドを介してアクセスされるため、この実装で正しく動くわけです。</p>
+<h1 id="アクターのHP"><a href="#アクターのHP" class="headerlink" title="アクターのHP"></a>アクターのHP</h1><p>アクターの名前の例では、値を取得する操作に絞って説明しました。<br>今度はアクターのHPを増減させる操作、つまり値を書き換える操作を例にとって説明します。</p>
+<h2 id="実現したいシステムの例-1"><a href="#実現したいシステムの例-1" class="headerlink" title="実現したいシステムの例"></a>実現したいシステムの例</h2><p>話をシンプルにするために、パーティリーダーのHPに100のダメージを与えるプラグインコマンドを考えます。</p>
+<h2 id="Game-Actorの外部からHPを直接操作する"><a href="#Game-Actorの外部からHPを直接操作する" class="headerlink" title="Game_Actorの外部からHPを直接操作する"></a>Game_Actorの外部からHPを直接操作する</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*:</span></span><br><span class="line"><span class="comment"> * @plugindesc リーダーにダメージを与えるプラグインコマンド</span></span><br><span class="line"><span class="comment"> * @author DarkPlasma</span></span><br><span class="line"><span class="comment"> * @target MZ</span></span><br><span class="line"><span class="comment"> * @command リーダーに100ダメージ</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line"><span class="meta">  'use strict'</span>;</span><br><span class="line">  <span class="keyword">const</span> pluginName = <span class="built_in">document</span>.currentScript.src.replace(<span class="regexp">/^.*\/(.*).js$/</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">arguments</span>[<span class="number">1</span>];</span><br><span class="line">  &#125;);</span><br><span class="line">  </span><br><span class="line">  PluginManager.registerCommand(pluginName, <span class="string">'リーダーに100ダメージ'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">args</span>) </span>&#123;</span><br><span class="line">    $gameParty.leader()._hp -= <span class="number">100</span>;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>プラグインコマンドの作り方については、<a href="https://tkool.jp/mz/plugin/make/koushiki.html" target="_blank" rel="noopener">公式のプラグイン講座</a>を参照してください。<br>ここでは、プラグインコマンドの処理の中身についてのみ説明します。</p>
+<p><code>$gameParty.leader()</code> で、パーティリーダーのアクターの状態、すなわち <code>Game_Actor</code> インスタンスを取得することができます。<br>そのHPを100減らしているのだから、これで正常に動きそうだと思われるかもしれません。<br>では、実際にこのプラグインコマンドを数回実行してステータス画面で結果を確認してみましょう。</p>
+<p><img src="100damage.png" alt="100ダメージイベント" title="リーダーに100ダメージを与えるイベント"></p>
+<p><img src="hpminus.png" alt="HPがマイナスに！" title="HPが負の値に"></p>
+<p>はい。不具合です。HPがなんと負の値になっています。<br><code>Game_Actor</code> クラスの外部から <code>_hp</code> を直接操作してしまうと、こうなります。</p>
+<h2 id="正しいやり方はコアスクリプト内にある"><a href="#正しいやり方はコアスクリプト内にある" class="headerlink" title="正しいやり方はコアスクリプト内にある"></a>正しいやり方はコアスクリプト内にある</h2><p>イベントコマンドの「HPの増減」でバトラーやアクターのHPを増減させるためのコードを確認してみましょう。<br>rmmz_objects.js 内に次のように定義されています。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Game_Interpreter.prototype.changeHp = <span class="function"><span class="keyword">function</span>(<span class="params">target, value, allowDeath</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (target.isAlive()) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!allowDeath &amp;&amp; target.hp &lt;= -value) &#123;</span><br><span class="line">            value = <span class="number">1</span> - target.hp;</span><br><span class="line">        &#125;</span><br><span class="line">        target.gainHp(value);</span><br><span class="line">        <span class="keyword">if</span> (target.isDead()) &#123;</span><br><span class="line">            target.performCollapse();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>諸々コードが書かれていますが、重要なのは <code>target.gainHp(value);</code> の行です。<br><code>target</code> はHPの増減を行いたい対象、 <code>value</code> はHPをいくら増減するかという値、 <code>gainHp</code> はHPを獲得する操作であるらしい、というところまでは簡単な英単語が読めれば推測できるかと思います。<br>この <code>target</code> は、詳しい説明は省きますが <code>Game_Actor</code> か <code>Game_Enemy</code> のどちらかのインスタンスです。<br><code>gainHp</code> はそれらのクラスが提供する操作です。同じファイル内に定義されているので、中身を見てみましょう。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Game_Battler.prototype.gainHp = <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>._result.hpDamage = -value;</span><br><span class="line">    <span class="keyword">this</span>._result.hpAffected = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">this</span>.setHp(<span class="keyword">this</span>.hp + value);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><code>Game_Battler</code> なる新しいクラスが出てきました。<br>実は、 <code>Game_Actor</code> も <code>Game_Enemy</code> も <code>Game_Battler</code> クラスを継承しています。<sup class="footnote-ref"><a href="#fn8" id="fnref8" title="Game_BattlerはGame_ActorとGame_Enemyの親クラスである、という。">8</a></sup><br>継承についてはざっくり言ってしまうと、クラス内に定義したメソッドや変数を別の新しいクラスに引き継ぐことです。<br>つまり、 <code>Game_Battler</code> で定義されたメソッドである <code>gainHp</code> は、 <code>Game_Actor</code> や <code>Game_Enemy</code> にも引き継がれており、どちらのクラスでも使えるようになっています。</p>
+<p>それでは、実際にメソッドの処理内容を見てみましょう。<br>引数として受け取る <code>value</code> は、先ほどと同様に、HPを増減させる値です。<br><code>this._result</code> に関しては、戦闘中以外は気にしなくて良いものなので、本記事では触れずにおきます。<br>ここで大事なのは <code>this.setHp(this.hp + value);</code> の行です。<sup class="footnote-ref"><a href="#fn9" id="fnref9" title="なぜ._hpでなく.hpなのかは本記事では説明しない。気になる場合はrmmz_objects.js内を // Hit Points で検索してみてほしい。">9</a></sup></p>
+<p>自分のHPを現在HP + 増減値にセットしている、という風に読めますね。<br>では、更に深追いしてみましょう。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Game_BattlerBase.prototype.setHp = <span class="function"><span class="keyword">function</span>(<span class="params">hp</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>._hp = hp;</span><br><span class="line">    <span class="keyword">this</span>.refresh();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><code>Game_BattlerBase</code> は <code>Game_Battler</code> の更に親クラスです。ここで定義したメソッドや変数も、 <code>Game_Actor</code> や <code>Game_Enemy</code> のクラスに引き継がれています。</p>
+<p>ようやく、 <code>this._hp</code> に対する書き換えのコードが見つかりました。<br>ところが、このメソッドはそれ以外にも何かしているようです。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Game_BattlerBase.prototype.refresh = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> stateId <span class="keyword">of</span> <span class="keyword">this</span>.stateResistSet()) &#123;</span><br><span class="line">        <span class="keyword">this</span>.eraseState(stateId);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>._hp = <span class="keyword">this</span>._hp.clamp(<span class="number">0</span>, <span class="keyword">this</span>.mhp);</span><br><span class="line">    <span class="keyword">this</span>._mp = <span class="keyword">this</span>._mp.clamp(<span class="number">0</span>, <span class="keyword">this</span>.mmp);</span><br><span class="line">    <span class="keyword">this</span>._tp = <span class="keyword">this</span>._tp.clamp(<span class="number">0</span>, <span class="keyword">this</span>.maxTp());</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>今、重要な行は1つだけです。<br><code>this._hp = this._hp.clamp(0, this.mhp);</code></p>
+<p><code>.clamp</code> はツクールのコアスクリプトが数値型に対して追加しているメソッドで、数値が第一引数よりも小さければ第一引数を、第二引数よりも大きければ第二引数を返します。<br>つまり、HPの増減によって <code>this._hp</code> が負の値になっても、ここの処理を通ることで 0 に直されるのです。</p>
+<h2 id="修正プラグイン"><a href="#修正プラグイン" class="headerlink" title="修正プラグイン"></a>修正プラグイン</h2><p>ここまでを踏まえて、先程のプラグインを修正してみましょう。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*:</span></span><br><span class="line"><span class="comment"> * @plugindesc リーダーにダメージを与えるプラグインコマンド</span></span><br><span class="line"><span class="comment"> * @author DarkPlasma</span></span><br><span class="line"><span class="comment"> * @target MZ</span></span><br><span class="line"><span class="comment"> * @command リーダーに100ダメージ</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line"><span class="meta">  'use strict'</span>;</span><br><span class="line">  <span class="keyword">const</span> pluginName = <span class="built_in">document</span>.currentScript.src.replace(<span class="regexp">/^.*\/(.*).js$/</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">arguments</span>[<span class="number">1</span>];</span><br><span class="line">  &#125;);</span><br><span class="line">  </span><br><span class="line">  PluginManager.registerCommand(pluginName, <span class="string">'リーダーに100ダメージ'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">args</span>) </span>&#123;</span><br><span class="line">    $gameParty.leader().gainHp(<span class="number">-100</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p><code>Game_Actor</code> は、HPの増減操作を行う <code>gainHp</code> というメソッドを提供しています。<br>クラスの外部からはそれを使うだけで、後は <code>Game_Actor</code> の中でよろしく、HPが負の値になったりしないように調整してくれるのです。</p>
+<p><code>Game_Actor</code> が秘匿しておきたい <code>_hp</code> を外部から直接書き換えようとすると容易に不具合が発生すること、 <code>Game_Actor</code> が提供してくれる <code>gainHp</code> メソッドを利用することで不具合を回避できることがおわかりいただけたかと思います。</p>
+<h1 id="例外"><a href="#例外" class="headerlink" title="例外"></a>例外</h1><p>基本的に、アンダースコアから始まる変数に対してクラスの外からアクセスしたり書き換えたりするべきではありません。<br>しかし、実現したい内容によってはコアスクリプトで取得操作が提供されていないような変数にクラス外からアクセスしたくなるケースもあります。</p>
+<p>例えば、アクターの覚えているスキル一覧が該当します。<br><code>Game_Actor</code> の中に <code>_skills</code> という変数があります。<br>これは、アクターの覚えているスキルのID一覧を表す配列です。<br><code>Game_Actor.prototype.skills</code> というメソッドもありますが、これで取得できるのは、アクターのスキル一覧画面に表示すべきスキル情報一覧です。<br>覚えているスキルのみでなく、装備などで一時的に追加されたスキルもこれに含まれるため、覚えているスキルに限定して取得したい場合には使えません。<sup class="footnote-ref"><a href="#fn10" id="fnref10" title="全く使えないこともないが、かなり回りくどい使い方をしなければならず、かえって保守性が落ちる。">10</a></sup></p>
+<p>こういう場合には、仕方なく <code>actor._skills</code> などとして外部から直接アクセスすることもあります。<sup class="footnote-ref"><a href="#fn11" id="fnref11" title="プラグインを書く場合はGame_Actorの中に処理を追加すべきだが、小規模なスクリプトを実行したいだけの場合は大仰になるので、外から直接アクセスすることを許容するケースもある。">11</a></sup></p>
+<h1 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h1><p>アンダースコアから始まる変数にクラスの外から直接アクセスしたり、書き換えたりすべきではないということと、その理由について簡単な例を交えて説明しました。<br>この基本方針を守って書かれているというのは、コアスクリプトが読みやすく、どこにどんな処理があるのかあたりを付けやすい理由の一つでもあります。</p>
+<p>すぐに理解して実践するのは難しいことと思いますので、ある程度コードを書いてみたら、この記事の内容を思い出しながらもう一度書いたコードを読み直してみてください。</p>
+<p>本記事のタイトルにある方針を守って書かれたコードは、時としてバグを防ぎ、バグの原因の発見を助けてくれます。<br>本質的でないバグの修正に追われて、本当にやりたかったゲームの開発ができなくなっては本末転倒ですから、コードを書く際には是非意識してみてください。</p>
+  <hr class="footnotes-sep">
+  <section class="footnotes">
+  <ol class="footnotes-list">
+  <li id="fn1" class="footnote-item">内部的にはevalしているので、規模の大きなスクリプトは推奨しないし、小規模でも多用しないほうが良い。<a href="#fnref1"> <span class="up-arrow"></span></a></li>
+<li id="fn2" class="footnote-item">正確にはメソッドも含むが、コアスクリプト内で見る頻度は圧倒的に変数のほうが多い。<a href="#fnref2"> <span class="up-arrow"></span></a></li>
+<li id="fn3" class="footnote-item">クラス内部に秘匿しておきたい情報に外部からアクセスさせない機能を持つ言語もあるが、javascriptはそうではないので、命名でその意味を表す慣習がある。<a href="#fnref3"> <span class="up-arrow"></span></a></li>
+<li id="fn4" class="footnote-item"><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes/Private_class_fields" target="_blank" rel="noopener">プライベートクラスフィールド</a>は実験的な内容であり、サポートしていないブラウザもあるため、ここでは触れない。<a href="#fnref4"> <span class="up-arrow"></span></a></li>
+<li id="fn5" class="footnote-item">外からアクセスしても良いメソッド。変数そのものを公開することは多くない。<a href="#fnref5"> <span class="up-arrow"></span></a></li>
+<li id="fn6" class="footnote-item">混乱させるようで非常に心苦しいが、実装を単純化するための仕様定義。例えば、「すけ」という名前を「かく」にイベントコマンドで変更した場合、表示上「†かく†」とする。<a href="#fnref6"> <span class="up-arrow"></span></a></li>
+<li id="fn7" class="footnote-item">インターフェースと呼ばれる。<a href="#fnref7"> <span class="up-arrow"></span></a></li>
+<li id="fn8" class="footnote-item">Game_BattlerはGame_ActorとGame_Enemyの親クラスである、という。<a href="#fnref8"> <span class="up-arrow"></span></a></li>
+<li id="fn9" class="footnote-item">なぜ._hpでなく.hpなのかは本記事では説明しない。気になる場合はrmmz_objects.js内を // Hit Points で検索してみてほしい。<a href="#fnref9"> <span class="up-arrow"></span></a></li>
+<li id="fn10" class="footnote-item">全く使えないこともないが、かなり回りくどい使い方をしなければならず、かえって保守性が落ちる。<a href="#fnref10"> <span class="up-arrow"></span></a></li>
+<li id="fn11" class="footnote-item">プラグインを書く場合はGame_Actorの中に処理を追加すべきだが、小規模なスクリプトを実行したいだけの場合は大仰になるので、外から直接アクセスすることを許容するケースもある。<a href="#fnref11"> <span class="up-arrow"></span></a></li>
+  </ol>
+  </section>
+
+      
+    </div>
+    
+    <footer>
+        <div class="article-footer">
+        <div class="footer-left">
+        
+  
+  <div class="categories">
+    <a href="/nplus_doc/categories/ゲーム制作/">ゲーム制作</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/nplus_doc/tags/情報技術/">情報技術</a>, <a href="/nplus_doc/tags/RPGツクールMV/">RPGツクールMV</a>, <a href="/nplus_doc/tags/RPGツクールMZ/">RPGツクールMZ</a>
+  </div>
+
+        </div>
+        <div class="footer-right">
+          <a target="_blank" rel="noopener" href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="【RPGツクールMV/MZ】なぜアンダースコアで始まる変数にクラスの外からアクセスしてはならないのか | ぷらずま式改" data-url="https://elleonard.github.io/nplus_doc/2021/01/10/engineering/rmmz/dont-access-private-from-outside/" data-via="elleonard_f" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+        </div>
+        
+          <div class="article-prev">
+              <a href="/nplus_doc/2021/03/01/game/ghost-of-tsushima/">【ゲーム感想】Ghost of Tsushima <span class="prev-arrow"/></a>
+            </div>
+        
+        
+          <div class="article-next">
+            <a href="/nplus_doc/2020/12/31/misc/2020/">2020年の振り返り <span class="next-arrow"/></a>
+          </div>
+        
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="検索">
+    <input type="hidden" name="q" value="site:elleonard.github.io/nplus_doc">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">カテゴリ</h3>
+  <ul class="entry">
+  
+    <li><a href="/nplus_doc/categories/FGO/">FGO</a><small>47</small></li>
+  
+    <li><a href="/nplus_doc/categories/niconico/">niconico</a><small>3</small></li>
+  
+    <li><a href="/nplus_doc/categories/アニメ感想/">アニメ感想</a><small>10</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム/">ゲーム</a><small>77</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム/ゲームレビュー/">ゲームレビュー</a><small>61</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム制作/">ゲーム制作</a><small>12</small></li>
+  
+    <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/デッキレシピ/">デッキレシピ</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/小説/">小説</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/情報技術/">情報技術</a><small>11</small></li>
+  
+    <li><a href="/nplus_doc/categories/漫画/">漫画</a><small>2</small></li>
+  
+    <li><a href="/nplus_doc/categories/百合/">百合</a><small>9</small></li>
+  
+    <li><a href="/nplus_doc/categories/艦これ/">艦これ</a><small>76</small></li>
+  
+    <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/">遊戯王ブロンティーズ</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/雑記/">雑記</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最近の投稿</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/nplus_doc/2022/04/27/game/atelier/sophie2/">【ゲーム感想】ソフィーのアトリエ2 ～不思議な夢の錬金術士～</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/04/10/misc/social-game-overcame-me/">ソシャゲを続けられない無力な人間の嘆き</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/02/09/game/neptunia/neptunia-senran-kagura-ninja-wars/">【ゲーム感想】閃乱忍忍忍者大戦ネプテューヌ -少女たちの饗宴-</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/01/18/game/night-of-azure/night-of-azure/">【ゲーム感想】よるのないくに</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2021/12/31/misc/2021/">2021年の振り返り</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Link</h3>
+  <ul class="entry">
+    
+      <li>
+        <a target="_blank" rel="noopener" href="https://www.nicovideo.jp/">niconico</a>
+      </li>
+    
+      <li>
+        <a target="_blank" rel="noopener" href="http://lovingtheflags1986.blog96.fc2.com/">国旗と酒が待ち遠しいドリル日記</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  <p>
+  
+  &copy; 2022 NPlasma
+  
+  All rights reserved.</p>
+  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</div>
+<div class="alignright">
+  <a target="_blank" rel="noopener" href="https://github.com/elleonard"><i class="fab fa-github"></i></a>
+  <a target="_blank" rel="noopener" href="https://twitter.com/elleonard_f"><i class="fab fa-twitter-square"></i></a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="/nplus_doc/js/jquery.imagesloaded.min.js"></script>
+<script src="/nplus_doc/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/nplus_doc/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/nplus_doc/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id='bg'></div>
+</body>
+</html>

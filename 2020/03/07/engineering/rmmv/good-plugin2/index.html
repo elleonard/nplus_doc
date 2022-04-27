@@ -1,0 +1,331 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>RPGツクールMV 続・良いプラグインとは | ぷらずま式改</title>
+  <meta name="author" content="NPlasma" />
+
+  
+  <meta name="description" content="NPlasmaの個人メモ" />
+  
+
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <meta property="og:title" content="RPGツクールMV 続・良いプラグインとは" />
+  <meta property="og:site_name" content="ぷらずま式改" />
+
+  
+  
+
+  
+    <meta property="og:image" content="/img/ogp.png" />
+  
+
+  <!-- ogp -->
+  
+    
+      <meta name="description" content="RPGツクールMV 良いプラグインとは の内容からもう少し難しい内容に踏み込みます。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RPGツクールMV 続・良いプラグインとは">
+<meta property="og:url" content="https://elleonard.github.io/nplus_doc/2020/03/07/engineering/rmmv/good-plugin2/index.html">
+<meta property="og:site_name" content="ぷらずま式改">
+<meta property="og:description" content="RPGツクールMV 良いプラグインとは の内容からもう少し難しい内容に踏み込みます。">
+<meta property="og:locale" content="ja_JP">
+<meta property="article:published_time" content="2020-03-06T16:01:28.000Z">
+<meta property="article:modified_time" content="2022-04-16T09:44:10.485Z">
+<meta property="article:author" content="NPlasma">
+<meta property="article:tag" content="情報技術">
+<meta property="article:tag" content="RPGツクールMV">
+<meta property="article:tag" content="github">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@elleonard_f">
+    
+    <meta name="twitter:image" content="https://elleonard.github.io/nplus_doc/img/ogp.png"/>
+  
+
+  <link rel="alternate" href="/nplus_doc/atom.xml" title="ぷらずま式改" type="application/atom+xml">
+  <link rel="stylesheet" href="/nplus_doc/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/nplus_doc/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/nplus_doc//favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/nplus_doc//favicon/favicon-16x16.png">
+  <link rel="manifest" href="/nplus_doc//favicon/site.webmanifest">
+  <link rel="mask-icon" href="/nplus_doc//favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <script src="https://kit.fontawesome.com/b51cad8f00.js" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/nplus_doc/">ぷらずま式改</a></h1>
+  <h2><a href="/nplus_doc/">NPlasma個人メモ</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/nplus_doc/">Home</a></li>
+    
+      <li><a href="/nplus_doc/2016/05/29/about/">About</a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://twitter.com/elleonard_f">Twitter</a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://github.com/elleonard">GitHub</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2020-03-06T16:01:28.000Z"><a href="/nplus_doc/2020/03/07/engineering/rmmv/good-plugin2/">2020-03-07</a></time>
+      
+      
+  
+    <h1 class="title">RPGツクールMV 続・良いプラグインとは</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <div id="toc" class="toc-article">
+          <p class="toc-title">目次</p>
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB"><span class="toc-text">はじめに</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%89%AF%E3%81%84%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9"><span class="toc-text">良いプラグインの書き方</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%82%BB%E3%83%BC%E3%83%96%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E4%BA%92%E6%8F%9B%E6%80%A7%E3%82%92%E7%A0%B4%E5%A3%8A%E3%81%97%E3%81%AA%E3%81%84"><span class="toc-text">セーブデータの互換性を破壊しない</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%82%AB%E3%83%97%E3%82%BB%E3%83%AB%E5%8C%96%E3%82%92%E6%84%8F%E8%AD%98%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B"><span class="toc-text">カプセル化を意識している</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E9%A0%BB%E5%BA%A6%E3%81%A7%E5%91%BC%E3%81%B0%E3%82%8C%E3%82%8B%E5%87%A6%E7%90%86%E3%82%92%E9%81%BF%E3%81%91%E3%82%8B"><span class="toc-text">高頻度で呼ばれる処理を避ける</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%81%8A%E3%82%8F%E3%82%8A%E3%81%AB"><span class="toc-text">おわりに</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%81%8A%E3%81%BE%E3%81%911%EF%BC%9A%E9%9B%A3%E8%AA%AD%E5%8C%96"><span class="toc-text">おまけ1：難読化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%81%8A%E3%81%BE%E3%81%912-%E3%83%A1%E3%83%A2%E3%83%AA"><span class="toc-text">おまけ2: メモリ</span></a></li></ol>
+        </div>
+        <a href="/nplus_doc/2019/11/28/engineering/rmmv/good-plugin/" title="RPGツクールMV 良いプラグインとは">RPGツクールMV 良いプラグインとは</a> の内容からもう少し難しい内容に踏み込みます。
+
+<a id="more"></a>
+
+<h1 id="はじめに"><a href="#はじめに" class="headerlink" title="はじめに"></a>はじめに</h1><p>良いプラグインの定義については <a href="/nplus_doc/2019/11/28/engineering/rmmv/good-plugin/" title="前回の記事">前回の記事</a> をご参照ください。<br>今回もその定義に従って、可読性や保守性を意識したプラグインの書き方を紹介していきます。</p>
+<p>前回よりも難しい領域に踏み込むため、この記事の説明だけでは理解しにくい内容もあるかもしれません。<br>今回はできるだけ具体的なコード例を書きながら書き進めていくつもりです。</p>
+<h1 id="良いプラグインの書き方"><a href="#良いプラグインの書き方" class="headerlink" title="良いプラグインの書き方"></a>良いプラグインの書き方</h1><h2 id="セーブデータの互換性を破壊しない"><a href="#セーブデータの互換性を破壊しない" class="headerlink" title="セーブデータの互換性を破壊しない"></a>セーブデータの互換性を破壊しない</h2><p>RPGツクールMVの <code>Game_****</code> 系のクラスは、内容をゲームのセーブデータに保存しています。<sup class="footnote-ref"><a href="#fn1" id="fnref1" title="Game_Message,Game_Troop,Game_Enemy,Game_Tempは例外。">1</a></sup><br>このクラス群にメンバを追加する場合は、十分に注意する必要があります。</p>
+<p>以下の例を見てみましょう。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> _Game_Character_initMembers = Game_Character.prototype.initMembers;</span><br><span class="line">Game_Character.prototype.initMembers = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  _Game_Character_initMembers.call(<span class="keyword">this</span>);</span><br><span class="line">  <span class="keyword">this</span>._characterHoge = [];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>こう書くと、 <code>Game_Character</code> クラスに配列要素が一つ追加されます。<br>その分だけセーブデータが大きくなるのはもちろんなので、そこも注意しなければなりませんが、最も恐ろしいのは再現条件のわかりにくいバグの温床になることです。</p>
+<p><code>Game_****</code> 系のクラスはニューゲーム開始時に <code>$game****</code> なる変数にインスタンスを生成します。<br>そして、セーブデータをロードした際には、ロードしたデータを <code>$game****</code> 変数に展開します。</p>
+<p>上記のコードを含むプラグインを導入する前にセーブしたデータを、プラグイン導入後にロードするとどうなるでしょうか。<br>ニューゲーム開始時には空配列で初期化される <code>_characterHoge</code> が、セーブデータロード時には未定義になってしまいます。<br>その配列に対して何らかのメソッドを呼ぶ、例えば <code>.map</code> で何らかの処理を配列の要素全てに対して行うようなコードが書かれていた場合に、 <code>Cannot read property &#39;map&#39; of undefined</code> などというエラーが出てしまうのです。</p>
+<p>こういったケースが存在することを知っていれば再現条件に想像は付きますが、プラグインの利用者はたいていこんなこと知りません。<br>再現の条件がわからないまま断片的な情報を作者に送りつけなければならなかったり、あるいはその時点でプラグインを捨てる選択を迫られるでしょう。<br>リリースしてから時間の経ったゲームの改修に使われてしまった場合は最悪です。<br>プレイヤーがバージョンアップしたゲームを取り込んだ後、これまでのセーブデータの続きからプレイできなくなってしまいます。</p>
+<p>セーブデータに影響があるため、 <code>Game_****</code> 系のクラスにメンバを追加する場合は、ニューゲーム開始後とセーブデータロード後のどちらでもしっかりと値が初期化されるよう注意しましょう。<br>もちろん、セーブデータに含める必要のないメンバを追加すべきではありません。</p>
+<h2 id="カプセル化を意識している"><a href="#カプセル化を意識している" class="headerlink" title="カプセル化を意識している"></a>カプセル化を意識している</h2><p>2021/01/10追記: より平易な記事を用意したので、よくわからないという方はそちらも参照してみてください。</p>
+<a href="/nplus_doc/2021/01/10/engineering/rmmz/dont-access-private-from-outside/" title="【RPGツクールMV/MZ】なぜアンダースコアで始まる変数にクラスの外からアクセスしてはならないのか">【RPGツクールMV/MZ】なぜアンダースコアで始まる変数にクラスの外からアクセスしてはならないのか</a>
+
+<p>カプセル化。RPGツクールの世界では、某クソコード動画さんのおかげで有名な言葉かもしれません。</p>
+<p>噛み砕いて説明すると、クラスが内部状態や詳細な実装ではなく外部から必要な操作のみを公開するようにし、それぞれのクラスの独立性を担保して保守しやすくすることです。<br>言葉だけではピンとこないと思うので、RPGツクールMVのコアスクリプトのコードを一部見てみましょう。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Game_CharacterBase.prototype.moveStraight = <span class="function"><span class="keyword">function</span> (<span class="params">d</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.setMovementSuccess(<span class="keyword">this</span>.canPass(<span class="keyword">this</span>._x, <span class="keyword">this</span>._y, d));</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.isMovementSucceeded()) &#123;</span><br><span class="line">    <span class="keyword">this</span>.setDirection(d);</span><br><span class="line">    <span class="keyword">this</span>._x = $gameMap.roundXWithDirection(<span class="keyword">this</span>._x, d);</span><br><span class="line">    <span class="keyword">this</span>._y = $gameMap.roundYWithDirection(<span class="keyword">this</span>._y, d);</span><br><span class="line">    <span class="keyword">this</span>._realX = $gameMap.xWithDirection(<span class="keyword">this</span>._x, <span class="keyword">this</span>.reverseDir(d));</span><br><span class="line">    <span class="keyword">this</span>._realY = $gameMap.yWithDirection(<span class="keyword">this</span>._y, <span class="keyword">this</span>.reverseDir(d));</span><br><span class="line">    <span class="keyword">this</span>.increaseSteps();</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.setDirection(d);</span><br><span class="line">    <span class="keyword">this</span>.checkEventTriggerTouchFront(d);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>これは、 <code>Game_CharacterBase</code> クラス（ゲーム中でマップに表示するためのキャラクターに共通の処理が書かれたクラス）に定義された <code>moveStraight</code> メソッドです。<br>名前の通り、キャラクターを1歩移動させるメソッドですね。</p>
+<p>1歩移動させるだけなら、向きに応じてキャラクターの <code>_x</code> や <code>_y</code> を操作すれば良いだけじゃないかと思うかもしれません。<br>実際はこのコードの通り、ある向きに対して移動が成功したかどうかの判定をしたり、マップがループ構造だった場合に端っこから逆側に出てくる処理があったりして、かなり複雑な処理になっています。<br>しかも、このメソッドを直接外部から呼ぶわけでもなく、更に外部向けに抽象化された <code>moveRandom</code> や <code>moveTowardCharacter</code> 等といった同じクラス内<sup class="footnote-ref"><a href="#fn2" id="fnref2" title="あるいはGame_CharacterBaseを継承したクラスの内部。">2</a></sup>のメソッドから呼び出されるようになっています。<br><code>Game_CharacterBase</code> を継承するクラスの一つである <code>Game_Player</code> について、更に呼び出しを遡ると <code>update</code> メソッドまで到達し、ようやく外部クラスである <code>Scene_Map</code> クラスの <code>updateMain</code> から呼び出されているとわかります。<br>マップ上のプレイヤーを実際に移動させる、という場合に、外からは <code>update</code> だけ呼べば良い構造になっているわけです。</p>
+<p>RPGツクールMVでは、 _ （アンダーバー）で始まる名前のシンボルは、そのクラスの内部に隠蔽しておきたいメンバとして扱う、という命名規則を採用しています。<sup class="footnote-ref"><a href="#fn3" id="fnref3" title="最も広く受け入れられているスタイルの一つ Airbnb JavaScript Style Guide も同様の命名規則を採用している。">3</a></sup> <sup class="footnote-ref"><a href="#fn4" id="fnref4" title="ちなみに Google JavaScript Style Guide ではアンダーバーを末尾につける命名規則を採用している。プロダクトごとに命名規則は異なる。">4</a></sup></p>
+<p>外部のクラスから <code>_x</code> 等のような、アンダーバーで始まる名前のメンバにアクセスしないようにコードを書くべき、ということです。<br><code>_x</code> や <code>_y</code> は <code>Game_CharacterBase</code> の内部状態であり、それを直接操作するために必要な手続きは <code>Game_CharacterBase</code> 自身が持つべきです。</p>
+<p>こうしてクラスごとの責務を明確にしたコードを書くと何が嬉しいかというと、プログラムが巨大になった場合でもどこにどんな処理があるかあたりをつけやすく、役割が明確なのでどこをどう書き換えれば望みの挙動を実現できるかすぐにわかったり、不具合があった場合にも原因となっている箇所が特定しやすくなります。</p>
+<p>プラグインを書く場合にこれを完璧に守るのは難しい場合もありますが、プラグインの規模が大きくなればなるほど、これを意識できているかどうかが効いてきます。<br>前回の記事では散々苦言を呈したYEPやMOGですが、規模の大きいプラグインを書いているだけあってカプセル化という観点で見ればそれなりにまともなコードが多い印象を受けます。</p>
+<h2 id="高頻度で呼ばれる処理を避ける"><a href="#高頻度で呼ばれる処理を避ける" class="headerlink" title="高頻度で呼ばれる処理を避ける"></a>高頻度で呼ばれる処理を避ける</h2><p>クラスにもよりますが、 <code>update</code> メソッドは、ゲームの処理の中で毎フレーム呼ばれていたりして、非常に呼び出し頻度が高いです。<br>毎フレーム呼び出されるメソッドの中に、重たい処理が混ざっていたらどうでしょうか。</p>
+<p>これはゲーム全体のパフォーマンスに関わる問題で、何も考えずに重たい処理（画像や音声といった、各種メディアファイルのロード等）をいくつも突っ込んでしまうと、ゲームが処理落ちして遊んでいられなくなることにも繋がります。</p>
+<p>プラグインによってどこに処理を追加すべきか、カプセル化の項目でも説明したプログラムの責務と合わせて、じっくり検討する必要があります。</p>
+<h1 id="おわりに"><a href="#おわりに" class="headerlink" title="おわりに"></a>おわりに</h1><p>この記事では、セーブデータに関する話、カプセル化による保守性を意識したコードの話、そしてゲームのパフォーマンスに関わるような高頻度で呼ばれる処理の話を紹介しました。</p>
+<p>ここで書いた話はゲームにとって必須ではないかもしれません。<br>プラグインとはあくまで従の存在であり、主たる存在はゲームそのものです。</p>
+<p>しかしながら、従たるプラグインが良いものであることで、ゲームを作るための障害を減らしたり、効率よくゲームを作ることができるようになります。<br>前回以上に難しい内容になってしまいましたが、プラグインを読んだり書いたりする際に頭の片隅に今回の記事の内容を思い浮かべていただければ幸いです。</p>
+<h1 id="おまけ1：難読化"><a href="#おまけ1：難読化" class="headerlink" title="おまけ1：難読化"></a>おまけ1：難読化</h1><p>前回から通して、コードの読みやすさを重視してきましたが、逆にあえてコードを読みにくくすることもあります。<br>商業で書いたコード等の盗用を防止する為に、プログラム的に人間にほとんど読めないようなコードに変換するのです。</p>
+<p>RPGツクールMVのプラグインにおいても、同様のことをしつつ有料でプラグインを販売している方がいらっしゃるようです。</p>
+<p>ただ、有料であろうとなかろうと、難読化するということは元のコードを作者以外に読ませたくないということになります。<br>つまり、作者以外がそのプラグインについてサポートできなくなるということです。<br>自分一人で迅速にサポートをし続ける気概があるのでない限り、公開するプラグインを難読化するメリットは全くないと言って良いでしょう。</p>
+<p>コードを圧縮することで難読化するため、ゲームにおいてプラグインが占める容量を減らすことも可能ではあります。<br>ですが、巨大なプラグインをいくつも入れていない限り誤差レベルですし、コメントに多く含まれるライセンス表記をまるごと消してしまうため、別途必要な表記をしておかなければライセンス違反になってしまいます。<br>より容量の大きい画像や音声ファイルについての軽量化を考えるほうがコストパフォーマンスは良いでしょう。</p>
+<h1 id="おまけ2-メモリ"><a href="#おまけ2-メモリ" class="headerlink" title="おまけ2: メモリ"></a>おまけ2: メモリ</h1><p>プログラムの中でオブジェクトを生成すると、その分だけメモリを使用します。<br>使用できるメモリの量は有限であり、メモリがいっぱいになるとゲームが直ちに落ちてしまう……というわけでは、実はありません。</p>
+<p>JavaScript処理系にはGarbage Collector（ガベージコレクタ、ゴミ集め）の機能が備わっており、不要になったメモリ領域を自動的に再利用してくれます。<br><code>new Bitmap()</code> などとして確保したオブジェクトのためのメモリ領域が使わなくなった後<sup class="footnote-ref"><a href="#fn5" id="fnref5" title="正確にはもう二度と使われないとGCに判断された後。">5</a></sup>占有されっぱなしにならないのは、これのおかげです。</p>
+<p>ゲームにおいてこのGCは曲者です。<br>メモリの再利用自体は必要なことですが、それをするコストもタダではないのです。<br>必要なものをしっかりとマーキングして、不要なものだけ再利用しなければなりません。<br>GCのせいでゲームがカクつく可能性がある、と言うと、アクションゲームなどを作っている方には深刻さが伝わるかもしれません。</p>
+<p>ただし、ChromeやChromiumに搭載されたJavaScriptエンジンV8のGCは非常に優秀で、マイナーGC<sup class="footnote-ref"><a href="#fn6" id="fnref6" title="V8のGCは世代別GCで、ざっくり言うと簡単なお掃除と大掃除の2種類があり、マイナーGCは簡単なお掃除のほう。ちなみに大掃除のほうはメジャーGCと呼ぶ。">6</a></sup>は10ミリ秒のオーダーで完了します。<sup class="footnote-ref"><a href="#fn7" id="fnref7" title="オブジェクトプールを使った静的メモリ JavaScript参照。">7</a></sup><br>もちろん、GCが頻発してしまうのは問題ですが、RPGツクールMVのプラグインでそんなに大きなオブジェクトを頻繁に作っては捨て、という処理を書くことはないでしょう。</p>
+<p>小さなゴミが大量に出るのは経験上よく知られており、GCもそれに適した形にチューニングされています。<br>正確なことはゲームごとにメモリ使用量推移のデータを見てみないとわかりませんが、よほど雑にアロケーション<sup class="footnote-ref"><a href="#fn8" id="fnref8" title="オブジェクトのためにメモリを確保すること。">8</a></sup>してしまったりオブジェクトを保持し続けない限り、GCの停止時間が問題になることはないでしょう。<br>GCのタイミングを制御したいほどリアルタイム性を重視するアクションゲームの場合は大掛かりな最適化を考えても良いかもしれませんが、そうでない場合は特別にGCを意識してコードの可読性を落としたりすべきではありません。<sup class="footnote-ref"><a href="#fn9" id="fnref9" title="オブジェクトプールが有効なのはプログラム全体で必要なオブジェクト数上限がわかっている場合であって、単独のプラグインだけで意識してオブジェクトを抱え込んでも逆効果にすらなる場合がある。">9</a></sup></p>
+  <hr class="footnotes-sep">
+  <section class="footnotes">
+  <ol class="footnotes-list">
+  <li id="fn1" class="footnote-item">Game_Message,Game_Troop,Game_Enemy,Game_Tempは例外。<a href="#fnref1"> <span class="up-arrow"></span></a></li>
+<li id="fn2" class="footnote-item">あるいはGame_CharacterBaseを継承したクラスの内部。<a href="#fnref2"> <span class="up-arrow"></span></a></li>
+<li id="fn3" class="footnote-item">最も広く受け入れられているスタイルの一つ <a href="http://snowdream.github.io/javascript-style-guide/javascript-style-guide/jp/index.html" target="_blank" rel="noopener">Airbnb JavaScript Style Guide</a> も同様の命名規則を採用している。<a href="#fnref3"> <span class="up-arrow"></span></a></li>
+<li id="fn4" class="footnote-item">ちなみに <a href="http://cou929.nu/data/google_javascript_style_guide/" target="_blank" rel="noopener">Google JavaScript Style Guide</a> ではアンダーバーを末尾につける命名規則を採用している。プロダクトごとに命名規則は異なる。<a href="#fnref4"> <span class="up-arrow"></span></a></li>
+<li id="fn5" class="footnote-item">正確にはもう二度と使われないとGCに判断された後。<a href="#fnref5"> <span class="up-arrow"></span></a></li>
+<li id="fn6" class="footnote-item">V8のGCは世代別GCで、ざっくり言うと簡単なお掃除と大掃除の2種類があり、マイナーGCは簡単なお掃除のほう。ちなみに大掃除のほうはメジャーGCと呼ぶ。<a href="#fnref6"> <span class="up-arrow"></span></a></li>
+<li id="fn7" class="footnote-item"><a href="https://www.html5rocks.com/ja/tutorials/speed/static-mem-pools/" target="_blank" rel="noopener">オブジェクトプールを使った静的メモリ JavaScript</a>参照。<a href="#fnref7"> <span class="up-arrow"></span></a></li>
+<li id="fn8" class="footnote-item">オブジェクトのためにメモリを確保すること。<a href="#fnref8"> <span class="up-arrow"></span></a></li>
+<li id="fn9" class="footnote-item">オブジェクトプールが有効なのはプログラム全体で必要なオブジェクト数上限がわかっている場合であって、単独のプラグインだけで意識してオブジェクトを抱え込んでも逆効果にすらなる場合がある。<a href="#fnref9"> <span class="up-arrow"></span></a></li>
+  </ol>
+  </section>
+
+      
+    </div>
+    
+    <footer>
+        <div class="article-footer">
+        <div class="footer-left">
+        
+  
+  <div class="categories">
+    <a href="/nplus_doc/categories/ゲーム制作/">ゲーム制作</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/nplus_doc/tags/情報技術/">情報技術</a>, <a href="/nplus_doc/tags/RPGツクールMV/">RPGツクールMV</a>, <a href="/nplus_doc/tags/github/">github</a>
+  </div>
+
+        </div>
+        <div class="footer-right">
+          <a target="_blank" rel="noopener" href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="RPGツクールMV 続・良いプラグインとは | ぷらずま式改" data-url="https://elleonard.github.io/nplus_doc/2020/03/07/engineering/rmmv/good-plugin2/" data-via="elleonard_f" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+        </div>
+        
+          <div class="article-prev">
+              <a href="/nplus_doc/2020/03/13/anime/girls-und-panzer/">【アニメ感想】ガールズ＆パンツァー TVシリーズ アンツィオ戦 劇場版 <span class="prev-arrow"/></a>
+            </div>
+        
+        
+          <div class="article-next">
+            <a href="/nplus_doc/2020/02/21/novel/dear-all-of-you/">【ラノベ感想】じんるいのみなさまへ -わたしたちの場所- <span class="next-arrow"/></a>
+          </div>
+        
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="検索">
+    <input type="hidden" name="q" value="site:elleonard.github.io/nplus_doc">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">カテゴリ</h3>
+  <ul class="entry">
+  
+    <li><a href="/nplus_doc/categories/FGO/">FGO</a><small>47</small></li>
+  
+    <li><a href="/nplus_doc/categories/niconico/">niconico</a><small>3</small></li>
+  
+    <li><a href="/nplus_doc/categories/アニメ感想/">アニメ感想</a><small>10</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム/">ゲーム</a><small>77</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム/ゲームレビュー/">ゲームレビュー</a><small>61</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム制作/">ゲーム制作</a><small>12</small></li>
+  
+    <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/デッキレシピ/">デッキレシピ</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/小説/">小説</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/情報技術/">情報技術</a><small>11</small></li>
+  
+    <li><a href="/nplus_doc/categories/漫画/">漫画</a><small>2</small></li>
+  
+    <li><a href="/nplus_doc/categories/百合/">百合</a><small>9</small></li>
+  
+    <li><a href="/nplus_doc/categories/艦これ/">艦これ</a><small>76</small></li>
+  
+    <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/">遊戯王ブロンティーズ</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/雑記/">雑記</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最近の投稿</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/nplus_doc/2022/04/27/game/atelier/sophie2/">【ゲーム感想】ソフィーのアトリエ2 ～不思議な夢の錬金術士～</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/04/10/misc/social-game-overcame-me/">ソシャゲを続けられない無力な人間の嘆き</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/02/09/game/neptunia/neptunia-senran-kagura-ninja-wars/">【ゲーム感想】閃乱忍忍忍者大戦ネプテューヌ -少女たちの饗宴-</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/01/18/game/night-of-azure/night-of-azure/">【ゲーム感想】よるのないくに</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2021/12/31/misc/2021/">2021年の振り返り</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Link</h3>
+  <ul class="entry">
+    
+      <li>
+        <a target="_blank" rel="noopener" href="https://www.nicovideo.jp/">niconico</a>
+      </li>
+    
+      <li>
+        <a target="_blank" rel="noopener" href="http://lovingtheflags1986.blog96.fc2.com/">国旗と酒が待ち遠しいドリル日記</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  <p>
+  
+  &copy; 2022 NPlasma
+  
+  All rights reserved.</p>
+  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</div>
+<div class="alignright">
+  <a target="_blank" rel="noopener" href="https://github.com/elleonard"><i class="fab fa-github"></i></a>
+  <a target="_blank" rel="noopener" href="https://twitter.com/elleonard_f"><i class="fab fa-twitter-square"></i></a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="/nplus_doc/js/jquery.imagesloaded.min.js"></script>
+<script src="/nplus_doc/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/nplus_doc/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/nplus_doc/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id='bg'></div>
+</body>
+</html>
