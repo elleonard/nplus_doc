@@ -5,6 +5,8 @@ tags:
   - PS4
   - Switch
   - Steam
+  - ソフィーのアトリエ2
+  - アトリエシリーズ
 category:
   - ゲーム
   - ゲームレビュー
