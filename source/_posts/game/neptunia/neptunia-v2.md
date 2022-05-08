@@ -37,7 +37,7 @@ Re;birth3からこちらに移行した身としては、PS4向けにだいぶ�
 # サウンド
 
 サウンド面はシリーズで一番好きかもしれない
-PROVIDENCE、WILL BE VINUS、Sa・Ku・Ra～In full Bloom～、宿命の邂逅、DIMENSION ZERO、相対性VISIONあたりが好き
+PROVIDENCE、WILL BE VENUS、Sa・Ku・Ra～In full Bloom～、宿命の邂逅、DIMENSION ZERO、相対性VISIONあたりが好き
 ベストは何よりDRIVE AWAY
 エグゼドライブを飛ばさずに見る機会が多かった理由の半分はこの曲にあると言っても過言ではない
 
