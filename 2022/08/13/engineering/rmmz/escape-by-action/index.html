@@ -1,0 +1,310 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>【RPGツクールMV/MZ】行動による逃走とその仕様 | ぷらずま式改</title>
+  <meta name="author" content="NPlasma" />
+
+  
+  <meta name="description" content="NPlasmaの個人メモ" />
+  
+
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <meta property="og:title" content="【RPGツクールMV/MZ】行動による逃走とその仕様" />
+  <meta property="og:site_name" content="ぷらずま式改" />
+
+  
+  
+
+  
+    <meta property="og:image" content="/img/ogp.png" />
+  
+
+  <!-- ogp -->
+  
+    
+      <meta name="description" content="RPGツクールMV&#x2F;MZにおける、行動による逃走とその仕様について解説します。その中でも、ステート・強化・弱体の解除については直感と反する仕様が存在するため、それを解決するプラグインを紹介します。 解説のもととなるコアスクリプトのバージョンは、MVは1.6.3 MZは1.5.0です。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【RPGツクールMV&#x2F;MZ】行動による逃走とその仕様">
+<meta property="og:url" content="https://elleonard.github.io/nplus_doc/2022/08/13/engineering/rmmz/escape-by-action/index.html">
+<meta property="og:site_name" content="ぷらずま式改">
+<meta property="og:description" content="RPGツクールMV&#x2F;MZにおける、行動による逃走とその仕様について解説します。その中でも、ステート・強化・弱体の解除については直感と反する仕様が存在するため、それを解決するプラグインを紹介します。 解説のもととなるコアスクリプトのバージョンは、MVは1.6.3 MZは1.5.0です。">
+<meta property="og:locale" content="ja_JP">
+<meta property="article:published_time" content="2022-08-13T00:05:23.000Z">
+<meta property="article:modified_time" content="2022-08-13T09:12:15.423Z">
+<meta property="article:author" content="NPlasma">
+<meta property="article:tag" content="情報技術">
+<meta property="article:tag" content="RPGツクールMZ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@elleonard_f">
+    
+    <meta name="twitter:image" content="https://elleonard.github.io/nplus_doc/img/ogp.png"/>
+  
+
+  <link rel="alternate" href="/nplus_doc/atom.xml" title="ぷらずま式改" type="application/atom+xml">
+  <link rel="stylesheet" href="/nplus_doc/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/nplus_doc/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/nplus_doc//favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/nplus_doc//favicon/favicon-16x16.png">
+  <link rel="manifest" href="/nplus_doc//favicon/site.webmanifest">
+  <link rel="mask-icon" href="/nplus_doc//favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <script src="https://kit.fontawesome.com/b51cad8f00.js" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/nplus_doc/">ぷらずま式改</a></h1>
+  <h2><a href="/nplus_doc/">NPlasma個人メモ</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/nplus_doc/">Home</a></li>
+    
+      <li><a href="/nplus_doc/2016/05/29/about/">About</a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://twitter.com/elleonard_f">Twitter</a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://github.com/elleonard">GitHub</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2022-08-13T00:05:23.000Z"><a href="/nplus_doc/2022/08/13/engineering/rmmz/escape-by-action/">2022-08-13</a></time>
+      
+      
+  
+    <h1 class="title">【RPGツクールMV/MZ】行動による逃走とその仕様</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <div id="toc" class="toc-article">
+          <p class="toc-title">目次</p>
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E7%A8%AE%E9%A1%9E%E3%81%AE%E3%80%8C%E9%80%83%E3%81%92%E3%82%8B%E3%80%8D"><span class="toc-text">2種類の「逃げる」</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%83%91%E3%83%BC%E3%83%86%E3%82%A4%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89-%E3%80%8C%E9%80%83%E3%81%92%E3%82%8B%E3%80%8D%E3%81%AB%E3%82%88%E3%82%8B%E9%80%83%E8%B5%B0"><span class="toc-text">パーテイコマンド 「逃げる」による逃走</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E5%8A%B9%E6%9E%9C-%E3%80%8C%E9%80%83%E3%81%92%E3%82%8B%E3%80%8D%E3%81%AB%E3%82%88%E3%82%8B%E9%80%83%E8%B5%B0%EF%BC%88%E8%A1%8C%E5%8B%95%E3%81%AB%E3%82%88%E3%82%8B%E9%80%83%E8%B5%B0%EF%BC%89"><span class="toc-text">特殊効果 「逃げる」による逃走（行動による逃走）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A1%8C%E5%8B%95%E3%81%AB%E3%82%88%E3%82%8B%E9%80%83%E8%B5%B0%E3%81%AE%E7%89%B9%E5%BE%B4"><span class="toc-text">行動による逃走の特徴</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B5%E3%82%AD%E3%83%A3%E3%83%A9%E3%82%92%E9%80%83%E8%B5%B0%E3%81%95%E3%81%9B%E3%82%8B%E5%94%AF%E4%B8%80%E3%81%AE%E6%89%8B%E6%AE%B5"><span class="toc-text">敵キャラを逃走させる唯一の手段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%83%E8%B5%B0%E6%99%82%E3%81%AB%E6%88%A6%E9%97%98%E4%B8%8D%E8%83%BD%E5%90%AB%E3%82%80%E3%81%99%E3%81%B9%E3%81%A6%E3%81%AE%E3%82%B9%E3%83%86%E3%83%BC%E3%83%88%E3%81%8C%E8%A7%A3%E9%99%A4%E3%81%95%E3%82%8C%E3%82%8B"><span class="toc-text">逃走時に戦闘不能含むすべてのステートが解除される</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%83%E8%B5%B0%E3%81%97%E3%81%A6%E3%82%82%E5%BC%B7%E5%8C%96%E3%83%BB%E5%BC%B1%E4%BD%93%E3%81%8C%E8%A7%A3%E9%99%A4%E3%81%95%E3%82%8C%E3%81%AA%E3%81%84"><span class="toc-text">逃走しても強化・弱体が解除されない</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%8D%E5%BA%A6%E6%88%A6%E9%97%98%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%A7%E3%81%8D%E3%82%8B"><span class="toc-text">再度戦闘に参加できる</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A1%8C%E5%8B%95%E3%81%AB%E3%82%88%E3%82%8B%E9%80%83%E8%B5%B0%E3%81%AE%E7%90%86%E6%83%B3%E7%9A%84%E3%81%AA%E4%BB%95%E6%A7%98%E3%81%AE%E6%A4%9C%E8%A8%8E"><span class="toc-text">行動による逃走の理想的な仕様の検討</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%82%B9%E3%83%86%E3%83%BC%E3%83%88%E3%81%AE%E8%A7%A3%E9%99%A4"><span class="toc-text">ステートの解除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%B7%E5%8C%96%E3%83%BB%E5%BC%B1%E4%BD%93%E3%81%AE%E8%A7%A3%E9%99%A4"><span class="toc-text">強化・弱体の解除</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%90%86%E6%83%B3%E3%82%92%E5%AE%9F%E7%8F%BE%E3%81%99%E3%82%8B%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3"><span class="toc-text">理想を実現するプラグイン</span></a></li></ol>
+        </div>
+        <p>RPGツクールMV/MZにおける、行動による逃走とその仕様について解説します。<br>その中でも、ステート・強化・弱体の解除については直感と反する仕様が存在するため、それを解決するプラグインを紹介します。</p>
+<p>解説のもととなるコアスクリプトのバージョンは、MVは1.6.3 MZは1.5.0です。</p>
+<span id="more"></span>
+
+<h1 id="2種類の「逃げる」"><a href="#2種類の「逃げる」" class="headerlink" title="2種類の「逃げる」"></a>2種類の「逃げる」</h1><p>RPGツクールMV/MZにおいて、 <code>逃げる</code> という言葉が指す処理には2種類あります。<br>それぞれについて処理内容は異なります。</p>
+<h2 id="パーテイコマンド-「逃げる」による逃走"><a href="#パーテイコマンド-「逃げる」による逃走" class="headerlink" title="パーテイコマンド 「逃げる」による逃走"></a>パーテイコマンド 「逃げる」による逃走</h2><p>プレイヤーが戦闘中にパーティコマンドとして選択する <code>逃げる</code> です。<br>逃走成功判定に成功した場合は逃走フラグ<sup class="footnote-ref"><a href=#fn1 id="fnref1" title="これがONの状態で戦闘を終了すると、逃走回数カウントが+1される。">1</a></sup>をONにしつつ、戦闘を中断する処理を行います。</p>
+<h2 id="特殊効果-「逃げる」による逃走（行動による逃走）"><a href="#特殊効果-「逃げる」による逃走（行動による逃走）" class="headerlink" title="特殊効果 「逃げる」による逃走（行動による逃走）"></a>特殊効果 「逃げる」による逃走（行動による逃走）</h2><p>スキルやアイテムの使用効果に、特殊効果 <code>逃げる</code> が存在します。<br>この逃走は、該当スキル・アイテムの効果対象となるバトラー<sup class="footnote-ref"><a href=#fn2 id="fnref2" title="戦闘に参加している味方アクター、敵キャラをバトラー(Battler)と呼ぶ。">2</a></sup>を戦闘から離脱させる<sup class="footnote-ref"><a href=#fn3 id="fnref3" title="戦闘に参加していない状態にする。">3</a></sup>処理を行います。</p>
+<p>パーティコマンドのような逃走成功判定を行わず、行動さえ成功すれば<sup class="footnote-ref"><a href=#fn4 id="fnref4" title="行動制約で行動できなかったり、成功率の判定で成功すれば。">4</a></sup>逃走できます。</p>
+<p>本記事では、スキルやアイテムを使用することを <code>行動</code><br>行動の特殊効果 <code>逃げる</code> によって逃走することを <code>行動による逃走</code><br>使用効果に特殊効果 <code>逃げる</code> の設定された行動のことを <code>逃走行動</code><br>と呼びます。</p>
+<p>成功判定の他にも、行動による逃走にはパーティコマンドによる逃走と違う処理がいくつもあります。</p>
+<h1 id="行動による逃走の特徴"><a href="#行動による逃走の特徴" class="headerlink" title="行動による逃走の特徴"></a>行動による逃走の特徴</h1><p>MV/MZにおける行動による逃走が、どのような特徴で実装されているかを説明します。</p>
+<h2 id="敵キャラを逃走させる唯一の手段"><a href="#敵キャラを逃走させる唯一の手段" class="headerlink" title="敵キャラを逃走させる唯一の手段"></a>敵キャラを逃走させる唯一の手段</h2><p>パーティコマンドによる逃走は、戦闘そのものを直接中断してしまうため、敵キャラを逃走させるという挙動はできません。<br>DQのメタルスライムやFFのサボテンダーのような、逃げてしまう敵を実現するためには、行動による逃走を使う必要があります。</p>
+<h2 id="逃走時に戦闘不能含むすべてのステートが解除される"><a href="#逃走時に戦闘不能含むすべてのステートが解除される" class="headerlink" title="逃走時に戦闘不能含むすべてのステートが解除される"></a>逃走時に戦闘不能含むすべてのステートが解除される</h2><p>行動による逃走を行ったバトラーのステートは、戦闘不能も含めて全て解除されます。</p>
+<p>仮に逃走したアクターのHPが0になっていた場合<sup class="footnote-ref"><a href=#fn5 id="fnref5" title="他のパーティメンバーが、戦闘不能の味方を対象に含む逃走行動をとった場合。">5</a></sup>、戦闘不能ステートは解除されますが、HPは0のままです。<br>その状態でしばらく歩くと、突如「＊＊＊（アクターの名前）は倒れた！」というメッセージが表示され、対象のアクターに戦闘不能ステートが付与されます。</p>
+<p>また、解除条件に戦闘終了で解除が設定されていないステートも、行動による逃走で戦闘から離脱した際に解除されてしまいます。</p>
+<h2 id="逃走しても強化・弱体が解除されない"><a href="#逃走しても強化・弱体が解除されない" class="headerlink" title="逃走しても強化・弱体が解除されない"></a>逃走しても強化・弱体が解除されない</h2><p>強化・弱体は、本来であれば戦闘終了時に解除されますが、行動による逃走で戦闘から離脱すると解除されません。</p>
+<h2 id="再度戦闘に参加できる"><a href="#再度戦闘に参加できる" class="headerlink" title="再度戦闘に参加できる"></a>再度戦闘に参加できる</h2><p>実は、行動による逃走が成立するとは、バトラーが隠れている状態になります。<br>行動による逃走での戦闘離脱は、敵キャラの 途中から出現 の仕組みで隠れている状態と同じ仕組みを利用しているのです。<br>そのため、バトルイベントで敵キャラの出現を逃走後の敵キャラに使用すると再度戦闘に現れます。</p>
+<h1 id="行動による逃走の理想的な仕様の検討"><a href="#行動による逃走の理想的な仕様の検討" class="headerlink" title="行動による逃走の理想的な仕様の検討"></a>行動による逃走の理想的な仕様の検討</h1><p>逃走行動時に全ステートが解除されたり、強化・弱体が解除されない仕様は、場合によっては直感に反するものです。<br>そこで、どのような仕様であれば直感的になるかを考えてみます。</p>
+<h2 id="ステートの解除"><a href="#ステートの解除" class="headerlink" title="ステートの解除"></a>ステートの解除</h2><p>まず、戦闘不能が解除されながらも残りHPが0のままの状態は異常なので、直感的には戦闘不能は解除されてほしくありません。<br>かと言って、あらゆるステートを解除しないようにしてしまうと、戦闘終了で解除されるべきステートが戦闘終了後に残ってしまいます。</p>
+<p>戦闘不能以外の、戦闘終了で解除されないステートについては、ゲームによっては行動による逃走で解除されてほしい場合とそうでない場合がありそうです。<br>例えば、再度戦闘に参加する際に引き継いでほしいステートもあるかもしれません。<br>単純に、戦闘終了で解除されないステートのみ引き継ぐべきかどうかは、ケースバイケースで、プロジェクトごとに決めるゲームの仕様の問題になります。</p>
+<p>つまり、行動による逃走で解除すべきかどうかという、ステートの解除条件の設定ができれば良さそうです。</p>
+<h2 id="強化・弱体の解除"><a href="#強化・弱体の解除" class="headerlink" title="強化・弱体の解除"></a>強化・弱体の解除</h2><p>行動による逃走で強化・弱体が解除されないのは、戦闘終了時に他バトラーの強化・弱体が解除される仕様と合わせると直感的ではありません。<br>ひとまず、逃走時に強化・弱体を解除するようにしてしまえば、戦闘終了時の解除仕様と合わせても自然になります。</p>
+<p>しかし、戦闘から離脱した際に強化・弱体を継続して、バトルイベントで再度戦闘に参加させたいという要求もあるかもしれません。<br>行動による逃走時には強化・弱体を継続しつつ、戦闘終了時には逃走したバトラーも含めてすべての強化・弱体を解除したいという要求も考えられます。<br>行動による逃走であろうと戦闘終了であろうと、強化・弱体は持続するという仕様も、統一感があって良いでしょう。</p>
+<p>強化・弱体について、行動による逃走で解除すべきかどうかと、戦闘終了時に解除すべきかどうかという2種類の設定ができればすべてカバーできそうです。</p>
+<h1 id="理想を実現するプラグイン"><a href="#理想を実現するプラグイン" class="headerlink" title="理想を実現するプラグイン"></a>理想を実現するプラグイン</h1><p>2種類のプラグインを作成しました。</p>
+<ul>
+<li><a href="https://elleonard.github.io/DarkPlasma-MZ-Plugins/2022/08/13/remove-state-by-escape/">逃走行動によってステート・強化・弱体解除</a></li>
+<li><a href="https://elleonard.github.io/DarkPlasma-MZ-Plugins/2022/08/13/remove-buff-at-battle-end/">戦闘終了時に強化・弱体を解除するかどうか</a></li>
+</ul>
+<p>戦闘終了時の強化・弱体解除のみ別プラグインとなっていますが、これは逃走行動による解除と意味が異なる独立した処理であるためです。</p>
+<a href="/nplus_doc/2019/11/28/engineering/rmmv/good-plugin/" title="3年前の記事">3年前の記事</a>では良いプラグインの条件に機能が単一であることを挙げました。一般に単一責任の原則と呼ばれるものですが、今回もそれに従っています。
+
+  <hr class="footnotes-sep" />
+  <section class="footnotes">
+  <ol class="footnotes-list">
+  <li id="fn1" class="footnote-item">これがONの状態で戦闘を終了すると、逃走回数カウントが+1される。<a href="#fnref1"> <span class="up-arrow"/></a></li>
+<li id="fn2" class="footnote-item">戦闘に参加している味方アクター、敵キャラをバトラー(Battler)と呼ぶ。<a href="#fnref2"> <span class="up-arrow"/></a></li>
+<li id="fn3" class="footnote-item">戦闘に参加していない状態にする。<a href="#fnref3"> <span class="up-arrow"/></a></li>
+<li id="fn4" class="footnote-item">行動制約で行動できなかったり、成功率の判定で成功すれば。<a href="#fnref4"> <span class="up-arrow"/></a></li>
+<li id="fn5" class="footnote-item">他のパーティメンバーが、戦闘不能の味方を対象に含む逃走行動をとった場合。<a href="#fnref5"> <span class="up-arrow"/></a></li>
+  </ol>
+  </section>
+      
+    </div>
+    
+    <footer>
+        <div class="article-footer">
+        <div class="footer-left">
+        
+  
+  <div class="categories">
+    <a href="/nplus_doc/categories/ゲーム制作/">ゲーム制作</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/nplus_doc/tags/情報技術/">情報技術</a>, <a href="/nplus_doc/tags/RPGツクールMZ/">RPGツクールMZ</a>
+  </div>
+
+        </div>
+        <div class="footer-right">
+          <a target="_blank" rel="noopener" href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="【RPGツクールMV/MZ】行動による逃走とその仕様 | ぷらずま式改" data-url="https://elleonard.github.io/nplus_doc/2022/08/13/engineering/rmmz/escape-by-action/" data-via="elleonard_f" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+        </div>
+        
+        
+          <div class="article-next">
+            <a href="/nplus_doc/2022/06/26/game/attack-on-titan/attack-on-titan/">【ゲーム感想】進撃の巨人 <span class="next-arrow"/></a>
+          </div>
+        
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="検索">
+    <input type="hidden" name="q" value="site:elleonard.github.io/nplus_doc">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">カテゴリ</h3>
+  <ul class="entry">
+  
+    <li><a href="/nplus_doc/categories/FGO/">FGO</a><small>47</small></li>
+  
+    <li><a href="/nplus_doc/categories/niconico/">niconico</a><small>3</small></li>
+  
+    <li><a href="/nplus_doc/categories/アニメ感想/">アニメ感想</a><small>10</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム/">ゲーム</a><small>79</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム/ゲームレビュー/">ゲームレビュー</a><small>63</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム制作/">ゲーム制作</a><small>13</small></li>
+  
+    <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/デッキレシピ/">デッキレシピ</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/小説/">小説</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/情報技術/">情報技術</a><small>11</small></li>
+  
+    <li><a href="/nplus_doc/categories/漫画/">漫画</a><small>2</small></li>
+  
+    <li><a href="/nplus_doc/categories/百合/">百合</a><small>9</small></li>
+  
+    <li><a href="/nplus_doc/categories/艦これ/">艦これ</a><small>76</small></li>
+  
+    <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/">遊戯王ブロンティーズ</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/雑記/">雑記</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最近の投稿</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/nplus_doc/2022/08/13/engineering/rmmz/escape-by-action/">【RPGツクールMV/MZ】行動による逃走とその仕様</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/06/26/game/attack-on-titan/attack-on-titan/">【ゲーム感想】進撃の巨人</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/05/15/niconico/goodbye-my-videos/">モンスターシハンター等 全動画を非公開にした話</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/05/08/game/neptunia/sisters-vs-sisters/">【ゲーム感想】超次元ゲイム ネプテューヌ Sisters vs Sisters</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2022/04/27/game/atelier/sophie2/">【ゲーム感想】ソフィーのアトリエ2 ～不思議な夢の錬金術士～</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Link</h3>
+  <ul class="entry">
+    
+      <li>
+        <a target="_blank" rel="noopener" href="https://www.nicovideo.jp/">niconico</a>
+      </li>
+    
+      <li>
+        <a target="_blank" rel="noopener" href="http://lovingtheflags1986.blog96.fc2.com/">国旗と酒が待ち遠しいドリル日記</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  <p>
+  
+  &copy; 2022 NPlasma
+  
+  All rights reserved.</p>
+  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</div>
+<div class="alignright">
+  <a target="_blank" rel="noopener" href="https://github.com/elleonard"><i class="fab fa-github"></i></a>
+  <a target="_blank" rel="noopener" href="https://twitter.com/elleonard_f"><i class="fab fa-twitter-square"></i></a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="/nplus_doc/js/jquery.imagesloaded.min.js"></script>
+<script src="/nplus_doc/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/nplus_doc/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/nplus_doc/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id='bg'></div>
+</body>
+</html>
