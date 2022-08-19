@@ -14,6 +14,38 @@ date: 2022-08-18 12:25:11
 
 <!-- more -->
 
+# 前提
+
+[リポジトリ](https://github.com/elleonard/DarkPlasma-MZ-Plugins)は以下のような構造になっています。{% footnote yarn.lockなど、今回のtypescript移行の文脈での説明に不要なものは省いている。 %}
+
+```
+├── _dist
+├── .github/workflows
+├── src
+│ └── codes
+│   ├── プラグイン1
+│   │ ├── _build
+│   │ │ ├── DarkPlasma_プラグイン1_commands.js
+│   │ │ ├── DarkPlasma_プラグイン1_header.js
+│   │ │ ├── DarkPlasma_プラグイン1_parameters.js
+│   │ │ └── DarkPlasma_プラグイン1_parametersOf.js
+│   │ ├── DarkPlasma_プラグイン1.js
+│   │ └── config.yml
+│   ├── プラグイン2
+│   └── ...
+└── package.json
+```
+
+RPGツクールのプラグインは単一機能であることが望ましく、それぞれが小規模です。
+1プラグインにつき1リポジトリの運用をされている方もいらっしゃいますが、筆者のプラグインはそれをやるほどの規模のものではなく、1リポジトリですべてを管理するmonorepo方式を取っています。
+{% post_link engineering/rmmz/rmmz-plugin-with-rollup %}に記した通り、rollup.jsを利用して、プラグインのメインロジックと設定を分離しています。
+config.ymlから、 _build 下に中間成果物を生成し、それとメインロジックを結合して、最終的な成果物を _dist に生成します。
+
+GitHub上では成果物用のディレクトリは確認できません。
+GitHub Actionsでビルドし、releaseブランチに成果物をpushしています。
+
+今回、typescript化するのはプラグインのメインロジック。上記の図では DarkPlasma_プラグイン1.js となっているものです。
+
 # 移行の理由
 
 型安全に書きたい！
