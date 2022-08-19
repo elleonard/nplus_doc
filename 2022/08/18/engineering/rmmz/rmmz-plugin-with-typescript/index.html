@@ -35,7 +35,7 @@
 <meta property="og:description" content="以前挑戦して失敗した後、放置していたtypescript移行の計画を実行に移しました。移行の方針から、実際の移行作業手順と、その過程で踏み抜いた罠、得られた副産物を記しておきます。">
 <meta property="og:locale" content="ja_JP">
 <meta property="article:published_time" content="2022-08-18T03:25:11.000Z">
-<meta property="article:modified_time" content="2022-08-19T15:35:01.894Z">
+<meta property="article:modified_time" content="2022-08-19T16:16:09.807Z">
 <meta property="article:author" content="NPlasma">
 <meta property="article:tag" content="情報技術">
 <meta property="article:tag" content="RPGツクールMZ">
@@ -144,15 +144,15 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn add -D typescript</span><br><span class="line">yarn tsc --init</span><br></pre></td></tr></table></figure>
 
 <p>これでプロジェクトにtypescriptをインストールし、tsconfig.jsonを生成します。<br>コンパイラオプションはほとんどいじりませんでした。デフォルトでstrictにチェックしてくれるので、型安全という目的はそこで達成されます。<br>自前でビルドの仕組みを持っているので、 module は <code>ESNext</code> にしておきました。</p>
-<h2 id="npm-scriptの整理"><a href="#npm-scriptの整理" class="headerlink" title="npm scriptの整理"></a>npm scriptの整理</h2><p>tsファイルを先にtscでトランスパイルし、その後、既存のrollupの仕組みに突っ込んで成果物をビルドする形式にするため、ビルド用のコマンドを整理する必要がありました。<br>ただし、トランスパイルの段階で、自動生成したプラグインパラメータなどの型情報がなくてエラーになるため、予めそれらの型定義ファイルも自動生成しておく必要があります。<br>幸い、 <code>tsc --declaration --allowJs --emitDeclarationOnly</code> で型定義を自動生成できる<sup class="footnote-ref"><a href=#fn5 id="fnref5" title="一部any型が生成されてしまっており敗北感があるものの、規模の大きいものではないため一旦許容している。">5</a></sup>ため、パラメータ設定のビルド時にそれらも一緒に生成してしまうこととしました。</p>
+<h2 id="npm-scriptの整理"><a href="#npm-scriptの整理" class="headerlink" title="npm scriptの整理"></a>npm scriptの整理</h2><p>tsファイルを先にtscでトランスパイルし、その後、既存のrollupの仕組みに突っ込んで成果物をビルドする形式にするため、ビルド用のコマンドを整理する必要がありました。<br>ただし、トランスパイルの段階で、自動生成したプラグインパラメータなどの中間成果物の型情報がなくてエラーになるため、予めそれらの型定義ファイルも自動生成しておく必要があります。<br>幸い、 <code>tsc --declaration --allowJs --emitDeclarationOnly</code> で型定義を自動生成できる<sup class="footnote-ref"><a href=#fn5 id="fnref5" title="一部any型が生成されてしまっており敗北感があるものの、規模の大きいものではないため一旦許容している。">5</a></sup>ため、設定のビルド時にそれらも一緒に生成してしまうこととしました。</p>
 <h2 id="既存プラグインの移行を試す"><a href="#既存プラグインの移行を試す" class="headerlink" title="既存プラグインの移行を試す"></a>既存プラグインの移行を試す</h2><p>プラグインコマンド、プラグインパラメータの両方を持ち、規模が大きすぎないものとして、 <a target="_blank" rel="noopener" href="https://github.com/elleonard/DarkPlasma-MZ-Plugins/blob/release/DarkPlasma_MaxItemCount.js">MaxItemCount</a> を選択しました。</p>
 <h1 id="移行の罠"><a href="#移行の罠" class="headerlink" title="移行の罠"></a>移行の罠</h1><p>いろんな罠を踏んで、思っていたより時間がかかりました。</p>
-<h2 id="tscはワイルドカードを解釈しない"><a href="#tscはワイルドカードを解釈しない" class="headerlink" title="tscはワイルドカードを解釈しない"></a>tscはワイルドカードを解釈しない</h2><p>tscのトランスパイル対象は、コマンドに引数として渡して指定することもできます。<sup class="footnote-ref"><a href=#fn6 id="fnref6" title="tsconfig.jsonのincludeでの指定も可能で、そちらが主流。include設定ではワイルドカードが使用できるが、今回は要件的に直接指定が必要であった。">6</a></sup><br>ただし、tscで型定義ファイルを生成する際には、既存のディレクトリ構成では各プラグインディレクトリの下にある <code>./_build/*.js</code> を対象とする想定でした。<br>プロジェクトルートからの相対パスをglob風に書くと、 <code>./src/**/_build/*.js</code> になります。</p>
+<h2 id="tscはワイルドカードを解釈しない"><a href="#tscはワイルドカードを解釈しない" class="headerlink" title="tscはワイルドカードを解釈しない"></a>tscはワイルドカードを解釈しない</h2><p>tscのトランスパイル対象は、コマンドに引数として渡して指定することもできます。<sup class="footnote-ref"><a href=#fn6 id="fnref6" title="tsconfig.jsonのincludeでの指定も可能で、そちらが主流。include設定ではワイルドカードが使用できるが、今回は要件的に直接指定が必要であった。">6</a></sup><br>tscで型定義ファイルを生成する際には、既存のディレクトリ構成では各プラグインディレクトリの下にある <code>./_build/*.js</code> を対象とする想定でした。<br>プロジェクトルートからの相対パスをglob風に書くと、 <code>./src/**/_build/*.js</code> になります。</p>
 <p>しかし、tscにワイルドカード指定を直接渡すと <code>*.js is not found</code> と言われ、何もしてくれません。</p>
 <p>仕方ないので、 <a target="_blank" rel="noopener" href="https://github.com/google/zx">google/zx</a> を利用することにしました。<br>npm-scriptから呼び出すことができ、ある程度複雑な処理をjsなどで書ける優れものです。<br>最近tsもサポートされたようですが、あまり欲張ると時間がいくらあっても足りないので、ひとまず .mjs でスクリプトを用意しました。<br>zxから呼び出すスクリプトで対象ファイル一覧を出し、それに対して <code>yarn tsc</code> を使って型定義ファイルを生成させる仕組みとしました。</p>
 <p>zxはnodeのバージョンが16以上でないと動かないので、ビルド環境のアップデートも必要でした。</p>
 <h2 id="個別にtscする"><a href="#個別にtscする" class="headerlink" title="個別にtscする"></a>個別にtscする</h2><p>単にtscのオプションをいじるだけでは、プラグインごとに個別にビルドできません。<br><code>--rootDir</code> オプションで指定ディレクトリ以下だけビルドしてくれそうだなと思いましたが、そんなことはありませんでした。</p>
-<p>多くのプラグインをひとつのリポジトリで管理しているという意味ではmonorepoなので、それぞれのプラグインを個別のプロジェクトとみなしてしまうのが一番楽そうだという結論に達しました。<br>ビルド時に対象ディレクトリにtsconfig.jsonをテンプレートからコピーし、 <code>-b</code> オプションでビルド対象として指定します。</p>
+<p>多くのプラグインをひとつのリポジトリで管理するmonorepo構造なので、それぞれのプラグインを個別のプロジェクトとみなしてしまうのが一番楽そうだという結論に達しました。<br>ビルド時に対象ディレクトリにtsconfig.jsonをテンプレートからコピーし、 <code>-b</code> オプションでビルド対象として指定します。</p>
 <p>せっかくなので、 origin/release のコミットコメントにある最終ビルド対象コミットIDを利用して、プロジェクト全体としての差分ビルドを実現することにしました。<br>rollup移行の際に、releaseブランチのコミットコメントを、ビルド元になったmasterのコミットIDにしておいたことがここで活きました。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git fetch origin release</span><br><span class="line">git log --first-parent origin/release --pretty=oneline -n 1</span><br></pre></td></tr></table></figure>
 
@@ -164,11 +164,10 @@
 <p><a target="_blank" rel="noopener" href="https://github.com/elleonard/DarkPlasma-MZ-Plugins/blob/1cb88d752fbf2041fe0e2ebd2efac984f4921ae8/scripts/buildDispatcher/buildIncremental.mjs">上記の仕組みを利用した差分ビルド用の .mjs</a> はちょっと雑な感じもしますが、ひとまずこんな感じです。</p>
 <h2 id="GitHub-Actionsが通らない"><a href="#GitHub-Actionsが通らない" class="headerlink" title="GitHub Actionsが通らない"></a>GitHub Actionsが通らない</h2><p>GitHub Actionsでは、一時ディレクトリの下でビルドコマンドを利用しているため、相対パスでビルド対象を決定すると残念なことになってしまいました。<br>横着せず、 <code>path.resolve(__dirname)</code> を駆使して絶対パス指定に変更。<br>すると今度はローカルでビルドを通せません。</p>
 <p>zxが特定以外の文字を含む変数を <code>$</code> に渡すコマンド内で展開しようとすると、 <code>$&#39;文字列&#39;</code> のように展開してしまうのです。</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/google/zx/blob/2ec0f0321fd43ceedd0287b96d07b674b2c34a6b/src/core.ts#L87">ソースコード</a></p>
 <p>つまり、以下のようなソースコードではコマンドが壊れてしまい、動きません。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">await</span> $<span class="string">`yarn tsc --declaration --allowJs --emitDeclarationOnly <span class="subst">$&#123;target&#125;</span>`</span>;</span><br></pre></td></tr></table></figure>
 
-<p>なぜかというと、筆者がWindowsを使っているからですね。絶対パスにコロンが含まれるため、zxによる展開時にエスケープされてしまうというわけです。<br>WSLなりdockerなりで開発環境のポータビリティを上げておかなかったツケと言えばツケですが、今それをやる余裕はないので、とりあえずzxのコードを読んでなんとかしました。</p>
+<p>なぜかというと、筆者がWindowsを使っているからですね。絶対パスにコロンが含まれるため、zxによる展開時にエスケープされてしまうというわけです。<br>WSLなりdockerなりで開発環境のポータビリティを上げておかなかったツケと言えばツケですが、今それをやる余裕はないので、とりあえず<a target="_blank" rel="noopener" href="https://github.com/google/zx/blob/2ec0f0321fd43ceedd0287b96d07b674b2c34a6b/src/core.ts#L87">zxのコード</a>を読んでなんとかしました。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">await</span> $([<span class="string">`yarn tsc --declaration --allowJs --emitDeclarationOnly`</span>, <span class="string">` <span class="subst">$&#123;target&#125;</span>`</span>], <span class="string">&#x27;&#x27;</span>);</span><br></pre></td></tr></table></figure>
 
 <p>こんな感じで配列で渡してあげると結合した状態のコマンドを流してくれます。これで <code>C:</code> から始まるパスでも安心です。</p>
