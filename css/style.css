@@ -929,6 +929,7 @@ div .amazon-link {
   color: #0cf;
 }
 figure.highlight {
+  background: #111;
   border: 1px solid #ddd;
   margin-top: 15px;
   padding: 7px 15px;
