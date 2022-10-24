@@ -21,7 +21,7 @@ date: 2021-10-03 23:55:23
 
 # 作品配布・販売ページリンク
 
-* [Again](https://ci-en.net/creator/2260/article/161200)
+* [Again](https://www.dlsite.com/home/work/=/product_id/RJ354000.html)
 * [Again後日談](https://ci-en.net/creator/2260/article/353909)
 * [Promise えちえちぼでぃ - DLSite](https://www.dlsite.com/home/work/=/product_id/RJ270599.html)
 
