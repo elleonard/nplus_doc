@@ -86,6 +86,65 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2019-01-30T21:57:58.000Z"><a href="/nplus_doc/2019/01/31/engineering/heroku-multiline-config/">2019-01-31</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/nplus_doc/2019/01/31/engineering/heroku-multiline-config/">Herokuで複数行のコンフィグが設定できずに夜を明かした話</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <div id="toc" class="toc-article">
+          <p class="toc-title">目次</p>
+          
+        </div>
+        <p>Herokuは手軽にウェブプログラミングを楽しめる最高の環境ですが、パスワードや秘密鍵等の秘匿情報の扱いにはもちろん気をつけなければいけません。<br><code>heroku config:set KEY=VALUE</code> で環境変数に設定し、それをプログラムから読み出すという手法が広く取られているようです。</p>
+<p>ただし、コマンドラインだと複数行の値（例えば秘密鍵）を設定する際に困ります。<br>筆者はWindowsマンかつPowershellおじさんなので <code>heroku config:set KEY=$(cat /path/to/file)</code> とかやってみても改行が潰されてしまうようでした。</p>
+<p>おとなしくHerokuのダッシュボードから設定すればちゃんと動きました。ちくしょう</p>
+
+      
+    </div>
+    
+    <footer>
+        <div class="article-footer">
+        <div class="footer-left">
+        
+  
+  <div class="categories">
+    <a href="/nplus_doc/categories/情報技術/">情報技術</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/nplus_doc/tags/Heroku/">Heroku</a>
+  </div>
+
+        </div>
+        <div class="footer-right">
+          <a target="_blank" rel="noopener" href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Herokuで複数行のコンフィグが設定できずに夜を明かした話 | ぷらずま式改" data-url="https://elleonard.github.io/nplus_doc/2019/01/31/engineering/heroku-multiline-config/" data-via="elleonard_f" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+        </div>
+        
+        
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2019-01-11T14:19:37.000Z"><a href="/nplus_doc/2019/01/11/yuri/what-is-yuri/">2019-01-11</a></time>
       
       
@@ -595,65 +654,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-10-30T14:04:34.000Z"><a href="/nplus_doc/2018/10/30/game/again/">2018-10-30</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/nplus_doc/2018/10/30/game/again/">【ゲーム感想】Again</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="はじめに"><a href="#はじめに" class="headerlink" title="はじめに"></a>はじめに</h1><p>この作品はtwitterでフォロワー限定で公開されていたものであり、作者に直接コンタクトを取らないとプレイすることができません。<sup class="footnote-ref"><a href=#fn1 id="fnref1" title="後日、ci-enにてフリー版及び続編が公開されました。">1</a></sup> <sup class="footnote-ref"><a href=#fn2 id="fnref2" title="更に後日、リメイク版が発売され、フリー版の公開は停止されました。">2</a></sup><br>筆者の考えとしては作品の出処はしっかり明記しておきたいのだが、作者の考えを察するにあまり広い範囲に公開したいわけではなさそうなので作品名と内容以外の詳細はあえて記さないこととします。</p>
-<p>とにかく衝撃的だったので、筆者の興奮を鎮めるためにもこの感想を記します。</p>
-      
-    </div>
-    
-    <footer>
-      <div class="alignleft">
-        <a href="/nplus_doc/2018/10/30/game/again/#more" class="more-link">More</a>
-      </div>
-    </footer>
-    
-    <footer>
-        <div class="article-footer">
-        <div class="footer-left">
-        
-  
-  <div class="categories">
-    <a href="/nplus_doc/categories/ゲーム/">ゲーム</a>, <a href="/nplus_doc/categories/ゲーム/ゲームレビュー/">ゲームレビュー</a>
-  </div>
-
-        
-  
-  <div class="tags">
-    <a href="/nplus_doc/tags/ゲーム/">ゲーム</a>, <a href="/nplus_doc/tags/RPGツクールMV/">RPGツクールMV</a>
-  </div>
-
-        </div>
-        <div class="footer-right">
-          <a target="_blank" rel="noopener" href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="【ゲーム感想】Again | ぷらずま式改" data-url="https://elleonard.github.io/nplus_doc/2018/10/30/game/again/" data-via="elleonard_f" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        </div>
-        </div>
-        
-        
-        <!-- partial('post/share') -->
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
 
 <nav id="pagination">
   
@@ -702,7 +702,7 @@
   
     <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/">遊戯王ブロンティーズ</a><small>4</small></li>
   
-    <li><a href="/nplus_doc/categories/雑記/">雑記</a><small>11</small></li>
+    <li><a href="/nplus_doc/categories/雑記/">雑記</a><small>12</small></li>
   
   </ul>
 </div>
@@ -712,6 +712,10 @@
 <div class="widget tag">
   <h3 class="title">最近の投稿</h3>
   <ul class="entry">
+    
+      <li>
+        <a href="/nplus_doc/2024/12/28/misc/2024/">2024年の振り返り</a>
+      </li>
     
       <li>
         <a href="/nplus_doc/2024/03/09/game/granblue-fantasy-relink/">【ゲーム感想】GRANBLUE FANTASY: Relink</a>
@@ -727,10 +731,6 @@
     
       <li>
         <a href="/nplus_doc/2023/04/15/game/atelier/ryza3/">【ゲーム感想】ライザのアトリエ3 ～終わりの錬金術士と秘密の鍵～</a>
-      </li>
-    
-      <li>
-        <a href="/nplus_doc/2023/03/23/game/etibo/again-remake/">【ゲーム感想】Again（リメイク）</a>
       </li>
     
   </ul>
