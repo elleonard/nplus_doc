@@ -3,6 +3,7 @@ title: 【ゲーム感想】Again
 tags:
   - ゲーム
   - RPGツクールMV
+  - えちぼ
 category:
   - ゲーム
   - ゲームレビュー

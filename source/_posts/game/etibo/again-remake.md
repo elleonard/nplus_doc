@@ -3,6 +3,7 @@ title: 【ゲーム感想】Again（リメイク）
 tags:
   - ゲーム
   - RPGツクールMZ
+  - えちぼ
 category:
   - ゲーム
   - ゲームレビュー

@@ -3,6 +3,7 @@ title: 【ゲーム感想】Promise
 tags:
   - ゲーム
   - RPGツクールMZ
+  - えちぼ
 category:
   - ゲーム
   - ゲームレビュー
