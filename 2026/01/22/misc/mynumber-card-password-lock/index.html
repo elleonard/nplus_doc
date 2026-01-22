@@ -1,0 +1,311 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>マイナンバーカードのロックは1種類ではない | ぷらずま式改</title>
+  <meta name="author" content="NPlasma" />
+
+  
+  <meta name="description" content="NPlasmaの個人メモ" />
+  
+
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <meta property="og:title" content="マイナンバーカードのロックは1種類ではない" />
+  <meta property="og:site_name" content="ぷらずま式改" />
+
+  
+  
+
+  
+    <meta property="og:image" content="/img/ogp.png" />
+  
+
+  <!-- ogp -->
+  
+    
+      <meta name="description" content="間抜けをやらかし、その解決にかなり時間を使ったので、その経緯を記します。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="マイナンバーカードのロックは1種類ではない">
+<meta property="og:url" content="https://elleonard.github.io/nplus_doc/2026/01/22/misc/mynumber-card-password-lock/index.html">
+<meta property="og:site_name" content="ぷらずま式改">
+<meta property="og:description" content="間抜けをやらかし、その解決にかなり時間を使ったので、その経緯を記します。">
+<meta property="og:locale" content="ja_JP">
+<meta property="article:published_time" content="2026-01-22T01:27:11.000Z">
+<meta property="article:modified_time" content="2026-01-22T02:30:20.794Z">
+<meta property="article:author" content="NPlasma">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@elleonard_f">
+    
+    <meta name="twitter:image" content="https://elleonard.github.io/nplus_doc/img/ogp.png"/>
+  
+
+  <link rel="alternate" href="/nplus_doc/atom.xml" title="ぷらずま式改" type="application/atom+xml">
+  <link rel="stylesheet" href="/nplus_doc/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/nplus_doc/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/nplus_doc//favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/nplus_doc//favicon/favicon-16x16.png">
+  <link rel="manifest" href="/nplus_doc//favicon/site.webmanifest">
+  <link rel="mask-icon" href="/nplus_doc//favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <script src="https://kit.fontawesome.com/b51cad8f00.js" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/nplus_doc/">ぷらずま式改</a></h1>
+  <h2><a href="/nplus_doc/">NPlasma個人メモ</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/nplus_doc/">Home</a></li>
+    
+      <li><a href="/nplus_doc/2016/05/29/about/">About</a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://twitter.com/elleonard_f">Twitter</a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://github.com/elleonard">GitHub</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2026-01-22T01:27:11.000Z"><a href="/nplus_doc/2026/01/22/misc/mynumber-card-password-lock/">2026-01-22</a></time>
+      
+      
+  
+    <h1 class="title">マイナンバーカードのロックは1種類ではない</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <div id="toc" class="toc-article">
+          <p class="toc-title">目次</p>
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%99%BA%E7%AB%AF"><span class="toc-text">発端</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%AD%974%E6%A1%81%E3%80%81%E3%81%A4%E3%81%BE%E3%82%8A%E3%81%82%E3%82%8C%E3%81%A0%E3%81%AA"><span class="toc-text">数字4桁、つまりあれだな</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%83%AD%E3%83%83%E3%82%AF%E3%82%92%E8%A7%A3%E9%99%A4%E3%81%97%E3%81%9F%E3%81%84"><span class="toc-text">ロックを解除したい</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%9B%A0%E3%82%92%E8%AA%BF%E6%9F%BB-1%E5%9B%9E%E7%9B%AE"><span class="toc-text">原因を調査 (1回目)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E6%B2%BB%E4%BD%93%E3%81%AE%E5%BD%B9%E6%89%80-1%E5%9B%9E%E7%9B%AE"><span class="toc-text">自治体の役所(1回目)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%8A%80%E8%A1%8C"><span class="toc-text">銀行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E6%B2%BB%E4%BD%93%E3%81%AE%E5%BD%B9%E6%89%80-2%E5%9B%9E%E7%9B%AE"><span class="toc-text">自治体の役所(2回目)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%83%9E%E3%82%A4%E3%83%8A%E3%83%B3%E3%83%90%E3%83%BC%E7%B7%8F%E5%90%88%E3%83%95%E3%83%AA%E3%83%BC%E3%83%80%E3%82%A4%E3%83%A4%E3%83%AB"><span class="toc-text">マイナンバー総合フリーダイヤル</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E6%B2%BB%E4%BD%93%E3%81%AE%E5%BD%B9%E6%89%80-3%E5%9B%9E%E7%9B%AE"><span class="toc-text">自治体の役所(3回目)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%81%BE%E3%81%A8%E3%82%81"><span class="toc-text">まとめ</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%83%9E%E3%82%A4%E3%83%8A%E3%83%B3%E3%83%90%E3%83%BC%E3%82%AB%E3%83%BC%E3%83%89%E3%81%AB%E3%81%BE%E3%81%A4%E3%82%8F%E3%82%8B4%E6%A1%81%E3%81%AE%E6%95%B0%E5%AD%97%E3%81%AF4%E7%A8%AE%E9%A1%9E%E3%81%82%E3%82%8B"><span class="toc-text">マイナンバーカードにまつわる4桁の数字は4種類ある</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%83%9E%E3%82%A4%E3%83%8A%E3%83%B3%E3%83%90%E3%83%BC%E3%82%AB%E3%83%BC%E3%83%89%E3%81%AE%E3%83%AD%E3%83%83%E3%82%AF%E3%81%AF1%E7%A8%AE%E9%A1%9E%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84"><span class="toc-text">マイナンバーカードのロックは1種類ではない</span></a></li></ol></li></ol>
+        </div>
+        <p>間抜けをやらかし、その解決にかなり時間を使ったので、その経緯を記します。</p>
+<span id="more"></span>
+
+<h1 id="発端"><a href="#発端" class="headerlink" title="発端"></a>発端</h1><p>「スマホ買い替えたし、銀行のアプリで本人確認もやり直しだな！」</p>
+<p>これがすべての始まりでした。<br>銀行のアプリはマイナンバーカードをスマホで読み取ることにより、特定の機能が利用可能になる類のものがあります。<br>この際、マイナンバーカードに記された生年月日、有効期限、セキュリティコードの入力を求められました。</p>
+<p>では、マイナンバーカードのセキュリティコードとはどのような数字でしょうか。</p>
+<h2 id="数字4桁、つまりあれだな"><a href="#数字4桁、つまりあれだな" class="headerlink" title="数字4桁、つまりあれだな"></a>数字4桁、つまりあれだな</h2><p>早合点した筆者は、暗証番号を入力しました。もちろん、通りません。<br>セキュリティコードとは、暗証番号ではないのです。<br>マイナンバーカードの顔写真の下に小さく印字されている4桁の数字。これがセキュリティコードです。<sup class="footnote-ref"><a href=#fn1 id="fnref1" title="アプリ内の図解にもちゃんと記載されていました。ウカツ！">1</a></sup><br>ところが、エラーメッセージには「生年月日は西暦じゃなくて、マイナンバーカードに記されてる和暦だよ」というような内容が表示されています。<br>ちゃんと和暦にして再入力しても失敗し、その時点でセキュリティコードが間違っていることに思い至ればよかったのですが、4桁の数字と言えば暗証番号だろうという思い込みは消えません。<sup class="footnote-ref"><a href=#fn2 id="fnref2" title="暗証番号なのにマスク表示されない時点で不用心なアプリだな、銀行のアプリなんてそんなもんなのかなと見下していた節はあります。">2</a></sup><br>そうこうしているうちに、エラーメッセージが変わりました。マイナンバーカードのICチップがロックされたのです。</p>
+<h1 id="ロックを解除したい"><a href="#ロックを解除したい" class="headerlink" title="ロックを解除したい"></a>ロックを解除したい</h1><p>マイナンバーカード ロック解除 検索。<br>どうやら、コンビニで暗証番号を変えればロック解除できるらしい。<br>筆者は近所のコンビニでさっと手続きし、再度銀行のアプリを試しました。</p>
+<p>ところが、ICチップがロックされている旨のエラーメッセージは変わりません。<br>どういう、ことだ……？</p>
+<h2 id="原因を調査-1回目"><a href="#原因を調査-1回目" class="headerlink" title="原因を調査 (1回目)"></a>原因を調査 (1回目)</h2><p>試しに、マイナポータルへのログインにマイナンバーカード読み取りを使用してみました。<br>ログインできます。</p>
+<p>つまり、銀行のアプリに何か問題がある？<br>アプリかサーバーにキャッシュが残っていて、1日くらいは待たないといけないのかもしれない。<br>そう思って後日試しても、エラーは変わりません。</p>
+<h2 id="自治体の役所-1回目"><a href="#自治体の役所-1回目" class="headerlink" title="自治体の役所(1回目)"></a>自治体の役所(1回目)</h2><p>「マイナンバーカードのICチップがロックされているらしい」</p>
+<p>この情報を持って、自治体の役所の窓口でカードを調べてもらいました。<br>「特にロックされてないですね」<br>カードをICカードリーダーで読み取った職員の方にそう言われ、銀行のアプリで困っている旨を話すと、それなら銀行に行ってくれとのこと。</p>
+<p>確かにこの時点では、マイナポータルにもログインできているので、銀行のアプリ側を疑うのが筋なのかもしれません。<br>そう納得し、銀行の窓口を予約して後日行ってみることに。</p>
+<h2 id="銀行"><a href="#銀行" class="headerlink" title="銀行"></a>銀行</h2><p>銀行の窓口でも、マイナンバーカードの問題は解決しませんでした。<br>アプリの機能については、窓口の手続きで利用可能になりましたが、カード自体のロックはそのままです。<br>このままでは、今後の人生<sup class="footnote-ref"><a href=#fn3 id="fnref3" title="再発行までの9年。">3</a></sup>に禍根を残しかねません。</p>
+<p>この窓口で、担当の職員さんが調べてくれたところによると、<a target="_blank" rel="noopener" href="https://faq.myna.go.jp/faq/show/7204?site_domain=default">「券面事項確認アプリケーションにロックがかかっている」</a>状態らしいとのこと。<br>確かに、症状は一致しています。</p>
+<p>試しに、デジタル庁が配信している<a target="_blank" rel="noopener" href="https://services.digital.go.jp/mynumbercard-check-app/">マイナンバーカード対面確認アプリ</a>でスキャンしてみると、「券面確認APがブロックされています」のエラーが出ました。<br>とにかく、お住いの市区町村窓口にてロック解除手続きをせよとある通り、再び自治体の役所に足を運びます。</p>
+<h2 id="自治体の役所-2回目"><a href="#自治体の役所-2回目" class="headerlink" title="自治体の役所(2回目)"></a>自治体の役所(2回目)</h2><p>今思い返しても、なぜここで解決しなかったのかと思わずにいられません。</p>
+<p>窓口で職員の方に説明し、カードを確認していただいても、「ロックされてないですね」とのこと。<br>これ以上詳しいことはここではわからないので、国のマイナンバー総合フリーダイヤルに聞けと番号を案内されました。</p>
+<h2 id="マイナンバー総合フリーダイヤル"><a href="#マイナンバー総合フリーダイヤル" class="headerlink" title="マイナンバー総合フリーダイヤル"></a>マイナンバー総合フリーダイヤル</h2><p>電話して聞いてみました。<br>すると、「券面情報入力補助用暗証番号のロックはお住まいの自治体でしか解除できないよ」とのこと。<br>自治体の役所の職員に、嘘つかれたってコト……！？</p>
+<h2 id="自治体の役所-3回目"><a href="#自治体の役所-3回目" class="headerlink" title="自治体の役所(3回目)"></a>自治体の役所(3回目)</h2><p>いざとなったら、国との間で直接やり取りしてもらおうか、などと心を臨戦態勢にしながら3回目の自治体の役所へ。<br>そこで昨日とは違う若い職員さんに言われた衝撃の一言。</p>
+<p>「ロック解除しますね」</p>
+<p>なっ……なんだァ？てめェ……</p>
+<p>こう返しそうになったところを「ロックされてました？ 昨日はロックされてないと言われたんですが」と社会性フィルターに通しました。<br>4種類あるパスワードのうち、券面情報入力用暗証番号だけがロックされていたとのこと。</p>
+<p>待ってほしい。情報が足りなかった1回目と違って、2回目はそれわかってたはずでは？<br>いつでも心の刃を抜けるように柄にかけていた手はやり場を失い、「ご対応いただきありがとうございました」と言い残して帰宅。<sup class="footnote-ref"><a href=#fn4 id="fnref4" title="世界もこれくらい平和的に動いてくれれば良いのだが。">4</a></sup><br>筆者の間抜けに端を発するマイナンバーカードロック騒動はこうして幕を下ろしました。<br>そして今、同じ間抜けをやるかもしれない未来の人類<sup class="footnote-ref"><a href=#fn5 id="fnref5" title="人類は、基本的に間抜けである。思い込みから間抜けをやることは誰にでもあるので、本記事がそういう落とし穴を回避したり、深みから這い出る一助になれば幸いである。">5</a></sup>に向けてこの筆を執っている次第です。</p>
+<h1 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h1><h2 id="マイナンバーカードにまつわる4桁の数字は4種類ある"><a href="#マイナンバーカードにまつわる4桁の数字は4種類ある" class="headerlink" title="マイナンバーカードにまつわる4桁の数字は4種類ある"></a>マイナンバーカードにまつわる4桁の数字は4種類ある</h2><p>3つの暗証番号とセキュリティコードです。<br>たいていの場合、3つの暗証番号は同一の値に設定されているはずです。<sup class="footnote-ref"><a href=#fn6 id="fnref6" title="設定時の書類にまとめて同じものを設定する場合の記入欄があり、そちらが太枠で囲まれている。一般人は4桁の数字を何種類も似た用途のために使い分けられないので、同じにしとけというのは国の親切によるものだろう。">6</a></sup></p>
+<ul>
+<li>署名用電子証明書用のパスワード (6～16桁の英数字)</li>
+<li>利用者証明用電子証明書用の暗証番号 (4桁の数字)</li>
+<li>住民基本台帳用の暗証番号 (4桁の数字)</li>
+<li>券面事項入力補助用の暗証番号 (4桁の数字)</li>
+<li>セキュリティコード (4桁の数字。顔写真下に印字)</li>
+</ul>
+<p>このうち、署名用電子証明書用のパスワードと、利用者証明用電子証明書用の暗証番号は、どちらかがロックされていなければもう片方をコンビニの端末でロック解除できます。<br>ところが、券面事項入力補助用の暗証番号は自治体でなければ解除できません。</p>
+<p>そして、セキュリティコードはカードの印字されている不変の数字であり、暗証番号とは違うものです。</p>
+<h2 id="マイナンバーカードのロックは1種類ではない"><a href="#マイナンバーカードのロックは1種類ではない" class="headerlink" title="マイナンバーカードのロックは1種類ではない"></a>マイナンバーカードのロックは1種類ではない</h2><p>どうも、各種暗証番号について別々にロックがかかるようです。<br>今回は、券面事項入力補助用の暗証番号にロックがかかっていました。<br>これを自治体の窓口で再設定することで、ロックを解除できます。</p>
+<p>マイナポータルにログインするために使うのは、利用者証明用電子証明書用の暗証番号です。<br>一方、銀行のアプリやマイナンバーカード対面確認アプリが用いるのは、券面事項入力補助用の暗証番号です。<br>同じスマホでの読み取りでも、使う番号が違うのでロックも別になっていたんですね。</p>
+<p>おそらく、1～2回目の自治体の役所でのロックされていない発言は、他の暗証番号についてのロックを確認していたのでしょう。<br>それにしたって、何一つロックがかかっていないというような言い方をしないでいてくれればとは思いますが。</p>
+  <hr class="footnotes-sep" />
+  <section class="footnotes">
+  <ol class="footnotes-list">
+  <li id="fn1" class="footnote-item">アプリ内の図解にもちゃんと記載されていました。ウカツ！<a href="#fnref1"> <span class="up-arrow"/></a></li>
+<li id="fn2" class="footnote-item">暗証番号なのにマスク表示されない時点で不用心なアプリだな、銀行のアプリなんてそんなもんなのかなと見下していた節はあります。<a href="#fnref2"> <span class="up-arrow"/></a></li>
+<li id="fn3" class="footnote-item">再発行までの9年。<a href="#fnref3"> <span class="up-arrow"/></a></li>
+<li id="fn4" class="footnote-item">世界もこれくらい平和的に動いてくれれば良いのだが。<a href="#fnref4"> <span class="up-arrow"/></a></li>
+<li id="fn5" class="footnote-item">人類は、基本的に間抜けである。思い込みから間抜けをやることは誰にでもあるので、本記事がそういう落とし穴を回避したり、深みから這い出る一助になれば幸いである。<a href="#fnref5"> <span class="up-arrow"/></a></li>
+<li id="fn6" class="footnote-item">設定時の書類にまとめて同じものを設定する場合の記入欄があり、そちらが太枠で囲まれている。一般人は4桁の数字を何種類も似た用途のために使い分けられないので、同じにしとけというのは国の親切によるものだろう。<a href="#fnref6"> <span class="up-arrow"/></a></li>
+  </ol>
+  </section>
+      
+    </div>
+    
+    <footer>
+        <div class="article-footer">
+        <div class="footer-left">
+        
+  
+  <div class="categories">
+    <a href="/nplus_doc/categories/雑記/">雑記</a>
+  </div>
+
+        
+        </div>
+        <div class="footer-right">
+          <a target="_blank" rel="noopener" href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="マイナンバーカードのロックは1種類ではない | ぷらずま式改" data-url="https://elleonard.github.io/nplus_doc/2026/01/22/misc/mynumber-card-password-lock/" data-via="elleonard_f" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+          <a target="_blank" rel="noopener" href="https://misskeyshare.link/share.html?text=マイナンバーカードのロックは1種類ではない | ぷらずま式改&url=https://elleonard.github.io/nplus_doc/2026/01/22/misc/mynumber-card-password-lock/" style="background-color: #2b90d9;"><img src="/nplus_doc/img/mi.webp" style="width: 1em;"> ノート</a>
+        </div>
+        </div>
+        
+        
+          <div class="article-next">
+            <a href="/nplus_doc/2026/01/13/game/etibo/branch-fate/">【ゲーム感想】BranchFate <span class="next-arrow"/></a>
+          </div>
+        
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="検索">
+    <input type="hidden" name="q" value="site:elleonard.github.io/nplus_doc">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">カテゴリ</h3>
+  <ul class="entry">
+  
+    <li><a href="/nplus_doc/categories/FGO/">FGO</a><small>47</small></li>
+  
+    <li><a href="/nplus_doc/categories/niconico/">niconico</a><small>3</small></li>
+  
+    <li><a href="/nplus_doc/categories/アニメ感想/">アニメ感想</a><small>10</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム/">ゲーム</a><small>93</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム/ゲームレビュー/">ゲームレビュー</a><small>75</small></li>
+  
+    <li><a href="/nplus_doc/categories/ゲーム制作/">ゲーム制作</a><small>14</small></li>
+  
+    <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/デッキレシピ/">デッキレシピ</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/小説/">小説</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/情報技術/">情報技術</a><small>11</small></li>
+  
+    <li><a href="/nplus_doc/categories/漫画/">漫画</a><small>2</small></li>
+  
+    <li><a href="/nplus_doc/categories/百合/">百合</a><small>10</small></li>
+  
+    <li><a href="/nplus_doc/categories/艦これ/">艦これ</a><small>76</small></li>
+  
+    <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/">遊戯王ブロンティーズ</a><small>4</small></li>
+  
+    <li><a href="/nplus_doc/categories/雑記/">雑記</a><small>18</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最近の投稿</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/nplus_doc/2026/01/22/misc/mynumber-card-password-lock/">マイナンバーカードのロックは1種類ではない</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2026/01/13/game/etibo/branch-fate/">【ゲーム感想】BranchFate</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2025/12/28/misc/2025/">2025年の振り返り</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2025/08/29/game/exit8-the-movie/">映画『8番出口』を見てきた話</a>
+      </li>
+    
+      <li>
+        <a href="/nplus_doc/2025/08/28/misc/takayama-green-hotel/">高山グリーンホテルに泊まった話</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Link</h3>
+  <ul class="entry">
+    
+      <li>
+        <a target="_blank" rel="noopener" href="https://www.nicovideo.jp/">niconico</a>
+      </li>
+    
+      <li>
+        <a target="_blank" rel="noopener" href="http://lovingtheflags1986.blog96.fc2.com/">国旗と酒が待ち遠しいドリル日記</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  <p>
+  
+  &copy; 2026 NPlasma
+  
+  All rights reserved.</p>
+  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</div>
+<div class="alignright">
+  <a target="_blank" rel="noopener" href="https://github.com/elleonard"><i class="fab fa-github"></i></a>
+  <a target="_blank" rel="noopener" href="https://twitter.com/elleonard_f"><i class="fab fa-twitter-square"></i></a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="/nplus_doc/js/jquery.imagesloaded.min.js"></script>
+<script src="/nplus_doc/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/nplus_doc/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/nplus_doc/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id='bg'></div>
+</body>
+</html>
