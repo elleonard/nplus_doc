@@ -10,3 +10,4 @@ category:
 
 <!-- more -->
 
+{% footnote_list %}
