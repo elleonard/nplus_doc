@@ -108,7 +108,7 @@
 
 <span id="more"></span>
 
-<h1 id="はじめに"><a href="#はじめに" class="headerlink" title="はじめに"></a>はじめに</h1><p>良いプラグインの定義については <a href="/nplus_doc/2019/11/28/engineering/rmmv/good-plugin/" title="前回の記事">前回の記事</a> をご参照ください。<br>今回もその定義に従って、可読性や保守性を意識したプラグインの書き方を紹介していきます。</p>
+<h1 id="はじめに"><a href="#はじめに" class="headerlink" title="はじめに"></a>はじめに</h1><p>良いプラグインの定義については <a href="/nplus_doc/2019/11/28/engineering/rmmv/good-plugin/" title="RPGツクールMV 良いプラグインとは">前回の記事</a> をご参照ください。<br>今回もその定義に従って、可読性や保守性を意識したプラグインの書き方を紹介していきます。</p>
 <p>前回よりも難しい領域に踏み込むため、この記事の説明だけでは理解しにくい内容もあるかもしれません。<br>今回はできるだけ具体的なコード例を書きながら書き進めていくつもりです。</p>
 <h1 id="良いプラグインの書き方"><a href="#良いプラグインの書き方" class="headerlink" title="良いプラグインの書き方"></a>良いプラグインの書き方</h1><h2 id="セーブデータの互換性を破壊しない"><a href="#セーブデータの互換性を破壊しない" class="headerlink" title="セーブデータの互換性を破壊しない"></a>セーブデータの互換性を破壊しない</h2><p>RPGツクールMVの <code>Game_****</code> 系のクラスは、内容をゲームのセーブデータに保存しています。<sup class="footnote-ref"><a href=#fn1 id="fnref1" title="Game_Message,Game_Troop,Game_Enemy,Game_Tempは例外。">1</a></sup><br>このクラス群にメンバを追加する場合は、十分に注意する必要があります。</p>
 <p>以下の例を見てみましょう。</p>
@@ -244,7 +244,7 @@
   
     <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/">遊戯王ブロンティーズ</a><small>4</small></li>
   
-    <li><a href="/nplus_doc/categories/雑記/">雑記</a><small>19</small></li>
+    <li><a href="/nplus_doc/categories/雑記/">雑記</a><small>20</small></li>
   
   </ul>
 </div>
@@ -254,6 +254,10 @@
 <div class="widget tag">
   <h3 class="title">最近の投稿</h3>
   <ul class="entry">
+    
+      <li>
+        <a href="/nplus_doc/2026/07/28/misc/ikaho/">伊香保に行ってきた話</a>
+      </li>
     
       <li>
         <a href="/nplus_doc/2026/07/24/anime/chiikawa-the-movie-secret-of-mermaid-island/">【アニメ感想】映画ちいかわ 人魚の島のひみつ</a>
@@ -269,10 +273,6 @@
     
       <li>
         <a href="/nplus_doc/2026/02/15/misc/yugawara/">湯河原に行ってきた話</a>
-      </li>
-    
-      <li>
-        <a href="/nplus_doc/2026/02/08/game/the-farmer-was-replaced/">【ゲーム感想】農家はREPLACE()されました</a>
       </li>
     
   </ul>

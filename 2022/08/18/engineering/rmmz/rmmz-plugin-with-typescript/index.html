@@ -116,7 +116,7 @@
 <p>今回、typescript化するのはプラグインのメインロジック。上記の図では DarkPlasma_プラグイン1.js となっているものです。</p>
 <h1 id="移行の理由"><a href="#移行の理由" class="headerlink" title="移行の理由"></a>移行の理由</h1><p>型安全に書きたい！</p>
 <p>これに尽きます。<br>方々から拝借してちまちま改修しつつ使っているコアスクリプトの型定義ファイルや自前で書いたjsdocのお陰で、生jsでもそこそこ補完は効く状態でした。</p>
-<a href="/nplus_doc/2020/09/08/engineering/rmmz/rmmz-plugin-with-rollup/" title="rollup移行">rollup移行</a>によってメインロジックとボイラープレートを分離できていたのもあり、快適さもありました。
+<a href="/nplus_doc/2020/09/08/engineering/rmmz/rmmz-plugin-with-rollup/" title="rollupを利用した、RPGツクールMZのプラグインを快適に書ける仕組み">rollup移行</a>によってメインロジックとボイラープレートを分離できていたのもあり、快適さもありました。
 <p>しかしそれでも、ts-checkをかけると型起因のバグが見つかるのです。</p>
 <p>jsだと既存クラスの拡張時にimplicitなthisに頼らざるを得ず、その型を明示しようとすると毎度型チェックの分岐を書く必要があって無理でしょ感が溢れました。</p>
 <p>例えば、こんなコードです。</p>
@@ -274,7 +274,7 @@
   
     <li><a href="/nplus_doc/categories/遊戯王ブロンティーズ/">遊戯王ブロンティーズ</a><small>4</small></li>
   
-    <li><a href="/nplus_doc/categories/雑記/">雑記</a><small>19</small></li>
+    <li><a href="/nplus_doc/categories/雑記/">雑記</a><small>20</small></li>
   
   </ul>
 </div>
@@ -284,6 +284,10 @@
 <div class="widget tag">
   <h3 class="title">最近の投稿</h3>
   <ul class="entry">
+    
+      <li>
+        <a href="/nplus_doc/2026/07/28/misc/ikaho/">伊香保に行ってきた話</a>
+      </li>
     
       <li>
         <a href="/nplus_doc/2026/07/24/anime/chiikawa-the-movie-secret-of-mermaid-island/">【アニメ感想】映画ちいかわ 人魚の島のひみつ</a>
@@ -299,10 +303,6 @@
     
       <li>
         <a href="/nplus_doc/2026/02/15/misc/yugawara/">湯河原に行ってきた話</a>
-      </li>
-    
-      <li>
-        <a href="/nplus_doc/2026/02/08/game/the-farmer-was-replaced/">【ゲーム感想】農家はREPLACE()されました</a>
       </li>
     
   </ul>
